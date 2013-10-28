@@ -6,11 +6,10 @@ import android.database.Cursor;
 
 import com.core.ItemDescription;
 
-public class ItemDescriptionBookDB implements ItemDescriptionBookDao {
-	GenericDao dao;
+public class ItemDescriptionBookDB extends GenericDao implements ItemDescriptionBookDao {
 	
 	public ItemDescriptionBookDB(Context context) {
-		dao = new GenericDao(context, GenericDao.dName, ItemDescription.TABLE_CREATE, ItemDescription.DATABASE_TABLE, ItemDescription.DATABASE_VERSION);
+		super(context, GenericDao.dName, ItemDescription.TABLE_CREATE, ItemDescription.DATABASE_TABLE, ItemDescription.DATABASE_VERSION);
 	}
 
 	@Override
@@ -20,7 +19,7 @@ public class ItemDescriptionBookDB implements ItemDescriptionBookDao {
 		cv.put(ItemDescription.COL_BARCODE, itd.getBarcode());
 		cv.put(ItemDescription.COL_DESCRIPTION, itd.getItemDescription());
 		cv.put(ItemDescription.COL_PRICE, itd.getPrice());
-		return dao.insert(ItemDescription.DATABASE_TABLE, cv);
+		return super.insert(ItemDescription.DATABASE_TABLE, cv);
 	}
 
 	@Override
@@ -30,13 +29,13 @@ public class ItemDescriptionBookDB implements ItemDescriptionBookDao {
 		cv.put(ItemDescription.COL_BARCODE, itd.getBarcode());
 		cv.put(ItemDescription.COL_DESCRIPTION, itd.getItemDescription());
 		cv.put(ItemDescription.COL_PRICE, itd.getPrice());
-        return dao.update(ItemDescription.DATABASE_TABLE, GenericDao.KEY_ID + "=" + id, cv);
+        return super.update(ItemDescription.DATABASE_TABLE, GenericDao.KEY_ID + "=" + id, cv);
 	}
 
 	@Override
 	public ItemDescription[] findAll() {
 		String[] columns = new String[]{ GenericDao.KEY_ID , ItemDescription.COL_DESCRIPTION ,ItemDescription.COL_BARCODE, ItemDescription.COL_NAME , ItemDescription.COL_PRICE};
-		return getItemDescriptionsFromCursor(dao.get(ItemDescription.DATABASE_TABLE, columns));
+		return getItemDescriptionsFromCursor(super.get(ItemDescription.DATABASE_TABLE, columns));
 	}
 	
 	private ItemDescription[] getItemDescriptionsFromCursor(Cursor cursor){
@@ -62,20 +61,20 @@ public class ItemDescriptionBookDB implements ItemDescriptionBookDao {
 
 	@Override
 	public int delete(int id) {
-		return dao.delete(ItemDescription.DATABASE_TABLE,(long)id);
+		return super.delete(ItemDescription.DATABASE_TABLE,(long)id);
 	}
 	
 	@Override
 	public ItemDescription[] findByContains(String name) {
 		String[] cols = new String[]{ GenericDao.KEY_ID , ItemDescription.COL_DESCRIPTION ,ItemDescription.COL_BARCODE, ItemDescription.COL_NAME , ItemDescription.COL_PRICE};
 		ItemDescription[] itds = null;
-		return getItemDescriptionsFromCursor(dao.get(ItemDescription.DATABASE_TABLE, cols , ItemDescription.COL_NAME + " like " + "'%" + name + "%'" ));
+		return getItemDescriptionsFromCursor(super.get(ItemDescription.DATABASE_TABLE, cols , ItemDescription.COL_NAME + " like " + "'%" + name + "%'" ));
 	}
 
 	@Override
 	public int[] findIdByAll(String name) {
 		String[] columns = new String[]{GenericDao.KEY_ID};
-		Cursor cursor = dao.get(ItemDescription.DATABASE_TABLE, columns);
+		Cursor cursor = super.get(ItemDescription.DATABASE_TABLE, columns);
 		int[] itds = new int[0];
 		if(cursor != null){
 			if(cursor.moveToFirst()){
@@ -94,8 +93,8 @@ public class ItemDescriptionBookDB implements ItemDescriptionBookDao {
 	@Override
 	public int findIdBy(String name) {
 		String[] columns = new String[]{GenericDao.KEY_ID};
-		Cursor cursor = dao.get(ItemDescription.DATABASE_TABLE, columns);
-		cursor = dao.get(ItemDescription.DATABASE_TABLE , columns , ItemDescription.COL_NAME + " like " + "'" +name +"'");
+		Cursor cursor = super.get(ItemDescription.DATABASE_TABLE, columns);
+		cursor = super.get(ItemDescription.DATABASE_TABLE , columns , ItemDescription.COL_NAME + " like " + "'" +name +"'");
 		int itds = 0;
 		if(cursor != null){
 			if(cursor.moveToFirst()){
@@ -111,7 +110,7 @@ public class ItemDescriptionBookDB implements ItemDescriptionBookDao {
 	public ItemDescription findBy(int id) {
 		Cursor cursor;
 		String[] cols = new String[]{ GenericDao.KEY_ID , ItemDescription.COL_DESCRIPTION ,ItemDescription.COL_BARCODE, ItemDescription.COL_NAME , ItemDescription.COL_PRICE};
-		cursor = dao.get(ItemDescription.DATABASE_TABLE , cols , GenericDao.KEY_ID + "=" + id);
+		cursor = super.get(ItemDescription.DATABASE_TABLE , cols , GenericDao.KEY_ID + "=" + id);
 		ItemDescription itd = null;
 		if(cursor != null){
 			if(cursor.moveToFirst()){
@@ -132,7 +131,7 @@ public class ItemDescriptionBookDB implements ItemDescriptionBookDao {
 	public ItemDescription findBy(String name) {
 		Cursor cursor;
 		String[] cols = new String[]{ GenericDao.KEY_ID , ItemDescription.COL_DESCRIPTION ,ItemDescription.COL_BARCODE, ItemDescription.COL_NAME , ItemDescription.COL_PRICE};
-		cursor = dao.get(ItemDescription.DATABASE_TABLE , cols , ItemDescription.COL_NAME + " like " + "'" +name +"'");
+		cursor = super.get(ItemDescription.DATABASE_TABLE , cols , ItemDescription.COL_NAME + " like " + "'" +name +"'");
 		ItemDescription itd = null;
 		if(cursor != null){
 			if(cursor.moveToFirst()){
@@ -150,17 +149,17 @@ public class ItemDescriptionBookDB implements ItemDescriptionBookDao {
 
 	@Override
 	public int delete(String name) {
-		return dao.delete(ItemDescription.DATABASE_TABLE,ItemDescription.COL_NAME + " like " + "'" + name + "'" , null);
+		return super.delete(ItemDescription.DATABASE_TABLE,ItemDescription.COL_NAME + " like " + "'" + name + "'" , null);
 	}
 
 	public void close() {
-		dao.close();
+		super.close();
 	}
 
 	@Override
 	public int[] findIdByContains(String name) {
 		String[] cols = new String[]{ GenericDao.KEY_ID };
-		Cursor cursor =  dao.get(ItemDescription.DATABASE_TABLE, cols , ItemDescription.COL_NAME + " like " + "'%" + name + "%'" );
+		Cursor cursor =  super.get(ItemDescription.DATABASE_TABLE, cols , ItemDescription.COL_NAME + " like " + "'%" + name + "%'" );
 		int[] arr = new int[0];
 		if(cursor != null){
 			if(cursor.moveToFirst()){
@@ -180,7 +179,7 @@ public class ItemDescriptionBookDB implements ItemDescriptionBookDao {
 	public ItemDescription findByBarcode(int barcode) {
 		Cursor cursor;
 		String[] cols = new String[]{ GenericDao.KEY_ID , ItemDescription.COL_DESCRIPTION ,ItemDescription.COL_BARCODE, ItemDescription.COL_NAME , ItemDescription.COL_PRICE};
-		cursor = dao.get(ItemDescription.DATABASE_TABLE , cols , ItemDescription.COL_BARCODE + "=" + barcode);
+		cursor = super.get(ItemDescription.DATABASE_TABLE , cols , ItemDescription.COL_BARCODE + "=" + barcode);
 		ItemDescription itd = null;
 		if(cursor != null){
 			if(cursor.moveToFirst()){

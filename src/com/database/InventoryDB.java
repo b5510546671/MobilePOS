@@ -6,13 +6,13 @@ import android.database.Cursor;
 import com.core.Item;
 import com.core.ItemDescription;
 
-public class InventoryDB implements InventoryDao{
-	GenericDao dao;
+public class InventoryDB extends GenericDao implements InventoryDao{
+	
 	private Context context;
 	
 	public InventoryDB(Context context){
+		super(context, GenericDao.dName, Item.TABLE_CREATE, Item.DATABASE_TABLE, Item.DATABASE_VERSION);
 		this.context = context;
-		dao = new GenericDao(context, GenericDao.dName, Item.TABLE_CREATE, Item.DATABASE_TABLE, Item.DATABASE_VERSION);
 	}
 
 	@Override
@@ -21,12 +21,12 @@ public class InventoryDB implements InventoryDao{
         cv.put(Item.COL_STATUS, item.getStatus());
         cv.put(Item.COL_INVENTORYLINEITEM_ID, item.getInventoryLineItemId());
         cv.put(Item.COL_DESCRIPTION_ID, item.getDescriptionId());
-		return dao.insert(Item.DATABASE_TABLE, cv);
+		return super.insert(Item.DATABASE_TABLE, cv);
 	}
 
 	@Override
 	public int delete(int itemId) {
-		return dao.delete(Item.DATABASE_TABLE,GenericDao.KEY_ID + " = " + itemId, null);
+		return super.delete(Item.DATABASE_TABLE,GenericDao.KEY_ID + " = " + itemId, null);
 	}
 
 	@Override
@@ -36,13 +36,13 @@ public class InventoryDB implements InventoryDao{
         cv.put(Item.COL_INVENTORYLINEITEM_ID, item.getInventoryLineItemId());
         cv.put(Item.COL_DESCRIPTION_ID, item.getDescriptionId());
         cv.put(Item.COL_STATUS, item.getStatus());
-        return dao.update(Item.DATABASE_TABLE, GenericDao.KEY_ID + " = " + item._id, cv);
+        return super.update(Item.DATABASE_TABLE, GenericDao.KEY_ID + " = " + item._id, cv);
 	}
 
 	@Override
 	public Item[] findAll() {
 		String[] columns = new String[]{GenericDao.KEY_ID, Item.COL_STATUS , Item.COL_DESCRIPTION_ID, Item.COL_INVENTORYLINEITEM_ID};
-		return getItemFromCursor(dao.get(Item.DATABASE_TABLE, columns));
+		return getItemFromCursor(super.get(Item.DATABASE_TABLE, columns));
 	}
 	
 	private Item[] getItemFromCursor(Cursor cursor){
@@ -73,7 +73,7 @@ public class InventoryDB implements InventoryDao{
 		String[] columns = new String[]{GenericDao.KEY_ID, Item.COL_STATUS , Item.COL_DESCRIPTION_ID, Item.COL_INVENTORYLINEITEM_ID};
 		Item[] items = null;
 		for(int x = 0 ; x < array.length ; x++){
-			Cursor cursor = dao.get(Item.DATABASE_TABLE, columns , GenericDao.KEY_ID + " = " + array[x]);
+			Cursor cursor = super.get(Item.DATABASE_TABLE, columns , GenericDao.KEY_ID + " = " + array[x]);
 			if(cursor != null){
 				if(cursor.moveToFirst()){
 					int count = cursor.getColumnCount(); 
@@ -100,11 +100,10 @@ public class InventoryDB implements InventoryDao{
 	@Override
 	public Item findBy(String name) {
 		String[] columns = new String[]{GenericDao.KEY_ID, Item.COL_STATUS , Item.COL_DESCRIPTION_ID, Item.COL_INVENTORYLINEITEM_ID};
-		Cursor cursor = dao.get(Item.DATABASE_TABLE, columns);
+		Cursor cursor = super.get(Item.DATABASE_TABLE, columns);
 		Item item = null;
 		if(cursor != null){
 			if(cursor.moveToFirst()){
-				
 				int desId = cursor.getColumnIndex(Item.COL_DESCRIPTION_ID);
 				int invId = cursor.getColumnIndex(Item.COL_INVENTORYLINEITEM_ID);
 				int itcId = cursor.getColumnIndex(Item.COL_STATUS);
@@ -119,13 +118,13 @@ public class InventoryDB implements InventoryDao{
 
 	@Override
 	public void close() {
-		dao.close();
+		super.close();
 	}
 
 	@Override
 	public int findQuantity(int descId) {
 		String[] columns = new String[]{Item.COL_INVENTORYLINEITEM_ID};
-		Cursor cursor = dao.get(Item.DATABASE_TABLE, columns , Item.COL_DESCRIPTION_ID + "=" + descId);
+		Cursor cursor = super.get(Item.DATABASE_TABLE, columns , Item.COL_DESCRIPTION_ID + "=" + descId);
 		if(cursor != null){
 			return cursor.getCount();
 		}
@@ -138,17 +137,17 @@ public class InventoryDB implements InventoryDao{
 		ItemDescription itd = itdDB.findByBarcode(barcode);
 		itdDB.close();
 		String[] columns = new String[]{GenericDao.KEY_ID, Item.COL_STATUS , Item.COL_DESCRIPTION_ID, Item.COL_INVENTORYLINEITEM_ID};
-		return getItemFromCursor(dao.get(Item.DATABASE_TABLE, columns , Item.COL_DESCRIPTION_ID + "=" + itd._id));
+		return getItemFromCursor(super.get(Item.DATABASE_TABLE, columns , Item.COL_DESCRIPTION_ID + "=" + itd._id));
 	}
 
 	@Override
 	public Item[] findStatus(int status) {
 		String[] columns = new String[]{GenericDao.KEY_ID, Item.COL_STATUS , Item.COL_DESCRIPTION_ID, Item.COL_INVENTORYLINEITEM_ID};
-		return getItemFromCursor(dao.get(Item.DATABASE_TABLE, columns , Item.COL_STATUS + "=" + status));
+		return getItemFromCursor(super.get(Item.DATABASE_TABLE, columns , Item.COL_STATUS + "=" + status));
 	}
 
 	@Override
 	public Item[] findStatus(int descId, int status) {
-		return getItemFromCursor(dao.getDB().rawQuery("select " + GenericDao.KEY_ID +"," + Item.COL_STATUS +"," + Item.COL_DESCRIPTION_ID + "," + Item.COL_INVENTORYLINEITEM_ID + " from " + Item.DATABASE_TABLE + " where " +  Item.COL_STATUS + " = ? AND " + Item.COL_DESCRIPTION_ID + " = ? " ,new String[]{status+"" , descId +""} ));
+		return getItemFromCursor(super.getDB().rawQuery("select " + GenericDao.KEY_ID +"," + Item.COL_STATUS +"," + Item.COL_DESCRIPTION_ID + "," + Item.COL_INVENTORYLINEITEM_ID + " from " + Item.DATABASE_TABLE + " where " +  Item.COL_STATUS + " = ? AND " + Item.COL_DESCRIPTION_ID + " = ? " ,new String[]{status+"" , descId +""} ));
 	}
 }
