@@ -1,4 +1,4 @@
-package controller;
+package com.controller;
 import com.core.Store;
 
 public abstract class AbstractController {

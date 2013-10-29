@@ -12,7 +12,6 @@ public class ItemDescriptionBook {
 	private List<ItemDescription> itemDescription;
 	private Context con;
 	public ItemDescriptionBook(Context context) {
-		
 		con = context;
 		itemDescription = new ArrayList<ItemDescription>();
 	}

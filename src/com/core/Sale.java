@@ -3,6 +3,10 @@ package com.core;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 public class Sale {
 	public static final String DATABASE_TABLE = "SaleLadger";
     public static final int DATABASE_VERSION = 1;
@@ -17,10 +21,15 @@ public class Sale {
     private int customer;
     private long date;
     private ArrayList<Integer> saleLineItemsId;
+    private String payment;
     
     public Sale(Customer customer){
     	saleLineItemsId = new ArrayList<Integer>();
     	this.setCustomer(customer);
+    }
+    
+    public Sale(){
+    	saleLineItemsId = new ArrayList<Integer>();
     }
     
     public Sale(int customerId){
@@ -74,5 +83,20 @@ public class Sale {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public JSONObject getPayment() {
+		JSONParser parser = new JSONParser();
+		JSONObject obj = null;
+		try {
+			obj = (JSONObject)parser.parse(payment);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return obj;
+	}
+
+	public void setPayment(JSONObject pay) {
+		payment = pay.toJSONString();
 	}
 }

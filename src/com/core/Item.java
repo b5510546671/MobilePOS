@@ -19,7 +19,6 @@ public class Item {
 	private int inventoryLineItemId;
 	private int descriptionId;
 	
-	
 	public Item( int inventoryLineItemId , int descriptionId){
 		this.setStatus(STATUS_STOCK);
 		this.inventoryLineItemId = inventoryLineItemId;
@@ -63,5 +62,4 @@ public class Item {
 	public void set_id(int _id) {
 		this._id = _id;
 	}
-	
 }
