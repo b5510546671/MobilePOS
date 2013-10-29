@@ -22,27 +22,39 @@ public class SaleController {
 	public SaleController() {
 		this.store = Store.getInstance();
 		saleItems = new ArrayList<Item>();
-		
-		
+
 	}
-	public void createNewSale()
-	{
+
+	public void addItemToSale(Item item) {
+		for (SaleLineItem s : saleLineItems) {
+			if (s.getId() == item.get_id())
+				s.addItem(item);
+			return;
+		}
+		SaleLineItem add = new SaleLineItem();
+		add.addItem(item);
+		saleLineItems.add(add);
+	}
+
+	public void createNewSale() {
 		sale = new Sale();
 	}
-	
-	public SaleController getInstance()
-	{
-		if(saleController==null) saleController = new SaleController();
+
+	public void saveSaleToSaleLedger(Context con) {
+		store.getSaleLedger().add(con, sale);
+	}
+
+	public SaleController getInstance() {
+		if (saleController == null)
+			saleController = new SaleController();
 		return saleController;
 	}
-	public List<Item> getAllSaleItems()
-	{
-		
+
+	public List<Item> getAllSaleItems() {
 		return saleItems;
 	}
-	
-	public Item[] getAllSaleLineItems()
-	{
+
+	public Item[] getAllSaleLineItems() {
 		return (Item[]) sale.getSaleLineItems().toArray();
 	}
 

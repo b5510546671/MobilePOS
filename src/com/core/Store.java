@@ -15,4 +15,9 @@ public class Store {
 		if(instance == null) instance = new Store();
 		return instance;
 	}
+	
+	public SaleLadger getSaleLedger()
+	{
+		return this.saleLedger;
+	}
 }
