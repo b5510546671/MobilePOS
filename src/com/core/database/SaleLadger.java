@@ -12,27 +12,25 @@ import com.database.SaleLadgerDB;
 public class SaleLadger {
 	private SaleLadgerDB db;
 	private List<Sale> sales;
-	private Context con;
-	public SaleLadger(Context context){
-		con = context;
+	public SaleLadger(){
 		sales = new ArrayList<Sale>();
 	}
 	
-	public void add(Sale sale){
+	public void add(Context con,Sale sale){
 		db = new SaleLadgerDB(con);
 		db.insert(sale);
 		db.close();
 		sales.add(sale);
 	}
 	
-	public boolean remove(Sale sale){
+	public boolean remove(Context con,Sale sale){
 		db = new SaleLadgerDB(con);
 		db.delete(sale);
 		db.close();
 		return sales.remove(sale);
 	}
 	
-	public Sale[] getCurrentStory(){
+	public Sale[] getAllSale(Context con){
 		db = new SaleLadgerDB(con);
 		Sale[] x = db.findAll();
 		db.close();
