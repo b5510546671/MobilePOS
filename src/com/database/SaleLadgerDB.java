@@ -13,7 +13,7 @@ import com.core.Sale;
 
 public class SaleLadgerDB extends GenericDao implements SaleLadgerDao{
 
-	public SaleLadgerDB(Context context, String dbName, String sql, String tableName, int ver) {
+	public SaleLadgerDB(Context context){
 		super(context, GenericDao.dName, Sale.TABLE_CREATE, Sale.DATABASE_TABLE, Sale.DATABASE_VERSION);
 	}
 	

@@ -18,10 +18,14 @@ public class SaleLadger {
 	}
 	
 	public void add(Sale sale){
-		
+		db.insert(sale);
+		sales.add(sale);
 	}
 	
 	public boolean remove(Sale sale){
-		return 
+		db.delete(sale);
+		return sales.remove(sale);
 	}
+	
+	
 }
