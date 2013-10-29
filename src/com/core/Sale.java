@@ -32,6 +32,20 @@ public class Sale {
     public Sale(){
     	saleLineItems = new ArrayList<SaleLineItem>();
     }
+    public double getTotalPrice()
+    {
+    	double total=0;
+    	for(SaleLineItem s : saleLineItems)
+    	{
+    		Item[] items = s.getItems();
+    		for(Item item : items)
+    		{
+    			total+= item.getDescription().getPrice();
+    		}
+    		
+    	}
+    	return total;
+    }
     
     public boolean addSaleLineItem(SaleLineItem sli){
     	return saleLineItems.add(sli);

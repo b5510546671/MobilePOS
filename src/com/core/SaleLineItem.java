@@ -16,9 +16,18 @@ public class SaleLineItem {
     public SaleLineItem(){
     	items = new ArrayList<Item>();
     }
+    public int getAmount()
+    {
+    	return items.size();
+    }
     
     public void insertItem(Item item){
     	items.add(item);
+    }
+    
+    public Item[] getItems()
+    {
+    	return (Item[]) items.toArray();
     }
     
     public String getItemsString(){
