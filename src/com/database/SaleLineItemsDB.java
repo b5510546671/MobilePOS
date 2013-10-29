@@ -47,30 +47,45 @@ public class SaleLineItemsDB extends GenericDao implements SaleLineItemDao {
 		String[] columns = new String[]{ GenericDao.KEY_ID , SaleLineItem.COL_ITEMS };
 		Cursor cursor = super.get(ItemDescription.DATABASE_TABLE, columns);
 		SaleLineItem[] slis = null;
-		
-
 		if(cursor != null){
 			if(cursor.moveToFirst()){
-				int _id = cursor.getColumnIndex(GenericDao.KEY_ID);
-				int items = cursor.getColumnIndex(SaleLineItem.COL_ITEMS);
-				sale = new SaleLineItem();
-				sale.setId(cursor.getInt(_id));
-				sale.setDate(cursor.getLong(date));
-				sale.setPayment(cursor.getString(pay));
-				String[] saleLineItems = cursor.getString(slis).split(" ");
-				for(int j = 0 ; j < saleLineItems.length ; j++){
-					sale.addSaleLineItem( new SaleLineItemsDB(getContext()).findBy( Integer.parseInt(saleLineItems[j]) ));
+				int count = cursor.getColumnCount(); 
+				slis = new SaleLineItem[count];
+				for(int i = 0 ; i< count ; i++) {
+					int _id = cursor.getColumnIndex(GenericDao.KEY_ID);
+					int itemsId = cursor.getColumnIndex(SaleLineItem.COL_ITEMS);
+					String[] strs = cursor.getString(itemsId).split(" ");
+					slis[i] = new SaleLineItem();
+					slis[i].setId( cursor.getInt(_id) );
+					for(int j = 0 ; j < strs.length ; j++){
+						slis[i].addItem( new InventoryDB( getContext() ).find( Integer.parseInt(strs[j])  ) );
+					}
+					cursor.moveToNext();
 				}
-				cursor.moveToNext();
 			}
 		}
-				// TODO;
+		return slis;
 	}
 
 	@Override
 	public SaleLineItem findBy(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		String[] columns = new String[]{ GenericDao.KEY_ID , SaleLineItem.COL_ITEMS };
+		Cursor cursor = super.get(ItemDescription.DATABASE_TABLE, columns , id);
+		SaleLineItem sli = null;
+		if(cursor != null){
+			if(cursor.moveToFirst()){
+				sli = new SaleLineItem();
+				int _id = cursor.getColumnIndex(GenericDao.KEY_ID);
+				int itemsId = cursor.getColumnIndex(SaleLineItem.COL_ITEMS);
+				String[] strs = cursor.getString(itemsId).split(" ");
+				sli = new SaleLineItem();
+				sli.setId( cursor.getInt(_id) );
+				for(int j = 0 ; j < strs.length ; j++){
+					sli.addItem( new InventoryDB( getContext() ).find( Integer.parseInt(strs[j])  ) );
+				}
+			}
+		}
+		return sli;
 	}
 
 }

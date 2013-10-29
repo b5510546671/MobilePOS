@@ -30,6 +30,11 @@ public class SaleLineItem {
     	return (Item[]) items.toArray();
     }
     
+    public void addItem(Item item)
+    {
+    	items.add(item);
+    }
+    
     public String getItemsString(){
     	StringBuilder sb = new StringBuilder();
     	for(int i = 0 ; i < items.size() ; i++)

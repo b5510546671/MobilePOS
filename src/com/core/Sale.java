@@ -25,36 +25,22 @@ public class Sale {
     private String payment;
     
     public Sale(Customer customer){
-    	saleLineItems = new ArrayList<SaleLineItem>();
+    	setSaleLineItems(new ArrayList<SaleLineItem>());
     	this.setCustomer(customer);
     }
     
     public Sale(){
-    	saleLineItems = new ArrayList<SaleLineItem>();
-    }
-    public double getTotalPrice()
-    {
-    	double total=0;
-    	for(SaleLineItem s : saleLineItems)
-    	{
-    		Item[] items = s.getItems();
-    		for(Item item : items)
-    		{
-    			total+= item.getDescription().getPrice();
-    		}
-    		
-    	}
-    	return total;
+    	setSaleLineItems(new ArrayList<SaleLineItem>());
     }
     
     public boolean addSaleLineItem(SaleLineItem sli){
-    	return saleLineItems.add(sli);
+    	return getSaleLineItems().add(sli);
     }
 
     public String getSaleLineItemString(){
     	StringBuilder sb = new StringBuilder();
-    	for(int i = 0 ; i < saleLineItems.size() ; i++)
-    		sb.append(saleLineItems.get(i).getId()).append(" ");
+    	for(int i = 0 ; i < getSaleLineItems().size() ; i++)
+    		sb.append(getSaleLineItems().get(i).getId()).append(" ");
     	return sb.toString();
     }
 
@@ -98,5 +84,13 @@ public class Sale {
 	
 	public void setPayment(String payment) {
 		this.payment = payment;
+	}
+
+	public ArrayList<SaleLineItem> getSaleLineItems() {
+		return saleLineItems;
+	}
+
+	public void setSaleLineItems(ArrayList<SaleLineItem> saleLineItems) {
+		this.saleLineItems = saleLineItems;
 	}
 }

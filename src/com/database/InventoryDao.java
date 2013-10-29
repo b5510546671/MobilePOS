@@ -9,6 +9,7 @@ public interface InventoryDao {
 	public Item[] findAll();
 	public Item[] findContainsBy(String name);
 	public Item findBy(String name);
+	public Item find(int id);
 	public Item[] findByBarcode(int barcode);
 	public Item[] findStatus(int status);
 	public Item[] findStatus(int descId , int status);

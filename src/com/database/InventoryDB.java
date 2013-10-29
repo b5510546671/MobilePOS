@@ -101,7 +101,7 @@ public class InventoryDB extends GenericDao implements InventoryDao{
 	@Override
 	public Item findBy(String name) {
 		String[] columns = new String[]{GenericDao.KEY_ID, Item.COL_STATUS , Item.COL_DESCRIPTION_ID, Item.COL_INVENTORYLINEITEM_ID};
-		Cursor cursor = super.get(Item.DATABASE_TABLE, columns);
+		Cursor cursor = super.get(Item.DATABASE_TABLE , columns);
 		Item item = null;
 		if(cursor != null){
 			if(cursor.moveToFirst()){
@@ -157,5 +157,24 @@ public class InventoryDB extends GenericDao implements InventoryDao{
 		for(int i = 0 ; i < itemCode.length ; i++){
 			delete(itemCode[i]);
 		}
+	}
+
+	@Override
+	public Item find(int id) {
+		String[] columns = new String[]{GenericDao.KEY_ID, Item.COL_STATUS , Item.COL_DESCRIPTION_ID, Item.COL_INVENTORYLINEITEM_ID};
+		Cursor cursor = super.get(Item.DATABASE_TABLE, columns ,id);
+		Item item = null;
+		if(cursor != null){
+			if(cursor.moveToFirst()){
+				int desId = cursor.getColumnIndex(Item.COL_DESCRIPTION_ID);
+				int invId = cursor.getColumnIndex(Item.COL_INVENTORYLINEITEM_ID);
+				int itcId = cursor.getColumnIndex(Item.COL_STATUS);
+				int _id = cursor.getColumnIndex(GenericDao.KEY_ID); 
+				item = new Item( cursor.getInt(invId)  , new ItemDescriptionBookDB(context).findBy(  cursor.getInt(desId)  ));
+				item.setStatus(itcId);
+				item.set_id(cursor.getInt(_id));
+			}
+		}
+		return item;
 	}
 }
