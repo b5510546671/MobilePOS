@@ -1,10 +1,11 @@
-package com.core;
+package com.core.database;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
 
+import com.core.ItemDescription;
 import com.database.ItemDescriptionBookDB;
 
 public class ItemDescriptionBook {
