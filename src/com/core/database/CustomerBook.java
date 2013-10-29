@@ -1,8 +1,9 @@
-package com.core;
+package com.core.database;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.core.Customer;
 import com.database.CustomerBookDB;
 
 import android.content.Context;
