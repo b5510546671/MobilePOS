@@ -25,20 +25,29 @@ public class CashierBook {
 	}
 	
 	public void addCashier(Cashier c){
+		db = new CashierBookDB(context);
 		db.insert(c);
+		db.close();
 		cashier.add(c);
 	}
 	
 	public boolean remove(Cashier c){
+		db = new CashierBookDB(context);
 		db.delete(c.getId());
+		db.close();
 		return cashier.remove(c);
 	}
 	
 	public boolean remove(int id){
+		db = new CashierBookDB(context);
 		db.delete(id);
+		db.close();
 		for(Cashier c: cashier){
-			if(c.getId() == id)
+			if(c.getId() == id){
+				
 				return cashier.remove(c);
+			}
+				
 		}
 		return false;
 	}

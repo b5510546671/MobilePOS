@@ -10,9 +10,9 @@ import android.content.Context;
 public class CustomerBook {
 	private CustomerBookDB db;
 	private List<Customer> customers;
-
+	private Context con; 
 	public CustomerBook(Context context) {
-		db = new CustomerBookDB(context);
+		con = context;
 		customers = new ArrayList<Customer>();
 	}
 
@@ -21,21 +21,30 @@ public class CustomerBook {
 	}
 
 	public void addCutomer(Customer customer) {
+		db = new CustomerBookDB(con);
 		db.insert(customer);
+		db.close();
 		customers.add(customer);
 	}
 
 	public int getAmount() {
-		return db.findAll().length;
+		db = new CustomerBookDB(con);
+		int i = db.findAll().length;
+		db.close();
+		return i;
 	}
 
 	public boolean remove(Customer customer) {
+		db = new CustomerBookDB(con);
 		db.delete(customer.getId());
+		db.close();
 		return customers.remove(customer);
 	}
 
 	public boolean remove(int id) {
+		db = new CustomerBookDB(con);
 		db.delete(id);
+		db.close();
 		for(Customer c: customers){
 			if(c.getId() == id)
 				return customers.remove(c);
@@ -44,10 +53,16 @@ public class CustomerBook {
 	}
 
 	public boolean isContains(Customer customer) {
-		for (Customer c : db.findAll()) {
+		db = new CustomerBookDB(con);
+		Customer[] x = db.findAll();
+		db.close();
+		for (Customer c : x) {
 			if (c.getId() == customer.getId())
+				{
 				return true;
+				}
 		}
+
 		return false;
 	}
 
