@@ -68,7 +68,7 @@ public class SaleLadgerDB extends GenericDao implements SaleLadgerDao{
 					items[i].setPayment(cursor.getString(pay));
 					String[] saleLineItems = cursor.getString(slis).split(" ");
 					for(int j = 0 ; j < saleLineItems.length ; j++){
-						items[i].addSaleLineItemBy(Integer.parseInt(saleLineItems[j]));
+						items[i].addSaleLineItem( new SaleLineItemsDB(getContext()).findBy( Integer.parseInt(saleLineItems[j])) );
 					}
 					cursor.moveToNext();
 				}
@@ -89,13 +89,13 @@ public class SaleLadgerDB extends GenericDao implements SaleLadgerDao{
 				int date = cursor.getColumnIndex(Sale.COL_DATE);
 				int slis = cursor.getColumnIndex(Sale.COL_SALE_LINE_ITEMS);
 				int pay = cursor.getColumnIndex(Sale.COL_PAYMENT);
-				sale = new Sale( new CustomerBookDB().findBy(cursor.getInt(cusId)));
+				sale = new Sale( new CustomerBookDB(getContext()).findBy(cursor.getInt(cusId)));
 				sale.setId(cursor.getInt(_id));
 				sale.setDate(cursor.getLong(date));
 				sale.setPayment(cursor.getString(pay));
 				String[] saleLineItems = cursor.getString(slis).split(" ");
 				for(int j = 0 ; j < saleLineItems.length ; j++){
-					sale.addSaleLineItemBy(Integer.parseInt(saleLineItems[j]));
+					sale.addSaleLineItem( new SaleLineItemsDB(getContext()).findBy( Integer.parseInt(saleLineItems[j]) ));
 				}
 				cursor.moveToNext();
 			}
