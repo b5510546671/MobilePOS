@@ -53,4 +53,10 @@ public class CashierBookDB extends GenericDao implements CashierBookDao {
 		return null;
 	}
 
+	@Override
+	public int update(Cashier cashier) {
+		// TODO Auto-generated method stub
+		return 1;
+	}
+
 }

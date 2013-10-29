@@ -8,16 +8,20 @@ import android.content.Context;
 import com.database.CashierBookDB;
 
 public class CashierBook {
-	private CashierBookDB db;
 	private List<Cashier> cashier;
+	private Context context;
+	private CashierBookDB db;
 
 	public CashierBook(Context context) {
-		db = new CashierBookDB(context);
+		this.context = context;
 		cashier = new ArrayList<Cashier>();
 	}
-
+	
 	public Cashier getCashier(int id) {
-		return db.findBy(id);
+		db = new CashierBookDB(context);
+		Cashier c = db.findBy(id);
+		db.close();
+		return c;
 	}
 	
 	public void addCashier(Cashier c){

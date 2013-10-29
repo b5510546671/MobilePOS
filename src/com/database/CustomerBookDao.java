@@ -4,6 +4,7 @@ import com.core.Customer;
 
 public interface CustomerBookDao {
 	public long insert(Customer customer);
+	public int update(Customer customer);
 	public Customer findBy(String name);
 	public Customer deleteBy(String name);
 	public Customer[] findByContains(String name);

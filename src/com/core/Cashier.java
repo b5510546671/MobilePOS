@@ -1,5 +1,9 @@
 package com.core;
 
+import com.database.CashierBookDB;
+
+import android.content.Context;
+
 public class Cashier {
     public static final String DATABASE_TABLE = "CashierBook";
     public static final int DATABASE_VERSION = 1;
@@ -50,4 +54,12 @@ public class Cashier {
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+	public boolean comit(Context context){
+		CashierBookDB db = new CashierBookDB(context);
+		int t = db.update(this);
+		db.close();
+		return t != 0;
+	}
+	
 }

@@ -113,4 +113,10 @@ public class CustomerBookDB extends GenericDao implements CustomerBookDao {
 		return customers;
 	}
 
+	@Override
+	public int update(Customer customer) {
+		// TODO Auto-generated method stub
+		return 1;
+	}
+
 }
