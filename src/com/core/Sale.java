@@ -51,6 +51,20 @@ public class Sale {
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
+	
+	public double getTotalPrice()
+	{
+		double total = 0;
+		for(SaleLineItem s : saleLineItems)
+		{
+			Item[] items = s.getItems();
+			for(int i=0;i<items.length;i++)
+			{
+				total+= items[i].getDescription().getPrice();
+			}
+		}
+		return total;
+	}
 
 	public long getDateAsLong() {
 		return date;

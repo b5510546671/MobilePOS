@@ -1,9 +1,13 @@
 package com.core;
 
+import com.core.database.SaleLadger;
+
 public class Store {
 	private static Store instance;
+	private SaleLadger saleLedger;
 	
 	private Store() {
+		saleLedger = new SaleLadger();
 		
 	}
 	
