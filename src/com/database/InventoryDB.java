@@ -32,11 +32,11 @@ public class InventoryDB extends GenericDao implements InventoryDao{
 	@Override
 	public int update(Item item) {
 		ContentValues cv = new ContentValues();
-        cv.put(GenericDao.KEY_ID, item._id);
+        cv.put(GenericDao.KEY_ID, item.get_id());
         cv.put(Item.COL_INVENTORYLINEITEM_ID, item.getInventoryLineItemId());
         cv.put(Item.COL_DESCRIPTION_ID, item.getDescriptionId());
         cv.put(Item.COL_STATUS, item.getStatus());
-        return super.update(Item.DATABASE_TABLE, GenericDao.KEY_ID + " = " + item._id, cv);
+        return super.update(Item.DATABASE_TABLE, GenericDao.KEY_ID + " = " + item.get_id(), cv);
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class InventoryDB extends GenericDao implements InventoryDao{
 				for(int i = 0 ; i < count ; i++){
 					itds[i] = new Item( cursor.getInt(invId) , cursor.getInt(desId));
 					itds[i].setStatus(statusId);
-					itds[i]._id = cursor.getInt(_id);
+					itds[i].set_id(cursor.getInt(_id));
 					cursor.moveToNext();
 				}
 			}
@@ -83,7 +83,7 @@ public class InventoryDB extends GenericDao implements InventoryDao{
 						int invId = cursor.getColumnIndex(Item.COL_INVENTORYLINEITEM_ID);
 						int statusId = cursor.getColumnIndex(Item.COL_STATUS);
 						int _id = cursor.getColumnIndex(GenericDao.KEY_ID);
-						items[i]._id = cursor.getInt(_id);
+						items[i].set_id(cursor.getInt(_id));
 						items[i].setDescriptionId(cursor.getInt(desId));
 						items[i].setInventoryLineItemId(cursor.getInt(invId));
 						items[i].setStatus(cursor.getInt(statusId));
@@ -110,7 +110,7 @@ public class InventoryDB extends GenericDao implements InventoryDao{
 				int _id = cursor.getColumnIndex(GenericDao.KEY_ID); 
 				item = new Item( cursor.getInt(invId)  ,cursor.getInt(desId));
 				item.setStatus(itcId);
-				item._id = cursor.getInt(_id);
+				item.set_id(cursor.getInt(_id));
 			}
 		}
 		return item;

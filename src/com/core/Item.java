@@ -14,7 +14,7 @@ public class Item {
     public static final int STATUS_STOCK = 1;
     public static final int STATUS_OTHER = 2;
     
-    public int _id;
+    private int _id;
     private int status;
 	private int inventoryLineItemId;
 	private int descriptionId;
@@ -37,7 +37,7 @@ public class Item {
 	@Override
 	public boolean equals(Object o) {
 		if(Item.class != o.getClass()) return false;
-		return _id  == ((Item)o)._id;
+		return get_id()  == ((Item)o).get_id();
 	}
 
 	public int getDescriptionId (){
@@ -54,6 +54,14 @@ public class Item {
 
 	public void setStatus(int status) {
 		this.status = status;
+	}
+
+	public int get_id() {
+		return _id;
+	}
+
+	public void set_id(int _id) {
+		this._id = _id;
 	}
 	
 }

@@ -1,6 +1,7 @@
 package com.core;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Sale {
 	public static final String DATABASE_TABLE = "SaleLadger";
@@ -13,37 +14,54 @@ public class Sale {
     public static final String COL_SALE_LINE_ITEMS = "sale_line_items";
     
     private int id;
-    private Customer customer;
+    private int customer;
     private long date;
-    private ArrayList<SaleLineItem> saleLineItems;
+    private ArrayList<Integer> saleLineItemsId;
     
     public Sale(Customer customer){
-    	saleLineItems = new ArrayList<SaleLineItem>();
+    	saleLineItemsId = new ArrayList<Integer>();
     	this.setCustomer(customer);
     }
     
+    public Sale(int customerId){
+    	saleLineItemsId = new ArrayList<Integer>();
+    	customer = customerId;
+    }
+    
     public boolean addSaleLineItem(SaleLineItem sli){
-    	saleLineItems.add(sli);
+    	saleLineItemsId.add(sli.getId());
+    	return true;
+    }
+    
+    public boolean addSaleLineItemBy(int id){
+    	saleLineItemsId.add(id);
     	return true;
     }
 
     public String getSaleLineItemString(){
     	StringBuilder sb = new StringBuilder();
-    	for(int i = 0 ; i < saleLineItems.size() ; i++)
-    		sb.append(saleLineItems.get(i)).append(" ");
+    	for(int i = 0 ; i < saleLineItemsId.size() ; i++)
+    		sb.append(saleLineItemsId.get(i)).append(" ");
     	return sb.toString();
     }
 
 	public Customer getCustomer() {
-		return customer;
+		// TODO : get Customer form customer ID.
+		return null;
 	}
 
 	public void setCustomer(Customer customer) {
-		this.customer = customer;
+		this.customer = customer.getId();
 	}
 
-	public long getDate() {
+	public long getDateAsLong() {
 		return date;
+	}
+	
+	public Date getDate() {
+		Date d = new Date();
+		d.setTime(date);
+		return d;
 	}
 
 	public void setDate(long date) {

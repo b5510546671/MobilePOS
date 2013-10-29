@@ -75,7 +75,7 @@ public class InventoryActivity extends Activity {
     		return;
     	}
     	for(int i = 0 ; i < Integer.parseInt(quantity) ; i++){
-    		db.delete(items[i]._id);
+    		db.delete(items[i].get_id());
     	}
     	showdata();
     }

@@ -1,11 +1,14 @@
 package com.database;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 
 import com.core.Customer;
+import com.core.Item;
 import com.core.Sale;
 
 public class SaleLadgerDB extends GenericDao implements SaleLadgerDao{
@@ -18,7 +21,7 @@ public class SaleLadgerDB extends GenericDao implements SaleLadgerDao{
 	public long insert(Sale sale) {
 		ContentValues cv = new ContentValues();
         cv.put(Sale.COL_CUSTOMER_ID , sale.getCustomer().getId());
-        cv.put(Sale.COL_DATE , sale.getDate());
+        cv.put(Sale.COL_DATE , sale.getDateAsLong());
         cv.put(Sale.COL_SALE_LINE_ITEMS , sale.getSaleLineItemString());
         return super.insert(Customer.DATABASE_TABLE, cv);
 	}
@@ -43,8 +46,29 @@ public class SaleLadgerDB extends GenericDao implements SaleLadgerDao{
 
 	@Override
 	public Sale[] findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		String[] columns = new String[]{GenericDao.KEY_ID, Sale.COL_CUSTOMER_ID ,  Sale.COL_DATE , Sale.COL_SALE_LINE_ITEMS};
+		Cursor cursor = super.get(Item.DATABASE_TABLE, columns);
+		Sale[] items = null;
+		if(cursor != null){
+			if(cursor.moveToFirst()){
+				int count = cursor.getColumnCount(); 
+				items = new Sale[count];
+				for(int i = 0 ; i< count ; i++) {
+					int _id = cursor.getColumnIndex(GenericDao.KEY_ID);
+					int cusId = cursor.getColumnIndex(Sale.COL_CUSTOMER_ID );
+					int date = cursor.getColumnIndex(Sale.COL_DATE);
+					int slis = cursor.getColumnIndex(Sale.COL_SALE_LINE_ITEMS);
+					items[i] = new Sale(cursor.getInt(cusId));
+					items[i].setId(cursor.getInt(_id));
+					items[i].setDate(cursor.getLong(date));
+					String[] saleLineItems = cursor.getString(slis).split(" ");
+					for(int j = 0 ; j < saleLineItems.length ; j++){
+						items[i].addSaleLineItemBy(Integer.parseInt(saleLineItems[j]));
+					}
+				}
+			}
+		}
+		return items;
 	}
 
 	@Override
