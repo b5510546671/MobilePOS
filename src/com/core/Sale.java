@@ -16,6 +16,7 @@ public class Sale {
     public static final String COL_CUSTOMER_ID = "customer_id";
     public static final String COL_DATE = "date";
     public static final String COL_SALE_LINE_ITEMS = "sale_line_items";
+    public static final String COL_PAYMENT = "payment";
     
     private int id;
     private int customer;
@@ -85,18 +86,15 @@ public class Sale {
 		this.id = id;
 	}
 
-	public JSONObject getPayment() {
-		JSONParser parser = new JSONParser();
-		JSONObject obj = null;
-		try {
-			obj = (JSONObject)parser.parse(payment);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		return obj;
+	public Payment getPayment() {
+		return new Payment(payment);
 	}
 
-	public void setPayment(JSONObject pay) {
-		payment = pay.toJSONString();
+	public void setPayment(Payment payment) {
+		this.payment = payment.toString();
+	}
+	
+	public void setPayment(String payment) {
+		this.payment = payment;
 	}
 }

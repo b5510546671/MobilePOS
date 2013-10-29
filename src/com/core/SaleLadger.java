@@ -37,6 +37,4 @@ public class SaleLadger {
 		db.close();
 		return x;
 	}
-	
-	
 }
