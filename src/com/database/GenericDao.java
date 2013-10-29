@@ -83,7 +83,7 @@ public class GenericDao extends SQLiteOpenHelper {
        onCreate(db);
     }
     
-    public Cursor get(String table, String[] columns, String where){
+    protected Cursor get(String table, String[] columns, String where){
         Cursor cursor =db.query(true, table, columns, where, null, null, null, null, null);
         if (cursor != null) {
             cursor.moveToFirst();
@@ -91,7 +91,7 @@ public class GenericDao extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public Cursor get(String table, String[] columns, String where , String[] args){
+    protected Cursor get(String table, String[] columns, String where , String[] args){
         Cursor cursor =db.query(true, table, columns, where, args, null, null, null, null);
         if (cursor != null) {
             cursor.moveToFirst();
@@ -99,15 +99,15 @@ public class GenericDao extends SQLiteOpenHelper {
         return cursor;
     }
     
-    public long insert(String table, ContentValues values){
+    protected long insert(String table, ContentValues values){
         return db.insert(table, null, values);
     }
     
-    public Cursor get(String table, String[] columns){
+    protected Cursor get(String table, String[] columns){
         return db.query(table, columns, null, null, null, null, null);
     } 
     
-    public Cursor get(String table, String[] columns, long id){
+    protected Cursor get(String table, String[] columns, long id){
         Cursor cursor =db.query(true, table, columns, KEY_ID + "=" + id, null, null, null, null, null);
         if (cursor != null) {
             cursor.moveToFirst();
@@ -115,27 +115,27 @@ public class GenericDao extends SQLiteOpenHelper {
         return cursor;
     }
     
-    public int delete(String table) {
+    protected int delete(String table) {
         return db.delete(table, "1", null);
     }
     
-    public int delete(String table, long id) {
+    protected int delete(String table, long id) {
         return db.delete(table, KEY_ID + "=" + id, null);
     }
     
-    public int delete(String table, String where , String[] args) {
+    protected int delete(String table, String where , String[] args) {
         return db.delete(table, where , args);
     }
     
-    public int update(String table, long id, ContentValues values) {
+    protected int update(String table, long id, ContentValues values) {
         return db.update(table, values, KEY_ID + "=" + id, null);
     }
     
-    public int update(String table, String where, ContentValues values) {
+    protected int update(String table, String where, ContentValues values) {
         return db.update(table, values, where, null);
     }
     
-    public SQLiteDatabase getDB(){
+    protected SQLiteDatabase getDB(){
     	return db;
     }
 }
