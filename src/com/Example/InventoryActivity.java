@@ -51,7 +51,7 @@ public class InventoryActivity extends Activity {
     	itdDB.close();
     	if(itd == null) return;
     	for(int i = 0 ; i< Integer.parseInt(quantity); i++){
-    		db.insert(new Item( 0, itd._id));
+    		db.insert(new Item( 0, itd));
     	}
     	showdata();
     }

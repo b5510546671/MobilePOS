@@ -17,11 +17,11 @@ public class GenericDao extends SQLiteOpenHelper {
     private String tName;
     private String sql;
     public static final String KEY_ID = "_id";
-
-    //private GenericDao instance;
+    private Context context;
     
     public GenericDao(Context ctx, String dbName, String sql, String tableName, int ver){
         super(ctx, dbName, null, ver);
+        this.context = ctx;
         Log.i(TAG, "Creating or opening database [ " + dbName + " ].");
         this.sql = sql;
         dName = dbName;
@@ -39,27 +39,10 @@ public class GenericDao extends SQLiteOpenHelper {
             Log.e(TAG, "Cound not create the database table according to the SQL statement [ " + sql + " ].", se);
         }
     }
-    
-    /*
-    public static GenericDao getInstance(Context ctx, String dbName, String sql, String tableName, int ver){
-        if(instance == null){
-            instance = new GenericDao(ctx, dbName, sql, tableName, ver);
-            try{
-                Log.i(TAG, "Creating or opening the database [ " + dbName + " ].");
-                db = instance.getWritableDatabase();
-            }catch(SQLiteException se){
-                Log.e(TAG, "Cound not create and/or open the database [ " + dbName + " ] that will be used for reading and writing.", se);
-            }
-        }
-        return instance;
-    }*/
 
-    public void close(){
-        //if(instance != null){
+    public void close(){ 
             Log.i(TAG, "Closing the database [ " + dName + " ].");
-            db.close();
-        //    instance = null;
-        //}
+            db.close(); 
     }
     
     @Override
@@ -138,4 +121,12 @@ public class GenericDao extends SQLiteOpenHelper {
     protected SQLiteDatabase getDB(){
     	return db;
     }
+
+	public Context getContext() {
+		return context;
+	}
+
+	public void setContext(Context context) {
+		this.context = context;
+	}
 }

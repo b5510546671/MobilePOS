@@ -62,7 +62,7 @@ public class SaleLadgerDB extends GenericDao implements SaleLadgerDao{
 					int date = cursor.getColumnIndex(Sale.COL_DATE);
 					int slis = cursor.getColumnIndex(Sale.COL_SALE_LINE_ITEMS);
 					int pay = cursor.getColumnIndex(Sale.COL_PAYMENT);
-					items[i] = new Sale(cursor.getInt(cusId));
+					items[i] = new Sale( new CustomerBookDB(getContext()).findBy(cursor.getInt(cusId)));
 					items[i].setId(cursor.getInt(_id));
 					items[i].setDate(cursor.getLong(date));
 					items[i].setPayment(cursor.getString(pay));
@@ -89,7 +89,7 @@ public class SaleLadgerDB extends GenericDao implements SaleLadgerDao{
 				int date = cursor.getColumnIndex(Sale.COL_DATE);
 				int slis = cursor.getColumnIndex(Sale.COL_SALE_LINE_ITEMS);
 				int pay = cursor.getColumnIndex(Sale.COL_PAYMENT);
-				sale = new Sale(cursor.getInt(cusId));
+				sale = new Sale( new CustomerBookDB().findBy(cursor.getInt(cusId)));
 				sale.setId(cursor.getInt(_id));
 				sale.setDate(cursor.getLong(date));
 				sale.setPayment(cursor.getString(pay));

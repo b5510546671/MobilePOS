@@ -19,7 +19,7 @@ public class Item {
 	private int inventoryLineItemId;
 	private ItemDescription description;
 	
-	public Item( int inventoryLineItemId , ItemDescription description){
+	public Item(int inventoryLineItemId , ItemDescription description){
 		this.setStatus(STATUS_STOCK);
 		this.inventoryLineItemId = inventoryLineItemId;
 		this.setDescription(description);
