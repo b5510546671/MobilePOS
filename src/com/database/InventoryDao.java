@@ -4,6 +4,7 @@ import com.core.Item;
 public interface InventoryDao {
 	public long insert(Item item);
 	public int delete(int itemCode);
+	public void deleteAll(int[] itemCode);
 	public int update( Item item);
 	public Item[] findAll();
 	public Item[] findContainsBy(String name);

@@ -97,7 +97,6 @@ public class InventoryDB extends GenericDao implements InventoryDao{
 		return items;
 	}
 
-	//TODO
 	@Override
 	public Item findBy(String name) {
 		String[] columns = new String[]{GenericDao.KEY_ID, Item.COL_STATUS , Item.COL_DESCRIPTION_ID, Item.COL_INVENTORYLINEITEM_ID};
@@ -150,5 +149,12 @@ public class InventoryDB extends GenericDao implements InventoryDao{
 	@Override
 	public Item[] findStatus(int descId, int status) {
 		return getItemFromCursor(super.getDB().rawQuery("select " + GenericDao.KEY_ID +"," + Item.COL_STATUS +"," + Item.COL_DESCRIPTION_ID + "," + Item.COL_INVENTORYLINEITEM_ID + " from " + Item.DATABASE_TABLE + " where " +  Item.COL_STATUS + " = ? AND " + Item.COL_DESCRIPTION_ID + " = ? " ,new String[]{status+"" , descId +""} ));
+	}
+
+	@Override
+	public void deleteAll(int[] itemCode) {
+		for(int i = 0 ; i < itemCode.length ; i++){
+			delete(itemCode[i]);
+		}
 	}
 }

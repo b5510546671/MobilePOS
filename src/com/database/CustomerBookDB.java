@@ -115,8 +115,10 @@ public class CustomerBookDB extends GenericDao implements CustomerBookDao {
 
 	@Override
 	public int update(Customer customer) {
-		// TODO Auto-generated method stub
-		return 1;
+		ContentValues cv = new ContentValues();
+        cv.put(Customer.COL_NAME , customer.getName());
+        cv.put(Customer.COL_DATE , new Date().getTime());
+        return super.update(Customer.DATABASE_TABLE, customer.getId(), cv);
 	}
 
 }
