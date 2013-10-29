@@ -21,7 +21,7 @@ public class InventoryDB extends GenericDao implements InventoryDao{
 		ContentValues cv = new ContentValues();
         cv.put(Item.COL_STATUS, item.getStatus());
         cv.put(Item.COL_INVENTORYLINEITEM_ID, item.getInventoryLineItemId());
-        cv.put(Item.COL_DESCRIPTION_ID, item.getDescriptionId());
+        cv.put(Item.COL_DESCRIPTION_ID, item.getDescription().getId());
 		return super.insert(Item.DATABASE_TABLE, cv);
 	}
 
@@ -35,7 +35,7 @@ public class InventoryDB extends GenericDao implements InventoryDao{
 		ContentValues cv = new ContentValues();
         cv.put(GenericDao.KEY_ID, item.get_id());
         cv.put(Item.COL_INVENTORYLINEITEM_ID, item.getInventoryLineItemId());
-        cv.put(Item.COL_DESCRIPTION_ID, item.getDescriptionId());
+        cv.put(Item.COL_DESCRIPTION_ID, item.getDescription().getId());
         cv.put(Item.COL_STATUS, item.getStatus());
         return super.update(Item.DATABASE_TABLE, GenericDao.KEY_ID + " = " + item.get_id(), cv);
 	}

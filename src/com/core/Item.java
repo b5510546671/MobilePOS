@@ -17,12 +17,12 @@ public class Item {
     private int _id;
     private int status;
 	private int inventoryLineItemId;
-	private int descriptionId;
+	private ItemDescription description;
 	
-	public Item( int inventoryLineItemId , int descriptionId){
+	public Item( int inventoryLineItemId , ItemDescription description){
 		this.setStatus(STATUS_STOCK);
 		this.inventoryLineItemId = inventoryLineItemId;
-		this.descriptionId = descriptionId;
+		this.setDescription(description);
 	}
 	
 	public void setInventoryLineItemId(int inventoryLineItemId){
@@ -39,14 +39,6 @@ public class Item {
 		return get_id()  == ((Item)o).get_id();
 	}
 
-	public int getDescriptionId (){
-		return descriptionId;
-	}
-	
-	public void setDescriptionId (int despId){
-		descriptionId = despId;
-	}
-
 	public int getStatus() {
 		return status;
 	}
@@ -61,5 +53,13 @@ public class Item {
 
 	public void set_id(int _id) {
 		this._id = _id;
+	}
+
+	public ItemDescription getDescription() {
+		return description;
+	}
+
+	public void setDescription(ItemDescription description) {
+		this.description = description;
 	}
 }
