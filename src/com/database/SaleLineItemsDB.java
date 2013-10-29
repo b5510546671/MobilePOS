@@ -9,6 +9,7 @@ import android.database.Cursor;
 import com.core.Customer;
 import com.core.Item;
 import com.core.ItemDescription;
+import com.core.Sale;
 import com.core.SaleLineItem;
 
 public class SaleLineItemsDB extends GenericDao implements SaleLineItemDao {
@@ -45,7 +46,24 @@ public class SaleLineItemsDB extends GenericDao implements SaleLineItemDao {
 	public SaleLineItem[] findAll() {
 		String[] columns = new String[]{ GenericDao.KEY_ID , SaleLineItem.COL_ITEMS };
 		Cursor cursor = super.get(ItemDescription.DATABASE_TABLE, columns);
-		return null;
+		SaleLineItem[] slis = null;
+		
+
+		if(cursor != null){
+			if(cursor.moveToFirst()){
+				int _id = cursor.getColumnIndex(GenericDao.KEY_ID);
+				int items = cursor.getColumnIndex(SaleLineItem.COL_ITEMS);
+				sale = new SaleLineItem();
+				sale.setId(cursor.getInt(_id));
+				sale.setDate(cursor.getLong(date));
+				sale.setPayment(cursor.getString(pay));
+				String[] saleLineItems = cursor.getString(slis).split(" ");
+				for(int j = 0 ; j < saleLineItems.length ; j++){
+					sale.addSaleLineItem( new SaleLineItemsDB(getContext()).findBy( Integer.parseInt(saleLineItems[j]) ));
+				}
+				cursor.moveToNext();
+			}
+		}
 				// TODO;
 	}
 
