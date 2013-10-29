@@ -11,22 +11,21 @@ public class SaleLineItem {
     public static final String COL_ITEMS = "items";
     
     private int id;
-    private ArrayList<Integer> itemsId;
+    private ArrayList<Item> items;
     
     public SaleLineItem(){
-    	itemsId = new ArrayList<Integer>();
+    	items = new ArrayList<Item>();
     }
     
     public void insertItem(Item item){
-    	itemsId.add(item.get_id());
-    }
-    
-    public void insertItemBy(int id){
-    	itemsId.add(id);
+    	items.add(item);
     }
     
     public String getItemsString(){
-    	return null;
+    	StringBuilder sb = new StringBuilder();
+    	for(int i = 0 ; i < items.size() ; i++)
+    		sb.append(items.get(i).get_id()).append(" ");
+    	return sb.toString();
     }
 
 	public int getId() {

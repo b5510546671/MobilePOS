@@ -19,49 +19,37 @@ public class Sale {
     public static final String COL_PAYMENT = "payment";
     
     private int id;
-    private int customer;
+    private Customer customer;
     private long date;
-    private ArrayList<Integer> saleLineItemsId;
+    private ArrayList<SaleLineItem> saleLineItems;
     private String payment;
     
     public Sale(Customer customer){
-    	saleLineItemsId = new ArrayList<Integer>();
+    	saleLineItems = new ArrayList<SaleLineItem>();
     	this.setCustomer(customer);
     }
     
     public Sale(){
-    	saleLineItemsId = new ArrayList<Integer>();
-    }
-    
-    public Sale(int customerId){
-    	saleLineItemsId = new ArrayList<Integer>();
-    	customer = customerId;
+    	saleLineItems = new ArrayList<SaleLineItem>();
     }
     
     public boolean addSaleLineItem(SaleLineItem sli){
-    	saleLineItemsId.add(sli.getId());
-    	return true;
-    }
-    
-    public boolean addSaleLineItemBy(int id){
-    	saleLineItemsId.add(id);
-    	return true;
+    	return saleLineItems.add(sli);
     }
 
     public String getSaleLineItemString(){
     	StringBuilder sb = new StringBuilder();
-    	for(int i = 0 ; i < saleLineItemsId.size() ; i++)
-    		sb.append(saleLineItemsId.get(i)).append(" ");
+    	for(int i = 0 ; i < saleLineItems.size() ; i++)
+    		sb.append(saleLineItems.get(i).getId()).append(" ");
     	return sb.toString();
     }
 
 	public Customer getCustomer() {
-		// TODO : get Customer form customer ID.
-		return null;
+		return customer;
 	}
 
 	public void setCustomer(Customer customer) {
-		this.customer = customer.getId();
+		this.customer = customer;
 	}
 
 	public long getDateAsLong() {
