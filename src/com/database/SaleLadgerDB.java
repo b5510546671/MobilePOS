@@ -70,6 +70,7 @@ public class SaleLadgerDB extends GenericDao implements SaleLadgerDao{
 					for(int j = 0 ; j < saleLineItems.length ; j++){
 						items[i].addSaleLineItemBy(Integer.parseInt(saleLineItems[j]));
 					}
+					cursor.moveToNext();
 				}
 			}
 		}
@@ -96,6 +97,7 @@ public class SaleLadgerDB extends GenericDao implements SaleLadgerDao{
 				for(int j = 0 ; j < saleLineItems.length ; j++){
 					sale.addSaleLineItemBy(Integer.parseInt(saleLineItems[j]));
 				}
+				cursor.moveToNext();
 			}
 		} 
 		return sale;

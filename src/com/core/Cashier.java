@@ -55,11 +55,4 @@ public class Cashier {
 		this.id = id;
 	}
 	
-	public boolean comit(Context context){
-		CashierBookDB db = new CashierBookDB(context);
-		int t = db.update(this);
-		db.close();
-		return t != 0;
-	}
-	
 }
