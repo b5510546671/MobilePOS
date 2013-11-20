@@ -10,57 +10,41 @@ import android.content.Context;
 
 public class CustomerBook {
 	private CustomerBookDB db;
-	public CustomerBook() {
-	}
 
-	public Customer getCustomer(int id) {
+	public Customer getCustomerByID(int id) {
 		return db.findBy(id);
 	}
 
-	public void addCutomer(Context con,Customer customer) {
+	public Customer addCutomer(Context con,Customer customer) {
 		db = new CustomerBookDB(con);
-		db.insert(customer);
+		customer = db.insert(customer);
 		db.close();
+		return customer;
 	}
 
-	public int getAmount(Context con) {
+	public List<Customer> getAllCustomer(Context con) {
 		db = new CustomerBookDB(con);
-		int i = db.findAll().length;
+		List<Customer> i = db.findAll();
 		db.close();
 		return i;
 	}
 
 	public boolean remove(Context con,Customer customer) {
 		db = new CustomerBookDB(con);
-		Customer c = db.delete(customer.getID());
+		db.deleteByID(customer.getID());
 		db.close();
-		return c != null;
-	}
-
-	public boolean remove(Context con,int id) {
-		db = new CustomerBookDB(con);
-		db.delete(id);
-		db.close();
-		// TODO
-		/*for(Customer c: customers){
-			if(c.getId() == id)
-				return customers.remove(c);
-		}*/
-		return false;
+		return true;
 	}
 
 	public boolean isContains(Context con,Customer customer) {
 		db = new CustomerBookDB(con);
-		Customer[] x = db.findAll();
+		Customer c = db.findBy(customer.getID());
 		db.close();
-		for (Customer c : x) {
-			if (c.getID() == customer.getID())
-				{
-				return true;
-				}
-		}
-
-		return false;
+		return c != null;
+	}
+	
+	public int getAllCustomerQuantity(Context con){
+		return getAllCustomer(con).size();
 	}
 
 }
