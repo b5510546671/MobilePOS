@@ -1,65 +1,48 @@
 package com.core;
 
-public class Item {
-    public static final String DATABASE_TABLE = "Inventory3";
+import java.io.Serializable;
+
+public class Item implements Serializable {
+    public static final String DATABASE_TABLE = "Inventory";
     public static final int DATABASE_VERSION = 1;
     public static final String TABLE_CREATE =
-        "create table if not exists Inventory3 (_id integer primary key autoincrement , status integer, description_id integer not null, inventorylineitem_id integer not null);";
+        "create table if not exists Inventory (_id integer primary key autoincrement , sale_id integer, description_id integer not null, inventorylineitem_id integer not null);";
    
     public static final String COL_INVENTORYLINEITEM_ID = "inventorylineitem_id";
     public static final String COL_DESCRIPTION_ID = "description_id";
-    public static final String COL_STATUS = "status";
-	
-    public static final int STATUS_SOLD = 0;
-    public static final int STATUS_STOCK = 1;
-    public static final int STATUS_OTHER = 2;
+    public static final String COL_SALE_ID = "sale_id";
     
-    private int _id;
-    private int status;
-	private int inventoryLineItemId;
-	private ItemDescription description;
+    public static final int SALE_STOCK_ID = -1;
 	
-	public Item(int inventoryLineItemId , ItemDescription description){
-		this.setStatus(STATUS_STOCK);
-		this.inventoryLineItemId = inventoryLineItemId;
-		this.setDescription(description);
-	}
 	
-	public void setInventoryLineItemId(int inventoryLineItemId){
-		this.inventoryLineItemId = inventoryLineItemId;
+	private int id;
+	private ItemDescription itemDesciption;
+	
+	public Item(int id,ItemDescription itemDesription) {
+		this.itemDesciption = itemDesription;
+		this.id= id;
 	}
 	
-	public int getInventoryLineItemId (){
-		return inventoryLineItemId;
+	public int getID() {
+		return this.id;
 	}
 	
-	@Override
-	public boolean equals(Object o) {
-		if(Item.class != o.getClass()) return false;
-		return get_id()  == ((Item)o).get_id();
+	public ItemDescription getItemDescription()
+	{
+		return this.itemDesciption;
 	}
-
-	public int getStatus() {
-		return status;
+	
+	public void setItemDescription(ItemDescription itemDescription){
+		this.itemDesciption = itemDescription;
 	}
-
-	public void setStatus(int status) {
-		this.status = status;
+	
+	public float getPrice(){
+		return itemDesciption.getPrice();
+	
 	}
-
-	public int get_id() {
-		return _id;
-	}
-
-	public void set_id(int _id) {
-		this._id = _id;
-	}
-
-	public ItemDescription getDescription() {
-		return description;
-	}
-
-	public void setDescription(ItemDescription description) {
-		this.description = description;
+	
+	public String toString()
+	{
+		return itemDesciption.getName();
 	}
 }

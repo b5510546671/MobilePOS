@@ -1,110 +1,80 @@
-package com.core;
+ package com.core;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
-public class Sale {
+public class Sale implements Serializable {
 	public static final String DATABASE_TABLE = "SaleLadger";
     public static final int DATABASE_VERSION = 1;
     public static final String TABLE_CREATE =
-        "create table if not exists SaleLadger (_id integer primary key autoincrement , customer_id integer, date long not null, sale_line_items text not null);";
+        "create table if not exists SaleLadger (_id integer primary key autoincrement , customer_id integer, payment_id text not null, date long not null);";
    
     public static final String COL_CUSTOMER_ID = "customer_id";
     public static final String COL_DATE = "date";
-    public static final String COL_SALE_LINE_ITEMS = "sale_line_items";
-    public static final String COL_PAYMENT = "payment";
+    public static final String COL_PAYMENT_ID = "payment_id";
     
-    private int id;
-    private Customer customer;
-    private long date;
-    private ArrayList<SaleLineItem> saleLineItems;
-    private String payment;
-    
-    public Sale(Customer customer){
-    	setSaleLineItems(new ArrayList<SaleLineItem>());
-    	this.setCustomer(customer);
-    }
-    
-    public Sale(){
-    	setSaleLineItems(new ArrayList<SaleLineItem>());
-    }
-    
-    public boolean addSaleLineItem(SaleLineItem sli){
-    	return getSaleLineItems().add(sli);
-    }
-
-    public String getSaleLineItemString(){
-    	StringBuilder sb = new StringBuilder();
-    	for(int i = 0 ; i < getSaleLineItems().size() ; i++)
-    		sb.append(getSaleLineItems().get(i).getId()).append(" ");
-    	return sb.toString();
-    }
-
-	public Customer getCustomer() {
-		return customer;
-	}
-
-	public void setCustomer(Customer customer) {
+	
+	private List<Item> items = new ArrayList<Item>();
+	private int id;
+	private Customer customer;
+	private Date date;
+	private Payment payment;
+	
+	public Sale(int id,List<Item> items,Customer customer,Payment payment , Date date) {
+		this.id = id;
+		this.setItems(items);
+		this.date = date;
 		this.customer = customer;
+		payment.setPrice((float)getTotalPrice());
+		this.payment = payment;
+	}
+	
+	public int getID()
+	{
+		return id;
+	}
+	public void setCustomer(Customer customer)
+	{
+		this.customer = customer;
+	}
+	public Customer getCustomer()
+	{
+		return this.customer;
+	}
+	
+	public Payment getPayment()
+	{
+		return this.payment;
+	}
+	
+	public void setPayment(Payment payment)
+	{
+		this.payment = payment;
+	}
+	
+	public Date getDate(){
+		return this.date;
 	}
 	
 	public double getTotalPrice()
 	{
-		double total = 0;
-		for(SaleLineItem s : saleLineItems)
+		int totalPrice = 0;
+		for(Item i : getItems())
 		{
-			Item[] items = s.getItems();
-			for(int i=0;i<items.length;i++)
-			{
-				total+= items[i].getDescription().getPrice();
-			}
+			totalPrice+= i.getItemDescription().getPrice();
 		}
-		return total;
+		return totalPrice;
 	}
 
-	public long getDateAsLong() {
-		return date;
+	public List<Item> getItems() {
+		return items;
+	}
+
+	public void setItems(List<Item> items) {
+		this.items = items;
 	}
 	
-	public Date getDate() {
-		Date d = new Date();
-		d.setTime(date);
-		return d;
-	}
-
-	public void setDate(long date) {
-		this.date = date;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public Payment getPayment() {
-		return new Payment(payment);
-	}
-
-	public void setPayment(Payment payment) {
-		this.payment = payment.toString();
-	}
-	
-	public void setPayment(String payment) {
-		this.payment = payment;
-	}
-
-	public ArrayList<SaleLineItem> getSaleLineItems() {
-		return saleLineItems;
-	}
-
-	public void setSaleLineItems(ArrayList<SaleLineItem> saleLineItems) {
-		this.saleLineItems = saleLineItems;
-	}
 }

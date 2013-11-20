@@ -1,43 +1,39 @@
 package com.core;
 
+import java.io.Serializable;
 import java.io.StringWriter;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
-public class Payment {
+public class Payment implements Serializable {
+	public static final String DATABASE_TABLE = "PaymentBook";
+    public static final int DATABASE_VERSION = 1;
+    public static final String TABLE_CREATE =
+        "create table if not exists PaymentBook (_id integer primary key autoincrement , input_money real not null, price real not null);";
+   
+    public static final String COL_INPUT_MONEY = "input_money";
+    public static final String COL_PRICE = "price";
+	
 	private double input;
-	private double cash;
+	private double price;
+	private int id=0;
 	
-	public Payment(double input) {
+	public Payment(int id,double price,double input) {
+		this.id = id;
 		this.input = input;
-	}
-	
-	public Payment(double input , double cash) {
-		this(input);
-		this.cash = cash;
-	}
-	
-	public Payment(String json) {
-		JSONParser parser = new JSONParser();
-		JSONObject obj = null;
-		try {
-			obj = (JSONObject)parser.parse(json);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		this.input = Double.parseDouble(obj.get("input").toString());
-		this.cash = Double.parseDouble(obj.get("change").toString());
+		this.price = price;
 	}
 
-	public double getCash() {
-		return cash;
+	public int getID()
+	{
+		return this.id;
+	}
+	public double getPrice() {
+		return this.price;
 	}
 
 
-	public void setCash(double cash) {
-		this.cash = cash;
+	public void setPrice(double price) {
+		this.price = price;
 	}
 
 	public double getInput() {
@@ -49,15 +45,8 @@ public class Payment {
 		this.input = input;
 	}
 	
-	public double getChange(){
-		return input - cash;
-	}
-	
-	@Override
-	public String toString() {
-		JSONObject obj = new JSONObject();
-	    obj.put("input", Double.valueOf(input));
-	    obj.put("cash", Double.valueOf(cash));
-		return obj.toString();
+	public double getChange()
+	{
+		return input - price;
 	}
 }
