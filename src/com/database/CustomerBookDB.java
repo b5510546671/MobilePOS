@@ -1,5 +1,6 @@
 package com.database;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import android.content.ContentValues;
@@ -17,24 +18,27 @@ public class CustomerBookDB extends GenericDao implements CustomerBookDao {
 	}
 
 	@Override
-	public long insert(Customer customer) {
+	public Customer insert(Customer customer) {
 		ContentValues cv = new ContentValues();
         cv.put(Customer.COL_NAME , customer.getName());
         cv.put(Customer.COL_DATE , new Date().getTime());
-        return super.insert(Customer.DATABASE_TABLE, cv);
+        cv.put(Customer.COL_EMAIL , customer.getEmail());
+        customer = new Customer((int)super.insert(Customer.DATABASE_TABLE, cv), customer.getName() , customer.getRegisterDate() , customer.getEmail());
+        return customer;
 	}
 
 	@Override
 	public Customer findBy(String name) {
-		String[] columns = new String[]{GenericDao.KEY_ID , Customer.COL_NAME , Customer.COL_DATE};
-		Cursor cursor = super.get(Customer.DATABASE_TABLE, columns , Customer.COL_NAME + "=" + name);
+		String[] columns = new String[]{GenericDao.KEY_ID , Customer.COL_NAME , Customer.COL_DATE , Customer.COL_EMAIL};
+		Cursor cursor = super.get(Customer.DATABASE_TABLE, columns , Customer.COL_NAME + " like " + "'" +name +"'");
 		Customer customer = null;
 		if(cursor != null){
 			if(cursor.moveToFirst()){
 				int _id = cursor.getColumnIndex(GenericDao.KEY_ID);
 				int cus_name = cursor.getColumnIndex(Customer.COL_NAME);
 				int invId = cursor.getColumnIndex(Customer.COL_DATE);
-				customer = new Customer(cursor.getInt(_id), cursor.getString(cus_name), cursor.getLong(invId));
+				int email = cursor.getColumnIndex(Customer.COL_EMAIL);
+				customer = new Customer(cursor.getInt(_id), cursor.getString(cus_name), new Date(cursor.getLong(invId)) , cursor.getString(email));
 			}
 		} 
 		return customer;
@@ -42,7 +46,7 @@ public class CustomerBookDB extends GenericDao implements CustomerBookDao {
 	
 	@Override
 	public Customer findBy(int id) {
-		String[] columns = new String[]{GenericDao.KEY_ID , Customer.COL_NAME , Customer.COL_DATE};
+		String[] columns = new String[]{GenericDao.KEY_ID , Customer.COL_NAME , Customer.COL_DATE , Customer.COL_EMAIL};
 		Cursor cursor = super.get(Customer.DATABASE_TABLE, columns , GenericDao.KEY_ID + "=" + id);
 		Customer customer = null;
 		if(cursor != null){
@@ -50,7 +54,8 @@ public class CustomerBookDB extends GenericDao implements CustomerBookDao {
 				int _id = cursor.getColumnIndex(GenericDao.KEY_ID);
 				int cus_name = cursor.getColumnIndex(Customer.COL_NAME);
 				int invId = cursor.getColumnIndex(Customer.COL_DATE);
-				customer = new Customer(cursor.getInt(_id), cursor.getString(cus_name), cursor.getLong(invId));
+				int email = cursor.getColumnIndex(Customer.COL_EMAIL);
+				customer = new Customer(cursor.getInt(_id), cursor.getString(cus_name), new Date(cursor.getLong(invId)) , cursor.getString(email));
 			}
 		} 
 		return customer;
@@ -59,25 +64,26 @@ public class CustomerBookDB extends GenericDao implements CustomerBookDao {
 	@Override
 	public Customer deleteBy(String name) {
 		Customer customer = this.findBy(name);
-		super.delete(Customer.DATABASE_TABLE , Customer.COL_NAME + "=" + name, null);
+		super.delete(Customer.DATABASE_TABLE , Customer.COL_NAME + " like " + "'" + name + "'", null);
 		return customer;
 	}
 
 	@Override
-	public Customer[] findByContains(String name) {
-		String[] columns = new String[]{GenericDao.KEY_ID , Customer.COL_NAME , Customer.COL_DATE};
+	public ArrayList<Customer> findByContains(String name) {
+		String[] columns = new String[]{GenericDao.KEY_ID , Customer.COL_NAME , Customer.COL_DATE , Customer.COL_EMAIL};
 		Cursor cursor = super.get(Customer.TABLE_CREATE ,columns ,Customer.COL_NAME + " like " + "'%" + name + "%'");
-		Customer[] customers = null;
+		ArrayList<Customer> customers = new ArrayList<Customer>();
 		if(cursor != null){
 			if(cursor.moveToFirst()){
 				int count = cursor.getCount();
-				customers = new Customer[count];
+				//customers = new Customer[count];
 				int _id = cursor.getColumnIndex(GenericDao.KEY_ID);
 				int cus_name = cursor.getColumnIndex(Customer.COL_NAME);
 				int invId = cursor.getColumnIndex(Customer.COL_DATE);
+				int email = cursor.getColumnIndex(Customer.COL_EMAIL);
 				
 				for(int i = 0 ; i < count ; i++){
-					customers[i] = new Customer(cursor.getInt(_id), cursor.getString(cus_name), cursor.getLong(invId));
+					customers.add(new Customer(cursor.getInt(_id), cursor.getString(cus_name), new Date(cursor.getLong(invId)) , cursor.getString(email)));
 					cursor.moveToNext();
 				}
 			}
@@ -86,26 +92,26 @@ public class CustomerBookDB extends GenericDao implements CustomerBookDao {
 	}
 
 	@Override
-	public Customer delete(int id) {
-		Customer customer = this.findBy(id);
-		super.delete(Customer.DATABASE_TABLE , GenericDao.KEY_ID + "=" + id, null);
-		return customer;
+	public int deleteByID(int id) {
+		//Customer customer = this.findBy(id);
+		return (int)super.delete(Customer.DATABASE_TABLE , GenericDao.KEY_ID + "=" + id, null);
 	}
 
 	@Override
-	public Customer[] findAll() {
-		String[] columns = new String[]{GenericDao.KEY_ID , Customer.COL_NAME , Customer.COL_DATE};
+	public ArrayList<Customer> findAll() {
+		String[] columns = new String[]{GenericDao.KEY_ID , Customer.COL_NAME , Customer.COL_DATE , Customer.COL_EMAIL};
 		Cursor cursor = super.get(Customer.DATABASE_TABLE, columns);
-		Customer[] customers = null;
+		ArrayList<Customer> customers = new ArrayList<Customer>();
 		if(cursor != null){
 			if(cursor.moveToFirst()){
 				int count = cursor.getColumnCount(); 
-				customers = new Customer[count];
+				//customers = new Customer[count];
 				int _id = cursor.getColumnIndex(GenericDao.KEY_ID);
 				int cus_name = cursor.getColumnIndex(Customer.COL_NAME);
 				int invId = cursor.getColumnIndex(Customer.COL_DATE);
+				int email = cursor.getColumnIndex(Customer.COL_EMAIL);
 				for(int i = 0 ; i< count ; i++){
-					customers[i] = new Customer(cursor.getInt(_id), cursor.getString(cus_name), cursor.getLong(invId));
+					customers.add(new Customer(cursor.getInt(_id), cursor.getString(cus_name), new Date(cursor.getLong(invId)) , cursor.getString(email)));
 					cursor.moveToNext();
 				}
 			}
@@ -118,7 +124,8 @@ public class CustomerBookDB extends GenericDao implements CustomerBookDao {
 		ContentValues cv = new ContentValues();
         cv.put(Customer.COL_NAME , customer.getName());
         cv.put(Customer.COL_DATE , new Date().getTime());
-        return super.update(Customer.DATABASE_TABLE, customer.getId(), cv);
+        cv.put(Customer.COL_EMAIL , customer.getEmail());
+        return super.update(Customer.DATABASE_TABLE, customer.getID(), cv);
 	}
 
 }
