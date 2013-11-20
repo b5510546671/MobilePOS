@@ -32,7 +32,7 @@ public class CustomerBook {
 
 	public boolean remove(Context con,Customer customer) {
 		db = new CustomerBookDB(con);
-		Customer c = db.delete(customer.getId());
+		Customer c = db.delete(customer.getID());
 		db.close();
 		return c != null;
 	}
@@ -54,7 +54,7 @@ public class CustomerBook {
 		Customer[] x = db.findAll();
 		db.close();
 		for (Customer c : x) {
-			if (c.getId() == customer.getId())
+			if (c.getID() == customer.getID())
 				{
 				return true;
 				}
