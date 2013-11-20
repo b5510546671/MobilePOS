@@ -1,6 +1,8 @@
 package com.core;
 
-public class ItemDescription {
+import java.io.Serializable;
+
+public class ItemDescription implements Serializable {
     public static final String DATABASE_TABLE = "ItemDescriptionBook";
     public static final int DATABASE_VERSION = 1;
     public static final String TABLE_CREATE =
@@ -10,26 +12,23 @@ public class ItemDescription {
     public static final String COL_PRICE= "price";
     public static final String COL_NAME = "name";
     public static final String COL_BARCODE = "barcode";
-    
-	public int _id;
+   
+	private int id;
 	private String name;
 	private float price;
 	private int barcode;
 	private String itemDescription;
 	
-	public ItemDescription(String name, String itemDescription, float price, int barcode){
-		this.setItemDescription(itemDescription);
-		this.setName(name);
-		this.setPrice(price);
-		this.setBarcode(barcode);
+	public ItemDescription(int id,String name, String itemDescription, float price, int barcode){
+		this.id = id;
+		this.itemDescription = itemDescription;
+		this.name = name;
+		this.price = price;
+		this.barcode = barcode;
 	}
 
 	public int getId() {
-		return _id;
-	}
-
-	public void setId(int id) {
-		this._id = id;
+		return id;
 	}
 
 	public String getName() {
