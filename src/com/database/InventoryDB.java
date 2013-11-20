@@ -1,11 +1,19 @@
 package com.database;
 
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
+
+import com.core.InventoryLineItem;
 import com.core.Item;
 import com.core.ItemDescription;
+import com.core.database.Inventory;
 
 public class InventoryDB extends GenericDao implements InventoryDao{
 	
@@ -15,51 +23,57 @@ public class InventoryDB extends GenericDao implements InventoryDao{
 		super(context, GenericDao.dName, Item.TABLE_CREATE, Item.DATABASE_TABLE, Item.DATABASE_VERSION);
 		this.context = context;
 	}
-
+	
+	//checked
 	@Override
-	public long insert(Item item) {
+	public InventoryLineItem insert(InventoryLineItem inventoryLineItem) {
+		InventoryLineItemBookDB inventoryLineItemDB = new InventoryLineItemBookDB(context);
+		inventoryLineItem = inventoryLineItemDB.insert(inventoryLineItem);
+		inventoryLineItemDB.close();
+		List<Item> items = inventoryLineItem.getItems();
+		for(int i = 0 ; i < items.size() ; i++){
+			items.set(i, insert(inventoryLineItem.getID() , items.get(i)));
+		}
+		
+		return new InventoryLineItem(inventoryLineItem.getID(), inventoryLineItem.getItems(), inventoryLineItem.getDate());
+	}
+
+	//checked
+	@Override
+	public Item insert(int inventoryLineItem_id , Item item) {
 		ContentValues cv = new ContentValues();
-        cv.put(Item.COL_STATUS, item.getStatus());
-        cv.put(Item.COL_INVENTORYLINEITEM_ID, item.getInventoryLineItemId());
-        cv.put(Item.COL_DESCRIPTION_ID, item.getDescription().getId());
-		return super.insert(Item.DATABASE_TABLE, cv);
+        cv.put(Item.COL_SALE_ID, Item.SALE_STOCK_ID);
+        cv.put(Item.COL_INVENTORYLINEITEM_ID, inventoryLineItem_id);
+        cv.put(Item.COL_DESCRIPTION_ID, item.getItemDescription().getId());
+		return new Item((int)super.insert(Item.DATABASE_TABLE, cv) , item.getItemDescription());
 	}
 
+	//checked
 	@Override
-	public int delete(int itemId) {
-		return super.delete(Item.DATABASE_TABLE,GenericDao.KEY_ID + " = " + itemId, null);
+	public int deleteItemByID(int id) {
+		return super.delete(Item.DATABASE_TABLE,GenericDao.KEY_ID + " = " + id, null);
 	}
-
+	
 	@Override
-	public int update(Item item) {
-		ContentValues cv = new ContentValues();
-        cv.put(GenericDao.KEY_ID, item.getID());
-        cv.put(Item.COL_INVENTORYLINEITEM_ID, item.getInventoryLineItemId());
-        cv.put(Item.COL_DESCRIPTION_ID, item.getDescription().getId());
-        cv.put(Item.COL_STATUS, item.getStatus());
-        return super.update(Item.DATABASE_TABLE, GenericDao.KEY_ID + " = " + item.getID(), cv);
-	}
-
-	@Override
-	public Item[] findAll() {
-		String[] columns = new String[]{GenericDao.KEY_ID, Item.COL_STATUS , Item.COL_DESCRIPTION_ID, Item.COL_INVENTORYLINEITEM_ID};
+	public ArrayList<Item> findAll() {
+		String[] columns = new String[]{GenericDao.KEY_ID , Item.COL_DESCRIPTION_ID};
 		return getItemFromCursor(super.get(Item.DATABASE_TABLE, columns));
 	}
 	
-	private Item[] getItemFromCursor(Cursor cursor){
-		Item[] itds = null;
+	private ArrayList<Item> getItemFromCursor(Cursor cursor){
+		ArrayList<Item> itds = new ArrayList<Item>();
 		if(cursor != null){
 			if(cursor.moveToFirst()){
 				int count = cursor.getCount();
-				itds = new Item[count];
 				int _id = cursor.getColumnIndex(GenericDao.KEY_ID);
 				int desId = cursor.getColumnIndex(Item.COL_DESCRIPTION_ID);
 				int invId = cursor.getColumnIndex(Item.COL_INVENTORYLINEITEM_ID);
-				int statusId = cursor.getColumnIndex(Item.COL_STATUS);
+				int statusId = cursor.getColumnIndex(Item.COL_SALE_ID);
 				for(int i = 0 ; i < count ; i++){
-					itds[i] = new Item( cursor.getInt(invId) , new ItemDescriptionBookDB(context).findBy(  cursor.getInt(desId)  ));
-					itds[i].setStatus(statusId);
-					itds[i].set_id(cursor.getInt(_id));
+					ItemDescriptionBookDB _db = new ItemDescriptionBookDB(context);
+					ItemDescription des = _db.findBy(cursor.getInt(desId));
+					_db.close();
+					itds.add(new Item(cursor.getInt(_id), des));
 					cursor.moveToNext();
 				}
 			}
@@ -68,113 +82,137 @@ public class InventoryDB extends GenericDao implements InventoryDao{
 	}
 
 	@Override
-	public Item[] findContainsBy(String name) {
-		ItemDescriptionBookDB itdDB = new ItemDescriptionBookDB(context);
-		int[] array = itdDB.findIdByContains(name);
-		String[] columns = new String[]{GenericDao.KEY_ID, Item.COL_STATUS , Item.COL_DESCRIPTION_ID, Item.COL_INVENTORYLINEITEM_ID};
-		Item[] items = null;
-		for(int x = 0 ; x < array.length ; x++){
-			Cursor cursor = super.get(Item.DATABASE_TABLE, columns , GenericDao.KEY_ID + " = " + array[x]);
-			if(cursor != null){
-				if(cursor.moveToFirst()){
-					int count = cursor.getColumnCount(); 
-					items = new Item[count];
-					for(int i = 0 ; i< count ; i++){
-						int desId = cursor.getColumnIndex(Item.COL_DESCRIPTION_ID);
-						int invId = cursor.getColumnIndex(Item.COL_INVENTORYLINEITEM_ID);
-						int statusId = cursor.getColumnIndex(Item.COL_STATUS);
-						int _id = cursor.getColumnIndex(GenericDao.KEY_ID);
-						items[i].set_id(cursor.getInt(_id));
-						
-						items[i].setDescription( new ItemDescriptionBookDB(context).findBy(  cursor.getInt(desId)  ));
-						items[i].setInventoryLineItemId(cursor.getInt(invId));
-						items[i].setStatus(cursor.getInt(statusId));
-						cursor.moveToNext();
-					}
-				}
-			}
-		}
-		if(items == null) items = new Item[0];
-		return items;
-	}
-
-	@Override
-	public Item findBy(String name) {
-		String[] columns = new String[]{GenericDao.KEY_ID, Item.COL_STATUS , Item.COL_DESCRIPTION_ID, Item.COL_INVENTORYLINEITEM_ID};
-		Cursor cursor = super.get(Item.DATABASE_TABLE , columns);
-		Item item = null;
-		if(cursor != null){
-			if(cursor.moveToFirst()){
-				int desId = cursor.getColumnIndex(Item.COL_DESCRIPTION_ID);
-				int invId = cursor.getColumnIndex(Item.COL_INVENTORYLINEITEM_ID);
-				int itcId = cursor.getColumnIndex(Item.COL_STATUS);
-				int _id = cursor.getColumnIndex(GenericDao.KEY_ID); 
-				item = new Item( cursor.getInt(invId)  , new ItemDescriptionBookDB(context).findBy(  cursor.getInt(desId)  ));
-				item.setStatus(itcId);
-				item.set_id(cursor.getInt(_id));
-			}
-		}
-		return item;
-	}
-
-	@Override
-	public void close() {
-		super.close();
-	}
-
-	@Override
 	public int findQuantity(int descId) {
-		String[] columns = new String[]{Item.COL_INVENTORYLINEITEM_ID};
+		String[] columns = new String[]{GenericDao.KEY_ID ,Item.COL_INVENTORYLINEITEM_ID};
 		Cursor cursor = super.get(Item.DATABASE_TABLE, columns , Item.COL_DESCRIPTION_ID + "=" + descId);
 		if(cursor != null){
+			cursor.moveToFirst();
 			return cursor.getCount();
 		}
 		return 0;
 	}
-
+	
 	@Override
-	public Item[] findByBarcode(int barcode) {
-		ItemDescriptionBookDao itdDB = new ItemDescriptionBookDB(context);
-		ItemDescription itd = itdDB.findByBarcode(barcode);
-		itdDB.close();
-		String[] columns = new String[]{GenericDao.KEY_ID, Item.COL_STATUS , Item.COL_DESCRIPTION_ID, Item.COL_INVENTORYLINEITEM_ID};
-		return getItemFromCursor(super.get(Item.DATABASE_TABLE, columns , Item.COL_DESCRIPTION_ID + "=" + itd._id));
+	public int updateSaleID(int sale_id , Item item) {
+		ContentValues cv = new ContentValues();
+        cv.put(GenericDao.KEY_ID, item.getID());
+        cv.put(Item.COL_SALE_ID, sale_id);
+        return super.update(Item.DATABASE_TABLE, GenericDao.KEY_ID + " = " + item.getID(), cv);
+		//return super.update(Item.DATABASE_TABLE, item.getID(), cv);
 	}
 
 	@Override
-	public Item[] findStatus(int status) {
-		String[] columns = new String[]{GenericDao.KEY_ID, Item.COL_STATUS , Item.COL_DESCRIPTION_ID, Item.COL_INVENTORYLINEITEM_ID};
-		return getItemFromCursor(super.get(Item.DATABASE_TABLE, columns , Item.COL_STATUS + "=" + status));
-	}
-
-	@Override
-	public Item[] findStatus(int descId, int status) {
-		return getItemFromCursor(super.getDB().rawQuery("select " + GenericDao.KEY_ID +"," + Item.COL_STATUS +"," + Item.COL_DESCRIPTION_ID + "," + Item.COL_INVENTORYLINEITEM_ID + " from " + Item.DATABASE_TABLE + " where " +  Item.COL_STATUS + " = ? AND " + Item.COL_DESCRIPTION_ID + " = ? " ,new String[]{status+"" , descId +""} ));
-	}
-
-	@Override
-	public void deleteAll(int[] itemCode) {
-		for(int i = 0 ; i < itemCode.length ; i++){
-			delete(itemCode[i]);
-		}
-	}
-
-	@Override
-	public Item find(int id) {
-		String[] columns = new String[]{GenericDao.KEY_ID, Item.COL_STATUS , Item.COL_DESCRIPTION_ID, Item.COL_INVENTORYLINEITEM_ID};
+	public Item findByID(int id) {
+		String[] columns = new String[]{GenericDao.KEY_ID ,Item.COL_DESCRIPTION_ID };
 		Cursor cursor = super.get(Item.DATABASE_TABLE, columns ,id);
 		Item item = null;
 		if(cursor != null){
-			if(cursor.moveToFirst()){
-				int desId = cursor.getColumnIndex(Item.COL_DESCRIPTION_ID);
-				int invId = cursor.getColumnIndex(Item.COL_INVENTORYLINEITEM_ID);
-				int itcId = cursor.getColumnIndex(Item.COL_STATUS);
-				int _id = cursor.getColumnIndex(GenericDao.KEY_ID); 
-				item = new Item( cursor.getInt(invId)  , new ItemDescriptionBookDB(context).findBy(  cursor.getInt(desId)  ));
-				item.setStatus(itcId);
-				item.set_id(cursor.getInt(_id));
-			}
+			int itdID = cursor.getColumnIndex(Item.COL_DESCRIPTION_ID);
+			cursor.moveToFirst();
+			ItemDescriptionBookDB itemDescriptionBookDB = new ItemDescriptionBookDB(getContext());
+			ItemDescription itemDescription = itemDescriptionBookDB.findBy(cursor.getInt(itdID));
+			itemDescriptionBookDB.close();
+			item = new Item(id, itemDescription);
 		}
 		return item;
+	}
+
+	@Override
+	public int deleteItemsAndInventoryLineItemByInventoryLineItemID(int inventoryLineItem_id) {
+		InventoryLineItemBookDB inventoryLineItemBookDB = new InventoryLineItemBookDB(getContext());
+		inventoryLineItemBookDB.delete(inventoryLineItem_id);
+		inventoryLineItemBookDB.close();
+		return super.delete(Item.DATABASE_TABLE, Item.COL_INVENTORYLINEITEM_ID +"="+ inventoryLineItem_id , null);
+	}
+
+	@Override
+	public ArrayList<Item> findByDescriptionID(int itemDescription_id) {
+		String[] columns = new String[]{GenericDao.KEY_ID , Item.COL_DESCRIPTION_ID};
+		Cursor cursor = super.get(Item.DATABASE_TABLE , columns , Item.COL_DESCRIPTION_ID +"="+ itemDescription_id);
+		ArrayList<Item> items = new ArrayList<Item>();
+		if(cursor != null){
+			int _id = cursor.getColumnIndex(GenericDao.KEY_ID);
+			int _desId = cursor.getColumnIndex(Item.COL_DESCRIPTION_ID);
+			if(cursor.moveToFirst()){
+				ItemDescriptionBookDB itemDescriptionBookDB = new ItemDescriptionBookDB(getContext());
+				ItemDescription itemDescription = itemDescriptionBookDB.findBy(cursor.getInt(_desId));
+				itemDescriptionBookDB.close();
+				for(int i = 0 ; i < cursor.getCount() ; i++){
+					items.add( 
+							new Item(cursor.getInt(_id) , new ItemDescription(itemDescription.getId() ,itemDescription.getName() , itemDescription.getItemDescription() , itemDescription.getPrice() ,itemDescription.getBarcode()))
+					);
+					cursor.moveToNext();
+				}
+			}
+		}
+		return items;
+	}
+
+	
+	@Override
+	public List<Item> findByInventoryLineItemID(int inventoryLineItem_id) {
+		String[] columns = new String[]{GenericDao.KEY_ID , Item.COL_DESCRIPTION_ID};
+		Cursor cursor = super.get(Item.DATABASE_TABLE , columns , Item.COL_INVENTORYLINEITEM_ID +"="+ inventoryLineItem_id);
+		HashMap<Integer , ItemDescription> itemDescriptionsMap = new HashMap<Integer, ItemDescription>();
+		ArrayList<Item> items = new ArrayList<Item>();
+		if(cursor != null){
+			int _id = cursor.getColumnIndex(GenericDao.KEY_ID);
+			int _desId = cursor.getColumnIndex(Item.COL_DESCRIPTION_ID);
+			if(cursor.moveToFirst()){
+				ItemDescriptionBookDB itemDescriptionBookDB = new ItemDescriptionBookDB(getContext());
+				ItemDescription itemDescription;
+				for(int i = 0 ; i < cursor.getCount() ; i++){
+					if(!itemDescriptionsMap.containsKey(cursor.getInt(_desId))){
+						itemDescriptionsMap.put(cursor.getInt(_desId), itemDescriptionBookDB.findBy(cursor.getInt(_desId)));
+					}
+					itemDescription = itemDescriptionsMap.get(cursor.getInt(_desId));
+					items.add( 
+						new Item(cursor.getInt(_id) , new ItemDescription(itemDescription.getId() ,itemDescription.getName() , itemDescription.getItemDescription() , itemDescription.getPrice() ,itemDescription.getBarcode()))
+					);
+					cursor.moveToNext();
+				}
+				
+				itemDescriptionBookDB.close();
+			}
+		}
+		return items;
+	}
+
+	//Checked
+	@Override
+	public List<Item> findBySaleID(int id) {
+		String[] columns = new String[]{GenericDao.KEY_ID , Item.COL_DESCRIPTION_ID};
+		Cursor cursor = super.get(Item.DATABASE_TABLE , columns , Item.COL_SALE_ID +"="+ id);
+		HashMap<Integer , ItemDescription> itemDescriptionsMap = new HashMap<Integer, ItemDescription>();
+		ArrayList<Item> items = new ArrayList<Item>();
+		if(cursor != null){
+			int _id = cursor.getColumnIndex(GenericDao.KEY_ID);
+			int _desId = cursor.getColumnIndex(Item.COL_DESCRIPTION_ID);
+			if(cursor.moveToFirst()){
+				ItemDescriptionBookDB itemDescriptionBookDB = new ItemDescriptionBookDB(getContext());
+				ItemDescription itemDescription;
+				for(int i = 0 ; i < cursor.getCount() ; i++){
+					if(!itemDescriptionsMap.containsKey(cursor.getInt(_desId))){
+						itemDescriptionsMap.put(cursor.getInt(_desId), itemDescriptionBookDB.findBy(cursor.getInt(_desId)));
+					}
+					itemDescription = itemDescriptionsMap.get(cursor.getInt(_desId));
+					items.add( 
+						new Item(cursor.getInt(_id) , new ItemDescription(itemDescription.getId() ,itemDescription.getName() , itemDescription.getItemDescription() , itemDescription.getPrice() ,itemDescription.getBarcode()))
+					);
+					cursor.moveToNext();
+				}
+				
+				itemDescriptionBookDB.close();
+			}
+		}
+		return items;
+	}
+
+	//Checked
+	@Override
+	public int moveToStockBySaleID(int sale_id) {
+		ContentValues cv = new ContentValues();
+		cv.put(Item.COL_SALE_ID, Item.SALE_STOCK_ID);
+		return super.update( Item.DATABASE_TABLE , Item.COL_SALE_ID + "=" + sale_id , cv);
 	}
 }

@@ -1,18 +1,21 @@
 package com.database;
+import java.util.List;
+
+import com.core.InventoryLineItem;
 import com.core.Item;
 
 public interface InventoryDao {
-	public long insert(Item item);
-	public int delete(int itemCode);
-	public void deleteAll(int[] itemCode);
-	public int update( Item item);
-	public Item[] findAll();
-	public Item[] findContainsBy(String name);
-	public Item findBy(String name);
-	public Item find(int id);
-	public Item[] findByBarcode(int barcode);
-	public Item[] findStatus(int status);
-	public Item[] findStatus(int descId , int status);
-	public void close();
+	
+	public InventoryLineItem insert(InventoryLineItem inventoryLineItem);
+	public Item insert(int inventoryLineItem_id , Item item); //in side
+	public int deleteItemByID(int id);
+	public int deleteItemsAndInventoryLineItemByInventoryLineItemID(int inventoryLineItem_id);
+	public int moveToStockBySaleID(int sale_id);
+	public int updateSaleID(int sale_id , Item item); // if sale_id = 0 then item is stock
+	public List<Item> findAll();
+	public List<Item> findBySaleID(int sale_id);
+	public List<Item> findByInventoryLineItemID(int inventoryLineItem_id);
+	public List<Item> findByDescriptionID(int itemDescription_id);
+	public Item findByID(int id);
 	public int findQuantity(int descId);
 }

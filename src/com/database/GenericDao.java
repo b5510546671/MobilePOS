@@ -98,8 +98,8 @@ public class GenericDao extends SQLiteOpenHelper {
         return cursor;
     }
     
-    protected int delete(String table) {
-        return db.delete(table, "1", null);
+    public int delete(String table) {
+        return db.delete(table, null , null);
     }
     
     protected int delete(String table, long id) {
