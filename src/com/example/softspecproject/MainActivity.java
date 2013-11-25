@@ -21,7 +21,9 @@ import com.database.ItemDescriptionBookDB;
 import com.database.SaleLadgerDB;
 
 import android.os.Bundle;
+import android.os.Debug;
 import android.app.Activity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
@@ -48,6 +50,7 @@ public class MainActivity extends Activity {
 	
 	}
 	
+	Date d;
     public void onClick_bt1(View v){
     	
     	ItemDescriptionBook itemDescriptionBook = new ItemDescriptionBook();
@@ -69,6 +72,7 @@ public class MainActivity extends Activity {
     	SaleLadger saleLadger = new SaleLadger();
     	saleLadger.add(getApplicationContext(), sale);
     	
+    	d = sale.getDate();
     	txt_view.setText("setted");
     	/*
     	InventoryDB inventoryDB =  new InventoryDB(getApplicationContext());
@@ -83,7 +87,19 @@ public class MainActivity extends Activity {
     }
     
     public void onClick_bt2(View v){
-    	InventoryDB inventoryDB =  new InventoryDB(getApplicationContext());
+    	
+    	SaleLadger s = new SaleLadger();
+    	List<Sale> ls = s.getSaleBetween(getApplicationContext(), new Date(new Date().getTime()- 1000000000000000l), new Date());
+    	Log.i("APP", "a");
+    	//if(ls == null) 
+    	StringBuilder sb = new StringBuilder();
+    	for(int i = 0 ; i < ls.size() ; i++){
+    		Sale ss = ls.get(i);
+    		sb.append(ss.getID()).append("\n").append(ss.getDate().toString());
+    		Log.i("APP", sb.toString());
+    	}
+    	txt_view.setText(sb.toString());
+    	/*InventoryDB inventoryDB =  new InventoryDB(getApplicationContext());
     	
     	ArrayList<Item> items = new ArrayList<Item>();
     	items.add(new Item(0, new ItemDescription(2, "aaa", "zzz", 12.22f, 102220)));
@@ -94,15 +110,16 @@ public class MainActivity extends Activity {
     	inventoryLineItem = inventoryDB.insert(inventoryLineItem);
     	
     	txt_view.setText(  inventoryDB.findByInventoryLineItemID(inventoryLineItem.getID()).size() + " "  );
-    	inventoryDB.close();
+    	inventoryDB.close();*/
     }
     
     public void onClick_bt3(View v){
-    	ItemDescriptionBookDB itemDescriptionBookDB = new ItemDescriptionBookDB(getApplicationContext());
+    	Log.i("APP", "a");
+    	/*ItemDescriptionBookDB itemDescriptionBookDB = new ItemDescriptionBookDB(getApplicationContext());
     	ItemDescription itemDescription = itemDescriptionBookDB.insert(new ItemDescription(0, "helloooo", "kdskdak", 1000, 12345678));
     	
     	itemDescription = itemDescriptionBookDB.findByBarcode(itemDescription.getBarcode());
-    	txt_view.setText(itemDescription.getName() + "    " + itemDescription.getBarcode() + "   " + itemDescription.getPrice());
+    	txt_view.setText(itemDescription.getName() + "    " + itemDescription.getBarcode() + "   " + itemDescription.getPrice());*/
     }
 
     public void onClick_bt4(View v){

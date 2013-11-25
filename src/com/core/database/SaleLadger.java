@@ -1,6 +1,7 @@
 package com.core.database;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import android.content.Context;
@@ -40,6 +41,13 @@ public class SaleLadger {
 	public List<Sale> getAllSales(Context con){
 		db = new SaleLadgerDB(con);
 		List<Sale> x = db.findAll();
+		db.close();
+		return x;
+	}
+	
+	public List<Sale> getSaleBetween(Context con, Date from , Date to){
+		db = new SaleLadgerDB(con);
+		List<Sale> x = db.findByDate(from, to);
 		db.close();
 		return x;
 	}
