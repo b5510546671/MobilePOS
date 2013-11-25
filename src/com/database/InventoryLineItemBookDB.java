@@ -1,7 +1,7 @@
 package com.database;
 
-import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import android.content.ContentValues;
@@ -58,6 +58,28 @@ public class InventoryLineItemBookDB extends GenericDao implements
 	public List<InventoryLineItem> findAll() {
 		String[] columns = new String[]{GenericDao.KEY_ID , InventoryLineItem.COL_DATE};
 		Cursor cursor = super.get(InventoryLineItem.DATABASE_TABLE , columns);
+		ArrayList<InventoryLineItem> inventoryLineItems = new ArrayList<InventoryLineItem>();
+		if(cursor!= null){
+			int _date = cursor.getColumnIndex(InventoryLineItem.COL_DATE);
+			int _id = cursor.getColumnIndex(GenericDao.KEY_ID);
+			if(cursor.moveToFirst()){
+				InventoryDB inventoryDB = new InventoryDB(getContext());
+				for(int i = 0 ; i < cursor.getCount() ; i++){
+					inventoryLineItems.add(
+							new InventoryLineItem(cursor.getInt(_id), inventoryDB.findByInventoryLineItemID(cursor.getInt(_id)) , new Date(cursor.getInt(_date)) )
+					);
+					cursor.moveToNext();
+				}
+				inventoryDB.close();
+			}
+		}
+		return inventoryLineItems;
+	}
+
+	@Override
+	public List<InventoryLineItem> findByDate(Date from, Date to) {
+		String[] columns = new String[]{GenericDao.KEY_ID , InventoryLineItem.COL_DATE};
+		Cursor cursor = super.get(InventoryLineItem.DATABASE_TABLE , columns , InventoryLineItem.COL_DATE + " BETWEEN " + from.getTime() + " AND " + to.getTime());
 		ArrayList<InventoryLineItem> inventoryLineItems = new ArrayList<InventoryLineItem>();
 		if(cursor!= null){
 			int _date = cursor.getColumnIndex(InventoryLineItem.COL_DATE);

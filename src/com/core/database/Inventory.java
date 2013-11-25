@@ -1,5 +1,6 @@
 package com.core.database;
 
+import java.util.Date;
 import java.util.List;
 
 import android.content.Context;
@@ -81,5 +82,13 @@ public class Inventory {
 		int i = inventoryDB.findAll().size();
 		inventoryDB.close();
 		return i;
+	}
+	
+	public List<InventoryLineItem> getInventoryLineItemBetween(Context con , Date from , Date to){
+
+		InventoryLineItemBookDB inventoryLineItemBookDB = new InventoryLineItemBookDB(con);
+		List<InventoryLineItem> inventoryLineItems = inventoryLineItemBookDB.findByDate(from, to);
+		inventoryLineItemBookDB.close();
+		return inventoryLineItems;
 	}
 }

@@ -7,6 +7,7 @@ import java.util.List;
 import android.content.Context;
 import android.util.Log;
 
+import com.core.InventoryLineItem;
 import com.core.Sale;
 import com.database.SaleLadgerDB;
 
