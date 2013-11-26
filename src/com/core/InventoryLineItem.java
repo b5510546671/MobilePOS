@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * List of items in the inventory.
+ * @version 2013.11.26
  */
 public class InventoryLineItem implements Serializable{
 	 public static final String DATABASE_TABLE = "InventoryLineItemBook";
@@ -24,7 +25,7 @@ public class InventoryLineItem implements Serializable{
 	 private List<Item> items = new ArrayList<Item>();
 	 
 	 /**
-	  * Creates a InventoryLineItem with initial id, list of items and date.
+	  * Creates a InventoryLineItem and initializes id, list of items and date.
 	  * @param id the initial id of LineItem
 	  * @param items the initial list of items of LineItem
 	  * @param date the initial date of LineItem
@@ -36,8 +37,8 @@ public class InventoryLineItem implements Serializable{
 	}
 	
 	 /**
-	  * Returns the date of LineItem.
-	  * @return date the date
+	  * Get the date of LineItem.
+	  * @return date lineitem's date
 	  */
 	public Date getDate() {
 		return date;
@@ -45,23 +46,25 @@ public class InventoryLineItem implements Serializable{
 	
 	/**
 	 * Sets the date of LineItem.
-	 * @param date the date for setting
+	 * @param date the date to be set
 	 */
 	public void setDate(Date date) {
 		this.date = date;
 	}
 	
 	/**
-	 * Returns the id of LineItem.
-	 * @return id the id*/
+	 * Get the id of LineItem.
+	 * @return id the LineItem's id
+	 */
 	public int getID() {
 		return id;
 	}
 	
 	/**
-	 * Returns the list of item in LineItem
-	 * @return items the list of items
-	 * */
+	 * Get the list of item in LineItem
+	 * @return items the list of items in LineItem
+	 * 
+	 */
 	public List<Item> getItems()
 	{
 		return this.items;
@@ -69,7 +72,7 @@ public class InventoryLineItem implements Serializable{
 	
 	/**
 	 * Sets the list of items in LineItem.
-	 * @param items the list of items for setting
+	 * @param items the list of items to be set
 	 */
 	public void setItems(List<Item> items) {
 		this.items = items;
