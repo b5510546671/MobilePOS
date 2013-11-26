@@ -3,7 +3,8 @@ package com.core;
 import java.io.Serializable;
 
 /**
- * The product item
+ * The product item.
+ * @version 2013.11.26
  */
 public class Item implements Serializable {
     public static final String DATABASE_TABLE = "Inventory";
@@ -17,13 +18,13 @@ public class Item implements Serializable {
     
     public static final int SALE_STOCK_ID = -1;
 	
-    /** The id of Item */
+    /** The id of Item. */
 	private int id;
-	 /** The description of Item */
+	 /** The description of Item. */
 	private ItemDescription itemDesciption;
 	
 	/**
-	 * Creates an Item with initial id and description.
+	 * Creates an Item and initializes id and description.
 	 * @param id the initial id of Item
 	 * @param itemDescription the initial description of Item
 	 */
@@ -33,16 +34,16 @@ public class Item implements Serializable {
 	}
 	
 	/**
-	 * Returns the id of the item.
-	 * @return id the id
+	 * Get the id of the item.
+	 * @return id the item's id
 	 */
 	public int getID() {
 		return this.id;
 	}
 	
 	/**
-	 * Returns the description of the item.
-	 * @return itemDescription the description
+	 * Get the description of the item.
+	 * @return itemDescription the item's description
 	 */
 	public ItemDescription getItemDescription()
 	{
@@ -51,15 +52,15 @@ public class Item implements Serializable {
 	
 	/**
 	 * Sets the ItemDescription of the item.
-	 * @param itemDescription the description for setting
+	 * @param itemDescription the description to be set
 	 */
 	public void setItemDescription(ItemDescription itemDescription){
 		this.itemDesciption = itemDescription;
 	}
 	
 	/**
-	 * Returns the price of the item.
-	 * @return price the price
+	 * Get the price of the item.
+	 * @return price the item's price
 	 */
 	public float getPrice(){
 		return itemDesciption.getPrice();
@@ -67,8 +68,8 @@ public class Item implements Serializable {
 	}
 	
 	/**
-	 * Returns the name of the item.
-	 * @return name the name
+	 * Returns string.
+	 * @return name a string representation of item
 	 */
 	public String toString()
 	{
