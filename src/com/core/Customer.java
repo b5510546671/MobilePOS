@@ -5,7 +5,9 @@ import java.util.Date;
 
 /**
  * The customer who buy product.
- * */
+ * @version 2013.11.26
+ *
+ */
 public class Customer implements Serializable {
     public static final String DATABASE_TABLE = "CustomerBook";
     public static final int DATABASE_VERSION = 1;
@@ -26,7 +28,7 @@ public class Customer implements Serializable {
 	private String email;
 	
 	/**
-	 * Creates a Customer with initial id, name, register date and email.
+	 * Creates a Customer and initializes id, name, register date and email.
 	 * @param id the initial id of Customer
 	 * @param name the initial name of Customer
 	 * @param regsterDate the register date of Customer
@@ -40,16 +42,16 @@ public class Customer implements Serializable {
 	}
 	
 	/**
-	 * Returns the id of Customer.
-	 * @return id the id
+	 * Get the id of Customer.
+	 * @return id the customer's id
 	 */
 	public int getID(){
 		return id;
 	}
 	
 	/**
-	 * Returns the name of Customer.
-	 * @return name the name
+	 * Get the name of Customer.
+	 * @return name the customer's name
 	 */
 	public String getName()
 	{
@@ -58,7 +60,7 @@ public class Customer implements Serializable {
 	
 	/**
 	 * Sets the name of Customer.
-	 * @param name the name for setting
+	 * @param name the name to be set
 	 */
 	public void setName(String name)
 	{
@@ -66,8 +68,8 @@ public class Customer implements Serializable {
 	}
 	
 	/**
-	 * Returns the date of register in form of Date object.
-	 * @return registerDate the date of register
+	 * Get the register date.
+	 * @return registerDate the date of register as Date object
 	 */
 	public Date getRegisterDate()
 	{
@@ -75,8 +77,8 @@ public class Customer implements Serializable {
 	}
 
 	/**
-	 * Returns the email of Customer.
-	 * @return email the email
+	 * Get the email of Customer.
+	 * @return email the customer's email
 	 */
 	public String getEmail() {
 		return email;
@@ -84,7 +86,7 @@ public class Customer implements Serializable {
 
 	/**
 	 * Sets the email of Customer.
-	 * @param email the email for setting
+	 * @param email the email to be set
 	 */
 	public void setEmail(String email) {
 		this.email = email;

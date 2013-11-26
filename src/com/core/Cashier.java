@@ -6,7 +6,9 @@ import android.content.Context;
 
 /**
  * The user who using the POS.
- * */
+ * @version 2013.11.26
+ * 
+ */
 public class Cashier {
     public static final String DATABASE_TABLE = "CashierBook";
     public static final int DATABASE_VERSION = 1;
@@ -30,23 +32,23 @@ public class Cashier {
     public Cashier() {	}
     
     /**
-     * Returns the name of the Cashier.
-     * @return name the name
+     * Get the name of the Cashier.
+     * @return name name of cashier
      */
 	public String getName() {
 		return name;
 	}
 	
 	/**
-	 * Sets the name of the Cashier.
-	 * @param name the name for setting
+	 * Set the name of the Cashier.
+	 * @param name name to be set to cashier
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 	
 	/**
-	 * Returns the user of the Cashier.
+	 * Get the user of the Cashier.
 	 * @return user the user
 	 */
 	public String getUser() {
@@ -55,14 +57,14 @@ public class Cashier {
 	
 	/**
 	 * Sets the user of the Cashier.
-	 * @param user the user for setting
+	 * @param user the user to be set
 	 */
 	public void setUser(String user) {
 		this.user = user;
 	}
 
 	/**
-	 * Returns the password of the Cashier.
+	 * Get the password of the Cashier.
 	 * @return the password
 	 */
 	public String getPassword() {
@@ -71,15 +73,15 @@ public class Cashier {
 
 	/**
 	 * Sets the password of the Cashier.
-	 * @param password the password for setting
+	 * @param password the password to be set
 	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
 	/**
-	 * Returns the id of the Cashier.
-	 * @return id the id
+	 * Get the id of the Cashier.
+	 * @return id of cashier
 	 */
 	public int getId() {
 		return id;
@@ -87,7 +89,7 @@ public class Cashier {
 
 	/**
 	 * Sets the id of Cashier.
-	 * @param id the new id for setting
+	 * @param id the id to be set to cashier
 	 */
 	public void setId(int id) {
 		this.id = id;
