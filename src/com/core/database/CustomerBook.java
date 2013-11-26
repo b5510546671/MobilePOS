@@ -78,7 +78,7 @@ public class CustomerBook {
 	
 	/**
 	 * get the the number of the customer is the data base
-	 * @param con is the context that recieve from the user
+	 * @param con is the context that receive from the user
 	 * @return the number of all customer in the database
 	 */
 	public int getAllCustomerQuantity(Context con){

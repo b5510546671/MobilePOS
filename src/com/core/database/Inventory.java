@@ -11,10 +11,21 @@ import com.core.Item;
 import com.core.ItemDescription;
 import com.database.InventoryDB;
 import com.database.InventoryLineItemBookDB;
-
+/**
+ * Access to the inventory that contain in the database
+ */
 public class Inventory {
+	/**
+	 * Object of the inventory database 
+	 */
 	private InventoryDB db;
 	
+	/**
+	 * get the item in the database which will base on the id that user put in
+	 * @param context is the context that receive from the user
+	 * @param id is the id of the item that need to find
+	 * @return i is the item that have correct id
+	 */
 	public Item getByID(Context context , int id){
 		db = new InventoryDB(context);
 		Item i = db.findByID(id);
@@ -22,6 +33,11 @@ public class Inventory {
 		return i;
 	}
 	
+	/**
+	 * 
+	 * @param con
+	 * @return
+	 */
 	public List<Item> getAllStock(Context con){
 		db = new InventoryDB(con);
 		List<Item> i = db.findByDescriptionID(Item.SALE_STOCK_ID);
