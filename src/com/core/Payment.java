@@ -4,7 +4,8 @@ import java.io.Serializable;
 import java.io.StringWriter;
 
 /**
- * The Payment.
+ * The Payment class.
+ * @version 2013.11.26
  */
 public class Payment implements Serializable {
 	public static final String DATABASE_TABLE = "PaymentBook";
@@ -15,15 +16,15 @@ public class Payment implements Serializable {
     public static final String COL_INPUT_MONEY = "input_money";
     public static final String COL_PRICE = "price";
 	
-    /** The input of Payment */
+    /** The input of Payment. */
 	private double input;
-	/** The price of Payment */
+	/** The price of Payment. */
 	private double price;
-	/** The id of Payment */
+	/** The id of Payment. */
 	private int id=0;
 	
 	/**
-	 * Creates a Payment with initial id, price and input.
+	 * Creates a Payment and initializes id, price and input.
 	 * @param id the initial id of the Payment
 	 * @param price the initial price of the Payment
 	 * @param input the initial input of the Payment
@@ -35,8 +36,8 @@ public class Payment implements Serializable {
 	}
 
 	/**
-	 * Returns the id.
-	 * @return id the id
+	 * Get the payment id.
+	 * @return id the payment's id
 	 */
 	public int getID()
 	{
@@ -44,8 +45,8 @@ public class Payment implements Serializable {
 	}
 	
 	/**
-	 * Returns the price.
-	 * @return price the price
+	 * Get the price.
+	 * @return price the price in payment
 	 */
 	public double getPrice() {
 		return this.price;
@@ -53,15 +54,15 @@ public class Payment implements Serializable {
 
 	/**
 	 * Sets the price.
-	 * @param price the price for setting
+	 * @param price the price to be set
 	 */
 	public void setPrice(double price) {
 		this.price = price;
 	}
 
 	/**
-	 * Returns the input.
-	 * @return input the input
+	 * Get the input.
+	 * @return input the input in payment
 	 */
 	public double getInput() {
 		return input;
@@ -69,15 +70,15 @@ public class Payment implements Serializable {
 
 	/**
 	 * Sets the input.
-	 * @param input the input for setting
+	 * @param input the input to be set
 	 */
 	public void setInput(double input) {
 		this.input = input;
 	}
 	
 	/**
-	 * Returns the change.
-	 * @return change the change
+	 * Get the change.
+	 * @return change the change amount in payment
 	 */
 	public double getChange()
 	{

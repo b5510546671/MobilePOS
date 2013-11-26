@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * Description of item. 
+ * @version 2013.11.26
  */
 public class ItemDescription implements Serializable {
     public static final String DATABASE_TABLE = "ItemDescriptionBook";
@@ -16,24 +17,24 @@ public class ItemDescription implements Serializable {
     public static final String COL_NAME = "name";
     public static final String COL_BARCODE = "barcode";
    
-    /** The id of ItemDescription */
+    /** The id of ItemDescription. */
 	private int id;
-	 /** The name of ItemDescription */
+	 /** The name of ItemDescription. */
 	private String name;
-	 /** The price of ItemDescription */
+	 /** The price of ItemDescription. */
 	private float price;
-	 /** The bar code of ItemDescription */
+	 /** The bar code of ItemDescription. */
 	private int barcode;
-	 /** The description of ItemDescription */
+	 /** The description of ItemDescription. */
 	private String itemDescription;
 	
 	/**
-	 * Creates a ItemDescription with initial id, name, description, price and bar code.
+	 * Creates a ItemDescription and initializes id, name, description, price and barcode.
 	 * @param id the initial id of ItemDescription
 	 * @param name the initial name of ItemDescription
 	 * @param itemDescription the initial description of ItemDescription
-	 * @param price the initial id of ItemDescription
-	 * @param barcode the initial id of ItemDescription
+	 * @param price the initial price of ItemDescription
+	 * @param barcode the initial barcode of ItemDescription
 	 */
 	public ItemDescription(int id,String name, String itemDescription, float price, int barcode){
 		this.id = id;
@@ -44,72 +45,72 @@ public class ItemDescription implements Serializable {
 	}
 
 	/**
-	 * Returns the id of the description.
-	 * @return id the id
+	 * Get the id from the item description.
+	 * @return id the itemdescription's id
 	 */
 	public int getId() {
 		return id;
 	}
 
 	/**
-	 * Returns the name of the description.
-	 * @return name the name
+	 * Get the name from the item description.
+	 * @return name the itemdescription's name
 	 */
 	public String getName() {
 		return name;
 	}
 
 	/**
-	 * Sets the name of the description.
-	 * @param name the name for setting
+	 * Sets the name to the item description.
+	 * @param name the name to be set
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
 	/**
-	 * Returns the price of the description.
-	 * @return price the price
+	 * Get the price from the item description.
+	 * @return price the itemdescription's price
 	 */
 	public float getPrice() {
 		return price;
 	}
 
 	/**
-	 * Sets the price of the description.
-	 * @param price the price for setting
+	 * Sets the price to the description.
+	 * @param price the price to be set
 	 */
 	public void setPrice(float price) {
 		this.price = price;
 	}
 
 	/**
-	 * Returns the bar code of the description.
-	 * @return barcode the bar code
+	 * Get the barcode from the item description.
+	 * @return barcode the itemdescription's barcode
 	 */
 	public int getBarcode() {
 		return barcode;
 	}
 
 	/**
-	 * Sets the bar code of the description.
-	 * @param barcode the bar code for setting
+	 * Set the barcode to the item description.
+	 * @param barcode the barcode to be set
 	 */
 	public void setBarcode(int barcode) {
 		this.barcode = barcode;
 	}
 
 	/**
-	 * Returns the description.
-	 * @return itemDescription the description
+	 * Get the item description.
+	 * @return itemDescription the itemdescription
 	 */
 	public String getItemDescription() {
 		return itemDescription;
 	}
 
 	/**
-	 * Sets the new description.
-	 * @param itemDescription the description for setting
+	 * Sets the new item description.
+	 * @param itemDescription the item description to be set
 	 */
 	public void setItemDescription(String itemDescription) {
 		this.itemDescription = itemDescription;

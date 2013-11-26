@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * The Sale
+ * @version 2013.11.26
  */
 public class Sale implements Serializable {
 	public static final String DATABASE_TABLE = "SaleLadger";
@@ -18,19 +19,19 @@ public class Sale implements Serializable {
     public static final String COL_DATE = "date";
     public static final String COL_PAYMENT_ID = "payment_id";
     
-    /** The list of items of Sale */
+    /** The list of items in Sale. */
 	private List<Item> items = new ArrayList<Item>();
-	/** The id of Sale */
+	/** The id of Sale. */
 	private int id;
-	/** The customer of Sale */
+	/** The customer of Sale. */
 	private Customer customer;
-	/** The date of Sale */
+	/** The date of Sale. */
 	private Date date;
-	/** The payment of Sale */
+	/** The payment of Sale. */
 	private Payment payment;
 	
 	/**
-	 * Creates a Sale with initial id, list of items, customer, payment and date.
+	 * Creates a Sale and initilzes id, list of items, customer, payment and date.
 	 * @param id the initial id of Sale
 	 * @param items the initial list of items of Sale
 	 * @param customer the initial customer of Sale
@@ -47,8 +48,8 @@ public class Sale implements Serializable {
 	}
 	
 	/**
-	 * Returns the id of Sale.
-	 * @return id the id
+	 * Get the id of Sale.
+	 * @return id the sale id
 	 */
 	public int getID()
 	{
@@ -57,7 +58,7 @@ public class Sale implements Serializable {
 	
 	/**
 	 * Sets the customer of Sale.
-	 * @param customer the customer for setting
+	 * @param customer the customer to be set
 	 */
 	public void setCustomer(Customer customer)
 	{
@@ -65,8 +66,8 @@ public class Sale implements Serializable {
 	}
 	
 	/**
-	 * Returns the customer of Sale.
-	 * @return customer the customer
+	 * Get the customer of Sale.
+	 * @return customer the customer in that sale
 	 */
 	public Customer getCustomer()
 	{
@@ -74,8 +75,8 @@ public class Sale implements Serializable {
 	}
 	
 	/**
-	 * Returns the payment of Sale.
-	 * @return payment the payment
+	 * Get the payment of Sale.
+	 * @return payment the payment in that sale
 	 */
 	public Payment getPayment()
 	{
@@ -84,7 +85,7 @@ public class Sale implements Serializable {
 	
 	/**
 	 * Sets the payment of Sale.
-	 * @param payment the payment for setting
+	 * @param payment the payment to be set
 	 */
 	public void setPayment(Payment payment)
 	{
@@ -92,16 +93,16 @@ public class Sale implements Serializable {
 	}
 	
 	/**
-	 * Returns the date of Sale.
-	 * @return date the date
+	 * Get the date of Sale.
+	 * @return date the sale date
 	 */
 	public Date getDate(){
 		return this.date;
 	}
 	
 	/**
-	 * Returns the total price of Sale.
-	 * @return totalPrice the total price
+	 * Get the total price of Sale.
+	 * @return totalPrice the total price of that sale
 	 */
 	public double getTotalPrice()
 	{
@@ -114,8 +115,8 @@ public class Sale implements Serializable {
 	}
 
 	/**
-	 * Returns the list of items in Sale.
-	 * @return items the list of items
+	 * Get the list of items in Sale.
+	 * @return items the list of items in the sale
 	 */
 	public List<Item> getItems() {
 		return items;
@@ -123,7 +124,7 @@ public class Sale implements Serializable {
 
 	/**
 	 * Sets the list of items in Sale.
-	 * @param items the list of item for setting
+	 * @param items the list of item to be set
 	 */
 	public void setItems(List<Item> items) {
 		this.items = items;
