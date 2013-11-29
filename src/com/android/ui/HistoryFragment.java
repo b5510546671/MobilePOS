@@ -2,8 +2,7 @@ package com.android.ui;
 
 
 
-
-import com.example.softspecproject.R;
+import com.example.android.navigationdrawerexample.R;
 
 import android.os.Bundle;
 import android.app.ActionBar;

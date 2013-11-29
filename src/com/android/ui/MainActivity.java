@@ -3,7 +3,10 @@ package com.android.ui;
 
 import java.util.Locale;
 
-import com.example.softspecproject.R;
+import com.example.android.navigationdrawerexample.R;
+
+
+
 
 import android.app.ActionBar;
 import android.app.Activity;

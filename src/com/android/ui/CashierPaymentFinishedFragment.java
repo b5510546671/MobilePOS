@@ -3,8 +3,7 @@ package com.android.ui;
 
 
 
-
-import com.example.softspecproject.R;
+import com.example.android.navigationdrawerexample.R;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

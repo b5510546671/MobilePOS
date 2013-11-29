@@ -3,7 +3,9 @@ package com.android.ui;
 import java.util.Date;
 
 import com.core.Sale;
-import com.example.softspecproject.R;
+import com.example.android.navigationdrawerexample.R;
+import com.example.android.navigationdrawerexample.R.layout;
+import com.example.android.navigationdrawerexample.R.menu;
 
 import android.os.Bundle;
 import android.app.Activity;

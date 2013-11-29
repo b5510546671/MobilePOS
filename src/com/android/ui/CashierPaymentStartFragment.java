@@ -24,7 +24,7 @@ import com.controller.SaleController;
 import com.core.Item;
 import com.core.ItemDescription;
 import com.core.Payment;
-import com.example.softspecproject.R;
+import com.example.android.navigationdrawerexample.R;
 
 public class CashierPaymentStartFragment extends Fragment {
 	private Button buttonContinue;

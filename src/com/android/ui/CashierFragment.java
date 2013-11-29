@@ -11,7 +11,7 @@ import java.util.ResourceBundle.Control;
 import com.controller.SaleController;
 import com.core.Item;
 import com.core.ItemDescription;
-import com.example.softspecproject.R;
+import com.example.android.navigationdrawerexample.R;
 
 import android.app.AlertDialog;
 import android.app.Fragment;

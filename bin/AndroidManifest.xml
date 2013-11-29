@@ -1,26 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.softspecproject"
+    package="com.example.android.navigationdrawerexample"
     android:versionCode="1"
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="15"
+        android:minSdkVersion="14"
         android:targetSdkVersion="17" />
 
     <application
-        android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
-         >
+        android:label="Mobile POS"
+        android:theme="@android:style/Theme.Holo.Light.DarkActionBar" >
         <activity
-            android:name="com.example.softspecproject.MainActivity"
-            android:label="@string/app_name" >
+            android:name="com.android.ui.LoginActivity"
+            android:label="@string/title_activity_login" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="com.android.ui.CashierContinueActivity"
+            android:label="@string/title_activity_cashier_continue" >
+        </activity>
+        <activity
+            android:name="com.android.ui.CashierContinueFragment1"
+            android:label="@string/title_activity_cashier_continue2" >
+        </activity>
+        <activity
+            android:name="com.android.ui.MainActivity"
+            android:label="@string/title_activity_main" >
+        </activity>
+        <activity
+            android:name="com.android.ui.StoreManagerActivity"
+            android:label="@string/title_activity_store_manager" >
+        </activity>
+        <activity
+            android:name="com.android.ui.InventoryManagerActivity"
+            android:label="@string/title_activity_inventory_manager" >
+        </activity>
+        <activity
+            android:name="com.android.ui.StockCreateNewStock"
+            android:label="@string/title_activity_stock_create_new_stock" >
+        </activity>
+        <activity
+            android:name="com.android.ui.StockViewAllActivity"
+            android:label="@string/title_activity_stock_view_all" >
+        </activity>
+        <activity
+            android:name="com.android.ui.StockAddNewProductActivity"
+            android:label="@string/title_activity_stock_add_new_product" >
+        </activity>
+        <activity
+            android:name="com.android.ui.StockInventoryLineItemDetail"
+            android:label="@string/title_activity_stock_inventory_line_item_detail" >
+        </activity>
+        <activity
+            android:name="com.android.ui.CustomerRegisterActivity"
+            android:label="@string/title_activity_customer_register" >
         </activity>
     </application>
 

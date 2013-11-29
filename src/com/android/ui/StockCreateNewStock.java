@@ -8,7 +8,7 @@ import com.controller.InventoryController;
 import com.core.InventoryLineItem;
 import com.core.Item;
 import com.core.ItemDescription;
-import com.example.softspecproject.R;
+import com.example.android.navigationdrawerexample.R;
 
 import android.os.Bundle;
 import android.app.Activity;
