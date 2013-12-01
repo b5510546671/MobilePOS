@@ -44,6 +44,13 @@ public class Inventory {
 		return i;
 	}
 	
+	public List<Item> getStockItems(Context con){
+		db = new InventoryDB(con);
+		List<Item> i = db.findBySaleID(Item.SALE_STOCK_ID);
+		db.close();
+		return i;
+	}
+	
 	public List<Item> getItemsByItemDescription(Context con , ItemDescription itemDescription){
 		db = new InventoryDB(con);
 		List<Item> i = db.findByDescriptionID(itemDescription.getId());

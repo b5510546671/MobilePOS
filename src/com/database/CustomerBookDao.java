@@ -4,7 +4,12 @@ import java.util.List;
 
 import com.core.Customer;
 
+/**
+ * Standard SaleLadger DataAccessObject interface for any database.
+ * @author Krittayot Techasombooranakit 5510545976
+ */
 public interface CustomerBookDao {
+	
 	public Customer insert(Customer customer);
 	public int update(Customer customer);
 	public Customer findBy(String name);
