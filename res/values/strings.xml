@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">SoftspecProject</string>
+    <string name="app_name">Mobile POS</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="action_websearch">Web search</string>
+    <string name="app_not_available">Sorry, there\'s no web browser available</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-    <string name="menu_settings">Settings</string>
+    <string name="title_activity_cashier_continue">CashierContinueActivity</string>
+    <string name="title_activity_cashier_continue2">CashierContinue2</string>
+    <string name="title_activity_store_manager">StoreManagerActivity</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_inventory_manager">InventoryManagerActivity</string>
+    <string name="title_activity_stock_create_new_stock">StockCreateNewStock</string>
+    <string name="title_activity_stock_view_all">StockViewAllActivity</string>
+    <string name="title_activity_stock_add_new_product">StockAddNewProductActivity</string>
+    <string name="title_activity_stock_inventory_line_item_detail">StockInventoryLineItemDetail</string>
+    <string name="title_activity_customer_register">CustomerRegisterActivity</string>
 
 </resources>

@@ -7,7 +7,6 @@ import java.util.List;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.util.Log;
 
 import com.core.Customer;
 import com.core.Item;
@@ -127,37 +126,6 @@ public class SaleLadgerDB extends GenericDao implements SaleLadgerDao{
 			}
 		} 
 		return sale;
-	}
-
-
-	@Override
-	public List<Sale> findByDate(Date from, Date to) {
-		String[] columns = new String[]{GenericDao.KEY_ID, Sale.COL_CUSTOMER_ID ,  Sale.COL_DATE , Sale.COL_PAYMENT_ID};
-		Cursor cursor = super.get(Sale.DATABASE_TABLE, columns , Sale.COL_DATE + " BETWEEN " + from.getTime() + " AND " + to.getTime());
-		ArrayList<Sale> sales = null;
-		if(cursor != null){
-			if(cursor.moveToFirst()){
-				int _id = cursor.getColumnIndex(GenericDao.KEY_ID);
-				int cusId = cursor.getColumnIndex(Sale.COL_CUSTOMER_ID );
-				int date = cursor.getColumnIndex(Sale.COL_DATE);
-				int pay = cursor.getColumnIndex(Sale.COL_PAYMENT_ID);
-				sales = new ArrayList<Sale>();
-				CustomerBookDB customerBookDB = new CustomerBookDB(getContext());
-				PaymentBookDB paymentBookDB = new PaymentBookDB(getContext());
-				InventoryDB inventoryDB = new InventoryDB(getContext());
-				for(int i = 0 ; i < cursor.getCount() ; i++) {
-					Customer customer = customerBookDB.findBy(cursor.getInt(cusId));
-					Payment payment = paymentBookDB.findByID(cursor.getInt(pay));
-					List<Item> items = inventoryDB.findBySaleID(cursor.getInt(_id));
-					sales.add( new Sale(cursor.getInt(_id), items, customer, payment , new Date(cursor.getLong(date))) );
-					cursor.moveToNext();
-				}
-				customerBookDB.close();
-				paymentBookDB.close();
-				inventoryDB.close();
-			}
-		} 
-		return sales;
 	}
 
 }
