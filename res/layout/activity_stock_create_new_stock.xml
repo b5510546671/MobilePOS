@@ -32,7 +32,7 @@
             </EditText>
 
             <Button
-                android:id="@+id/button1"
+                android:id="@+id/btItemListView"
                 android:layout_width="49dp"
                 android:layout_height="wrap_content"
                 android:text="ok" />

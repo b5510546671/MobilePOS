@@ -3,8 +3,7 @@ package com.android.ui;
 
 import java.util.Locale;
 
-import com.example.android.navigationdrawerexample.R;
-
+import com.android.softspectproject.R;
 
 
 

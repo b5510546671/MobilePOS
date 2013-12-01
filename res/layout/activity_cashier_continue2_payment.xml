@@ -15,7 +15,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:text="Continue" />
+        android:text="Next" />
 
     <TextView
         android:id="@id/txtPaymentMethodShow"
@@ -62,12 +62,6 @@
             android:ems="10"
             android:hint="pay money"
             android:inputType="number" />
-
-        <Button
-            android:id="@+id/btMemberSendEmail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="OK" />
 
     </LinearLayout>
 

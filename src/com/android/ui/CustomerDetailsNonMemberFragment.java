@@ -5,8 +5,7 @@ import java.util.Date;
 import com.controller.SaleController;
 import com.core.Customer;
 import com.core.Sale;
-import com.example.android.navigationdrawerexample.R;
-
+import com.android.softspectproject.R;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;

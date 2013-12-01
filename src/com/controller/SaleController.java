@@ -7,7 +7,9 @@ import java.util.List;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.android.ui.CustomArrayAdapter;
 import com.core.Customer;
 import com.core.InventoryLineItem;
 import com.core.Item;
@@ -62,10 +64,17 @@ public class SaleController {
 	}
 
 	public void setItemList(List<Item> items) {
-		this.items = new ArrayList<Item>();
+		this.items = items;
+		itemsMap.clear();
 		for (Item i : items)
-			this.items.add(i);
-
+			{
+				itemsMap.put(i.getID(), i);
+			}
+	}
+	
+	public HashMap<Integer, Item> getItemsMap()
+	{
+		return this.itemsMap;
 	}
 
 	public List<Item> getItemsList() {

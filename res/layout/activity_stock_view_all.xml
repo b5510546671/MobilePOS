@@ -9,7 +9,7 @@
     tools:context=".StockViewAllActivity" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/txtItemListView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -23,7 +23,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/textView1" >
+        android:layout_below="@+id/txtItemListView" >
 
     </ListView>
 

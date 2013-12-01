@@ -1,9 +1,6 @@
 package com.android.ui;
 
-import com.example.android.navigationdrawerexample.R;
-import com.example.android.navigationdrawerexample.R.layout;
-import com.example.android.navigationdrawerexample.R.menu;
-
+import com.android.softspectproject.R;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;

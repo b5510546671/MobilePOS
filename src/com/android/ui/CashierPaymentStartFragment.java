@@ -24,8 +24,7 @@ import com.controller.SaleController;
 import com.core.Item;
 import com.core.ItemDescription;
 import com.core.Payment;
-import com.example.android.navigationdrawerexample.R;
-
+import com.android.softspectproject.R;
 public class CashierPaymentStartFragment extends Fragment {
 	private Button buttonContinue;
 	private TextView txtWishList;
@@ -86,7 +85,23 @@ public class CashierPaymentStartFragment extends Fragment {
 					Log.i("Payment", "InputMoney : " + inputMoney);
 					Log.i("Payment", "Total Price : " + totalPrice);
 					
-					if(inputMoney < totalPrice) Toast.makeText(getActivity(), "NotEnough Money!",Toast.LENGTH_SHORT).show();
+					if(inputMoney < totalPrice) 
+					{
+						final AlertDialog alertDialog1 = new AlertDialog.Builder(
+			                    getActivity()).create();
+			 
+			            alertDialog1.setTitle("Cashier Manager");
+			 
+			            alertDialog1.setMessage("Not Enough Money!");
+			
+			            alertDialog1.setButton("OK", new DialogInterface.OnClickListener() {
+			            	
+			                public void onClick(DialogInterface dialog, int which) {
+			                	
+			                }
+			            });
+			            alertDialog1.show();
+					}
 					else {
 						saleController.createPayment(totalPrice, inputMoney);
 						
@@ -94,6 +109,7 @@ public class CashierPaymentStartFragment extends Fragment {
 			                    getActivity()).create();
 			 
 			            alertDialog1.setTitle("Payment Details");
+			            
 			 
 			            alertDialog1.setMessage("Total Price :" + saleController.getPayment().getPrice() + "\nInput Money : " + saleController.getPayment().getInput() + "\nChange : " + saleController.getPayment().getChange());
 			
@@ -110,8 +126,20 @@ public class CashierPaymentStartFragment extends Fragment {
 					}
 					
 				} catch (Exception e) {
-					Toast.makeText(getActivity(), "Invalid Money Input! "+"\n"+e.getMessage(), Toast.LENGTH_SHORT).show();
-					
+					final AlertDialog alertDialog1 = new AlertDialog.Builder(
+		                    getActivity()).create();
+		 
+		            alertDialog1.setTitle("Cashier Manager");
+		 
+		            alertDialog1.setMessage("Payment Input Wrong!");
+		
+		            alertDialog1.setButton("OK", new DialogInterface.OnClickListener() {
+		            	
+		                public void onClick(DialogInterface dialog, int which) {
+		                	
+		                }
+		            });
+		            alertDialog1.show();
 				}
 				
 

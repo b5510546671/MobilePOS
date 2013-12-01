@@ -2,8 +2,7 @@ package com.android.ui;
 
 import com.controller.InventoryController;
 import com.core.ItemDescription;
-import com.example.android.navigationdrawerexample.R;
-
+import com.android.softspectproject.R;
 import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;

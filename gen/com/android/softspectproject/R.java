@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package com.example.android.navigationdrawerexample;
+package com.android.softspectproject;
 
 public final class R {
     public static final class attr {
@@ -31,9 +31,10 @@ public final class R {
         public static final int action_settings=0x7f050033;
         public static final int btContinue=0x7f050004;
         public static final int btCreateNewStock=0x7f050027;
+        public static final int btItemListView=0x7f05002b;
         public static final int btLogin=0x7f050023;
         public static final int btMemberOK=0x7f05000f;
-        public static final int btMemberSendEmail=0x7f05000a;
+        public static final int btMemberSendEmail=0x7f05000d;
         public static final int btNonMember=0x7f05000e;
         public static final int btNonMemberOK=0x7f050013;
         public static final int btRegisterOK=0x7f05001c;
@@ -44,7 +45,6 @@ public final class R {
         public static final int btn_add_inv=0x7f05001f;
         public static final int btn_remove_inv=0x7f050020;
         public static final int btn_sale_inv=0x7f050021;
-        public static final int button1=0x7f05002b;
         public static final int button2=0x7f05002e;
         public static final int button3=0x7f05002c;
         public static final int cashierButtonOK=0x7f050015;
@@ -61,9 +61,9 @@ public final class R {
         public static final int radioButton1=0x7f050006;
         public static final int radioButton2=0x7f050007;
         public static final int radioGroup1=0x7f050005;
-        public static final int scrollView1=0x7f05000d;
-        public static final int textView1=0x7f050019;
-        public static final int txtCustomerDetails=0x7f05000b;
+        public static final int scrollView1=0x7f05000c;
+        public static final int txtCustomerDetails=0x7f05000a;
+        public static final int txtItemListView=0x7f050019;
         public static final int txtMemberID=0x7f050010;
         public static final int txtNonMemberEmail=0x7f050012;
         public static final int txtNonMemberName=0x7f050011;
@@ -73,7 +73,7 @@ public final class R {
         public static final int txtRegisterName=0x7f05001a;
         public static final int txtRegisterPrice=0x7f05001b;
         public static final int txtRegisterProductionDescription=0x7f050029;
-        public static final int txtTotalPrice=0x7f05000c;
+        public static final int txtTotalPrice=0x7f05000b;
         public static final int txtWishListShow=0x7f050001;
         public static final int txt_barcode_inv=0x7f05001d;
         public static final int txt_quantity_inv=0x7f05001e;

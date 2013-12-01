@@ -11,7 +11,7 @@ import java.util.ResourceBundle.Control;
 import com.controller.SaleController;
 import com.core.Item;
 import com.core.ItemDescription;
-import com.example.android.navigationdrawerexample.R;
+import com.android.softspectproject.R;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
@@ -33,15 +33,14 @@ import android.widget.Toast;
 
 public class CashierFragment extends Fragment {
 	private ListView itemListView;
-	private Button nextButton;
+	private Button buttonNext;
 	private Button scanWithBarcodeButton;
 	private EditText txtBarcode;
 	private Button buttonOK;
 	private SaleController saleController;
 	private List<Item> items = new ArrayList<Item>();
-	private List<Item> forceAddItems = new  ArrayList<Item>();
 	
-	private ArrayAdapter<String> adapter;
+	private CustomArrayAdapter adapter;
 	private List<String> itemDisplay = new ArrayList<String>();
 	
 	private HashMap<Integer , Item> itemsMap = new HashMap<Integer, Item>();
@@ -63,14 +62,13 @@ public class CashierFragment extends Fragment {
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 		saleController = SaleController.getInstance();
-		adapter = new ArrayAdapter<String>(
-				getActivity(), R.layout.list_view, itemDisplay);
+		adapter = new CustomArrayAdapter(getActivity(), items);
 		itemListView = (ListView) getView().findViewById(R.id.cashierListView);
 		
 		
-		nextButton = (Button) getView().findViewById(R.id.btStockOK);
+		buttonNext = (Button) getView().findViewById(R.id.btStockOK);
 		buttonOK = (Button) getView().findViewById(R.id.cashierButtonOK);
-		nextButton.setOnClickListener(new OnClickListener() {
+		buttonNext.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View arg0) {
@@ -78,17 +76,15 @@ public class CashierFragment extends Fragment {
 				
 				
 				
-				while(itemDisplay.size()!=0) itemDisplay.remove(0);
-				while(items.size()!=0) items.remove(0);
-				//saleController.setItemList(items);
+				items = new ArrayList<Item>();
+				//Toast.makeText(getActivity(), items.toString(), 1).show();
 				adapter.notifyDataSetChanged();
 				
 				startActivity(intent);
 
 			}
 		});
-		scanWithBarcodeButton = (Button) getView().findViewById(
-				R.id.btScanWithBarcode);
+		scanWithBarcodeButton = (Button) getView().findViewById(R.id.btScanWithBarcode);
 		txtBarcode = (EditText) getView().findViewById(R.id.CashierTxtID);
 		scanWithBarcodeButton.setOnClickListener(new OnClickListener() {
 
@@ -99,8 +95,7 @@ public class CashierFragment extends Fragment {
 					intent.putExtra("SCAN_MODE", "PRODUCT_MODE");
 					startActivityForResult(intent, 0);
 				} catch (Exception e) {
-					Toast.makeText(getActivity().getBaseContext(),"Please Install Barcode Scanner",
-							Toast.LENGTH_SHORT).show();
+					Toast.makeText(getActivity().getBaseContext(),"Please Install Barcode Scanner",Toast.LENGTH_SHORT).show();
 				}
 
 			}
@@ -109,30 +104,33 @@ public class CashierFragment extends Fragment {
 		itemListView.setAdapter(adapter);
 		adapter.notifyDataSetChanged();
 
-		itemListView.setTextFilterEnabled(true);
+		//itemListView.setTextFilterEnabled(true);
 		itemListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				itemDisplay.remove(arg2);
-				items.remove(arg2);
-				saleController.setItemList(items);
+				
+				saleController.setItemList(adapter.getItems());
+				//itemDisplay.remove(arg2);
+				//items.remove(arg2);
+				//saleController.setItemList(items);
 				adapter.notifyDataSetChanged();
+				
 			}
 
 		});
+		
 
 		buttonOK.setOnClickListener(new OnClickListener() {
 
-			@SuppressWarnings("deprecation")
 			@Override
 			public void onClick(View v) {
 				
 				//txtBarcode.setText("");
-				Toast.makeText(getActivity(), "Item amount : " + items.size(), Toast.LENGTH_SHORT).show();
+				//Toast.makeText(getActivity(), "Item amount : " + items.size(), Toast.LENGTH_SHORT).show();
 				
-				
+				saleController.setItemList(adapter.getItems());
 
 				try {
 					
@@ -142,20 +140,30 @@ public class CashierFragment extends Fragment {
 					if(saleController.getItemQuantity(getActivity().getApplicationContext(),barcode) >saleController.getAmountInList(barcode) && saleController.getItemQuantity(getActivity().getApplicationContext(),barcode)>0)
 					{
 						Item item  = saleController.getItemfromInventory(getActivity().getApplicationContext(),barcode);
-						Toast.makeText(getActivity().getApplicationContext(), item.getItemDescription().getName(),Toast.LENGTH_SHORT).show();
-						
+						//Toast.makeText(getActivity(), saleController.getItemsMap().toString(), Toast.LENGTH_SHORT).show();
 						if(item != null) {
 							
-							
-							itemDisplay.add(item.toString());
 							items.add(item);
-							saleController.setItemList(items);
 							adapter.notifyDataSetChanged();
-							//Log.d("buttonOK", "amount in DB : "+saleController.getItemQuantity(getActivity().getApplicationContext(),barcode) + " || In list : " + saleController.getAmountInList(barcode));
+							saleController.setItemList(adapter.getItems());
+							
 						}
 						else
 						{
-							Toast.makeText(getActivity(), "Product barcode wrong", Toast.LENGTH_SHORT).show();
+							final AlertDialog alertDialog1 = new AlertDialog.Builder(
+				                    getActivity()).create();
+				 
+				            alertDialog1.setTitle("Stock Manager");
+				 
+				            alertDialog1.setMessage("Barcode Wrong!");
+				
+				            alertDialog1.setButton("OK", new DialogInterface.OnClickListener() {
+				            	
+				                public void onClick(DialogInterface dialog, int which) {
+				                	
+				                }
+				            });
+				            alertDialog1.show();
 						}
 						
 						
@@ -174,19 +182,19 @@ public class CashierFragment extends Fragment {
 			            	
 			                public void onClick(DialogInterface dialog, int which) {
 			                	
-			                	int barcode = Integer.parseInt(txtBarcode.getText().toString());
+			                	//int barcode = Integer.parseInt(txtBarcode.getText().toString());
 			                	
-			                	ItemDescription forceAddItemDescription = saleController.getItemDescriptionByBarcode(getActivity(), barcode);
+			                	//ItemDescription forceAddItemDescription = saleController.getItemDescriptionByBarcode(getActivity(), barcode);
 			                	
 			                	
-			                	Item forceAddedItem = saleController.forceAddItemToInventory(getActivity(), new Item(-10, forceAddItemDescription), new Date(0, 0, 0));
+			                	//Item forceAddedItem = saleController.forceAddItemToInventory(getActivity(), new Item(-10, forceAddItemDescription), new Date(0, 0, 0));
 			                	
-			                	forceAddItems.add(forceAddedItem);
+			                	//forceAddItems.add(forceAddedItem);
 			                	//items.add(forceAddedItem);
-			                	itemDisplay.add(forceAddedItem.getItemDescription().getName());
+			                	//itemDisplay.add(forceAddedItem.getItemDescription().getName());
 			                	
-			                	saleController.setItemList(items);
-			                	adapter.notifyDataSetChanged();
+			                	//saleController.setItemList(items);
+			                	//adapter.notifyDataSetChanged();
 			                }
 			            });
 			            
@@ -198,12 +206,24 @@ public class CashierFragment extends Fragment {
 					
 				} 
 			catch (Exception e) {
-					Toast.makeText(getActivity(), "Please fill the blank with the barcode number", Toast.LENGTH_SHORT).show();
-				}
-				
-				
-				
-				
+					//Toast.makeText(getActivity(), "Please fill the blank with the barcode number", Toast.LENGTH_SHORT).show();
+					
+						final AlertDialog alertDialog1 = new AlertDialog.Builder(
+			                    getActivity()).create();
+			 
+			            alertDialog1.setTitle("Cashier Manager");
+			 
+			            alertDialog1.setMessage("Please fill the blank with the barcode number");
+			
+			            alertDialog1.setButton("OK", new DialogInterface.OnClickListener() {
+			            	
+			                public void onClick(DialogInterface dialog, int which) {
+			                	
+			                }
+			            });
+			            alertDialog1.show();
+						
+			}
 			}
 		});
 	}

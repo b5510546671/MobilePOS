@@ -3,7 +3,8 @@ package com.android.ui;
 
 
 
-import com.example.android.navigationdrawerexample.R;
+
+import com.android.softspectproject.R;
 
 import android.os.Bundle;
 import android.app.ActionBar;

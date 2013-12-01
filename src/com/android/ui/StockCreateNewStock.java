@@ -8,8 +8,7 @@ import com.controller.InventoryController;
 import com.core.InventoryLineItem;
 import com.core.Item;
 import com.core.ItemDescription;
-import com.example.android.navigationdrawerexample.R;
-
+import com.android.softspectproject.R;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -47,7 +46,7 @@ public class StockCreateNewStock extends Activity {
 		inventoryController = InventoryController.getInstance();
 
 		txtBarcode = (EditText) findViewById(R.id.editText1);
-		btOK = (Button) findViewById(R.id.button1);
+		btOK = (Button) findViewById(R.id.btItemListView);
 		btScanWithBarcode = (Button) findViewById(R.id.button3);
 		itemListView = (ListView) findViewById(R.id.listView1);
 		btFinished = (Button) findViewById(R.id.button2);

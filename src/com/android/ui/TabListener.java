@@ -2,8 +2,7 @@ package com.android.ui;
 
 
 
-import com.example.android.navigationdrawerexample.R;
-
+import com.android.softspectproject.R;
 import android.app.ActionBar.Tab;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
