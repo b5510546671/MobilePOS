@@ -44,10 +44,10 @@ public class SearchFragment extends Fragment{
 		items.clear();
 		
 		for(Item i : saleController.getAllItem(getActivity().getApplicationContext())){			
-			if(i.getID() != -1){
+			
 				items.add(i);
 				showItems.add(i);
-			}
+			
 			
 	}
 		searchListView = (ListView)getView().findViewById(R.id.listViewProductSearch);

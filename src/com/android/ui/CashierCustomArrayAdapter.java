@@ -39,7 +39,7 @@ public class CashierCustomArrayAdapter extends ArrayAdapter<Item> {
 	public View getView(final int position, View view, ViewGroup parent) {
 	LayoutInflater inflater = context.getLayoutInflater();
 	View rowView= inflater.inflate(R.layout.list_view, null, true);
-	TextView txtTitle = (TextView) rowView.findViewById(R.id.txtItemListView);
+	TextView txtTitle = (TextView) rowView.findViewById(R.id.txtItemSearch);
 	txtTitle.setText(items.get(position).toString());
 	 Button btRemove = (Button) rowView.findViewById(R.id.btItemListView);
 	//ImageView imageView = (ImageView) rowView.findViewById(R.id.img);

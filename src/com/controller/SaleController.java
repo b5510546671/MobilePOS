@@ -44,11 +44,14 @@ public class SaleController {
 	}
 
 	public int getItemQuantity(Context con, int barcode) {
-		// TODO get amount of item from DB
-		ItemDescription itemDesc = store.getItemDescriptionBook().getItemDescriptionByBarcode(con, barcode);
-		Log.d("SaleController", itemDesc.getName());
+		List<Item> items = SaleController.getInstance().getAllItem(con);
+		int count=0;
+		for(Item  i : items){
+			if(i.getItemDescription().getBarcode() == barcode) count++;
+		}
+		
 
-		return store.getInventory().getItemsByItemDescription(con, itemDesc).size();
+		return count;
 	}
 
 	public double getTotalPrice() {
@@ -67,9 +70,12 @@ public class SaleController {
 		this.items = items;
 		itemsMap.clear();
 		for (Item i : items)
-			{
+		{
+			if(!itemsMap.containsKey(i.getID()))
 				itemsMap.put(i.getID(), i);
-			}
+		}
+		
+		Log.d("test", itemsMap.toString());
 	}
 	
 	public HashMap<Integer, Item> getItemsMap()
@@ -139,14 +145,14 @@ public class SaleController {
 
 	public Item getItemfromInventory(Context con, int barcode) {
 
-		ItemDescription itemDescription = store.getItemDescriptionBook().getItemDescriptionByBarcode(con, barcode);
+		//ItemDescription itemDescription = store.getItemDescriptionBook().getItemDescriptionByBarcode(con, barcode);
 		
-		List<Item> itemList  = store.getInventory().getItemsByItemDescription(con, itemDescription);
+		List<Item> itemList  = getAllItem(con);
+				
 		
-		for(int i=0;i<itemList.size();i++){
-			if(!itemsMap.containsKey(itemList.get(i).getID())){
-				itemsMap.put(itemList.get(i).getID(), itemList.get(i));
-				return itemList.get(i);
+		for(Item i : itemList){
+			if(!itemsMap.containsKey(i.getID()) && i.getItemDescription().getBarcode()==barcode ){
+			return i;
 			}
 		}
 		
@@ -163,7 +169,7 @@ public class SaleController {
 	}
 	public List<Item> getAllItem(Context con)
 	{
-		return store.getInventory().getAllItems(con);
+		return store.getInventory().getStockItems(con);
 		
 	}
 

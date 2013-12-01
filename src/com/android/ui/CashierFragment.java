@@ -136,16 +136,16 @@ public class CashierFragment extends Fragment {
 					
 					int barcode = Integer.parseInt(txtBarcode.getText().toString());
 					Log.i("buttonOK", "amount in DB : "+saleController.getItemQuantity(getActivity().getApplicationContext(),barcode) + " || In list : " + saleController.getAmountInList(barcode));
-				
 					if(saleController.getItemQuantity(getActivity().getApplicationContext(),barcode) >saleController.getAmountInList(barcode) && saleController.getItemQuantity(getActivity().getApplicationContext(),barcode)>0)
 					{
 						Item item  = saleController.getItemfromInventory(getActivity().getApplicationContext(),barcode);
-						//Toast.makeText(getActivity(), saleController.getItemsMap().toString(), Toast.LENGTH_SHORT).show();
+						
 						if(item != null) {
 							
 							items.add(item);
 							adapter.notifyDataSetChanged();
 							saleController.setItemList(adapter.getItems());
+							Toast.makeText(getActivity(), saleController.getItemsMap().toString(), Toast.LENGTH_SHORT).show();
 							
 						}
 						else

@@ -83,10 +83,10 @@ public class Inventory {
 		return i;
 	}
 	
-	public List<Item> getAllItems(Context con){
-		InventoryDB inventoryDB = new InventoryDB(con);
-		List<Item> items = inventoryDB.findAll();
-		inventoryDB.close();
-		return items;
+	public List<Item> getStockItems(Context con){
+		db = new InventoryDB(con);
+		List<Item> i = db.findBySaleID(Item.SALE_STOCK_ID);
+		db.close();
+		return i;
 	}
 }

@@ -63,7 +63,7 @@ public final class R {
         public static final int radioGroup1=0x7f050005;
         public static final int scrollView1=0x7f05000c;
         public static final int txtCustomerDetails=0x7f05000a;
-        public static final int txtItemListView=0x7f050019;
+        public static final int txtItemSearch=0x7f050019;
         public static final int txtMemberID=0x7f050010;
         public static final int txtNonMemberEmail=0x7f050012;
         public static final int txtNonMemberName=0x7f050011;
@@ -105,6 +105,7 @@ public final class R {
         public static final int fragment_container=0x7f030015;
         public static final int header=0x7f030016;
         public static final int list_view=0x7f030017;
+        public static final int search_listview=0x7f030018;
     }
     public static final class menu {
         public static final int cashier=0x7f070000;
