@@ -7,14 +7,14 @@
             android:id="@+id/btItemListView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/txtItemSearch"
-            android:layout_alignBottom="@+id/txtItemSearch"
+            android:layout_alignBaseline="@+id/txtItemListView"
+            android:layout_alignBottom="@+id/txtItemListView"
             android:layout_alignParentRight="true"
             android:layout_marginRight="19dp"
             android:text="delete" />
 
         <TextView
-            android:id="@+id/txtItemSearch"
+            android:id="@+id/txtItemListView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"

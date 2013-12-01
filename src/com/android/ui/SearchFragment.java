@@ -11,13 +11,17 @@ import com.core.Item;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -26,7 +30,7 @@ public class SearchFragment extends Fragment{
 	
 	private SaleController saleController;
 	private List<Item> items = new ArrayList<Item>();;
-	private CashierCustomArrayAdapter adapter;
+	private SearchCustomArrayAdapter adapter;
 	private ListView searchListView;
 	private EditText txtSearch;
 	private List<Item> showItems = new ArrayList<Item>();
@@ -51,9 +55,40 @@ public class SearchFragment extends Fragment{
 			
 	}
 		searchListView = (ListView)getView().findViewById(R.id.listViewProductSearch);
-		adapter = new CashierCustomArrayAdapter(getActivity(), showItems);
+		adapter = new SearchCustomArrayAdapter(getActivity(), showItems);
 		searchListView.setAdapter(adapter);
 		txtSearch = (EditText)getView().findViewById(R.id.txtSearchProduct);
+		searchListView.setOnItemClickListener(new OnItemClickListener() {
+
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				final AlertDialog alertDialog1 = new AlertDialog.Builder(
+	                    getActivity()).create();
+				
+				Item item = items.get(arg2);
+	 
+	            alertDialog1.setTitle("Product details");
+	            String s =	"ID : " + item.getID()+
+	            			"\nName : " + item.getItemDescription().getName()+
+	            			"\nBarcode : "+ item.getItemDescription().getBarcode()+
+	            			"\nPrice : " + item.getItemDescription().getPrice();
+	            			
+	 
+	            alertDialog1.setMessage(s);
+	
+	            alertDialog1.setButton("OK", new DialogInterface.OnClickListener() {
+	            	
+	                public void onClick(DialogInterface dialog, int which) {
+	                	
+	                }
+	            });
+	            alertDialog1.show();
+				
+			}
+
+		});
 		
 		txtSearch.addTextChangedListener(new TextWatcher() {
 			
@@ -88,7 +123,7 @@ public class SearchFragment extends Fragment{
 			}
 		});
 		
-		Toast.makeText(getActivity(), items.toString(), 1).show();
+		//t.makeText(getActivity(), items.toString(), 1).show();
 		
 		
 		

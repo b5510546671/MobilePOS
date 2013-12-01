@@ -22,11 +22,12 @@
             android:layout_height="wrap_content" >
 
             <EditText
-                android:id="@+id/editText1"
+                android:id="@+id/txtAddNewStockID"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:ems="10" >
+                android:ems="10"
+                android:hint="fill blank with barcode" >
 
                 <requestFocus />
             </EditText>
@@ -39,23 +40,32 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/btStockBarcodeScan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:text="Scan barcode" />
+
+        <TextView
+            style="?android:listSeparatorTextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Stock list"
+            android:textSize="20dp" />
 
         <ListView
             android:id="@+id/listViewProductSearch"
             android:layout_width="match_parent"
             android:layout_height="220dp"
-            android:layout_weight="0.75" >
+            android:layout_weight="0.75"
+            android:drawSelectorOnTop="true" >
+
         </ListView>
 
         <Button
             android:id="@+id/button2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:text="OK" />
     </LinearLayout>
 
 </RelativeLayout>

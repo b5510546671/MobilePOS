@@ -28,7 +28,7 @@ public final class R {
     }
     public static final class id {
         public static final int CashierTxtID=0x7f050014;
-        public static final int action_settings=0x7f050033;
+        public static final int action_settings=0x7f050034;
         public static final int btContinue=0x7f050004;
         public static final int btItemListView=0x7f05002c;
         public static final int btLogin=0x7f050023;
@@ -40,18 +40,17 @@ public final class R {
         public static final int btScanWithBarcode=0x7f050016;
         public static final int btSearch=0x7f050027;
         public static final int btStockAddNewProduct=0x7f050030;
+        public static final int btStockBarcodeScan=0x7f05002d;
         public static final int btStockOK=0x7f050018;
         public static final int btStockViewAll=0x7f05002f;
         public static final int btn_add_inv=0x7f05001f;
         public static final int btn_remove_inv=0x7f050020;
         public static final int btn_sale_inv=0x7f050021;
         public static final int button2=0x7f05002e;
-        public static final int button3=0x7f05002d;
         public static final int cashierButtonOK=0x7f050015;
         public static final int cashierListView=0x7f050017;
         public static final int content_frame=0x7f050025;
         public static final int drawer_layout=0x7f050024;
-        public static final int editText1=0x7f05002b;
         public static final int left_drawer=0x7f050026;
         public static final int linearLayout1=0x7f050008;
         public static final int listViewProductSearch=0x7f050028;
@@ -62,8 +61,10 @@ public final class R {
         public static final int radioButton2=0x7f050007;
         public static final int radioGroup1=0x7f050005;
         public static final int scrollView1=0x7f05000c;
+        public static final int txtAddNewStockID=0x7f05002b;
         public static final int txtCustomerDetails=0x7f05000a;
-        public static final int txtItemSearch=0x7f050019;
+        public static final int txtItemListView=0x7f050019;
+        public static final int txtItemSearch=0x7f050033;
         public static final int txtMemberID=0x7f050010;
         public static final int txtNonMemberEmail=0x7f050012;
         public static final int txtNonMemberName=0x7f050011;

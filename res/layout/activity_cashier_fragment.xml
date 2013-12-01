@@ -28,7 +28,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1.49"
                 android:ems="10"
-                android:hint="fill blank with ID" />
+                android:hint="fill blank with barcode" />
 
             <Button
                 android:id="@+id/cashierButtonOK"

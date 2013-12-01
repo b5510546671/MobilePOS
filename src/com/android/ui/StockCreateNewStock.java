@@ -8,11 +8,13 @@ import com.controller.InventoryController;
 import com.core.InventoryLineItem;
 import com.core.Item;
 import com.core.ItemDescription;
+import com.utils.DateManager;
 import com.android.softspectproject.R;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -33,10 +35,10 @@ public class StockCreateNewStock extends Activity {
 	private ListView itemListView;
 	private Button btFinished;
 	private InventoryController inventoryController;
-	private ArrayAdapter<String> arrayAdapter;
+	private CashierCustomArrayAdapter arrayAdapter;
 
 	private List<Item> items = new ArrayList<Item>();
-	private List<String> itemDisplay = new ArrayList<String>();
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,24 +47,23 @@ public class StockCreateNewStock extends Activity {
 
 		inventoryController = InventoryController.getInstance();
 
-		txtBarcode = (EditText) findViewById(R.id.editText1);
+		txtBarcode = (EditText) findViewById(R.id.txtAddNewStockID);
 		btOK = (Button) findViewById(R.id.btItemListView);
-		btScanWithBarcode = (Button) findViewById(R.id.button3);
+		btScanWithBarcode = (Button) findViewById(R.id.btStockBarcodeScan);
 		itemListView = (ListView) findViewById(R.id.listViewProductSearch);
 		btFinished = (Button) findViewById(R.id.button2);
-		arrayAdapter = new ArrayAdapter<String>(getApplicationContext(),
-				R.layout.activity_stock_add_item, itemDisplay);
+		arrayAdapter = new CashierCustomArrayAdapter(this, items);
 		itemListView.setAdapter(arrayAdapter);
 		itemListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long arg3) {
-				String s = (String) itemListView.getItemAtPosition(position);
+				//String s = (String) itemListView.getItemAtPosition(position);
 				items.remove(position);
-				itemDisplay.remove(position);
+				
 				arrayAdapter.notifyDataSetChanged();
-				Toast.makeText(getApplicationContext(), "remove", Toast.LENGTH_SHORT).show();
+				//Toast.makeText(getApplicationContext(), "remove", Toast.LENGTH_SHORT).show();
 
 			}
 		});
@@ -83,14 +84,27 @@ public class StockCreateNewStock extends Activity {
 
 					Item item = new Item(-1, itemDes);
 					items.add(item);
-					itemDisplay.add(item.getItemDescription().getName());
+					
 					arrayAdapter.notifyDataSetChanged();
 
 					
 					//Toast.makeText(getApplicationContext(), "Finished",Toast.LENGTH_SHORT).show();
 
 				} catch (Exception e) {
-					Toast.makeText(getApplicationContext(), "Wrong barcode",Toast.LENGTH_SHORT).show();
+					final AlertDialog alertDialog1 = new AlertDialog.Builder(
+		                    getApplicationContext()).create();
+		 
+		            alertDialog1.setTitle("Stock Manager");
+		 
+		            alertDialog1.setMessage("Barcode Wrong!");
+		
+		            alertDialog1.setButton("OK", new DialogInterface.OnClickListener() {
+		            	
+		                public void onClick(DialogInterface dialog, int which) {
+		                	
+		                }
+		            });
+		            alertDialog1.show();
 				}
 
 			}
@@ -103,19 +117,60 @@ public class StockCreateNewStock extends Activity {
 			@Override
 			public void onClick(View v) {
 
-				InventoryLineItem i  =new InventoryLineItem(-1, items, new Date(0,0,0));
+				InventoryLineItem i  =new InventoryLineItem(-1, items,DateManager.getCurrentDate());
 				
 				InventoryLineItem getInven = inventoryController.addinventoryLineItemToInventory(getApplicationContext(), i);
 				
-				Toast.makeText(getApplicationContext(), getInven.getItems().get(0).getItemDescription().getName(),Toast.LENGTH_SHORT).show();
-				//Toast.makeText(getApplicationContext(), "123", Toast.LENGTH_SHORT).show();
+				// TODO Auto-generated method stub
+                AlertDialog.Builder builder = new AlertDialog.Builder(StockCreateNewStock.this);
+                builder.setTitle("Stock Manaer");
+                builder.setMessage("Already added to stock");
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+ 
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        // TODO Auto-generated method stub
+                        //Toast.makeText(getApplicationContext(), "Ok is clicked", Toast.LENGTH_LONG).show();
+                    	finish();
+                    }
+                });
+                
+                builder.show(); //To show the AlertDialog
 				
 			}
 			
 		});
 		
+		btScanWithBarcode.setOnClickListener(new OnClickListener() {
 
+			@Override
+			public void onClick(View arg0) {
+				try {
+					Intent intent = new Intent("com.google.zxing.client.android.SCAN");
+					intent.putExtra("SCAN_MODE", "PRODUCT_MODE");
+					startActivityForResult(intent, 0);
+				} catch (Exception e) {
+					Toast.makeText(getBaseContext(),"Please Install Barcode Scanner",Toast.LENGTH_SHORT).show();
+				}
+
+			}
+		});
 	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+		if (requestCode == 0) {
+			if (resultCode == this.RESULT_OK) {
+
+				String contents = intent.getStringExtra("SCAN_RESULT");
+				String format = intent.getStringExtra("SCAN_RESULT_FORMAT");
+
+				txtBarcode.setText(contents);
+			}
+		}
+		super.onActivityResult(requestCode, resultCode, intent);
+	}
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

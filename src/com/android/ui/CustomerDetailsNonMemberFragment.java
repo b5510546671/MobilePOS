@@ -5,9 +5,11 @@ import java.util.Date;
 import com.controller.SaleController;
 import com.core.Customer;
 import com.core.Sale;
+import com.utils.DateManager;
 import com.android.softspectproject.R;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -64,9 +66,9 @@ public class CustomerDetailsNonMemberFragment extends Fragment {
 				
 				AlertDialog alertDialog1 = new AlertDialog.Builder(getActivity()).create();
 
-				Customer c = new Customer(-1, "none", new Date(0,0,0),txtNonMemberEmail.getText().toString());
+				Customer c = new Customer(-1, "none",DateManager.getCurrentDate(),txtNonMemberEmail.getText().toString());
 				saleController.setCustomer(c);	
-				Sale sale = saleController.getSale(getActivity(),new Date(0,0,0));
+				Sale sale = saleController.getSale(getActivity(),DateManager.getCurrentDate());
 				
 				if(sale == null ) Toast.makeText(getActivity(), "Invalid data", Toast.LENGTH_SHORT).show();
 				else{
@@ -82,7 +84,17 @@ public class CustomerDetailsNonMemberFragment extends Fragment {
 
 								public void onClick(DialogInterface dialog,
 										int which) {
-									getActivity().finish();
+									
+									Intent newActivity = new Intent(Intent.ACTION_SEND);
+									String email="deknaew_bws@hotmail.com";
+									String subject="Receipt from POS mobile";
+									String message="Thnk You For Shopping";
+									newActivity.putExtra(Intent.EXTRA_EMAIL,email);         
+									newActivity.putExtra(Intent.EXTRA_SUBJECT, subject);
+									newActivity.putExtra(Intent.EXTRA_TEXT, message);
+									newActivity.setType("plain/text");
+									startActivity(Intent.createChooser(newActivity, "Email Sending Option :"));
+									
 								}
 							});
 

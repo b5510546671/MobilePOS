@@ -9,7 +9,7 @@
     tools:context=".StockFragment" >
 
     <TextView
-        android:id="@+id/txtItemSearch"
+        android:id="@+id/txtItemListView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/txtItemSearch"
+        android:layout_below="@+id/txtItemListView"
         android:layout_marginTop="18dp"
         android:text="Create New Stock" />
 

@@ -17,6 +17,7 @@ import com.core.ItemDescription;
 import com.core.Payment;
 import com.core.Sale;
 import com.core.Store;
+import com.utils.DateManager;
 
 public class SaleController {
 	private Store store;
@@ -45,11 +46,11 @@ public class SaleController {
 
 	public int getItemQuantity(Context con, int barcode) {
 		List<Item> items = SaleController.getInstance().getAllItem(con);
-		int count=0;
-		for(Item  i : items){
-			if(i.getItemDescription().getBarcode() == barcode) count++;
+		int count = 0;
+		for (Item i : items) {
+			if (i.getItemDescription().getBarcode() == barcode)
+				count++;
 		}
-		
 
 		return count;
 	}
@@ -61,25 +62,24 @@ public class SaleController {
 		}
 		return this.totalPrice;
 	}
-	
-	public ItemDescription getItemDescriptionByBarcode(Context con,int barcode){
-		return store.getItemDescriptionBook().getItemDescriptionByBarcode(con, barcode);
+
+	public ItemDescription getItemDescriptionByBarcode(Context con, int barcode) {
+		return store.getItemDescriptionBook().getItemDescriptionByBarcode(con,
+				barcode);
 	}
 
 	public void setItemList(List<Item> items) {
 		this.items = items;
 		itemsMap.clear();
-		for (Item i : items)
-		{
-			if(!itemsMap.containsKey(i.getID()))
+		for (Item i : items) {
+			if (!itemsMap.containsKey(i.getID()))
 				itemsMap.put(i.getID(), i);
 		}
-		
+
 		Log.d("test", itemsMap.toString());
 	}
-	
-	public HashMap<Integer, Item> getItemsMap()
-	{
+
+	public HashMap<Integer, Item> getItemsMap() {
 		return this.itemsMap;
 	}
 
@@ -96,11 +96,14 @@ public class SaleController {
 		return true;
 	}
 
-	public Customer getCustomerByID(Context con,int id) {
-		Customer c =store.getCustomerBook().addCutomer(con,new Customer(-1, "Sikarin", new Date(0,0,0),"Deknaew_bws@hotamil.com"));
+	public Customer getCustomerByID(Context con, int id) {
+		Customer c = store.getCustomerBook().getCustomerByID(id);
 
 		return c;
-		// store.getCustomerBook().getCustomerByID(id);
+	}
+
+	public Customer addCustomerToCustomerBook(Context con, Customer customer) {
+		return store.getCustomerBook().addCutomer(con, customer);
 	}
 
 	public void setCustomer(Customer customer) {
@@ -119,8 +122,6 @@ public class SaleController {
 			customer = null;
 			payment = null;
 
-			
-
 			return sale;
 		}
 
@@ -134,45 +135,40 @@ public class SaleController {
 		}
 		return count;
 	}
-	
-	public Item forceAddItemToInventory(Context con,Item item,Date date)
-	{
-		
-		List<Item> forceAddItemList = new  ArrayList<Item>();
+
+	public Item forceAddItemToInventory(Context con, Item item, Date date) {
+
+		List<Item> forceAddItemList = new ArrayList<Item>();
 		forceAddItemList.add(item);
-		return store.getInventory().addInventoryLineItem(con, new InventoryLineItem(-10,forceAddItemList, date)).getItems().get(0);
+		return store
+				.getInventory()
+				.addInventoryLineItem(con,
+						new InventoryLineItem(-10, forceAddItemList, date))
+				.getItems().get(0);
 	}
 
 	public Item getItemfromInventory(Context con, int barcode) {
 
-		//ItemDescription itemDescription = store.getItemDescriptionBook().getItemDescriptionByBarcode(con, barcode);
-		
-		List<Item> itemList  = getAllItem(con);
-				
-		
-		for(Item i : itemList){
-			if(!itemsMap.containsKey(i.getID()) && i.getItemDescription().getBarcode()==barcode ){
-			return i;
+		List<Item> itemList = getAllItem(con);
+
+		for (Item i : itemList) {
+			if (!itemsMap.containsKey(i.getID())
+					&& i.getItemDescription().getBarcode() == barcode) {
+				return i;
 			}
 		}
-		
+
 		return null;
-		
-		
-		
-		//return store.getInventory().getItemsByItemDescription(con, itemDescription).get(0);
 
 	}
-	
-	public Sale addSaleToSaleLadger(Context con,Sale sale){
+
+	public Sale addSaleToSaleLadger(Context con, Sale sale) {
 		return store.getSaleLedLadger().add(con, sale);
 	}
-	public List<Item> getAllItem(Context con)
-	{
-		return store.getInventory().getStockItems(con);
-		
-	}
 
-	
+	public List<Item> getAllItem(Context con) {
+		return store.getInventory().getStockItems(con);
+
+	}
 
 }
