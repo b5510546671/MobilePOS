@@ -3,6 +3,8 @@ package com.android.ui;
 import java.util.List;
 
 import com.android.softspectproject.R;
+import com.controller.InventoryController;
+import com.controller.SaleController;
 import com.core.ItemDescription;
 
 import android.app.Activity;
@@ -37,8 +39,7 @@ public class StockViewAllCustomArrayAdapter extends ArrayAdapter<ItemDescription
 	TextView txtTitle = (TextView) rowView.findViewById(R.id.txtViewAll);
 	txtTitle.setText(itemDescriptions.get(position).toString());
 	Button btEdit = (Button) rowView.findViewById(R.id.btViewAllEdit);
-	 
-	 btEdit.setOnClickListener(new OnClickListener() {
+	btEdit.setOnClickListener(new OnClickListener() {
 		
 		@Override
 		public void onClick(View v) {
@@ -65,9 +66,9 @@ public class StockViewAllCustomArrayAdapter extends ArrayAdapter<ItemDescription
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					 Toast.makeText(context, itemDescriptions.get(position).toString(), Toast.LENGTH_SHORT).show();	
 					 Intent intent = new Intent(context, EditProductDescriptionActivity.class);
 					 intent.putExtra("oldItemDescription", itemDescriptions.get(position));
+					 context.finish();
 					 context.startActivity(intent);
 				}
 			});

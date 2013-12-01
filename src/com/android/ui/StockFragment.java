@@ -19,12 +19,27 @@ public class StockFragment extends Fragment{
 	private Button btNewStock;
 	private Button btViewAll;
 	private Button btAddNewProduct;
+	private Button btCreateNewMember;
 
 	 @Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		btNewStock = (Button)getView().findViewById(R.id.btSearch);
 		btViewAll = (Button)getView().findViewById(R.id.btStockViewAll);
 		btAddNewProduct = (Button)getView().findViewById(R.id.btStockAddNewProduct);
+		
+		btCreateNewMember = (Button)getView().findViewById(R.id.btRegisterNewMember);
+		btCreateNewMember.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				//Toast.makeText(getActivity().getApplicationContext(), "Create New Stock", Toast.LENGTH_SHORT).show();
+				
+				Intent intent = new Intent(getActivity().getApplicationContext(), CustomerRegisterActivity.class);
+				startActivity(intent);
+				
+			}
+		});
+		
 		
 		btNewStock.setOnClickListener(new OnClickListener() {
 			

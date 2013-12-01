@@ -123,7 +123,6 @@ public class SearchFragment extends Fragment{
 			}
 		});
 		
-		//t.makeText(getActivity(), items.toString(), 1).show();
 		
 		
 		

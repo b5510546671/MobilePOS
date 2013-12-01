@@ -23,6 +23,6 @@
          android:layout_alignBottom="@+id/txtViewAll"
          android:layout_alignParentRight="true"
          android:layout_marginRight="16dp"
-         android:text="..." />
+         android:text="edit" />
 
  </RelativeLayout>

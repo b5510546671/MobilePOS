@@ -28,7 +28,8 @@ public final class R {
     }
     public static final class id {
         public static final int CashierTxtID=0x7f050014;
-        public static final int action_settings=0x7f05003c;
+        public static final int TextView01=0x7f050038;
+        public static final int action_settings=0x7f05003e;
         public static final int btContinue=0x7f050004;
         public static final int btEditOK=0x7f05001d;
         public static final int btItemListView=0x7f050033;
@@ -37,6 +38,7 @@ public final class R {
         public static final int btMemberSendEmail=0x7f05000d;
         public static final int btNonMember=0x7f05000e;
         public static final int btNonMemberOK=0x7f050013;
+        public static final int btRegisterNewMember=0x7f050039;
         public static final int btRegisterOK=0x7f05001c;
         public static final int btScanWithBarcode=0x7f050016;
         public static final int btSearch=0x7f05002e;
@@ -44,7 +46,7 @@ public final class R {
         public static final int btStockBarcodeScan=0x7f050034;
         public static final int btStockOK=0x7f050018;
         public static final int btStockViewAll=0x7f050036;
-        public static final int btViewAllEdit=0x7f05003a;
+        public static final int btViewAllEdit=0x7f05003c;
         public static final int btn_add_inv=0x7f050026;
         public static final int btn_remove_inv=0x7f050027;
         public static final int btn_sale_inv=0x7f050028;
@@ -56,7 +58,7 @@ public final class R {
         public static final int left_drawer=0x7f05002d;
         public static final int linearLayout1=0x7f050008;
         public static final int listViewProductSearch=0x7f05002f;
-        public static final int listViewStockAll=0x7f050038;
+        public static final int listViewStockAll=0x7f05003a;
         public static final int pager=0x7f050002;
         public static final int pager_title_strip=0x7f050003;
         public static final int radioButton1=0x7f050006;
@@ -72,7 +74,7 @@ public final class R {
         public static final int txtEditName=0x7f050021;
         public static final int txtEditPrice=0x7f05001f;
         public static final int txtItemListView=0x7f050019;
-        public static final int txtItemSearch=0x7f05003b;
+        public static final int txtItemSearch=0x7f05003d;
         public static final int txtMemberID=0x7f050010;
         public static final int txtNonMemberEmail=0x7f050012;
         public static final int txtNonMemberName=0x7f050011;
@@ -83,7 +85,7 @@ public final class R {
         public static final int txtRegisterProductionDescription=0x7f050031;
         public static final int txtSearchProduct=0x7f05001a;
         public static final int txtTotalPrice=0x7f05000b;
-        public static final int txtViewAll=0x7f050039;
+        public static final int txtViewAll=0x7f05003b;
         public static final int txtWishListShow=0x7f050001;
         public static final int txt_barcode_inv=0x7f050024;
         public static final int txt_quantity_inv=0x7f050025;

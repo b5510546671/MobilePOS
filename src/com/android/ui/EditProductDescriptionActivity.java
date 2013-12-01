@@ -52,6 +52,13 @@ public class EditProductDescriptionActivity extends Activity {
 		txtOldDescription = (TextView)findViewById(R.id.txtEditDetails);
 		btOK = (Button)findViewById(R.id.btEditOK);
 		
+		txtName.setText(oldItemDescription.getName()+"");
+		txtBarcode.setText(oldItemDescription.getBarcode()+"");
+		txtPrice.setText(oldItemDescription.getPrice() +"");
+		txtOldDescription.setText(oldItemDescription.getItemDescription()+"");
+		txtBarcode.setEnabled(false);
+		
+		
 		String s = 	"Name : " + oldItemDescription.getName()+
 					"\nBarcode : " + oldItemDescription.getBarcode()+
 					"\nPrice : " + oldItemDescription.getPrice()+
@@ -68,6 +75,8 @@ public class EditProductDescriptionActivity extends Activity {
 				String description = txtDescription.getText().toString();
 				
 				try {
+					
+					if(name=="" || barcode=="" || price=="" ) throw new Exception();
 					ItemDescription i = new ItemDescription(-1, name, description, Float.parseFloat(price), Integer.parseInt(barcode));
 					inventoryController.removeItemDescription(getApplicationContext(), oldItemDescription.getBarcode());
 					inventoryController.createNewItemDescription(getApplicationContext(), i.getName(), i.getItemDescription(), i.getPrice(), i.getBarcode());
@@ -97,7 +106,8 @@ public class EditProductDescriptionActivity extends Activity {
 
 			                @Override
 			                public void onClick(DialogInterface arg0, int arg1) {
-			                	
+			                	Intent intent = new Intent(getApplicationContext(), StockViewAllActivity.class);
+			                	startActivity(intent);
 			                }
 			            });
 			            

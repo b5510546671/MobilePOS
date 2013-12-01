@@ -119,7 +119,7 @@ public class MainActivity extends Activity {
      // Set Tab Icon and Titles
      		tabs[0]= actionBar.newTab().setText("History");
      		tabs[1] = actionBar.newTab().setText("Cashier");
-     		tabs[2] = actionBar.newTab().setText("Stock");
+     		tabs[2] = actionBar.newTab().setText("Manager");
      		tabs[3] = actionBar.newTab().setText("Search");
      		
 

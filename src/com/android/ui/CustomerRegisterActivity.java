@@ -2,7 +2,10 @@ package com.android.ui;
 
 import java.util.Date;
 
+import com.controller.SaleController;
+import com.core.Customer;
 import com.core.Sale;
+import com.utils.DateManager;
 import com.android.softspectproject.R;
 import android.os.Bundle;
 import android.app.Activity;
@@ -13,6 +16,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class CustomerRegisterActivity extends Activity {
 	
@@ -30,30 +34,34 @@ public class CustomerRegisterActivity extends Activity {
 		btOK = (Button)findViewById(R.id.btRegisterOK);
 		txtName = (EditText)findViewById(R.id.txtSearchProduct);
 		txtEmail = (EditText)findViewById(R.id.txtRegisterPrice);
+		 final String name = txtName.getText().toString();
+         final String email = txtEmail.getText().toString();
 		
 		btOK.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				AlertDialog alertDialog1 = new AlertDialog.Builder(getApplicationContext()).create();
-
-				alertDialog1.setTitle("Register finished");
-				
-				String name = txtName.getText().toString();
-				String eMail = txtEmail.getText().toString();
-
-				alertDialog1.setMessage("Name : " + name +"\nE-Mail : " + eMail);
-
-				alertDialog1.setButton("OK",
-						new DialogInterface.OnClickListener() {
-
-							public void onClick(DialogInterface dialog,int which) {
-							//TODO create the customer from database to this	
-								
-							}
-						});
-
-				alertDialog1.show();
+				AlertDialog.Builder builder = new AlertDialog.Builder(CustomerRegisterActivity.this);
+                builder.setTitle("Member Register");
+                
+               
+                builder.setMessage("Name : " + name + "\nE-mail : " + email);
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+ 
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                    	SaleController.getInstance().addCustomerToCustomerBook(getApplicationContext(), new Customer(-1,name, DateManager.getCurrentDate(), email));
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+ 
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                    	
+                    }
+                });
+               
+                builder.show(); 
 			}
 		});
 		

@@ -5,6 +5,8 @@ import com.core.ItemDescription;
 import com.android.softspectproject.R;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -51,12 +53,38 @@ public class StockAddNewProductActivity extends Activity {
 					ItemDescription itemDescription = inventoryController.createNewItemDescription(getApplicationContext(), name, productDescription, price, barcode);
 					ItemDescription itemGet = inventoryController.getItemDescriptionByBarcode(getApplicationContext(), barcode);
 					
-					Toast.makeText(getApplicationContext(),"Barcode : "+itemGet.getBarcode()+ "\nID : " + itemGet.getId()+ "\nName : "+ itemGet.getName() +"\nPrice"+ itemGet.getPrice() + "\nDescription :"+itemGet.getItemDescription()  , Toast.LENGTH_SHORT).show();
-					
-					
+					final AlertDialog alertDialog1 = new AlertDialog.Builder(StockAddNewProductActivity.this).create();
+					 
+		            alertDialog1.setTitle("Product Details");
+		 
+		            alertDialog1.setMessage("Product Description Added!");
+		
+		            alertDialog1.setButton("OK", new DialogInterface.OnClickListener() {
+		            	
+		                public void onClick(DialogInterface dialog, int which) {
+		                	//finish();
+		                	txtName.setText("");
+		                	txtPrice.setText("");
+		                	txtBarcode.setText("");
+		                	txtProductDescription.setText("");
+		                }
+		            });
+		            alertDialog1.show();	
 					
 				} catch (Exception e) {
-					Toast.makeText(getApplicationContext(), "Wrong Data", Toast.LENGTH_SHORT).show();
+					final AlertDialog alertDialog1 = new AlertDialog.Builder(StockAddNewProductActivity.this).create();
+		 
+		            alertDialog1.setTitle("Product Details");
+		 
+		            alertDialog1.setMessage("Plaese fill the correctly data!");
+		
+		            alertDialog1.setButton("OK", new DialogInterface.OnClickListener() {
+		            	
+		                public void onClick(DialogInterface dialog, int which) {
+		                	
+		                }
+		            });
+		            alertDialog1.show();	
 				}
 				
 				
