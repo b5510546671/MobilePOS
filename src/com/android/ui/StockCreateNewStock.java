@@ -48,7 +48,7 @@ public class StockCreateNewStock extends Activity {
 		txtBarcode = (EditText) findViewById(R.id.editText1);
 		btOK = (Button) findViewById(R.id.btItemListView);
 		btScanWithBarcode = (Button) findViewById(R.id.button3);
-		itemListView = (ListView) findViewById(R.id.listView1);
+		itemListView = (ListView) findViewById(R.id.listViewProductSearch);
 		btFinished = (Button) findViewById(R.id.button2);
 		arrayAdapter = new ArrayAdapter<String>(getApplicationContext(),
 				R.layout.activity_stock_add_item, itemDisplay);

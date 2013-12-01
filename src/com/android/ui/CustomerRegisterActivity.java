@@ -28,7 +28,7 @@ public class CustomerRegisterActivity extends Activity {
 		
 		
 		btOK = (Button)findViewById(R.id.btRegisterOK);
-		txtName = (EditText)findViewById(R.id.txtRegisterName);
+		txtName = (EditText)findViewById(R.id.txtSearchProduct);
 		txtEmail = (EditText)findViewById(R.id.txtRegisterPrice);
 		
 		btOK.setOnClickListener(new OnClickListener() {

@@ -161,6 +161,11 @@ public class SaleController {
 	public Sale addSaleToSaleLadger(Context con,Sale sale){
 		return store.getSaleLedLadger().add(con, sale);
 	}
+	public List<Item> getAllItem()
+	{
+		//store.getInventory().get
+		return null;
+	}
 
 	
 

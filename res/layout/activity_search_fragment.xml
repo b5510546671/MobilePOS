@@ -18,7 +18,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <EditText
-        android:id="@+id/txtRegisterName"
+        android:id="@+id/txtSearchProduct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -31,35 +31,21 @@
     </EditText>
 
     <Button
-        android:id="@+id/btCreateNewStock"
+        android:id="@+id/btSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/txtRegisterName"
-        android:layout_alignRight="@+id/txtRegisterName"
-        android:layout_below="@+id/txtRegisterName"
-        android:text="Button" />
+        android:layout_alignLeft="@+id/txtSearchProduct"
+        android:layout_alignRight="@+id/txtSearchProduct"
+        android:layout_below="@+id/txtSearchProduct"
+        android:text="Search" />
 
-    <ScrollView
-        android:id="@+id/scrollView1"
-        android:layout_width="wrap_content"
+    <ListView
+        android:id="@+id/listViewProductSearch"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/btCreateNewStock" >
+        android:layout_below="@+id/btSearch"
+        android:layout_centerHorizontal="true" >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/txtTotalPrice"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Large Text"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-        </LinearLayout>
-    </ScrollView>
+    </ListView>
 
 </RelativeLayout>

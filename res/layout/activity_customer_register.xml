@@ -18,7 +18,7 @@
         android:textSize="20sp" />
 
     <EditText
-        android:id="@+id/txtRegisterName"
+        android:id="@+id/txtSearchProduct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -35,8 +35,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignRight="@+id/txtRegisterName"
-        android:layout_below="@+id/txtRegisterName"
+        android:layout_alignRight="@+id/txtSearchProduct"
+        android:layout_below="@+id/txtSearchProduct"
         android:ems="10"
         android:hint="E-Mail" />
 

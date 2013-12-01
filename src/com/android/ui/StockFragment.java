@@ -22,7 +22,7 @@ public class StockFragment extends Fragment{
 
 	 @Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
-		btNewStock = (Button)getView().findViewById(R.id.btCreateNewStock);
+		btNewStock = (Button)getView().findViewById(R.id.btSearch);
 		btViewAll = (Button)getView().findViewById(R.id.btStockViewAll);
 		btAddNewProduct = (Button)getView().findViewById(R.id.btStockAddNewProduct);
 		

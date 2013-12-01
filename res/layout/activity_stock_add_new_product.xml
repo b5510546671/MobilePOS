@@ -17,7 +17,7 @@
         android:text="Add New Product Description" />
 
     <EditText
-        android:id="@+id/txtRegisterName"
+        android:id="@+id/txtSearchProduct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -33,9 +33,9 @@
         android:id="@+id/txtRegisterPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/txtRegisterName"
+        android:layout_alignLeft="@+id/txtSearchProduct"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/txtRegisterName"
+        android:layout_below="@+id/txtSearchProduct"
         android:ems="10"
         android:hint="Price"
         android:inputType="numberDecimal" />
