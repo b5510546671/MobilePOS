@@ -19,5 +19,6 @@
     <string name="title_activity_stock_add_new_product">StockAddNewProductActivity</string>
     <string name="title_activity_stock_inventory_line_item_detail">StockInventoryLineItemDetail</string>
     <string name="title_activity_customer_register">CustomerRegisterActivity</string>
+    <string name="title_activity_edit_product_description">EditProductDescriptionActivity</string>
 
 </resources>

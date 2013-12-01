@@ -14,16 +14,17 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="View All Stock" />
+        android:text="Product Description"
+        android:textSize="20sp" />
 
     <ListView
-        android:id="@+id/listViewStockAllItem2"
+        android:id="@+id/listViewStockAll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/txtItemListView" >
+        android:layout_below="@+id/txtItemListView"
+        android:drawSelectorOnTop="true" >
 
     </ListView>
 

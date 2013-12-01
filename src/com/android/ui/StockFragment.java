@@ -30,7 +30,7 @@ public class StockFragment extends Fragment{
 			
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(getActivity().getApplicationContext(), "Create New Stock", Toast.LENGTH_SHORT).show();
+				//Toast.makeText(getActivity().getApplicationContext(), "Create New Stock", Toast.LENGTH_SHORT).show();
 				
 				Intent intent = new Intent(getActivity().getApplicationContext(), StockCreateNewStock.class);
 				startActivity(intent);
@@ -42,7 +42,7 @@ public class StockFragment extends Fragment{
 			
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(getActivity().getApplicationContext(), "View All Stock", Toast.LENGTH_SHORT).show();
+				//Toast.makeText(getActivity().getApplicationContext(), "View All Stock", Toast.LENGTH_SHORT).show();
 				
 				Intent intent = new Intent(getActivity().getApplicationContext(), StockViewAllActivity.class);
 				startActivity(intent);
@@ -53,7 +53,7 @@ public class StockFragment extends Fragment{
 			
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(getActivity().getApplicationContext(), "Add New Product to Stock", Toast.LENGTH_SHORT).show();
+				//Toast.makeText(getActivity().getApplicationContext(), "Add New Product to Stock", Toast.LENGTH_SHORT).show();
 				
 				Intent intent = new Intent(getActivity().getApplicationContext(), StockAddNewProductActivity.class);
 				startActivity(intent);

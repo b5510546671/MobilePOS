@@ -36,6 +36,12 @@ public class InventoryController {
 		return store.getItemDescriptionBook().add(con, name, description, price, barcode);
 	}
 	
+	public void removeItemDescription(Context con,int barcode){
+		
+		ItemDescription itemDescription = store.getItemDescriptionBook().getItemDescriptionByBarcode(con, barcode);
+		store.getItemDescriptionBook().remove(con, itemDescription);
+	}
+	
 	public InventoryLineItem addinventoryLineItemToInventory(Context con,InventoryLineItem inventoryLineItem)
 	{
 		return store.getInventory().addInventoryLineItem(con, inventoryLineItem);

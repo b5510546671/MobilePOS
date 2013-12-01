@@ -170,5 +170,9 @@ public class SaleController {
 		return store.getInventory().getStockItems(con);
 
 	}
+	
+	public List<ItemDescription> getAllItemDescription(Context con){
+		return store.getItemDescriptionBook().getAllItemDescriptions(con);
+	}
 
 }

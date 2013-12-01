@@ -61,6 +61,10 @@
             android:name="com.android.ui.CustomerRegisterActivity"
             android:label="@string/title_activity_customer_register" >
         </activity>
+        <activity
+            android:name="com.android.ui.EditProductDescriptionActivity"
+            android:label="@string/title_activity_edit_product_description" >
+        </activity>
     </application>
 
 </manifest>

@@ -25,7 +25,7 @@ public class CashierCustomArrayAdapter extends ArrayAdapter<Item> {
 	private Activity context;
 
 	public CashierCustomArrayAdapter(Activity context, List<Item> items) {
-		super(context, R.layout.list_view, items);
+		super(context, R.layout.cashier_listview, items);
 		this.context =  context;
 		this.items = items;
 	}
@@ -38,7 +38,7 @@ public class CashierCustomArrayAdapter extends ArrayAdapter<Item> {
 	@Override
 	public View getView(final int position, View view, ViewGroup parent) {
 	LayoutInflater inflater = context.getLayoutInflater();
-	View rowView= inflater.inflate(R.layout.list_view, null, true);
+	View rowView= inflater.inflate(R.layout.cashier_listview, null, true);
 	TextView txtTitle = (TextView) rowView.findViewById(R.id.txtItemListView);
 	txtTitle.setText(items.get(position).toString());
 	 Button btRemove = (Button) rowView.findViewById(R.id.btItemListView);

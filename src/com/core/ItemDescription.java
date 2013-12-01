@@ -62,4 +62,9 @@ public class ItemDescription implements Serializable {
 	public void setItemDescription(String itemDescription) {
 		this.itemDescription = itemDescription;
 	}
+	
+	public String toString(){
+		return this.name;
+	}
+	
 }
