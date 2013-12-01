@@ -45,9 +45,11 @@ public class CustomerDetailsNonMemberFragment extends Fragment {
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 
 		super.onViewCreated(view, savedInstanceState);
-		
-		
 		saleController  = SaleController.getInstance();
+		Toast.makeText(getActivity(), saleController.getItemsList().toString(), 1).show();
+		
+		
+		
 		txtNonMemberEmail = (EditText) getView().findViewById(
 				R.id.txtNonMemberEmail);
 		txtNonMemberName = (EditText) getView().findViewById(
@@ -67,25 +69,28 @@ public class CustomerDetailsNonMemberFragment extends Fragment {
 				Sale sale = saleController.getSale(getActivity(),new Date(0,0,0));
 				
 				if(sale == null ) Toast.makeText(getActivity(), "Invalid data", Toast.LENGTH_SHORT).show();
-				else saleController.addSaleToSaleLadger(getActivity(), sale);
-				
-				
-				alertDialog1.setTitle("POS Mobile");
-				
-				
-				alertDialog1.setMessage("E-mail Sent to >>" + c.getEmail());
-				
+				else{
+					Sale savedSale = saleController.addSaleToSaleLadger(getActivity(), sale);
+					alertDialog1.setTitle("POS Mobile");
+					
+					
+					alertDialog1.setMessage(savedSale.getItems().toString()+ "\nE-mail Sent to >>" + c.getEmail());
+					
 
-				alertDialog1.setButton("OK",
-						new DialogInterface.OnClickListener() {
+					alertDialog1.setButton("OK",
+							new DialogInterface.OnClickListener() {
 
-							public void onClick(DialogInterface dialog,
-									int which) {
-								getActivity().finish();
-							}
-						});
+								public void onClick(DialogInterface dialog,
+										int which) {
+									getActivity().finish();
+								}
+							});
 
-				alertDialog1.show();
+					alertDialog1.show();
+				}
+				
+				
+				
 			}
 		});
 

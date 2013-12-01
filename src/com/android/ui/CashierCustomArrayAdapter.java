@@ -18,13 +18,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class CustomArrayAdapter extends ArrayAdapter<Item> {
+public class CashierCustomArrayAdapter extends ArrayAdapter<Item> {
 
 	
 	private List<Item> items;
 	private Activity context;
 
-	public CustomArrayAdapter(Activity context, List<Item> items) {
+	public CashierCustomArrayAdapter(Activity context, List<Item> items) {
 		super(context, R.layout.list_view, items);
 		this.context =  context;
 		this.items = items;

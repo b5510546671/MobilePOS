@@ -82,4 +82,11 @@ public class Inventory {
 		inventoryDB.close();
 		return i;
 	}
+	
+	public List<Item> getAllItems(Context con){
+		InventoryDB inventoryDB = new InventoryDB(con);
+		List<Item> items = inventoryDB.findAll();
+		inventoryDB.close();
+		return items;
+	}
 }

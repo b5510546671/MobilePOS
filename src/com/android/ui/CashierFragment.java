@@ -40,7 +40,7 @@ public class CashierFragment extends Fragment {
 	private SaleController saleController;
 	private List<Item> items = new ArrayList<Item>();
 	
-	private CustomArrayAdapter adapter;
+	private CashierCustomArrayAdapter adapter;
 	private List<String> itemDisplay = new ArrayList<String>();
 	
 	private HashMap<Integer , Item> itemsMap = new HashMap<Integer, Item>();
@@ -62,7 +62,7 @@ public class CashierFragment extends Fragment {
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 		saleController = SaleController.getInstance();
-		adapter = new CustomArrayAdapter(getActivity(), items);
+		adapter = new CashierCustomArrayAdapter(getActivity(), items);
 		itemListView = (ListView) getView().findViewById(R.id.cashierListView);
 		
 		

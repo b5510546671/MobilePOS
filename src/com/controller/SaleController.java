@@ -9,7 +9,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.android.ui.CustomArrayAdapter;
+import com.android.ui.CashierCustomArrayAdapter;
 import com.core.Customer;
 import com.core.InventoryLineItem;
 import com.core.Item;
@@ -161,10 +161,10 @@ public class SaleController {
 	public Sale addSaleToSaleLadger(Context con,Sale sale){
 		return store.getSaleLedLadger().add(con, sale);
 	}
-	public List<Item> getAllItem()
+	public List<Item> getAllItem(Context con)
 	{
-		//store.getInventory().get
-		return null;
+		return store.getInventory().getAllItems(con);
+		
 	}
 
 	
