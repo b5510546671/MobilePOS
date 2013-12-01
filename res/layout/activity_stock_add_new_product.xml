@@ -69,6 +69,7 @@
         android:layout_alignLeft="@+id/txtRegisterProductionDescription"
         android:layout_alignRight="@+id/txtRegisterProductionDescription"
         android:layout_below="@+id/txtRegisterProductionDescription"
+        android:background="@android:color/holo_orange_light"
         android:text="OK" />
 
 </RelativeLayout>

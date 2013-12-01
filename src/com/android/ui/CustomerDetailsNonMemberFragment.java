@@ -94,7 +94,7 @@ public class CustomerDetailsNonMemberFragment extends Fragment {
 									newActivity.putExtra(Intent.EXTRA_TEXT, message);
 									newActivity.setType("plain/text");
 									startActivity(Intent.createChooser(newActivity, "Email Sending Option :"));
-									
+									getActivity().finish();
 								}
 							});
 

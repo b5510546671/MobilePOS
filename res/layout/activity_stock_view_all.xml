@@ -12,9 +12,13 @@
         android:id="@+id/txtItemListView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/listViewStockAll"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
+        android:layout_alignRight="@+id/listViewStockAll"
+        android:background="@android:color/holo_orange_light"
         android:text="Product Description"
+        android:textColor="#FFFFFF"
+        android:textColorHint="@android:color/holo_blue_bright"
         android:textSize="20sp" />
 
     <ListView

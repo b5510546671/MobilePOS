@@ -11,7 +11,7 @@
     <application
         android:icon="@drawable/ic_launcher"
         android:label="Mobile POS"
-        android:theme="@android:style/Theme.Holo.Light.DarkActionBar" >
+        android:theme="@style/Theme.Sikarinstyle" >
         <activity
             android:name="com.android.ui.LoginActivity"
             android:label="@string/title_activity_login" >

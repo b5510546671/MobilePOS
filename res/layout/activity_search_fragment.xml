@@ -37,6 +37,7 @@
         android:layout_alignLeft="@+id/txtSearchProduct"
         android:layout_alignRight="@+id/txtSearchProduct"
         android:layout_below="@+id/txtSearchProduct"
+         android:background="@android:color/holo_orange_light"
         android:text="Search" />
 
     <ListView

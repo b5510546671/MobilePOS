@@ -22,6 +22,7 @@
         android:layout_alignLeft="@+id/txtMemberID"
         android:layout_alignRight="@+id/txtMemberID"
         android:layout_below="@+id/txtMemberID"
+         android:background="@android:color/holo_orange_light"
         android:text="OK" />
 
     <Button
@@ -31,6 +32,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
+         android:background="@android:color/holo_orange_light"
         android:text="Send receipt via E-mail" />
 
     <ScrollView

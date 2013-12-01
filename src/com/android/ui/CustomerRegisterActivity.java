@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -34,8 +35,6 @@ public class CustomerRegisterActivity extends Activity {
 		btOK = (Button)findViewById(R.id.btRegisterOK);
 		txtName = (EditText)findViewById(R.id.txtSearchProduct);
 		txtEmail = (EditText)findViewById(R.id.txtRegisterPrice);
-		 final String name = txtName.getText().toString();
-         final String email = txtEmail.getText().toString();
 		
 		btOK.setOnClickListener(new OnClickListener() {
 			
@@ -44,13 +43,37 @@ public class CustomerRegisterActivity extends Activity {
 				AlertDialog.Builder builder = new AlertDialog.Builder(CustomerRegisterActivity.this);
                 builder.setTitle("Member Register");
                 
-               
+                final String name = txtName.getText().toString();
+                final String email = txtEmail.getText().toString();
                 builder.setMessage("Name : " + name + "\nE-mail : " + email);
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
  
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
-                    	SaleController.getInstance().addCustomerToCustomerBook(getApplicationContext(), new Customer(-1,name, DateManager.getCurrentDate(), email));
+                    	final Customer c = SaleController.getInstance().addCustomerToCustomerBook(getApplicationContext(), new Customer(-1,name, DateManager.getCurrentDate(), email));
+                    	AlertDialog.Builder builder2 = new AlertDialog.Builder(CustomerRegisterActivity.this);
+                        builder2.setTitle(c.getName()+"'s Member Details");
+                        builder2.setMessage("ID" +c.getID() +"\nName : " + c.getName() + "\nE-mail : " + c.getEmail() + "\nRegister date : "+ c.getRegisterDate().getDate()+ "/"+ c.getRegisterDate().getMonth() + "/"+ c.getRegisterDate().getYear());
+                        builder2.setPositiveButton("OK",new DialogInterface.OnClickListener() {
+							
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								
+								Intent newActivity = new Intent(Intent.ACTION_SEND);
+								String email=c.getEmail();
+								String subject="Register finished";
+								newActivity.putExtra(Intent.EXTRA_EMAIL,email);         
+								newActivity.putExtra(Intent.EXTRA_SUBJECT, subject);
+								newActivity.putExtra(Intent.EXTRA_TEXT, c.getName()+"'s Member Details"+"\nID" +c.getID() +"\nName : " + c.getName() + "\nE-mail : " + c.getEmail() + "\nRegister date : "+ c.getRegisterDate().getDate()+ "/"+ c.getRegisterDate().getMonth() + "/"+ (c.getRegisterDate().getYear()+1900) );
+								newActivity.setType("plain/text");
+								startActivity(Intent.createChooser(newActivity, "Email Sending Option :"));
+								finish();
+								
+							}
+						});
+                    	
+                        builder2.show(); 
+                    	
                     }
                 });
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
