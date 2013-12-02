@@ -13,10 +13,15 @@
         android:id="@+id/txtItemListView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
+        android:background="#FFFFFF"
+        android:gravity="center"
         android:text="Stock Manager"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/pressed_sikarinstyle"
+        android:textSize="30dp" />
 
     <Button
         android:id="@+id/btStockViewAll"
@@ -25,8 +30,9 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/btSearch"
-         android:background="@android:color/white"
-        android:text="View All Product Description" />
+        android:text="View All Product Description" 
+        style="@style/ButtonText"
+       	android:background="@drawable/btn_yellow"/>
 
     <Button
         android:id="@+id/btStockAddNewProduct"
@@ -35,18 +41,9 @@
         android:layout_alignLeft="@+id/btStockViewAll"
         android:layout_alignRight="@+id/btStockViewAll"
         android:layout_below="@+id/btStockViewAll"
-         android:background="@android:color/holo_orange_light"
-        android:text="Add New Product Description" />
-
-    <TextView
-        android:id="@+id/TextView01"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/btStockAddNewProduct"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="51dp"
-        android:text="Member Manager"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:text="Add New Product Description" 
+        style="@style/ButtonText"
+       	android:background="@drawable/btn_yellow"/>
 
     <Button
         android:id="@+id/btSearch"
@@ -56,17 +53,34 @@
         android:layout_alignRight="@+id/btStockViewAll"
         android:layout_below="@+id/txtItemListView"
         android:layout_marginTop="14dp"
-         android:background="@android:color/holo_orange_light"
-        android:text="Create New Stock" />
+        android:text="Create New Stock" 
+        style="@style/ButtonText"
+       	android:background="@drawable/btn_yellow"/>
 
     <Button
         android:id="@+id/btRegisterNewMember"
+        style="@style/ButtonText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/btStockAddNewProduct"
         android:layout_alignRight="@+id/btStockAddNewProduct"
         android:layout_below="@+id/TextView01"
-         android:background="@android:color/holo_orange_light"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/btn_yellow"
         android:text="Register new member" />
+
+    <TextView
+        android:id="@+id/TextView01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btStockAddNewProduct"
+        android:layout_alignRight="@+id/btStockAddNewProduct"
+        android:layout_below="@+id/btStockAddNewProduct"
+        android:background="#FFFFFF"
+        android:gravity="center"
+        android:text="Member Manager"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/pressed_sikarinstyle"
+        android:textSize="30dp" />
 
 </RelativeLayout>

@@ -47,7 +47,8 @@
         android:layout_alignLeft="@+id/txtRegisterPrice"
         android:layout_alignRight="@+id/txtRegisterPrice"
         android:layout_below="@+id/txtRegisterPrice"
-         android:background="@android:color/holo_orange_light"
+        style="@style/ButtonText"
+       	android:background="@drawable/btn_yellow"
         android:text="OK" />
 
 </RelativeLayout>

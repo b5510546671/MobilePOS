@@ -5,6 +5,7 @@ import com.core.database.Inventory;
 import com.core.database.ItemDescriptionBook;
 import com.core.database.PaymentBook;
 import com.core.database.SaleLadger;
+import com.database.CashierBook;
 
 public class Store {
 	private static Store instance;
@@ -14,6 +15,7 @@ public class Store {
 	private ItemDescriptionBook itemDescriptionBook;
 	private PaymentBook paymentBook;
 	private SaleLadger saleLadger;
+	private CashierBook cashierBook;
 
 	public Store() {
 		customerBook = new CustomerBook();
@@ -21,12 +23,17 @@ public class Store {
 		itemDescriptionBook = new ItemDescriptionBook();
 		paymentBook = new PaymentBook();
 		saleLadger = new SaleLadger();
+		cashierBook = new CashierBook();
 	}
 
 	public static Store getInstance() {
 		if (instance == null)
 			instance = new Store();
 		return instance;
+	}
+	
+	public CashierBook getCashierBook(){
+		return this.cashierBook;
 	}
 
 	public SaleLadger getSaleLedLadger() {

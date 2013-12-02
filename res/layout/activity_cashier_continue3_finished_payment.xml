@@ -24,8 +24,9 @@
         android:layout_alignLeft="@id/txtPaymentMethodShow"
         android:layout_alignRight="@id/txtPaymentMethodShow"
         android:layout_below="@+id/txtCustomerDetails"
-        android:background="@android:color/holo_orange_light"
         android:text="Sign in with Member ID" 
+        style="@style/ButtonText"
+       	android:background="@drawable/btn_yellow"
         />
 
     <Button
@@ -35,8 +36,9 @@
         android:layout_alignLeft="@+id/btMemberSendEmail"
         android:layout_alignRight="@+id/btMemberSendEmail"
         android:layout_below="@+id/btMemberSendEmail"
-         android:background="@android:color/white"
-        android:text="Not a member" />
+        android:text="Not a member"
+        style="@style/ButtonText"
+       	android:background="@drawable/btn_yellow" />
 
     <TextView
         android:id="@+id/txtCustomerDetails"

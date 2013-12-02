@@ -37,31 +37,32 @@ public final class R {
         public static final int btn_cab_done_focused_sikarinstyle=0x7f02000a;
         public static final int btn_cab_done_pressed_sikarinstyle=0x7f02000b;
         public static final int btn_cab_done_sikarinstyle=0x7f02000c;
-        public static final int cab_background_bottom_sikarinstyle=0x7f02000d;
-        public static final int cab_background_top_sikarinstyle=0x7f02000e;
-        public static final int drawer_shadow=0x7f02000f;
-        public static final int ic_drawer=0x7f020010;
-        public static final int ic_launcher=0x7f020011;
-        public static final int list_focused_sikarinstyle=0x7f020012;
-        public static final int menu_dropdown_panel_sikarinstyle=0x7f020013;
-        public static final int pressed_background_sikarinstyle=0x7f020014;
-        public static final int progress_bg_sikarinstyle=0x7f020015;
-        public static final int progress_horizontal_sikarinstyle=0x7f020016;
-        public static final int progress_primary_sikarinstyle=0x7f020017;
-        public static final int progress_secondary_sikarinstyle=0x7f020018;
-        public static final int selectable_background_sikarinstyle=0x7f020019;
-        public static final int spinner_ab_default_sikarinstyle=0x7f02001a;
-        public static final int spinner_ab_disabled_sikarinstyle=0x7f02001b;
-        public static final int spinner_ab_focused_sikarinstyle=0x7f02001c;
-        public static final int spinner_ab_pressed_sikarinstyle=0x7f02001d;
-        public static final int spinner_background_ab_sikarinstyle=0x7f02001e;
-        public static final int tab_indicator_ab_sikarinstyle=0x7f02001f;
-        public static final int tab_selected_focused_sikarinstyle=0x7f020020;
-        public static final int tab_selected_pressed_sikarinstyle=0x7f020021;
-        public static final int tab_selected_sikarinstyle=0x7f020022;
-        public static final int tab_unselected_focused_sikarinstyle=0x7f020023;
-        public static final int tab_unselected_pressed_sikarinstyle=0x7f020024;
-        public static final int tab_unselected_sikarinstyle=0x7f020025;
+        public static final int btn_yellow=0x7f02000d;
+        public static final int cab_background_bottom_sikarinstyle=0x7f02000e;
+        public static final int cab_background_top_sikarinstyle=0x7f02000f;
+        public static final int drawer_shadow=0x7f020010;
+        public static final int ic_drawer=0x7f020011;
+        public static final int ic_launcher=0x7f020012;
+        public static final int list_focused_sikarinstyle=0x7f020013;
+        public static final int menu_dropdown_panel_sikarinstyle=0x7f020014;
+        public static final int pressed_background_sikarinstyle=0x7f020015;
+        public static final int progress_bg_sikarinstyle=0x7f020016;
+        public static final int progress_horizontal_sikarinstyle=0x7f020017;
+        public static final int progress_primary_sikarinstyle=0x7f020018;
+        public static final int progress_secondary_sikarinstyle=0x7f020019;
+        public static final int selectable_background_sikarinstyle=0x7f02001a;
+        public static final int spinner_ab_default_sikarinstyle=0x7f02001b;
+        public static final int spinner_ab_disabled_sikarinstyle=0x7f02001c;
+        public static final int spinner_ab_focused_sikarinstyle=0x7f02001d;
+        public static final int spinner_ab_pressed_sikarinstyle=0x7f02001e;
+        public static final int spinner_background_ab_sikarinstyle=0x7f02001f;
+        public static final int tab_indicator_ab_sikarinstyle=0x7f020020;
+        public static final int tab_selected_focused_sikarinstyle=0x7f020021;
+        public static final int tab_selected_pressed_sikarinstyle=0x7f020022;
+        public static final int tab_selected_sikarinstyle=0x7f020023;
+        public static final int tab_unselected_focused_sikarinstyle=0x7f020024;
+        public static final int tab_unselected_pressed_sikarinstyle=0x7f020025;
+        public static final int tab_unselected_sikarinstyle=0x7f020026;
     }
     public static final class id {
         public static final int CashierTxtID=0x7f060014;
@@ -89,13 +90,13 @@ public final class R {
         public static final int btn_add_inv=0x7f06002c;
         public static final int btn_remove_inv=0x7f06002d;
         public static final int btn_sale_inv=0x7f06002e;
-        public static final int button1=0x7f060031;
+        public static final int button1=0x7f060032;
         public static final int button2=0x7f06003d;
         public static final int cashierButtonOK=0x7f060015;
         public static final int cashierListView=0x7f060017;
         public static final int content_frame=0x7f060034;
         public static final int drawer_layout=0x7f060033;
-        public static final int imageView1=0x7f060032;
+        public static final int imageView1=0x7f060031;
         public static final int left_drawer=0x7f060035;
         public static final int linearLayout1=0x7f060008;
         public static final int listViewProductSearch=0x7f060037;
@@ -204,17 +205,18 @@ public final class R {
         public static final int title_activity_store_manager=0x7f07000a;
     }
     public static final class style {
-        public static final int ActionBar_Solid_Sikarinstyle=0x7f080001;
-        public static final int ActionBar_Transparent_Sikarinstyle=0x7f080002;
-        public static final int ActionBarTabStyle_Sikarinstyle=0x7f080005;
-        public static final int ActionButton_CloseMode_Sikarinstyle=0x7f080008;
-        public static final int DropDownListView_Sikarinstyle=0x7f080004;
-        public static final int DropDownNav_Sikarinstyle=0x7f080006;
-        public static final int PopupMenu_Sikarinstyle=0x7f080003;
-        public static final int ProgressBar_Sikarinstyle=0x7f080007;
-        public static final int Theme_Sikarinstyle=0x7f080000;
+        public static final int ActionBar_Solid_Sikarinstyle=0x7f080002;
+        public static final int ActionBar_Transparent_Sikarinstyle=0x7f080003;
+        public static final int ActionBarTabStyle_Sikarinstyle=0x7f080006;
+        public static final int ActionButton_CloseMode_Sikarinstyle=0x7f080009;
+        public static final int ButtonText=0x7f080000;
+        public static final int DropDownListView_Sikarinstyle=0x7f080005;
+        public static final int DropDownNav_Sikarinstyle=0x7f080007;
+        public static final int PopupMenu_Sikarinstyle=0x7f080004;
+        public static final int ProgressBar_Sikarinstyle=0x7f080008;
+        public static final int Theme_Sikarinstyle=0x7f080001;
         /**  this style is only referenced in a Light.DarkActionBar based theme 
          */
-        public static final int Theme_Sikarinstyle_Widget=0x7f080009;
+        public static final int Theme_Sikarinstyle_Widget=0x7f08000a;
     }
 }

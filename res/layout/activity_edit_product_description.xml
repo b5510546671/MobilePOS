@@ -15,7 +15,8 @@
         android:layout_alignLeft="@+id/scrollView1"
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/txtEditDescription"
-         android:background="@android:color/holo_orange_light"
+        style="@style/ButtonText"
+       	android:background="@drawable/btn_yellow"
         android:text="OK" />
 
     <EditText

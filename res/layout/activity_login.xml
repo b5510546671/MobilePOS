@@ -16,18 +16,10 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
+        style="@style/ButtonText"
+       	android:background="@drawable/btn_yellow"
         android:text="Log in" 
-        android:background="@android:color/holo_orange_light"/>
-
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/btLogin"
-        android:layout_alignRight="@+id/btLogin"
-        android:layout_below="@+id/btLogin"
-         android:background="@android:color/white"
-        android:text="Sign up" />
+        />
 
     <EditText
         android:id="@+id/CashierTxtID"
@@ -60,5 +52,16 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="18dp"
         android:src="@drawable/ic_launcher" />
+
+    <Button
+        android:id="@+id/button1"
+        style="@style/ButtonText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btLogin"
+        android:layout_alignRight="@+id/btLogin"
+        android:layout_below="@+id/btLogin"
+        android:background="@drawable/btn_yellow"
+        android:text="Sign up" />
 
 </RelativeLayout>

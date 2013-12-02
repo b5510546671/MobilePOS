@@ -16,7 +16,6 @@
 
      <Button
          android:id="@+id/btViewAllEdit"
-         style="?android:attr/buttonStyleSmall"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:layout_alignBaseline="@+id/txtViewAll"
@@ -24,6 +23,7 @@
          android:layout_alignParentRight="true"
          android:layout_marginRight="16dp"
          android:text="edit" 
-          android:background="#e74c3c"/>
+         style="@style/ButtonText"
+       	android:background="@drawable/btn_yellow"/>
 
  </RelativeLayout>

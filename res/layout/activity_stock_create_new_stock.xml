@@ -36,14 +36,18 @@
                 android:id="@+id/btItemListView"
                 android:layout_width="49dp"
                 android:layout_height="wrap_content"
-                android:text="ok" />
+                android:text="ok"
+                style="@style/ButtonText"
+       			android:background="@drawable/btn_yellow" />
         </LinearLayout>
 
         <Button
             android:id="@+id/btStockBarcodeScan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Scan barcode" />
+            android:text="Scan barcode" 
+            style="@style/ButtonText"
+       	android:background="@drawable/btn_yellow"/>
 
         <TextView
             style="?android:listSeparatorTextViewStyle"

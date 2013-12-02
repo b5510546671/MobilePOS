@@ -11,6 +11,8 @@
             android:layout_alignBottom="@+id/txtItemListView"
             android:layout_alignParentRight="true"
             android:layout_marginRight="19dp"
+            style="@style/ButtonText"
+       		android:background="@drawable/btn_yellow"
             android:text="delete" />
 
         <TextView

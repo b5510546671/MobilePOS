@@ -17,6 +17,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.drm.DrmStore.Action;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
@@ -73,6 +74,7 @@ public class MainActivity extends Activity {
         //mDrawerList.setHeaderDividersEnabled(true);
         mDrawerList.setSelected(false);
         //mDrawerList.setFooterDividersEnabled(true);
+        mDrawerList.setBackgroundColor(Color.WHITE);
         
 
         // set a custom shadow that overlays the main content when the drawer opens

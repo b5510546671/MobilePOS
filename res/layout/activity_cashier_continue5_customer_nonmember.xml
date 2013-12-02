@@ -44,7 +44,8 @@
         android:layout_alignLeft="@+id/txtNonMemberEmail"
         android:layout_alignRight="@+id/txtNonMemberEmail"
         android:layout_below="@+id/txtNonMemberEmail"
-         android:background="@android:color/holo_orange_light"
+        style="@style/ButtonText"
+       	android:background="@drawable/btn_yellow"
         android:text="OK" />
 
 </RelativeLayout>

@@ -15,7 +15,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:background="@android:color/holo_orange_light"
+        style="@style/ButtonText"
+       	android:background="@drawable/btn_yellow"
         android:text="Next" />
 
     <TextView
