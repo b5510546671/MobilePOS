@@ -41,6 +41,7 @@ public class SaleLadger {
 		db = new SaleLadgerDB(con);
 		List<Sale> x = db.findAll();
 		db.close();
+		if(x==null) return new ArrayList<Sale>();
 		return x;
 	}
 	

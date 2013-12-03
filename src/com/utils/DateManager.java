@@ -9,6 +9,7 @@ public class DateManager {
 	public static Date getCurrentDate(){
 		Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("GMT+7"));
 		
+		
 		    return cal.getTime();
  	}
 

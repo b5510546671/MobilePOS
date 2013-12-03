@@ -10,8 +10,44 @@
     tools:context=".HistoryFragment" >
 
     <TextView
+        android:id="@+id/txtItemListView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="History" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="#FFFFFF"
+        android:gravity="center"
+        android:text="Sale Report"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/pressed_sikarinstyle"
+        android:textSize="30dp" />
 
+    <Button
+        android:id="@+id/btReportDate"
+        style="@style/ButtonText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/txtItemListView"
+        android:layout_alignRight="@+id/txtItemListView"
+        android:layout_below="@+id/txtItemListView"
+        android:background="@drawable/btn_yellow"
+        android:text="Button" />
+
+    <Spinner
+        android:id="@+id/spinnerReport"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/btReportDate" />
+
+    <ListView
+        android:id="@+id/listViewAllSale"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/spinnerReport"
+        android:layout_below="@+id/spinnerReport" >
+    </ListView>
+    
 </RelativeLayout>

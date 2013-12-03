@@ -72,7 +72,7 @@
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/txtHistorySale"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -86,7 +86,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView1"
+        android:layout_below="@+id/txtHistorySale"
         android:text="Old Description"
         android:textSize="16sp" />
 

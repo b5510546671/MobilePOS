@@ -43,6 +43,11 @@ public class SaleController {
 	public Payment getPayment() {
 		return this.payment;
 	}
+	
+	public List<Sale> getAllSale(Context con)
+	{
+		return store.getSaleLedLadger().getAllSales(con);
+	}
 
 	public int getItemQuantity(Context con, int barcode) {
 		List<Item> items = SaleController.getInstance().getAllItem(con);
