@@ -15,15 +15,20 @@
         <activity
             android:name="com.android.ui.LoginActivity"
             android:label="@string/title_activity_login" >
+            
+        </activity>
+        <activity
+            android:name="com.android.ui.CashierContinueActivity"
+            android:label="@string/title_activity_cashier_continue" >
+        </activity>
+        <activity
+            android:name="com.android.ui.LoginFallAnimationActivity"
+            android:label="Fall" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name="com.android.ui.CashierContinueActivity"
-            android:label="@string/title_activity_cashier_continue" >
         </activity>
         <activity
             android:name="com.android.ui.CashierContinueFragment1"
@@ -64,6 +69,10 @@
         <activity
             android:name="com.android.ui.EditProductDescriptionActivity"
             android:label="@string/title_activity_edit_product_description" >
+        </activity>
+        <activity
+            android:name="com.android.ui.HIstoryDeailsActivity"
+            android:label="@string/title_activity_history_deails" >
         </activity>
     </application>
 

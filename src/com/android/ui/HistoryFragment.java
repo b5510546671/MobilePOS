@@ -17,6 +17,7 @@ import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.Fragment;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -92,7 +93,7 @@ public class HistoryFragment extends Fragment {
 
 		    @Override
 		    public void onItemClick(AdapterView<?> parent, View view,
-		            int position, long id) {
+		            final int position, long id) {
 		    	
 		    	String s = "";
 		    	s+="Sale ID : " + sales.get(position).getID();
@@ -109,6 +110,10 @@ public class HistoryFragment extends Fragment {
  
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
+                    	Intent intent = new Intent(getActivity().getApplicationContext(), HIstoryDeailsActivity.class);
+                    	intent.putExtra("sale", sales.get(position));
+                    	//Toast.makeText(getActivity(), "Send : " + sales.get(position).getID(), 1).show();
+                    	startActivity(intent);
                     	
                     }
                 });
@@ -141,7 +146,7 @@ public class HistoryFragment extends Fragment {
 					public void onItemSelected(AdapterView<?> parentView,
 							View selectedItemView, int position, long id) {
 						
-						Toast.makeText(getActivity(),selectedDay +"/"+ selectedMonth+"/"+ selectedYear, 1).show();
+						//Toast.makeText(getActivity(),selectedDay +"/"+ selectedMonth+"/"+ selectedYear, 1).show();
 						
 						if(position==0){
 							sales.clear();

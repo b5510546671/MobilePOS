@@ -34,7 +34,7 @@ public class StockAddNewProductActivity extends Activity {
         inventoryController = InventoryController.getInstance();
         
         txtName = (EditText)findViewById(R.id.txtSearchProduct);
-        txtPrice = (EditText)findViewById(R.id.txtRegisterPrice);
+        txtPrice = (EditText)findViewById(R.id.txtLoginUserName);
         txtBarcode = (EditText)findViewById(R.id.txtRegisterBarcode);
         txtProductDescription = (EditText)findViewById(R.id.txtRegisterProductionDescription);
         btOK = (Button)findViewById(R.id.btRegisterOK);

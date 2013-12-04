@@ -30,7 +30,7 @@
     </EditText>
 
     <EditText
-        android:id="@+id/txtRegisterPrice"
+        android:id="@+id/txtLoginUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/txtSearchProduct"
@@ -45,8 +45,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignRight="@+id/txtRegisterPrice"
-        android:layout_below="@+id/txtRegisterPrice"
+        android:layout_alignRight="@+id/txtLoginUserName"
+        android:layout_below="@+id/txtLoginUserName"
         android:ems="10"
         android:hint="barcode"
         android:inputType="number" />

@@ -51,7 +51,7 @@ public class StockCreateNewStock extends Activity {
 		btOK = (Button) findViewById(R.id.btItemListView);
 		btScanWithBarcode = (Button) findViewById(R.id.btStockBarcodeScan);
 		itemListView = (ListView) findViewById(R.id.listViewProductSearch);
-		btFinished = (Button) findViewById(R.id.button2);
+		btFinished = (Button) findViewById(R.id.btLoginFallSignUp);
 		arrayAdapter = new CashierCustomArrayAdapter(this, items);
 		itemListView.setAdapter(arrayAdapter);
 		itemListView.setOnItemClickListener(new OnItemClickListener() {

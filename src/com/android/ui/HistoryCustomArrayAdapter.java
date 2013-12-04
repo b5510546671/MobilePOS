@@ -3,6 +3,8 @@ package com.android.ui;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.sax.StartElementListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +38,7 @@ public class HistoryCustomArrayAdapter extends ArrayAdapter<Sale> {
 	TextView txtTitle = (TextView) rowView.findViewById(R.id.txtSaleDetail);
 	txtTitle.setText("Sale ID : " + sales.get(position).getID() + " (  Date :" + (sales.get(position).getDate().getDay()+1)+"/"+(sales.get(position).getDate().getMonth()+1) + "/" + (sales.get(position).getDate().getYear()+1900)+")");
 	 
+	
 	
 	return rowView;
 	}

@@ -48,6 +48,10 @@ public class SaleController {
 	{
 		return store.getSaleLedLadger().getAllSales(con);
 	}
+	
+	public void removeSaleFromSaleLadger(Context con,Sale sale){
+		store.getSaleLedLadger().remove(con, sale);
+	}
 
 	public int getItemQuantity(Context con, int barcode) {
 		List<Item> items = SaleController.getInstance().getAllItem(con);

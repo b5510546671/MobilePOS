@@ -9,59 +9,36 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".LoginActivity" >
 
-    <Button
-        android:id="@+id/btLogin"
+    <EditText
+        android:id="@+id/txtLoginFallPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        style="@style/ButtonText"
-       	android:background="@drawable/btn_yellow"
-        android:text="Log in" 
-        />
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="138dp"
+        android:ems="10" >
+
+        <requestFocus />
+    </EditText>
 
     <EditText
-        android:id="@+id/CashierTxtID"
+        android:id="@+id/txtLoginFallName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/btLogin"
-        android:layout_alignLeft="@+id/btLogin"
-        android:layout_alignRight="@+id/btLogin"
+        android:layout_alignLeft="@+id/txtLoginFallPassword"
+        android:layout_alignRight="@+id/txtLoginFallPassword"
+        android:layout_below="@+id/txtLoginFallPassword"
         android:ems="10"
-        android:hint="Password"
-        android:inputType="numberPassword"
-        android:singleLine="true" />
-
-    <EditText
-        android:id="@+id/txtRegisterPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/CashierTxtID"
-        android:layout_alignLeft="@+id/CashierTxtID"
-        android:layout_alignRight="@+id/btLogin"
-        android:ems="10"
-        android:hint="Username"
-        android:singleLine="true" />
-
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/txtRegisterPrice"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="18dp"
-        android:src="@drawable/ic_launcher" />
+        android:inputType="textPassword" />
 
     <Button
-        android:id="@+id/btReportDate"
-        style="@style/ButtonText"
+        android:id="@+id/btLoginFall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/btLogin"
-        android:layout_alignRight="@+id/btLogin"
-        android:layout_below="@+id/btLogin"
-        android:background="@drawable/btn_yellow"
-        android:text="Sign up" />
+        android:layout_alignLeft="@+id/txtLoginFallName"
+        android:layout_alignRight="@+id/txtLoginFallName"
+        android:layout_below="@+id/txtLoginFallName"
+        android:text="Button" />
 
 </RelativeLayout>

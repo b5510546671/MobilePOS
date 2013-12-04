@@ -31,7 +31,7 @@
     </EditText>
 
     <EditText
-        android:id="@+id/txtRegisterPrice"
+        android:id="@+id/txtLoginUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -44,9 +44,9 @@
         android:id="@+id/btRegisterOK"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/txtRegisterPrice"
-        android:layout_alignRight="@+id/txtRegisterPrice"
-        android:layout_below="@+id/txtRegisterPrice"
+        android:layout_alignLeft="@+id/txtLoginUserName"
+        android:layout_alignRight="@+id/txtLoginUserName"
+        android:layout_below="@+id/txtLoginUserName"
         style="@style/ButtonText"
        	android:background="@drawable/btn_yellow"
         android:text="OK" />

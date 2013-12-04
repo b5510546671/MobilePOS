@@ -25,13 +25,14 @@
 
     <Button
         android:id="@+id/btReportDate"
-        style="@style/ButtonText"
+        
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/txtItemListView"
         android:layout_alignRight="@+id/txtItemListView"
         android:layout_below="@+id/txtItemListView"
         android:background="@drawable/btn_yellow"
+        style="@style/ButtonText"
         android:text="Button" />
 
     <Spinner
