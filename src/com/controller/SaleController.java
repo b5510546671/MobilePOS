@@ -106,7 +106,7 @@ public class SaleController {
 	}
 
 	public Customer getCustomerByID(Context con, int id) {
-		Customer c = store.getCustomerBook().getCustomerByID(id);
+		Customer c = store.getCustomerBook().getCustomerByID(con,id);
 
 		return c;
 	}

@@ -66,10 +66,12 @@ public class CustomerDetailsMemberedFragment extends Fragment {
 				try {
 					
 					int id = Integer.parseInt(txtMemberId.getText().toString());
-					Log.i("Member ID",id+"");
-					customer = saleController.getCustomerByID(getActivity(), id);
+					
+					customer = saleController.getCustomerByID(getActivity().getApplicationContext(), id);
+					
 					if(customer == null)  throw new Exception();
 					else {
+						if(customer.getName().equals("none")) throw new Exception();
 						saleController.setCustomer(customer);
 					}
 					Log.i("log",customer.toString());

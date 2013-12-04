@@ -33,7 +33,9 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:text="Send receipt via E-mail" />
+        android:text="Send receipt via E-mail" 
+        style="@style/ButtonText"
+       	android:background="@drawable/btn_yellow"/>
 
     <ScrollView
         android:id="@+id/scrollView1"
@@ -53,7 +55,7 @@
                 android:id="@+id/txtCustomerDetails"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Large Text"
+                android:text="MemberDetails"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
         </LinearLayout>
@@ -67,7 +69,8 @@
         android:layout_alignRight="@id/txtPaymentMethodShow"
         android:layout_below="@id/txtPaymentMethodShow"
         android:ems="10"
-        android:hint="Member ID" >
+        android:hint="Member ID"
+        android:inputType="number" >
 
         <requestFocus />
     </EditText>

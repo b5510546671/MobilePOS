@@ -34,7 +34,7 @@ public class CustomerRegisterActivity extends Activity {
 		
 		btOK = (Button)findViewById(R.id.btRegisterOK);
 		txtName = (EditText)findViewById(R.id.txtSearchProduct);
-		txtEmail = (EditText)findViewById(R.id.txtLoginUserName);
+		txtEmail = (EditText)findViewById(R.id.txtAddNewProducrDescriptionPrice);
 		
 		btOK.setOnClickListener(new OnClickListener() {
 			
@@ -53,7 +53,7 @@ public class CustomerRegisterActivity extends Activity {
                     	final Customer c = SaleController.getInstance().addCustomerToCustomerBook(getApplicationContext(), new Customer(-1,name, DateManager.getCurrentDate(), email));
                     	AlertDialog.Builder builder2 = new AlertDialog.Builder(CustomerRegisterActivity.this);
                         builder2.setTitle(c.getName()+"'s Member Details");
-                        builder2.setMessage("ID" +c.getID() +"\nName : " + c.getName() + "\nE-mail : " + c.getEmail() + "\nRegister date : "+ c.getRegisterDate().getDate()+ "/"+ c.getRegisterDate().getMonth() + "/"+ c.getRegisterDate().getYear());
+                        builder2.setMessage("ID: " +c.getID() +"\nName : " + c.getName() + "\nE-mail : " + c.getEmail() + "\nRegister date : "+ c.getRegisterDate().getDate()+ "/"+ c.getRegisterDate().getMonth() + "/"+ c.getRegisterDate().getYear());
                         builder2.setPositiveButton("OK",new DialogInterface.OnClickListener() {
 							
 							@Override

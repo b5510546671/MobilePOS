@@ -57,8 +57,7 @@ public class HistoryFragment extends Fragment {
 
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
-		
-		
+
 		saleController = SaleController.getInstance();
 		final Calendar c = Calendar.getInstance();
 		selectedYear = DateManager.getCurrentDate().getYear() + 1900;
@@ -67,7 +66,8 @@ public class HistoryFragment extends Fragment {
 		optionSearchSpinner = (Spinner) getView().findViewById(
 				R.id.spinnerReport);
 		btDateChange = (Button) getView().findViewById(R.id.btReportDate);
-		btDateChange.setText("Selected Date : " + selectedDay + "/"+ selectedMonth + "/" + selectedYear);
+		btDateChange.setText("Selected Date : " + selectedDay + "/"
+				+ selectedMonth + "/" + selectedYear);
 
 		listViewSale = (ListView) getView().findViewById(R.id.listViewAllSale);
 
@@ -76,64 +76,69 @@ public class HistoryFragment extends Fragment {
 		list.add("Search by Date");
 		list.add("Search by Month");
 		list.add("Search by Year");
-		allSales = saleController.getAllSale(getActivity().getApplicationContext());
+		// allSales =
+		// saleController.getAllSale(getActivity().getApplicationContext());
 
-		sales.clear();
-			for(Sale sale : allSales){
-				sales.add(sale);
-			}
-			//Toast.makeText(getActivity(), sales.toString(), 1).show();
 		adapter = new HistoryCustomArrayAdapter(getActivity(), sales);
-		
-		//if(ada==null) Toast.makeText(getActivity(), "null", 1).show();
 		listViewSale.setAdapter(adapter);
-		//adapter.notifyDataSetChanged();
-		
 		listViewSale.setOnItemClickListener(new OnItemClickListener() {
 
-		    @Override
-		    public void onItemClick(AdapterView<?> parent, View view,
-		            final int position, long id) {
-		    	
-		    	String s = "";
-		    	s+="Sale ID : " + sales.get(position).getID();
-		    	s+="\nProduct : "+""+sales.get(position).getItems().toString();
-		    	s+="\nTotal Price : " + sales.get(position).getTotalPrice();
-		    	s+="\nCash : " + sales.get(position).getPayment().getInput();
-		    	s+="\nCustomer : " +sales.get(position).getCustomer().getName();
-		    	s+="\nDate : " + + (sales.get(position).getDate().getDay()+1)+"/"+(sales.get(position).getDate().getMonth()+1) + "/" + (sales.get(position).getDate().getYear()+1900);
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					final int position, long id) {
 
-		    	AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle("Sale Manager");
-                builder.setMessage(s);
-                builder.setPositiveButton("Edit", new DialogInterface.OnClickListener() {
- 
-                    @Override
-                    public void onClick(DialogInterface arg0, int arg1) {
-                    	Intent intent = new Intent(getActivity().getApplicationContext(), HIstoryDeailsActivity.class);
-                    	intent.putExtra("sale", sales.get(position));
-                    	//Toast.makeText(getActivity(), "Send : " + sales.get(position).getID(), 1).show();
-                    	startActivity(intent);
-                    	
-                    }
-                });
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
- 
-                    @Override
-                    public void onClick(DialogInterface arg0, int arg1) {
-                    	
-                    }
-                });
-               
-                builder.show(); 
+				String s = "";
+				s += "Sale ID : " + sales.get(position).getID();
+				s += "\nProduct : " + ""
+						+ sales.get(position).getItems().toString();
+				s += "\nTotal Price : " + sales.get(position).getTotalPrice();
+				s += "\nCash : " + sales.get(position).getPayment().getInput();
+				s += "\nCustomer : "
+						+ sales.get(position).getCustomer().getName();
+				s += "\nDate : "
+						+ +(sales.get(position).getDate().getDay() + 1) + "/"
+						+ (sales.get(position).getDate().getMonth() + 1) + "/"
+						+ (sales.get(position).getDate().getYear() + 1900);
 
-		    }
+				AlertDialog.Builder builder = new AlertDialog.Builder(
+						getActivity());
+				builder.setTitle("Sale Manager");
+				builder.setMessage(s);
+				builder.setPositiveButton("Edit",
+						new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface arg0, int arg1) {
+								Intent intent = new Intent(getActivity()
+										.getApplicationContext(),
+										HIstoryDeailsActivity.class);
+								intent.putExtra("sale", sales.get(position));
+								startActivity(intent);
+
+							}
+						});
+				builder.setNegativeButton("Cancel",
+						new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface arg0, int arg1) {
+
+							}
+						});
+
+				builder.show();
+
+			}
 
 		});
-		
-		
+		sales.clear();
+		for (Sale sale : saleController.getAllSale(getActivity()
+				.getApplicationContext())) {
+			sales.add(sale);
+		}
 
-		
+		adapter.notifyDataSetChanged();
+
 		ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(
 				getActivity(), android.R.layout.simple_spinner_item, list);
 		dataAdapter
@@ -145,45 +150,52 @@ public class HistoryFragment extends Fragment {
 					@Override
 					public void onItemSelected(AdapterView<?> parentView,
 							View selectedItemView, int position, long id) {
-						
-						//Toast.makeText(getActivity(),selectedDay +"/"+ selectedMonth+"/"+ selectedYear, 1).show();
-						
-						if(position==0){
+
+						// Toast.makeText(getActivity(),selectedDay +"/"+
+						// selectedMonth+"/"+ selectedYear, 1).show();
+
+						if (position == 0) {
 							sales.clear();
-							for(Sale sale : saleController.getAllSale(getActivity())){
+							for (Sale sale : saleController
+									.getAllSale(getActivity())) {
 								sales.add(sale);
 							}
 							adapter.notifyDataSetChanged();
-							
-						}
-						else if(position==1){//By Date
+
+						} else if (position == 1) {// By Date
 							sales.clear();
-							for(Sale sale : saleController.getAllSale(getActivity())){
-								if(sale.getDate().getDay()+1 == selectedDay && sale.getDate().getMonth()+1 == selectedMonth && sale.getDate().getYear()+1900 == selectedYear) sales.add(sale);
+							for (Sale sale : saleController
+									.getAllSale(getActivity())) {
+								if (sale.getDate().getDay() + 1 == selectedDay
+										&& sale.getDate().getMonth() + 1 == selectedMonth
+										&& sale.getDate().getYear() + 1900 == selectedYear)
+									sales.add(sale);
 							}
 							adapter.notifyDataSetChanged();
-							
-						}
-						else if(position == 2){//By Month
+
+						} else if (position == 2) {// By Month
 							sales.clear();
-							for(Sale sale : saleController.getAllSale(getActivity())){
-								if(sale.getDate().getMonth()+1 == selectedMonth) sales.add(sale);
+							for (Sale sale : saleController
+									.getAllSale(getActivity())) {
+								if (sale.getDate().getMonth() + 1 == selectedMonth)
+									sales.add(sale);
+							}
+							adapter.notifyDataSetChanged();
+						} else if (position == 2) {// By Month
+							sales.clear();
+							for (Sale sale : saleController
+									.getAllSale(getActivity())) {
+								if (sale.getDate().getYear() + 1900 == selectedYear)
+									sales.add(sale);
 							}
 							adapter.notifyDataSetChanged();
 						}
-						else if(position == 2){//By Month
-							sales.clear();
-							for(Sale sale : saleController.getAllSale(getActivity())){
-								if(sale.getDate().getYear()+1900 == selectedYear) sales.add(sale);
-							}
-							adapter.notifyDataSetChanged();
-						}
-						
+
 					}
 
 					@Override
 					public void onNothingSelected(AdapterView<?> parentView) {
-						
+
 					}
 
 				});
@@ -200,11 +212,13 @@ public class HistoryFragment extends Fragment {
 				OnDateSetListener mDateSetListener = new OnDateSetListener() {
 
 					@Override
-					public void onDateSet(DatePicker view, int year,int monthOfYear, int dayOfMonth) {
+					public void onDateSet(DatePicker view, int year,
+							int monthOfYear, int dayOfMonth) {
 						selectedDay = dayOfMonth;
 						selectedMonth = monthOfYear + 1;
 						selectedYear = year;
-						btDateChange.setText(selectedDay + "/" + selectedMonth+ "/" + selectedYear);
+						btDateChange.setText(selectedDay + "/" + selectedMonth
+								+ "/" + selectedYear);
 
 					}
 				};
@@ -226,6 +240,18 @@ public class HistoryFragment extends Fragment {
 		});
 
 		super.onViewCreated(view, savedInstanceState);
+	}
+
+	@Override
+	public void onResume() {
+		sales.clear();
+		for (Sale sale : saleController.getAllSale(getActivity()
+				.getApplicationContext())) {
+			sales.add(sale);
+		}
+
+		adapter.notifyDataSetChanged();
+		super.onResume();
 	}
 
 }

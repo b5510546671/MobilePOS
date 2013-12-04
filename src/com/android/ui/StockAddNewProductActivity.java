@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -21,6 +22,7 @@ public class StockAddNewProductActivity extends Activity {
 	private EditText txtPrice;
 	private EditText txtBarcode;
 	private EditText txtProductDescription;
+	private Button btScanBarcode;
 	
 	private Button btOK;
 	
@@ -34,11 +36,25 @@ public class StockAddNewProductActivity extends Activity {
         inventoryController = InventoryController.getInstance();
         
         txtName = (EditText)findViewById(R.id.txtSearchProduct);
-        txtPrice = (EditText)findViewById(R.id.txtLoginUserName);
+        txtPrice = (EditText)findViewById(R.id.txtAddNewProducrDescriptionPrice);
         txtBarcode = (EditText)findViewById(R.id.txtRegisterBarcode);
         txtProductDescription = (EditText)findViewById(R.id.txtRegisterProductionDescription);
         btOK = (Button)findViewById(R.id.btRegisterOK);
-        
+        btScanBarcode = (Button)findViewById(R.id.btAddNewProductDescriptionScanBarcode);
+        btScanBarcode.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				try {
+					Intent intent = new Intent("com.google.zxing.client.android.SCAN");
+					intent.putExtra("SCAN_MODE", "PRODUCT_MODE");
+					startActivityForResult(intent, 0);
+				} catch (Exception e) {
+					Toast.makeText(getApplicationContext(),"Please Install Barcode Scanner",Toast.LENGTH_SHORT).show();
+				}
+
+			}
+		});
         btOK.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -92,7 +108,19 @@ public class StockAddNewProductActivity extends Activity {
 		});
         
     }
+    @Override
+	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+		if (requestCode == 0) {
+			if (resultCode == RESULT_OK) {
 
+				String contents = intent.getStringExtra("SCAN_RESULT");
+				String format = intent.getStringExtra("SCAN_RESULT_FORMAT");
+
+				txtBarcode.setText(contents);
+			}
+		}
+		super.onActivityResult(requestCode, resultCode, intent);
+	}
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

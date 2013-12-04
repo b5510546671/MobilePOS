@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_2"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -47,14 +48,15 @@
             android:layout_height="wrap_content"
             android:text="Scan barcode" 
             style="@style/ButtonText"
-       	android:background="@drawable/btn_yellow"/>
+       		android:background="@drawable/btn_yellow"/>
 
         <TextView
             style="?android:listSeparatorTextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Stock list"
-            android:textSize="20dp" />
+            android:textSize="20dp" 
+            android:background="#FFFFFF"/>
 
         <ListView
             android:id="@+id/listViewProductSearch"
@@ -69,7 +71,9 @@
             android:id="@+id/btLoginFallSignUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="OK" />
+            android:text="OK" 
+            style="@style/ButtonText"
+       		android:background="@drawable/btn_yellow"/>
     </LinearLayout>
 
 </RelativeLayout>

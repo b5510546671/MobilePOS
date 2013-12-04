@@ -11,8 +11,11 @@ import android.content.Context;
 public class CustomerBook {
 	private CustomerBookDB db;
 
-	public Customer getCustomerByID(int id) {
-		return db.findBy(id);
+	public Customer getCustomerByID(Context con,int id) {
+		db = new CustomerBookDB(con);
+		Customer c  = db.findBy(id);
+		db.close();
+		return c;
 	}
 
 	public Customer addCutomer(Context con,Customer customer) {
