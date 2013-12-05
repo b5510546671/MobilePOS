@@ -17,7 +17,6 @@ public class CashierBook {
 	private String content = "1,Sikarin Larnamwong,b5510546174,sikarin1993\n2,Krittayout Techasombooranakit,b5510545976,benzsk130";
 	
 	private List<Cashier> cashiers = new ArrayList<Cashier>();
-	private CashierBookDataManager cashierBookDataManager = CashierBookDataManager.getInstance();
 
 	
 	public CashierBook() {

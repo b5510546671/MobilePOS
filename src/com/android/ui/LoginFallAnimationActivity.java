@@ -8,7 +8,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import com.android.softspectproject.R;
-import com.database.CashierBookDataManager;
 import com.utils.Constants;
 
 import android.animation.ValueAnimator;
@@ -50,7 +49,6 @@ public class LoginFallAnimationActivity extends Activity {
 	private Button btSignUp;
 	private String FILENAME = "cashier.txt";
 	private String content = "1,Sikarin Larnamwong,b5510546174,sikarin1993\n2,Krittayout Techasombooranakit,b5510545976,benzsk130";
-	private CashierBookDataManager fileDataManager;
 	private FileInputStream fileInputStream;
 	private FileOutputStream fileOutputStream;
 
@@ -90,7 +88,6 @@ public class LoginFallAnimationActivity extends Activity {
 		
 
 		btLogin = (Button) findViewById(R.id.btLoginFall);
-		fileDataManager = CashierBookDataManager.getInstance();
 		txtUsername = (EditText) findViewById(R.id.txtLoginFallName);
 		txtPassword = (EditText) findViewById(R.id.txtLoginFallPassword);
 		btSignUp = (Button) findViewById(R.id.btLoginFallSignUp);
