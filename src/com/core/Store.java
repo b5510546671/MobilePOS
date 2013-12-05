@@ -1,11 +1,11 @@
 package com.core;
 
+import com.core.database.CashierBook;
 import com.core.database.CustomerBook;
 import com.core.database.Inventory;
 import com.core.database.ItemDescriptionBook;
 import com.core.database.PaymentBook;
 import com.core.database.SaleLadger;
-import com.database.CashierBook;
 
 public class Store {
 	private static Store instance;
@@ -16,6 +16,7 @@ public class Store {
 	private PaymentBook paymentBook;
 	private SaleLadger saleLadger;
 	private CashierBook cashierBook;
+	
 
 	public Store() {
 		customerBook = new CustomerBook();

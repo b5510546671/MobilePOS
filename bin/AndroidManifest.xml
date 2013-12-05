@@ -15,7 +15,6 @@
         <activity
             android:name="com.android.ui.LoginActivity"
             android:label="@string/title_activity_login" >
-            
         </activity>
         <activity
             android:name="com.android.ui.CashierContinueActivity"
@@ -73,6 +72,10 @@
         <activity
             android:name="com.android.ui.HIstoryDeailsActivity"
             android:label="@string/title_activity_history_deails" >
+        </activity>
+        <activity
+            android:name="com.android.ui.CashierSignUpActivity"
+            android:label="@string/title_activity_cashier_sign_up" >
         </activity>
     </application>
 

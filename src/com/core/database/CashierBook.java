@@ -19,7 +19,7 @@ public class CashierBook {
 		return c;
 	}
 	
-	public List<Cashier> getAll(Context con) {
+	public List<Cashier> getAllCashier(Context con) {
 		db = new CashierBookDB(con);
 		List<Cashier> c  = db.findAll();
 		db.close();
@@ -46,5 +46,20 @@ public class CashierBook {
 		db.close();
 		return c;
 	}
+	
+	public Cashier addCashier(Context con,Cashier cashier) {
+		db = new CashierBookDB(con);
+		Cashier c  = db.insert(cashier);
+		db.close();
+		return c;
+	}
+	public void removeCashier(Context con,Cashier cashier) {
+		db = new CashierBookDB(con);
+		 db.delete(cashier);
+		db.close();
+	
+	}
+	
+	
 	
 }

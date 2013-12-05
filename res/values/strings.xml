@@ -21,5 +21,6 @@
     <string name="title_activity_customer_register">CustomerRegisterActivity</string>
     <string name="title_activity_edit_product_description">EditProductDescriptionActivity</string>
     <string name="title_activity_history_deails">HIstoryDeailsActivity</string>
+    <string name="title_activity_cashier_sign_up">CashierSignUpActivity</string>
 
 </resources>
