@@ -1,11 +1,21 @@
 package com.core;
 
 import java.io.Serializable;
+import java.util.Date;
 
 
 import android.content.Context;
 
 public class Cashier implements Serializable{
+	
+	  public static final String DATABASE_TABLE = "CashierBook";
+	  public static final int DATABASE_VERSION = 1;
+	public static final String TABLE_CREATE =
+	     "create table if not exists CashierBook (_id integer primary key autoincrement , name text not null, user text not null, password text not null);";
+	    
+	public static final String COL_NAME = "name";
+	public static final String COL_USERNAME = "user";
+	public static final String COL_PASSWORD = "password";
     
     private int id;
     private String name;
