@@ -76,7 +76,6 @@ public class CustomerBookDB extends GenericDao implements CustomerBookDao {
 		if(cursor != null){
 			if(cursor.moveToFirst()){
 				int count = cursor.getCount();
-				//customers = new Customer[count];
 				int _id = cursor.getColumnIndex(GenericDao.KEY_ID);
 				int cus_name = cursor.getColumnIndex(Customer.COL_NAME);
 				int invId = cursor.getColumnIndex(Customer.COL_DATE);
@@ -93,7 +92,6 @@ public class CustomerBookDB extends GenericDao implements CustomerBookDao {
 
 	@Override
 	public int deleteByID(int id) {
-		//Customer customer = this.findBy(id);
 		return (int)super.delete(Customer.DATABASE_TABLE , GenericDao.KEY_ID + "=" + id, null);
 	}
 

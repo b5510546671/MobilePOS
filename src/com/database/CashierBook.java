@@ -35,6 +35,7 @@ public class CashierBook {
 	public Cashier getCashierByUsername(){
 		return null;
 	}
+	
 	public Cashier getCashierByID(){
 		return null;
 	}

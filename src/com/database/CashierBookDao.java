@@ -6,9 +6,9 @@ import com.core.Cashier;
 
 public interface CashierBookDao {
 	public Cashier insert(Cashier c);
-	public Cashier remove(Cashier c);
+	public int delete(Cashier c);
 	public List<Cashier> findAll();
-	public Cashier findByName(String name);
-	public Cashier findByID(int i);
+	public Cashier findBy(String name);
+	public Cashier findBy(int id);
 	public Cashier update(Cashier c);
 }

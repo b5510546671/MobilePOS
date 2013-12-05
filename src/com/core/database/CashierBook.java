@@ -14,7 +14,7 @@ public class CashierBook {
 	
 	public Cashier getCashierByID(Context con,int id) {
 		db = new CashierBookDB(con);
-		Cashier c  = db.findByID(id);
+		Cashier c  = db.findBy(id);
 		db.close();
 		return c;
 	}
@@ -28,14 +28,14 @@ public class CashierBook {
 	
 	public Cashier getCashierByName(Context con,String name) {
 		db = new CashierBookDB(con);
-		Cashier c  = db.findByName(name);
+		Cashier c  = db.findBy(name);
 		db.close();
 		return c;
 	}
 	
 	public Cashier getCashierById(Context con,int id) {
 		db = new CashierBookDB(con);
-		Cashier c  = db.findByID(id);
+		Cashier c  = db.findBy(id);
 		db.close();
 		return c;
 	}
