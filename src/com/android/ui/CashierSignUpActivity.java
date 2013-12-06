@@ -4,6 +4,7 @@ import com.android.softspectproject.R;
 import com.android.softspectproject.R.layout;
 import com.android.softspectproject.R.menu;
 import com.controller.CashierBookController;
+import com.core.Cashier;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -41,7 +42,10 @@ public class CashierSignUpActivity extends Activity {
 			public void onClick(View v) {
 				username = txtUsername.getText().toString();
 				password = txtPassword.getText().toString();
+				Cashier cashier = new Cashier(-1, "name", username, password);
 				
+				
+				//Cashier c = cashierBookController.addCashier(getApplicationContext(), cashier);
 			}
 		});
 	}
