@@ -22,8 +22,9 @@ public class ItemDescriptionBookDB extends GenericDao implements ItemDescription
 		cv.put(ItemDescription.COL_BARCODE, itd.getBarcode());
 		cv.put(ItemDescription.COL_DESCRIPTION, itd.getItemDescription());
 		cv.put(ItemDescription.COL_PRICE, itd.getPrice());
+		cv.put(ItemDescription.COL_COST, itd.getPrice());
 		long tmp = super.insert(ItemDescription.DATABASE_TABLE, cv);
-		return new ItemDescription((int)tmp , itd.getName() , itd.getItemDescription(), itd.getPrice(), itd.getBarcode() );
+		return new ItemDescription((int)tmp , itd.getName() , itd.getItemDescription() , itd.getCost() , itd.getPrice(), itd.getBarcode());
 	}
 
 	@Override
@@ -52,8 +53,9 @@ public class ItemDescriptionBookDB extends GenericDao implements ItemDescription
 					int desc = cursor.getColumnIndex(ItemDescription.COL_DESCRIPTION);
 					int _name = cursor.getColumnIndex(ItemDescription.COL_NAME);
 					int price = cursor.getColumnIndex(ItemDescription.COL_PRICE);
+					int _cost = cursor.getColumnIndex(ItemDescription.COL_COST);
 					int _id = cursor.getColumnIndex(GenericDao.KEY_ID); 
-					itds.add(new ItemDescription(cursor.getInt(_id), cursor.getString(_name) , cursor.getString(desc) , cursor.getFloat(price) , cursor.getInt(barcode)));
+					itds.add(new ItemDescription(cursor.getInt(_id), cursor.getString(_name) , cursor.getString(desc), cursor.getFloat(_cost)  , cursor.getFloat(price) , cursor.getInt(barcode)));
 					cursor.moveToNext();
 				}
 			}
@@ -84,9 +86,10 @@ public class ItemDescriptionBookDB extends GenericDao implements ItemDescription
 				int desc = cursor.getColumnIndex(ItemDescription.COL_DESCRIPTION);
 				int _name = cursor.getColumnIndex(ItemDescription.COL_NAME);
 				int price = cursor.getColumnIndex(ItemDescription.COL_PRICE);
+				int _cost = cursor.getColumnIndex(ItemDescription.COL_COST);
 				int _id = cursor.getColumnIndex(GenericDao.KEY_ID); 
 				
-				itd= new ItemDescription(cursor.getInt(_id) , cursor.getString(_name) , cursor.getString(desc) , cursor.getFloat(price) , cursor.getInt(barcode));
+				itd= new ItemDescription(cursor.getInt(_id) , cursor.getString(_name) , cursor.getString(desc), cursor.getFloat(_cost)  , cursor.getFloat(price) , cursor.getInt(barcode));
 			}
 		}
 		return itd;
@@ -104,8 +107,9 @@ public class ItemDescriptionBookDB extends GenericDao implements ItemDescription
 				int desc = cursor.getColumnIndex(ItemDescription.COL_DESCRIPTION);
 				int _name = cursor.getColumnIndex(ItemDescription.COL_NAME);
 				int price = cursor.getColumnIndex(ItemDescription.COL_PRICE);
+				int _cost = cursor.getColumnIndex(ItemDescription.COL_COST);
 				int _id = cursor.getColumnIndex(GenericDao.KEY_ID); 
-				itd= new ItemDescription(cursor.getInt(_id) , cursor.getString(_name) , cursor.getString(desc) , cursor.getFloat(price) , cursor.getInt(barcode));
+				itd= new ItemDescription(cursor.getInt(_id) , cursor.getString(_name) , cursor.getString(desc), cursor.getFloat(_cost)  , cursor.getFloat(price) , cursor.getInt(barcode));
 			}
 		}
 		return itd;
@@ -123,9 +127,10 @@ public class ItemDescriptionBookDB extends GenericDao implements ItemDescription
 				int desc = cursor.getColumnIndex(ItemDescription.COL_DESCRIPTION);
 				int _name = cursor.getColumnIndex(ItemDescription.COL_NAME);
 				int price = cursor.getColumnIndex(ItemDescription.COL_PRICE);
+				int _cost = cursor.getColumnIndex(ItemDescription.COL_COST);
 				int _id = cursor.getColumnIndex(GenericDao.KEY_ID); 
 				
-				itd= new ItemDescription(cursor.getInt(_id), cursor.getString(_name) , cursor.getString(desc) , cursor.getFloat(price) , cursor.getInt(_barcode));
+				itd= new ItemDescription(cursor.getInt(_id), cursor.getString(_name) , cursor.getString(desc), cursor.getFloat(_cost)  , cursor.getFloat(price) , cursor.getInt(barcode));
 			}
 		}
 		return itd;

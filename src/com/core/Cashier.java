@@ -26,6 +26,7 @@ public class Cashier implements Serializable{
     	this.id  =id;
     	this.name = name;
     	this.username = userName;
+    	this.password = passWord;
 	}
     
 	public String getName() {

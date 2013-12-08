@@ -12,6 +12,13 @@ import com.database.CustomerBookDB;
 public class CashierBook {
 	private CashierBookDB db;
 	
+	public Cashier addCashier(Context con ,String name ,String userName ,String password){
+		db = new CashierBookDB(con);
+		Cashier c  = db.insert(new Cashier(0, name, userName, password));
+		db.close();
+		return c;
+	}
+	
 	public Cashier getCashierByID(Context con,int id) {
 		db = new CashierBookDB(con);
 		Cashier c  = db.findBy(id);
@@ -19,7 +26,7 @@ public class CashierBook {
 		return c;
 	}
 	
-	public List<Cashier> getAllCashier(Context con) {
+	public List<Cashier> getAll(Context con) {
 		db = new CashierBookDB(con);
 		List<Cashier> c  = db.findAll();
 		db.close();
@@ -46,20 +53,5 @@ public class CashierBook {
 		db.close();
 		return c;
 	}
-	
-	public Cashier addCashier(Context con,Cashier cashier) {
-		db = new CashierBookDB(con);
-		Cashier c  = db.insert(cashier);
-		db.close();
-		return c;
-	}
-	public void removeCashier(Context con,Cashier cashier) {
-		db = new CashierBookDB(con);
-		 db.delete(cashier);
-		db.close();
-	
-	}
-	
-	
 	
 }

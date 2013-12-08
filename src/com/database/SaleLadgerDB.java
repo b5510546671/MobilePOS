@@ -2,12 +2,14 @@ package com.database;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 
+import com.core.Cashier;
 import com.core.Customer;
 import com.core.Item;
 import com.core.Payment;
@@ -19,8 +21,6 @@ public class SaleLadgerDB extends GenericDao implements SaleLadgerDao{
 		super(context, GenericDao.dName, Sale.TABLE_CREATE, Sale.DATABASE_TABLE, Sale.DATABASE_VERSION);
 	}
 	
-	
-	//checked
 	@Override
 	public Sale insert(Sale sale) {
 		PaymentBookDB paymentBookDB = new PaymentBookDB(getContext());
@@ -35,8 +35,9 @@ public class SaleLadgerDB extends GenericDao implements SaleLadgerDao{
 		cv.put(Sale.COL_CUSTOMER_ID , sale.getCustomer().getID());
         cv.put(Sale.COL_DATE , sale.getDate().getTime());  
         cv.put(Sale.COL_PAYMENT_ID , sale.getPayment().getID());
+        cv.put(Sale.COL_CASHIER_ID , sale.getCashier().getId());
         
-        sale = new Sale((int)super.insert(Sale.DATABASE_TABLE, cv) ,sale.getItems() , sale.getCustomer() ,sale.getPayment() , sale.getDate());
+        sale = new Sale((int)super.insert(Sale.DATABASE_TABLE, cv) ,sale.getItems(), sale.getCashier() , sale.getCustomer() ,sale.getPayment() , sale.getDate());
         List<Item> items = sale.getItems();
         InventoryDB inventoryDB = new InventoryDB(getContext());
         for(int i = 0 ; i < items.size() ; i++){
@@ -69,7 +70,7 @@ public class SaleLadgerDB extends GenericDao implements SaleLadgerDao{
 
 	@Override
 	public ArrayList<Sale> findAll() {
-		String[] columns = new String[]{GenericDao.KEY_ID, Sale.COL_CUSTOMER_ID ,  Sale.COL_DATE , Sale.COL_PAYMENT_ID};
+		String[] columns = new String[]{GenericDao.KEY_ID, Sale.COL_CUSTOMER_ID ,  Sale.COL_DATE , Sale.COL_PAYMENT_ID , Sale.COL_CASHIER_ID};
 		Cursor cursor = super.get(Sale.DATABASE_TABLE, columns);
 		ArrayList<Sale> sales = null;
 		if(cursor != null){
@@ -78,16 +79,26 @@ public class SaleLadgerDB extends GenericDao implements SaleLadgerDao{
 				int cusId = cursor.getColumnIndex(Sale.COL_CUSTOMER_ID );
 				int date = cursor.getColumnIndex(Sale.COL_DATE);
 				int pay = cursor.getColumnIndex(Sale.COL_PAYMENT_ID);
+				int _cash = cursor.getColumnIndex(Sale.COL_PAYMENT_ID);
 				sales = new ArrayList<Sale>();
 				CustomerBookDB customerBookDB = new CustomerBookDB(getContext());
 				PaymentBookDB paymentBookDB = new PaymentBookDB(getContext());
 				InventoryDB inventoryDB = new InventoryDB(getContext());
+				HashMap<Integer, Cashier> cashMap = new HashMap<Integer, Cashier>();
 				for(int i = 0 ; i < cursor.getCount() ; i++) {
 					Customer customer = customerBookDB.findBy(cursor.getInt(cusId));
 					Payment payment = paymentBookDB.findByID(cursor.getInt(pay));
 					List<Item> items = inventoryDB.findBySaleID(cursor.getInt(_id));
+					Cashier cashier;
+					if(cashMap.containsKey(cursor.getInt(_cash))) cashier = cashMap.get(cursor.getInt(_cash));
+					else{
+						CashierBookDB cashDB = new CashierBookDB(getContext());
+						cashier = cashDB.findBy(cursor.getInt(_cash));
+						cashMap.put(cursor.getInt(_cash), cashier);
+						cashDB.close();
+					}
 					
-					sales.add( new Sale(cursor.getInt(_id), items, customer, payment , new Date(cursor.getLong(date))) );
+					sales.add( new Sale(cursor.getInt(_id), items, cashier , customer, payment , new Date(cursor.getLong(date))) );
 					cursor.moveToNext();
 				}
 				customerBookDB.close();
@@ -100,7 +111,7 @@ public class SaleLadgerDB extends GenericDao implements SaleLadgerDao{
 
 	@Override
 	public Sale findByID(int id) {
-		String[] columns = new String[]{GenericDao.KEY_ID, Sale.COL_CUSTOMER_ID ,  Sale.COL_DATE , Sale.COL_PAYMENT_ID};
+		String[] columns = new String[]{GenericDao.KEY_ID, Sale.COL_CUSTOMER_ID ,  Sale.COL_DATE , Sale.COL_PAYMENT_ID , Sale.COL_CASHIER_ID};
 		Cursor cursor = super.get(Sale.DATABASE_TABLE, columns , GenericDao.KEY_ID + "=" + id);
 		Sale sale = null;
 		if(cursor != null){
@@ -109,6 +120,7 @@ public class SaleLadgerDB extends GenericDao implements SaleLadgerDao{
 				int cusId = cursor.getColumnIndex(Sale.COL_CUSTOMER_ID );
 				int date = cursor.getColumnIndex(Sale.COL_DATE);
 				int pay = cursor.getColumnIndex(Sale.COL_PAYMENT_ID);
+				int _cash = cursor.getColumnIndex(Sale.COL_CASHIER_ID);
 				
 				CustomerBookDB customerBookDB = new CustomerBookDB(getContext());
 				Customer customer = customerBookDB.findBy(cursor.getInt(cusId));
@@ -122,7 +134,11 @@ public class SaleLadgerDB extends GenericDao implements SaleLadgerDao{
 				List<Item> items = inventoryDB.findBySaleID(id);
 				inventoryDB.close();
 				
-				sale = new Sale( cursor.getInt(_id) , items, customer, payment , new Date(cursor.getLong(date)));
+				CashierBookDB cashDB = new CashierBookDB(getContext());
+				Cashier cashier = cashDB.findBy(cursor.getInt(_cash));
+				cashDB.close();
+				
+				sale = new Sale( cursor.getInt(_id) , items , cashier, customer, payment , new Date(cursor.getLong(date)));
 			}
 		} 
 		return sale;

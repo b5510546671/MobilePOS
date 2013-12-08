@@ -23,20 +23,6 @@
         android:textColor="#FFFFFF"/>
 
     <EditText
-        android:id="@+id/txtSignUpUsername"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_alignRight="@+id/textView1"
-        android:layout_below="@+id/textView1"
-        android:layout_marginTop="15dp"
-        android:ems="10"
-        android:hint="Username" >
-
-        <requestFocus />
-    </EditText>
-
-    <EditText
         android:id="@+id/txtSignUpPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -54,5 +40,29 @@
         android:layout_alignRight="@+id/txtSignUpPassword"
         android:layout_below="@+id/txtSignUpPassword"
         android:text="OK" />
+
+    <EditText
+        android:id="@+id/txtSignUpUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_alignRight="@+id/txtSignUpName"
+        android:layout_below="@+id/txtSignUpName"
+        android:ems="10"
+        android:hint="Username" />
+
+    <EditText
+        android:id="@+id/txtSignUpName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_alignRight="@+id/textView1"
+        android:layout_below="@+id/textView1"
+        android:ems="10"
+        android:hint="Name"
+        android:inputType="textPersonName" >
+
+        <requestFocus />
+    </EditText>
 
 </RelativeLayout>

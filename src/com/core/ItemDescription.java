@@ -6,10 +6,11 @@ public class ItemDescription implements Serializable {
     public static final String DATABASE_TABLE = "ItemDescriptionBook";
     public static final int DATABASE_VERSION = 1;
     public static final String TABLE_CREATE =
-        "create table if not exists ItemDescriptionBook (_id integer primary key autoincrement , name text not null , barcode integer not null , description text not null, price real not null);";
+        "create table if not exists ItemDescriptionBook (_id integer primary key autoincrement , name text not null , barcode integer not null , description text not null,cost real not null, price real not null);";
     
     public static final String COL_DESCRIPTION = "description";
-    public static final String COL_PRICE= "price";
+    public static final String COL_PRICE = "price";
+    public static final String COL_COST = "cost";
     public static final String COL_NAME = "name";
     public static final String COL_BARCODE = "barcode";
    
@@ -18,8 +19,9 @@ public class ItemDescription implements Serializable {
 	private float price;
 	private int barcode;
 	private String itemDescription;
+	private int cost;
 	
-	public ItemDescription(int id,String name, String itemDescription, float price, int barcode){
+	public ItemDescription(int id,String name, String itemDescription,float cost, float price, int barcode){
 		this.id = id;
 		this.itemDescription = itemDescription;
 		this.name = name;
@@ -65,6 +67,14 @@ public class ItemDescription implements Serializable {
 	
 	public String toString(){
 		return this.name;
+	}
+
+	public int getCost() {
+		return cost;
+	}
+
+	public void setCost(int cost) {
+		this.cost = cost;
 	}
 	
 }

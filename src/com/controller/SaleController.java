@@ -10,6 +10,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.android.ui.CashierCustomArrayAdapter;
+import com.core.Cashier;
 import com.core.Customer;
 import com.core.InventoryLineItem;
 import com.core.Item;
@@ -17,6 +18,7 @@ import com.core.ItemDescription;
 import com.core.Payment;
 import com.core.Sale;
 import com.core.Store;
+import com.core.database.CashierBook;
 import com.utils.DateManager;
 
 public class SaleController {
@@ -25,6 +27,7 @@ public class SaleController {
 	private static SaleController saleController;
 	private Customer customer;
 	private Payment payment;
+	private Cashier cashier;
 	private double totalPrice = 0;
 	private static HashMap<Integer, Item> itemsMap = new HashMap<Integer, Item>();
 
@@ -42,6 +45,14 @@ public class SaleController {
 
 	public Payment getPayment() {
 		return this.payment;
+	}
+	
+	public Cashier getCashier(){
+		return this.cashier;
+	}
+	
+	public void setCashier(Cashier cashier){
+		this.cashier = cashier;
 	}
 	
 	public List<Sale> getAllSale(Context con)
@@ -120,13 +131,13 @@ public class SaleController {
 	}
 
 	public Sale getSale(Context con, Date date) {
-		if (items == null || customer == null || payment == null) {
+		if (items == null || customer == null || payment == null || cashier==null) {
 			items = null;
 			customer = null;
 			payment = null;
 			return null;
 		} else {
-			Sale sale = new Sale(0, items, customer, payment, date);
+			Sale sale = new Sale(-1, items, cashier, customer, payment, date);
 			items = null;
 			customer = null;
 			payment = null;
@@ -143,17 +154,6 @@ public class SaleController {
 				count++;
 		}
 		return count;
-	}
-
-	public Item forceAddItemToInventory(Context con, Item item, Date date) {
-
-		List<Item> forceAddItemList = new ArrayList<Item>();
-		forceAddItemList.add(item);
-		return store
-				.getInventory()
-				.addInventoryLineItem(con,
-						new InventoryLineItem(-10, forceAddItemList, date))
-				.getItems().get(0);
 	}
 
 	public Item getItemfromInventory(Context con, int barcode) {
@@ -182,6 +182,11 @@ public class SaleController {
 	
 	public List<ItemDescription> getAllItemDescription(Context con){
 		return store.getItemDescriptionBook().getAllItemDescriptions(con);
+	}
+	
+	public List<Cashier> getAllCashier(Context con){
+		return store.getCashierBook().getAll(con);
+		
 	}
 
 }

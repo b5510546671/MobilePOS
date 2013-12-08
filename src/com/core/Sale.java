@@ -10,20 +10,23 @@ public class Sale implements Serializable {
 	public static final String DATABASE_TABLE = "SaleLadger";
     public static final int DATABASE_VERSION = 1;
     public static final String TABLE_CREATE =
-        "create table if not exists SaleLadger (_id integer primary key autoincrement , customer_id integer, payment_id text not null, date long not null);";
+        "create table if not exists SaleLadger (_id integer primary key autoincrement , cashier_id integer , customer_id integer, payment_id text not null, date long not null);";
    
     public static final String COL_CUSTOMER_ID = "customer_id";
     public static final String COL_DATE = "date";
     public static final String COL_PAYMENT_ID = "payment_id";
+    public static final String COL_CASHIER_ID = "cashier_id";
     
 	
 	private List<Item> items = new ArrayList<Item>();
 	private int id;
+	private Cashier cashier;
 	private Customer customer;
 	private Date date;
 	private Payment payment;
 	
-	public Sale(int id,List<Item> items,Customer customer,Payment payment , Date date) {
+	public Sale(int id,List<Item> items, Cashier cashier ,Customer customer,Payment payment , Date date) {
+		this.setCashier(cashier);
 		this.id = id;
 		this.setItems(items);
 		this.date = date;
@@ -75,6 +78,14 @@ public class Sale implements Serializable {
 
 	public void setItems(List<Item> items) {
 		this.items = items;
+	}
+
+	public Cashier getCashier() {
+		return cashier;
+	}
+
+	public void setCashier(Cashier cashier) {
+		this.cashier = cashier;
 	}
 	
 }

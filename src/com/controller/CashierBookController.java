@@ -25,7 +25,7 @@ public class CashierBookController {
 	}
 	
 	public List<Cashier> getAllCashier(Context con){
-		return store.getCashierBook().getAllCashier(con);
+		return store.getCashierBook().getAll(con);
 	}
 	
 	public Cashier editCashier(Context con,Cashier cashier){
@@ -33,12 +33,10 @@ public class CashierBookController {
 	}
 	
 	public Cashier addCashier(Context con,Cashier cashier){
-		return store.getCashierBook().addCashier(con, cashier);
+		return store.getCashierBook().addCashier(con, cashier.getName(), cashier.getUsername(), cashier.getPassword());
 	}
 	
-	public void deleteCashier(Context con,Cashier cashier){
-		store.getCashierBook().removeCashier(con, cashier);
-	}
+	
 	
 	
 	

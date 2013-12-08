@@ -57,17 +57,6 @@
         android:hint="barcode"
         android:inputType="number" />
 
-    <Button
-        android:id="@+id/btAddNewProductDescriptionScanBarcode"
-        style="@style/ButtonText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/txtRegisterBarcode"
-        android:layout_alignRight="@+id/txtRegisterBarcode"
-        android:layout_below="@+id/txtRegisterBarcode"
-        android:background="@drawable/btn_yellow"
-        android:text="Scan barcode" />
-
     <EditText
         android:id="@+id/txtRegisterProductionDescription"
         android:layout_width="wrap_content"
@@ -90,5 +79,28 @@
         android:layout_alignRight="@+id/txtRegisterProductionDescription"
         android:background="@drawable/btn_yellow"
         android:text="OK" />
+
+    <EditText
+        android:id="@+id/txtRegisterCost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/txtRegisterBarcode"
+        android:layout_alignRight="@+id/txtRegisterBarcode"
+        android:layout_below="@+id/txtRegisterBarcode"
+        android:ems="10"
+        android:hint="cost"
+        android:inputType="numberDecimal" />
+
+    <Button
+        android:id="@+id/btAddNewProductDescriptionScanBarcode"
+        style="@style/ButtonText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/txtRegisterCost"
+        android:layout_alignRight="@+id/txtRegisterCost"
+        android:layout_below="@+id/txtRegisterCost"
+        android:background="@drawable/btn_yellow"
+        android:gravity="center"
+        android:text="Scan barcode" />
 
 </RelativeLayout>

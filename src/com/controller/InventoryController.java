@@ -32,8 +32,8 @@ public class InventoryController {
 		return store.getInventory().getItemsByItemDescription(con, itemDes).get(0);
 	}
 	
-	public ItemDescription createNewItemDescription(Context con,String name,String description,float price,int barcode){
-		return store.getItemDescriptionBook().add(con, name, description, price, barcode);
+	public ItemDescription createNewItemDescription(Context con,String name,String description,float price,int barcode,float cost){
+		return store.getItemDescriptionBook().add(con, name, description, price, barcode, cost);
 	}
 	
 	public void removeItemDescription(Context con,int barcode){

@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.controller.InventoryController;
+import com.controller.SaleController;
 import com.core.InventoryLineItem;
 import com.core.Item;
 import com.core.ItemDescription;
@@ -74,21 +75,38 @@ public class StockCreateNewStock extends Activity {
 			public void onClick(View v) {
 
 				try {
-					Log.d("Add new Item Activity ",inventoryController.toString());
-					int barcode = Integer.parseInt(txtBarcode.getText()
-							.toString());
-					//Toast.makeText(getApplicationContext(),"Barcode : " + barcode, Toast.LENGTH_SHORT).show();
-					ItemDescription itemDes = inventoryController.getItemDescriptionByBarcode(getApplicationContext(), barcode);
-
-					//Toast.makeText(getApplicationContext(),"Name : "+itemDes.getName(), Toast.LENGTH_SHORT).show();
-
-					Item item = new Item(-1, itemDes);
-					items.add(item);
+					final int barcode = Integer.parseInt(txtBarcode.getText().toString());
 					
-					arrayAdapter.notifyDataSetChanged();
+
+					AlertDialog.Builder alert = new AlertDialog.Builder(StockCreateNewStock.this);
+
+					alert.setTitle("Product IMEI number");
+					alert.setMessage("Inser the Imei of the product");
+
+					// Set an EditText view to get user input 
+					final EditText input = new EditText(StockCreateNewStock.this);
+					alert.setView(input);
+
+					alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int whichButton) {
+					  String imei = input.getText().toString();
+					  ItemDescription itemDes = inventoryController.getItemDescriptionByBarcode(getApplicationContext(), barcode);
+					  Item item = new Item(-1, itemDes,imei);
+						items.add(item);
+						
+						arrayAdapter.notifyDataSetChanged();
+					  }
+					});
+
+					alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+					  public void onClick(DialogInterface dialog, int whichButton) {
+					  }
+					});
+
+					alert.show();
+					
 
 					
-					//Toast.makeText(getApplicationContext(), "Finished",Toast.LENGTH_SHORT).show();
 
 				} catch (Exception e) {
 					final AlertDialog alertDialog1 = new AlertDialog.Builder(
@@ -117,7 +135,7 @@ public class StockCreateNewStock extends Activity {
 			@Override
 			public void onClick(View v) {
 
-				InventoryLineItem i  =new InventoryLineItem(-1, items,DateManager.getCurrentDate());
+				InventoryLineItem i  =new InventoryLineItem(-1, items,DateManager.getCurrentDate(),SaleController.getInstance().getCashier());
 				
 				InventoryLineItem getInven = inventoryController.addinventoryLineItemToInventory(getApplicationContext(), i);
 				

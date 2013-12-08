@@ -35,7 +35,7 @@ public class InventoryDB extends GenericDao implements InventoryDao{
 			items.set(i, insert(inventoryLineItem.getID() , items.get(i)));
 		}
 		
-		return new InventoryLineItem(inventoryLineItem.getID(), inventoryLineItem.getItems(), inventoryLineItem.getDate());
+		return new InventoryLineItem(inventoryLineItem.getID(), inventoryLineItem.getItems(), inventoryLineItem.getDate() , inventoryLineItem.getCashier());
 	}
 
 	//checked
@@ -43,9 +43,12 @@ public class InventoryDB extends GenericDao implements InventoryDao{
 	public Item insert(int inventoryLineItem_id , Item item) {
 		ContentValues cv = new ContentValues();
         cv.put(Item.COL_SALE_ID, Item.SALE_STOCK_ID);
+        cv.put(Item.COL_COST, item.getCost());
+        cv.put(Item.COL_IMEI, item.getImei());
         cv.put(Item.COL_INVENTORYLINEITEM_ID, inventoryLineItem_id);
         cv.put(Item.COL_DESCRIPTION_ID, item.getItemDescription().getId());
-		return new Item((int)super.insert(Item.DATABASE_TABLE, cv) , item.getItemDescription());
+        
+		return new Item((int)super.insert(Item.DATABASE_TABLE, cv) , item.getItemDescription() ,item.getCost() , item.getImei());
 	}
 
 	//checked
@@ -67,13 +70,15 @@ public class InventoryDB extends GenericDao implements InventoryDao{
 				int count = cursor.getCount();
 				int _id = cursor.getColumnIndex(GenericDao.KEY_ID);
 				int desId = cursor.getColumnIndex(Item.COL_DESCRIPTION_ID);
-				int invId = cursor.getColumnIndex(Item.COL_INVENTORYLINEITEM_ID);
-				int statusId = cursor.getColumnIndex(Item.COL_SALE_ID);
+				//int invId = cursor.getColumnIndex(Item.COL_INVENTORYLINEITEM_ID);
+				int _cost = cursor.getColumnIndex(Item.COL_COST);
+				int _imei = cursor.getColumnIndex(Item.COL_IMEI);
+				//int statusId = cursor.getColumnIndex(Item.COL_SALE_ID);
 				for(int i = 0 ; i < count ; i++){
 					ItemDescriptionBookDB _db = new ItemDescriptionBookDB(context);
 					ItemDescription des = _db.findBy(cursor.getInt(desId));
 					_db.close();
-					itds.add(new Item(cursor.getInt(_id), des));
+					itds.add(new Item(cursor.getInt(_id), des , cursor.getFloat(_cost) , cursor.getString(_imei)));
 					cursor.moveToNext();
 				}
 			}
@@ -108,11 +113,13 @@ public class InventoryDB extends GenericDao implements InventoryDao{
 		Item item = null;
 		if(cursor != null){
 			int itdID = cursor.getColumnIndex(Item.COL_DESCRIPTION_ID);
+			int _cost = cursor.getColumnIndex(Item.COL_COST);
+			int _imei = cursor.getColumnIndex(Item.COL_IMEI);
 			cursor.moveToFirst();
 			ItemDescriptionBookDB itemDescriptionBookDB = new ItemDescriptionBookDB(getContext());
 			ItemDescription itemDescription = itemDescriptionBookDB.findBy(cursor.getInt(itdID));
 			itemDescriptionBookDB.close();
-			item = new Item(id, itemDescription);
+			item = new Item(id, itemDescription , cursor.getFloat(_cost) , cursor.getString(_imei));
 		}
 		return item;
 	}
@@ -133,13 +140,15 @@ public class InventoryDB extends GenericDao implements InventoryDao{
 		if(cursor != null){
 			int _id = cursor.getColumnIndex(GenericDao.KEY_ID);
 			int _desId = cursor.getColumnIndex(Item.COL_DESCRIPTION_ID);
+			int _cost = cursor.getColumnIndex(Item.COL_COST);
+			int _imei = cursor.getColumnIndex(Item.COL_IMEI);
 			if(cursor.moveToFirst()){
 				ItemDescriptionBookDB itemDescriptionBookDB = new ItemDescriptionBookDB(getContext());
 				ItemDescription itemDescription = itemDescriptionBookDB.findBy(cursor.getInt(_desId));
 				itemDescriptionBookDB.close();
 				for(int i = 0 ; i < cursor.getCount() ; i++){
 					items.add( 
-							new Item(cursor.getInt(_id) , new ItemDescription(itemDescription.getId() ,itemDescription.getName() , itemDescription.getItemDescription() , itemDescription.getPrice() ,itemDescription.getBarcode()))
+							new Item(cursor.getInt(_id) , new ItemDescription(itemDescription.getId() ,itemDescription.getName() , itemDescription.getItemDescription() , itemDescription.getCost() , itemDescription.getPrice() ,itemDescription.getBarcode()) , cursor.getFloat(_cost) , cursor.getString(_imei))
 					);
 					cursor.moveToNext();
 				}
@@ -158,6 +167,8 @@ public class InventoryDB extends GenericDao implements InventoryDao{
 		if(cursor != null){
 			int _id = cursor.getColumnIndex(GenericDao.KEY_ID);
 			int _desId = cursor.getColumnIndex(Item.COL_DESCRIPTION_ID);
+			int _cost = cursor.getColumnIndex(Item.COL_COST);
+			int _imei = cursor.getColumnIndex(Item.COL_IMEI);
 			if(cursor.moveToFirst()){
 				ItemDescriptionBookDB itemDescriptionBookDB = new ItemDescriptionBookDB(getContext());
 				ItemDescription itemDescription;
@@ -167,7 +178,7 @@ public class InventoryDB extends GenericDao implements InventoryDao{
 					}
 					itemDescription = itemDescriptionsMap.get(cursor.getInt(_desId));
 					items.add( 
-						new Item(cursor.getInt(_id) , new ItemDescription(itemDescription.getId() ,itemDescription.getName() , itemDescription.getItemDescription() , itemDescription.getPrice() ,itemDescription.getBarcode()))
+						new Item(cursor.getInt(_id) , new ItemDescription(itemDescription.getId() ,itemDescription.getName() , itemDescription.getItemDescription() , itemDescription.getCost() , itemDescription.getPrice() ,itemDescription.getBarcode()) , cursor.getFloat(_cost) , cursor.getString(_imei))
 					);
 					cursor.moveToNext();
 				}
@@ -188,6 +199,8 @@ public class InventoryDB extends GenericDao implements InventoryDao{
 		if(cursor != null){
 			int _id = cursor.getColumnIndex(GenericDao.KEY_ID);
 			int _desId = cursor.getColumnIndex(Item.COL_DESCRIPTION_ID);
+			int _cost = cursor.getColumnIndex(Item.COL_COST);
+			int _imei = cursor.getColumnIndex(Item.COL_IMEI);
 			if(cursor.moveToFirst()){
 				ItemDescriptionBookDB itemDescriptionBookDB = new ItemDescriptionBookDB(getContext());
 				ItemDescription itemDescription;
@@ -197,7 +210,7 @@ public class InventoryDB extends GenericDao implements InventoryDao{
 					}
 					itemDescription = itemDescriptionsMap.get(cursor.getInt(_desId));
 					items.add( 
-						new Item(cursor.getInt(_id) , new ItemDescription(itemDescription.getId() ,itemDescription.getName() , itemDescription.getItemDescription() , itemDescription.getPrice() ,itemDescription.getBarcode()))
+						new Item(cursor.getInt(_id) , new ItemDescription(itemDescription.getId() ,itemDescription.getName() , itemDescription.getItemDescription() , itemDescription.getCost() , itemDescription.getPrice() ,itemDescription.getBarcode()) , cursor.getFloat(_cost) , cursor.getString(_imei))
 					);
 					cursor.moveToNext();
 				}

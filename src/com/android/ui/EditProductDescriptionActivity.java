@@ -28,6 +28,7 @@ public class EditProductDescriptionActivity extends Activity {
 	private EditText txtBarcode;
 	private EditText txtPrice;
 	private EditText txtDescription;
+	private EditText txtCost;
 	private Button btOK;
 	private TextView txtOldDescription;
 	
@@ -50,6 +51,7 @@ public class EditProductDescriptionActivity extends Activity {
 		txtPrice = (EditText)findViewById(R.id.txtEditPrice);
 		txtDescription = (EditText)findViewById(R.id.txtEditDescription);
 		txtOldDescription = (TextView)findViewById(R.id.txtEditDetails);
+		txtCost = (EditText)findViewById(R.id.txtEditCost);
 		btOK = (Button)findViewById(R.id.btEditOK);
 		
 		txtName.setText(oldItemDescription.getName()+"");
@@ -61,6 +63,7 @@ public class EditProductDescriptionActivity extends Activity {
 		
 		String s = 	"Name : " + oldItemDescription.getName()+
 					"\nBarcode : " + oldItemDescription.getBarcode()+
+					"\nCost : "+ oldItemDescription.getCost()+
 					"\nPrice : " + oldItemDescription.getPrice()+
 					"\nDecsription : " + oldItemDescription.getItemDescription();
 		txtOldDescription.setText(s);
@@ -73,13 +76,14 @@ public class EditProductDescriptionActivity extends Activity {
 				String barcode = txtBarcode.getText().toString();
 				String price = txtPrice.getText().toString();
 				String description = txtDescription.getText().toString();
+				String cost = txtCost.getText().toString();
 				
 				try {
 					
-					if(name=="" || barcode=="" || price=="" ) throw new Exception();
-					ItemDescription i = new ItemDescription(-1, name, description, Float.parseFloat(price), Integer.parseInt(barcode));
+					if(name=="" || barcode=="" || price=="" || cost=="") throw new Exception();
+					ItemDescription i = new ItemDescription(-1, name, description, Float.parseFloat(price), Integer.parseInt(barcode), 0);
 					inventoryController.removeItemDescription(getApplicationContext(), oldItemDescription.getBarcode());
-					inventoryController.createNewItemDescription(getApplicationContext(), i.getName(), i.getItemDescription(), i.getPrice(), i.getBarcode());
+					inventoryController.createNewItemDescription(getApplicationContext(), name, description, Float.parseFloat(price), Integer.parseInt(barcode), Float.parseFloat(cost));
 					final AlertDialog alertDialog1 = new AlertDialog.Builder(
 		                    EditProductDescriptionActivity.this).create();
 		 
@@ -97,23 +101,22 @@ public class EditProductDescriptionActivity extends Activity {
 		            
 					
 				} catch (Exception e) {
-					 AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+					 
 			            
-			            	
-			            builder.setTitle("Product Description");
-			            builder.setMessage("Please fill all data correctly!");
-			            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+			            AlertDialog.Builder alert = new AlertDialog.Builder(EditProductDescriptionActivity.this);
 
-			                @Override
-			                public void onClick(DialogInterface arg0, int arg1) {
-			                	Intent intent = new Intent(getApplicationContext(), StockViewAllActivity.class);
-			                	startActivity(intent);
-			                }
+			            alert.setTitle("Product Description");
+			            alert.setMessage("Please fill all data correctly!");
+
+
+			            alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+			            public void onClick(DialogInterface dialog, int whichButton) {
+			            }
 			            });
+
 			            
-			            
-			            
-			            builder.show(); //To show the AlertDialog
+
+			            alert.show();
 
 				}
 				

@@ -10,13 +10,13 @@
 
     <Button
         android:id="@+id/btEditOK"
+        style="@style/ButtonText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/scrollView1"
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/txtEditDescription"
-        style="@style/ButtonText"
-       	android:background="@drawable/btn_yellow"
+        android:background="@drawable/btn_yellow"
         android:text="OK" />
 
     <EditText
@@ -27,7 +27,6 @@
         android:layout_alignLeft="@+id/txtEditPrice"
         android:layout_alignRight="@+id/txtEditPrice"
         android:ems="10"
-        
         android:hint="Description word" />
 
     <EditText
@@ -40,36 +39,6 @@
         android:ems="10"
         android:hint="Price"
         android:inputType="numberDecimal" />
-
-    <EditText
-        android:id="@+id/txtEditBarcode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/txtEditPrice"
-        android:layout_alignLeft="@+id/txtEditName"
-        android:layout_alignParentRight="true"
-        android:ems="10"
-        android:hint="Barcode"
-        android:inputType="number" />
-
-    <EditText
-        android:id="@+id/txtEditName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/txtEditBarcode"
-        android:layout_alignParentRight="true"
-        android:layout_toRightOf="@+id/TextView01"
-        android:ems="10"
-        android:hint="Name" />
-
-    <TextView
-        style="?android:listSeparatorTextViewStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/txtEditName"
-        android:layout_alignLeft="@+id/scrollView1"
-        android:text="Add new description"
-        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/txtHistorySale"
@@ -114,29 +83,6 @@
     </ScrollView>
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/txtEditName"
-        android:layout_alignBottom="@+id/txtEditName"
-        android:layout_alignParentLeft="true"
-        android:layout_toLeftOf="@+id/txtEditName"
-        android:text="Name"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="15sp" />
-
-    <TextView
-        android:id="@+id/TextView01"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/txtEditBarcode"
-        android:layout_alignBottom="@+id/txtEditBarcode"
-        android:layout_alignLeft="@+id/scrollView1"
-        android:text="Barcode"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="15sp" />
-
-    <TextView
         android:id="@+id/TextView02"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -157,5 +103,77 @@
         android:text="Desc."
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/txtEditName"
+        android:layout_alignBottom="@+id/txtEditName"
+        android:layout_alignLeft="@+id/textView1"
+        android:text="Name"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="15sp" />
+
+    <EditText
+        android:id="@+id/txtEditCost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txtEditPrice"
+        android:layout_toRightOf="@+id/TextView01"
+        android:ems="10"
+        android:hint="Cost"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/txtEditBarcode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txtEditCost"
+        android:layout_alignLeft="@+id/txtEditCost"
+        android:ems="10"
+        android:hint="Barcode"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/TextView01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/txtEditBarcode"
+        android:layout_alignBottom="@+id/txtEditBarcode"
+        android:layout_alignLeft="@+id/textView3"
+        android:text="Barcode"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/TextView04"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/txtEditCost"
+        android:layout_alignBottom="@+id/txtEditCost"
+        android:layout_alignLeft="@+id/TextView02"
+        android:text="Cost"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="15sp" />
+
+    <EditText
+        android:id="@+id/txtEditName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txtEditBarcode"
+        android:layout_alignLeft="@+id/txtEditBarcode"
+        android:ems="10"
+        android:hint="Name" />
+
+    <TextView
+        android:id="@+id/textView1"
+        style="?android:listSeparatorTextViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txtEditName"
+        android:layout_alignLeft="@+id/scrollView1"
+        android:text="Add new description"
+        android:textSize="16sp" />
 
 </RelativeLayout>

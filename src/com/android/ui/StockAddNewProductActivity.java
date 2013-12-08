@@ -22,6 +22,7 @@ public class StockAddNewProductActivity extends Activity {
 	private EditText txtPrice;
 	private EditText txtBarcode;
 	private EditText txtProductDescription;
+	private EditText txtCost;
 	private Button btScanBarcode;
 	
 	private Button btOK;
@@ -35,6 +36,7 @@ public class StockAddNewProductActivity extends Activity {
         
         inventoryController = InventoryController.getInstance();
         
+        txtCost = (EditText)findViewById(R.id.txtRegisterCost);
         txtName = (EditText)findViewById(R.id.txtSearchProduct);
         txtPrice = (EditText)findViewById(R.id.txtAddNewProducrDescriptionPrice);
         txtBarcode = (EditText)findViewById(R.id.txtRegisterBarcode);
@@ -61,12 +63,12 @@ public class StockAddNewProductActivity extends Activity {
 			public void onClick(View v) {
 				try {
 					String name = txtName.getText().toString();
+					int cost = Integer.parseInt(txtCost.getText().toString());
 					float price = Float.parseFloat(txtPrice.getText().toString());
 					int barcode = Integer.parseInt( txtBarcode.getText().toString());
 					String productDescription = txtProductDescription.getText().toString();
 					
-					Log.i("Add new Item Activity ",inventoryController.toString());
-					ItemDescription itemDescription = inventoryController.createNewItemDescription(getApplicationContext(), name, productDescription, price, barcode);
+					ItemDescription itemDescription = inventoryController.createNewItemDescription(getApplicationContext(), name, productDescription, price, barcode,cost);
 					ItemDescription itemGet = inventoryController.getItemDescriptionByBarcode(getApplicationContext(), barcode);
 					
 					final AlertDialog alertDialog1 = new AlertDialog.Builder(StockAddNewProductActivity.this).create();
@@ -83,6 +85,7 @@ public class StockAddNewProductActivity extends Activity {
 		                	txtPrice.setText("");
 		                	txtBarcode.setText("");
 		                	txtProductDescription.setText("");
+		                	txtCost.setText("");
 		                }
 		            });
 		            alertDialog1.show();	
@@ -92,7 +95,7 @@ public class StockAddNewProductActivity extends Activity {
 		 
 		            alertDialog1.setTitle("Product Details");
 		 
-		            alertDialog1.setMessage("Plaese fill the correctly data!");
+		            alertDialog1.setMessage("Plaese fill the correctly data!\n" + e.toString());
 		
 		            alertDialog1.setButton("OK", new DialogInterface.OnClickListener() {
 		            	

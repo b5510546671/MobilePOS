@@ -4,6 +4,8 @@ package com.android.ui;
 import java.util.Locale;
 
 import com.android.softspectproject.R;
+import com.controller.SaleController;
+import com.core.Cashier;
 
 
 
@@ -34,6 +36,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -52,15 +55,24 @@ public class MainActivity extends Activity {
 	StockFragment stockFragment = new StockFragment();
 	ActionBar actionBar;
 	private static ListView listViews;
-	
+	private SaleController saleController;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
     	
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        saleController = SaleController.getInstance();
+        Cashier cashier = (Cashier) getIntent().getSerializableExtra("cashier");
+        
+        if(cashier != null){
+        	Toast.makeText(getApplicationContext(), "Cashier : "+cashier.getName(), 1).show();
+        	saleController.setCashier(cashier);
+        }
+        
         tabs = new ActionBar.Tab[4];
         listViews = (ListView)findViewById(R.id.cashierListView);
+        
 
         mTitle = mDrawerTitle = "Mobile POS";
          title = new String[]{"Profile","Sign out"};
@@ -68,6 +80,8 @@ public class MainActivity extends Activity {
         
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
         View headerView = ((LayoutInflater)getSystemService(getApplicationContext().LAYOUT_INFLATER_SERVICE)).inflate(R.layout.header, null, false);
+        TextView txtHeader = (TextView)(headerView.findViewById(R.id.txtHeaderUsername));
+        txtHeader.setText("Cashier : " + saleController.getCashier().getName());
         mDrawerList.addHeaderView(headerView, "HEY", false);
         mDrawerList.setSelected(false);
         mDrawerList.setBackgroundColor(Color.WHITE);
@@ -199,6 +213,34 @@ public class MainActivity extends Activity {
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        	
+        	if(position==1)
+        	{
+        		AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+				builder.setTitle("Cashier Profile");
+				Cashier cashier = saleController.getCashier();
+				String s =	"ID : " + cashier.getId()+
+							"\nName : " + cashier.getName()+
+							"\nUsername : "+cashier.getUsername();
+				builder.setMessage(s);
+				
+				builder.setNegativeButton("Edit",new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface arg0,int arg1) {
+								
+							}
+						});
+				builder.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						
+					}
+				});
+
+				builder.show();
+        	}
             if(position==2){
             	final Intent intent = new Intent(getApplicationContext(), LoginFallAnimationActivity.class);
             	AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);

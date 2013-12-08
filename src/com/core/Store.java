@@ -16,7 +16,6 @@ public class Store {
 	private PaymentBook paymentBook;
 	private SaleLadger saleLadger;
 	private CashierBook cashierBook;
-	
 
 	public Store() {
 		customerBook = new CustomerBook();

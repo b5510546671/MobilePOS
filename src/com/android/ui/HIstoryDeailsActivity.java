@@ -110,8 +110,7 @@ public class HIstoryDeailsActivity extends Activity {
 										.getText().toString(), date, txtEmail
 										.getText().toString());
 
-								Sale saleNew = new Sale(-1, items, customerNew,
-										paymentNew, date);
+								Sale saleNew = new Sale(-1, items,saleController.getCashier(), customerNew,paymentNew, date);
 								saleController.removeSaleFromSaleLadger(
 										getApplicationContext(), sale);
 								saleController.addSaleToSaleLadger(
@@ -211,7 +210,6 @@ public class HIstoryDeailsActivity extends Activity {
 
 		});
 
-		// sale.getID();
 	}
 
 	@Override
