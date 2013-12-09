@@ -22,6 +22,7 @@ public class InventoryLineItem implements Serializable{
 		this.id = id;
 		this.date = date;
 		this.items = items;
+		this.cashier = cashier;
 	}
 	 
 	public Date getDate() {

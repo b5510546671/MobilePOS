@@ -22,7 +22,7 @@ public class ItemDescriptionBookDB extends GenericDao implements ItemDescription
 		cv.put(ItemDescription.COL_BARCODE, itd.getBarcode());
 		cv.put(ItemDescription.COL_DESCRIPTION, itd.getItemDescription());
 		cv.put(ItemDescription.COL_PRICE, itd.getPrice());
-		cv.put(ItemDescription.COL_COST, itd.getPrice());
+		cv.put(ItemDescription.COL_COST, itd.getCost());
 		long tmp = super.insert(ItemDescription.DATABASE_TABLE, cv);
 		return new ItemDescription((int)tmp , itd.getName() , itd.getItemDescription() , itd.getCost() , itd.getPrice(), itd.getBarcode());
 	}
@@ -34,12 +34,13 @@ public class ItemDescriptionBookDB extends GenericDao implements ItemDescription
 		cv.put(ItemDescription.COL_BARCODE, itd.getBarcode());
 		cv.put(ItemDescription.COL_DESCRIPTION, itd.getItemDescription());
 		cv.put(ItemDescription.COL_PRICE, itd.getPrice());
+		cv.put(ItemDescription.COL_COST, itd.getCost());
         return super.update(ItemDescription.DATABASE_TABLE, GenericDao.KEY_ID + "=" + id, cv);
 	}
 
 	@Override
 	public ArrayList<ItemDescription> findAll() {
-		String[] columns = new String[]{ GenericDao.KEY_ID , ItemDescription.COL_DESCRIPTION ,ItemDescription.COL_BARCODE, ItemDescription.COL_NAME , ItemDescription.COL_PRICE};
+		String[] columns = new String[]{ GenericDao.KEY_ID , ItemDescription.COL_DESCRIPTION ,ItemDescription.COL_BARCODE, ItemDescription.COL_NAME , ItemDescription.COL_PRICE , ItemDescription.COL_COST};
 		return getItemDescriptionsFromCursor(super.get(ItemDescription.DATABASE_TABLE, columns));
 	}
 	
@@ -55,7 +56,7 @@ public class ItemDescriptionBookDB extends GenericDao implements ItemDescription
 					int price = cursor.getColumnIndex(ItemDescription.COL_PRICE);
 					int _cost = cursor.getColumnIndex(ItemDescription.COL_COST);
 					int _id = cursor.getColumnIndex(GenericDao.KEY_ID); 
-					itds.add(new ItemDescription(cursor.getInt(_id), cursor.getString(_name) , cursor.getString(desc), cursor.getFloat(_cost)  , cursor.getFloat(price) , cursor.getInt(barcode)));
+					itds.add(new ItemDescription(cursor.getInt(_id), cursor.getString(_name) , cursor.getString(desc), cursor.getFloat(_cost)  , cursor.getFloat(price) , cursor.getString(barcode)));
 					cursor.moveToNext();
 				}
 			}
@@ -70,14 +71,14 @@ public class ItemDescriptionBookDB extends GenericDao implements ItemDescription
 	
 	@Override
 	public ArrayList<ItemDescription> findByContains(String name) {
-		String[] cols = new String[]{ GenericDao.KEY_ID , ItemDescription.COL_DESCRIPTION ,ItemDescription.COL_BARCODE, ItemDescription.COL_NAME , ItemDescription.COL_PRICE};
+		String[] cols = new String[]{ GenericDao.KEY_ID , ItemDescription.COL_DESCRIPTION ,ItemDescription.COL_BARCODE, ItemDescription.COL_NAME , ItemDescription.COL_PRICE , ItemDescription.COL_COST};
 		return getItemDescriptionsFromCursor(super.get(ItemDescription.DATABASE_TABLE, cols , ItemDescription.COL_NAME + " like " + "'%" + name + "%'" ));
 	}
 
 	@Override
 	public ItemDescription findBy(int id) {
 		Cursor cursor;
-		String[] cols = new String[]{ GenericDao.KEY_ID , ItemDescription.COL_DESCRIPTION ,ItemDescription.COL_BARCODE, ItemDescription.COL_NAME , ItemDescription.COL_PRICE};
+		String[] cols = new String[]{ GenericDao.KEY_ID , ItemDescription.COL_DESCRIPTION ,ItemDescription.COL_BARCODE, ItemDescription.COL_NAME , ItemDescription.COL_PRICE , ItemDescription.COL_COST};
 		cursor = super.get(ItemDescription.DATABASE_TABLE , cols , GenericDao.KEY_ID + "=" + id);
 		ItemDescription itd = null;
 		if(cursor != null){
@@ -89,7 +90,7 @@ public class ItemDescriptionBookDB extends GenericDao implements ItemDescription
 				int _cost = cursor.getColumnIndex(ItemDescription.COL_COST);
 				int _id = cursor.getColumnIndex(GenericDao.KEY_ID); 
 				
-				itd= new ItemDescription(cursor.getInt(_id) , cursor.getString(_name) , cursor.getString(desc), cursor.getFloat(_cost)  , cursor.getFloat(price) , cursor.getInt(barcode));
+				itd= new ItemDescription(cursor.getInt(_id) , cursor.getString(_name) , cursor.getString(desc), cursor.getFloat(_cost)  , cursor.getFloat(price) , cursor.getString(barcode));
 			}
 		}
 		return itd;
@@ -98,7 +99,7 @@ public class ItemDescriptionBookDB extends GenericDao implements ItemDescription
 	@Override
 	public ItemDescription findBy(String name) {
 		Cursor cursor;
-		String[] cols = new String[]{ GenericDao.KEY_ID , ItemDescription.COL_DESCRIPTION ,ItemDescription.COL_BARCODE, ItemDescription.COL_NAME , ItemDescription.COL_PRICE};
+		String[] cols = new String[]{ GenericDao.KEY_ID , ItemDescription.COL_DESCRIPTION ,ItemDescription.COL_BARCODE, ItemDescription.COL_NAME , ItemDescription.COL_PRICE , ItemDescription.COL_COST};
 		cursor = super.get(ItemDescription.DATABASE_TABLE , cols , ItemDescription.COL_NAME + " like " + "'" +name +"'");
 		ItemDescription itd = null;
 		if(cursor != null){
@@ -109,17 +110,17 @@ public class ItemDescriptionBookDB extends GenericDao implements ItemDescription
 				int price = cursor.getColumnIndex(ItemDescription.COL_PRICE);
 				int _cost = cursor.getColumnIndex(ItemDescription.COL_COST);
 				int _id = cursor.getColumnIndex(GenericDao.KEY_ID); 
-				itd= new ItemDescription(cursor.getInt(_id) , cursor.getString(_name) , cursor.getString(desc), cursor.getFloat(_cost)  , cursor.getFloat(price) , cursor.getInt(barcode));
+				itd= new ItemDescription(cursor.getInt(_id) , cursor.getString(_name) , cursor.getString(desc), cursor.getFloat(_cost)  , cursor.getFloat(price) , cursor.getString(barcode));
 			}
 		}
 		return itd;
 	}
 
 	@Override
-	public ItemDescription findByBarcode(int barcode) {
+	public ItemDescription findByBarcode(String barcode) {
 		Cursor cursor;
-		String[] cols = new String[]{ GenericDao.KEY_ID , ItemDescription.COL_DESCRIPTION ,ItemDescription.COL_BARCODE, ItemDescription.COL_NAME , ItemDescription.COL_PRICE};
-		cursor = super.get(ItemDescription.DATABASE_TABLE , cols , ItemDescription.COL_BARCODE + "=" + barcode);
+		String[] cols = new String[]{ GenericDao.KEY_ID , ItemDescription.COL_DESCRIPTION ,ItemDescription.COL_BARCODE, ItemDescription.COL_NAME , ItemDescription.COL_PRICE , ItemDescription.COL_COST};
+		cursor = super.get(ItemDescription.DATABASE_TABLE , cols , ItemDescription.COL_BARCODE + " like " + "'" + barcode +"'");
 		ItemDescription itd = null;
 		if(cursor != null){
 			if(cursor.moveToFirst()){
@@ -130,7 +131,7 @@ public class ItemDescriptionBookDB extends GenericDao implements ItemDescription
 				int _cost = cursor.getColumnIndex(ItemDescription.COL_COST);
 				int _id = cursor.getColumnIndex(GenericDao.KEY_ID); 
 				
-				itd= new ItemDescription(cursor.getInt(_id), cursor.getString(_name) , cursor.getString(desc), cursor.getFloat(_cost)  , cursor.getFloat(price) , cursor.getInt(barcode));
+				itd= new ItemDescription(cursor.getInt(_id), cursor.getString(_name) , cursor.getString(desc), cursor.getFloat(_cost)  , cursor.getFloat(price) , cursor.getString(_barcode));
 			}
 		}
 		return itd;

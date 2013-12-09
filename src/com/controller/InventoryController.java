@@ -24,7 +24,7 @@ public class InventoryController {
 		 return inventoryController;
 	}
 	
-	public ItemDescription getItemDescriptionByBarcode(Context con, int barcode){
+	public ItemDescription getItemDescriptionByBarcode(Context con, String barcode){
 		return store.getItemDescriptionBook().getItemDescriptionByBarcode(con, barcode);
 	}
 	
@@ -32,11 +32,11 @@ public class InventoryController {
 		return store.getInventory().getItemsByItemDescription(con, itemDes).get(0);
 	}
 	
-	public ItemDescription createNewItemDescription(Context con,String name,String description,float price,int barcode,float cost){
+	public ItemDescription createNewItemDescription(Context con,String name,String description,float price,String barcode,float cost){
 		return store.getItemDescriptionBook().add(con, name, description, price, barcode, cost);
 	}
 	
-	public void removeItemDescription(Context con,int barcode){
+	public void removeItemDescription(Context con,String barcode){
 		
 		ItemDescription itemDescription = store.getItemDescriptionBook().getItemDescriptionByBarcode(con, barcode);
 		store.getItemDescriptionBook().remove(con, itemDescription);

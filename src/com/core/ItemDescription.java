@@ -6,7 +6,7 @@ public class ItemDescription implements Serializable {
     public static final String DATABASE_TABLE = "ItemDescriptionBook";
     public static final int DATABASE_VERSION = 1;
     public static final String TABLE_CREATE =
-        "create table if not exists ItemDescriptionBook (_id integer primary key autoincrement , name text not null , barcode integer not null , description text not null,cost real not null, price real not null);";
+        "create table if not exists ItemDescriptionBook (_id integer primary key autoincrement , name text not null , barcode text not null , description text not null, cost real not null , price real not null);";
     
     public static final String COL_DESCRIPTION = "description";
     public static final String COL_PRICE = "price";
@@ -17,16 +17,17 @@ public class ItemDescription implements Serializable {
 	private int id;
 	private String name;
 	private float price;
-	private int barcode;
+	private String barcode;
 	private String itemDescription;
-	private int cost;
+	private float cost;
 	
-	public ItemDescription(int id,String name, String itemDescription,float cost, float price, int barcode){
+	public ItemDescription(int id,String name, String itemDescription,float cost, float price, String barcode){
 		this.id = id;
 		this.itemDescription = itemDescription;
 		this.name = name;
 		this.price = price;
 		this.barcode = barcode;
+		this.cost = cost;
 	}
 
 	public int getId() {
@@ -49,11 +50,11 @@ public class ItemDescription implements Serializable {
 		this.price = price;
 	}
 
-	public int getBarcode() {
+	public String getBarcode() {
 		return barcode;
 	}
 
-	public void setBarcode(int barcode) {
+	public void setBarcode(String barcode) {
 		this.barcode = barcode;
 	}
 
@@ -69,11 +70,11 @@ public class ItemDescription implements Serializable {
 		return this.name;
 	}
 
-	public int getCost() {
+	public float getCost() {
 		return cost;
 	}
 
-	public void setCost(int cost) {
+	public void setCost(float cost) {
 		this.cost = cost;
 	}
 	

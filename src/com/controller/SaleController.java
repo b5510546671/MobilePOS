@@ -64,7 +64,7 @@ public class SaleController {
 		store.getSaleLedLadger().remove(con, sale);
 	}
 
-	public int getItemQuantity(Context con, int barcode) {
+	public int getItemQuantity(Context con, String barcode) {
 		List<Item> items = SaleController.getInstance().getAllItem(con);
 		int count = 0;
 		for (Item i : items) {
@@ -83,9 +83,8 @@ public class SaleController {
 		return this.totalPrice;
 	}
 
-	public ItemDescription getItemDescriptionByBarcode(Context con, int barcode) {
-		return store.getItemDescriptionBook().getItemDescriptionByBarcode(con,
-				barcode);
+	public ItemDescription getItemDescriptionByBarcode(Context con, String barcode) {
+		return store.getItemDescriptionBook().getItemDescriptionByBarcode(con,barcode);
 	}
 
 	public void setItemList(List<Item> items) {
@@ -147,26 +146,26 @@ public class SaleController {
 
 	}
 
-	public int getAmountInList(int barcode) {
+	public int getAmountInList(String barcode) {
 		int count = 0;
 		for (Item i : items) {
-			if (i.getItemDescription().getBarcode() == barcode)
+			if (i.getItemDescription().getBarcode().equals(barcode))
 				count++;
 		}
 		return count;
 	}
 
-	public Item getItemfromInventory(Context con, int barcode) {
+	public Item getItemfromInventoryByIMEI(Context con, String imei) {
 
 		List<Item> itemList = getAllItem(con);
 
 		for (Item i : itemList) {
-			if (!itemsMap.containsKey(i.getID())
-					&& i.getItemDescription().getBarcode() == barcode) {
+			if (!itemsMap.containsKey(i.getID()) && i.getImei().equals(imei)) {
 				return i;
 			}
 		}
 
+		
 		return null;
 
 	}
@@ -176,7 +175,7 @@ public class SaleController {
 	}
 
 	public List<Item> getAllItem(Context con) {
-		return store.getInventory().getStockItems(con);
+		return store.getInventory().getAllStock(con);
 
 	}
 	
@@ -185,7 +184,7 @@ public class SaleController {
 	}
 	
 	public List<Cashier> getAllCashier(Context con){
-		return store.getCashierBook().getAll(con);
+		return store.getCashierBook().getAllCashier(con);
 		
 	}
 

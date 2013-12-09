@@ -25,7 +25,7 @@ public class CashierBookController {
 	}
 	
 	public List<Cashier> getAllCashier(Context con){
-		return store.getCashierBook().getAll(con);
+		return store.getCashierBook().getAllCashier(con);
 	}
 	
 	public Cashier editCashier(Context con,Cashier cashier){

@@ -59,28 +59,28 @@ public class InventoryDB extends GenericDao implements InventoryDao{
 	
 	@Override
 	public ArrayList<Item> findAll() {
-		String[] columns = new String[]{GenericDao.KEY_ID , Item.COL_DESCRIPTION_ID};
+		String[] columns = new String[]{GenericDao.KEY_ID ,Item.COL_DESCRIPTION_ID , Item.COL_IMEI , Item.COL_COST};
 		return getItemFromCursor(super.get(Item.DATABASE_TABLE, columns));
 	}
 	
 	private ArrayList<Item> getItemFromCursor(Cursor cursor){
 		ArrayList<Item> itds = new ArrayList<Item>();
+		HashMap<Integer, ItemDescription> maps = new HashMap<Integer, ItemDescription>();
 		if(cursor != null){
 			if(cursor.moveToFirst()){
 				int count = cursor.getCount();
 				int _id = cursor.getColumnIndex(GenericDao.KEY_ID);
 				int desId = cursor.getColumnIndex(Item.COL_DESCRIPTION_ID);
-				//int invId = cursor.getColumnIndex(Item.COL_INVENTORYLINEITEM_ID);
 				int _cost = cursor.getColumnIndex(Item.COL_COST);
 				int _imei = cursor.getColumnIndex(Item.COL_IMEI);
-				//int statusId = cursor.getColumnIndex(Item.COL_SALE_ID);
+				ItemDescriptionBookDB _db = new ItemDescriptionBookDB(context);
 				for(int i = 0 ; i < count ; i++){
-					ItemDescriptionBookDB _db = new ItemDescriptionBookDB(context);
-					ItemDescription des = _db.findBy(cursor.getInt(desId));
-					_db.close();
+					if(!maps.containsKey(cursor.getInt(desId))) maps.put(cursor.getInt(desId), _db.findBy(cursor.getInt(desId)));
+					ItemDescription des = maps.get(cursor.getInt(desId));
 					itds.add(new Item(cursor.getInt(_id), des , cursor.getFloat(_cost) , cursor.getString(_imei)));
 					cursor.moveToNext();
 				}
+				_db.close();
 			}
 		} 
 		return itds;
@@ -108,7 +108,7 @@ public class InventoryDB extends GenericDao implements InventoryDao{
 
 	@Override
 	public Item findByID(int id) {
-		String[] columns = new String[]{GenericDao.KEY_ID ,Item.COL_DESCRIPTION_ID };
+		String[] columns = new String[]{GenericDao.KEY_ID ,Item.COL_DESCRIPTION_ID , Item.COL_IMEI , Item.COL_COST};
 		Cursor cursor = super.get(Item.DATABASE_TABLE, columns ,id);
 		Item item = null;
 		if(cursor != null){
@@ -136,89 +136,23 @@ public class InventoryDB extends GenericDao implements InventoryDao{
 	public ArrayList<Item> findByDescriptionID(int itemDescription_id) {
 		String[] columns = new String[]{GenericDao.KEY_ID , Item.COL_DESCRIPTION_ID};
 		Cursor cursor = super.get(Item.DATABASE_TABLE , columns , Item.COL_DESCRIPTION_ID +"="+ itemDescription_id);
-		ArrayList<Item> items = new ArrayList<Item>();
-		if(cursor != null){
-			int _id = cursor.getColumnIndex(GenericDao.KEY_ID);
-			int _desId = cursor.getColumnIndex(Item.COL_DESCRIPTION_ID);
-			int _cost = cursor.getColumnIndex(Item.COL_COST);
-			int _imei = cursor.getColumnIndex(Item.COL_IMEI);
-			if(cursor.moveToFirst()){
-				ItemDescriptionBookDB itemDescriptionBookDB = new ItemDescriptionBookDB(getContext());
-				ItemDescription itemDescription = itemDescriptionBookDB.findBy(cursor.getInt(_desId));
-				itemDescriptionBookDB.close();
-				for(int i = 0 ; i < cursor.getCount() ; i++){
-					items.add( 
-							new Item(cursor.getInt(_id) , new ItemDescription(itemDescription.getId() ,itemDescription.getName() , itemDescription.getItemDescription() , itemDescription.getCost() , itemDescription.getPrice() ,itemDescription.getBarcode()) , cursor.getFloat(_cost) , cursor.getString(_imei))
-					);
-					cursor.moveToNext();
-				}
-			}
-		}
-		return items;
+		return getItemFromCursor(cursor);
 	}
 
 	
 	@Override
 	public List<Item> findByInventoryLineItemID(int inventoryLineItem_id) {
-		String[] columns = new String[]{GenericDao.KEY_ID , Item.COL_DESCRIPTION_ID};
+		String[] columns = new String[]{GenericDao.KEY_ID ,Item.COL_DESCRIPTION_ID , Item.COL_IMEI , Item.COL_COST};
 		Cursor cursor = super.get(Item.DATABASE_TABLE , columns , Item.COL_INVENTORYLINEITEM_ID +"="+ inventoryLineItem_id);
-		HashMap<Integer , ItemDescription> itemDescriptionsMap = new HashMap<Integer, ItemDescription>();
-		ArrayList<Item> items = new ArrayList<Item>();
-		if(cursor != null){
-			int _id = cursor.getColumnIndex(GenericDao.KEY_ID);
-			int _desId = cursor.getColumnIndex(Item.COL_DESCRIPTION_ID);
-			int _cost = cursor.getColumnIndex(Item.COL_COST);
-			int _imei = cursor.getColumnIndex(Item.COL_IMEI);
-			if(cursor.moveToFirst()){
-				ItemDescriptionBookDB itemDescriptionBookDB = new ItemDescriptionBookDB(getContext());
-				ItemDescription itemDescription;
-				for(int i = 0 ; i < cursor.getCount() ; i++){
-					if(!itemDescriptionsMap.containsKey(cursor.getInt(_desId))){
-						itemDescriptionsMap.put(cursor.getInt(_desId), itemDescriptionBookDB.findBy(cursor.getInt(_desId)));
-					}
-					itemDescription = itemDescriptionsMap.get(cursor.getInt(_desId));
-					items.add( 
-						new Item(cursor.getInt(_id) , new ItemDescription(itemDescription.getId() ,itemDescription.getName() , itemDescription.getItemDescription() , itemDescription.getCost() , itemDescription.getPrice() ,itemDescription.getBarcode()) , cursor.getFloat(_cost) , cursor.getString(_imei))
-					);
-					cursor.moveToNext();
-				}
-				
-				itemDescriptionBookDB.close();
-			}
-		}
-		return items;
+		return getItemFromCursor(cursor);
 	}
 
 	//Checked
 	@Override
 	public List<Item> findBySaleID(int id) {
-		String[] columns = new String[]{GenericDao.KEY_ID , Item.COL_DESCRIPTION_ID};
+		String[] columns = new String[]{GenericDao.KEY_ID ,Item.COL_DESCRIPTION_ID , Item.COL_IMEI , Item.COL_COST};
 		Cursor cursor = super.get(Item.DATABASE_TABLE , columns , Item.COL_SALE_ID +"="+ id);
-		HashMap<Integer , ItemDescription> itemDescriptionsMap = new HashMap<Integer, ItemDescription>();
-		ArrayList<Item> items = new ArrayList<Item>();
-		if(cursor != null){
-			int _id = cursor.getColumnIndex(GenericDao.KEY_ID);
-			int _desId = cursor.getColumnIndex(Item.COL_DESCRIPTION_ID);
-			int _cost = cursor.getColumnIndex(Item.COL_COST);
-			int _imei = cursor.getColumnIndex(Item.COL_IMEI);
-			if(cursor.moveToFirst()){
-				ItemDescriptionBookDB itemDescriptionBookDB = new ItemDescriptionBookDB(getContext());
-				ItemDescription itemDescription;
-				for(int i = 0 ; i < cursor.getCount() ; i++){
-					if(!itemDescriptionsMap.containsKey(cursor.getInt(_desId))){
-						itemDescriptionsMap.put(cursor.getInt(_desId), itemDescriptionBookDB.findBy(cursor.getInt(_desId)));
-					}
-					itemDescription = itemDescriptionsMap.get(cursor.getInt(_desId));
-					items.add( 
-						new Item(cursor.getInt(_id) , new ItemDescription(itemDescription.getId() ,itemDescription.getName() , itemDescription.getItemDescription() , itemDescription.getCost() , itemDescription.getPrice() ,itemDescription.getBarcode()) , cursor.getFloat(_cost) , cursor.getString(_imei))
-					);
-					cursor.moveToNext();
-				}
-				
-				itemDescriptionBookDB.close();
-			}
-		}
-		return items;
+		return getItemFromCursor(cursor);
 	}
 
 	//Checked
@@ -227,5 +161,24 @@ public class InventoryDB extends GenericDao implements InventoryDao{
 		ContentValues cv = new ContentValues();
 		cv.put(Item.COL_SALE_ID, Item.SALE_STOCK_ID);
 		return super.update( Item.DATABASE_TABLE , Item.COL_SALE_ID + "=" + sale_id , cv);
+	}
+
+	@Override
+	public Item findByImei(String id) {
+		String[] columns = new String[]{GenericDao.KEY_ID ,Item.COL_DESCRIPTION_ID , Item.COL_IMEI , Item.COL_DESCRIPTION_ID};
+		Cursor cursor = super.get(Item.DATABASE_TABLE, columns , Item.COL_IMEI + " like " + "'%" + id + "%'" );
+		Item item = null;
+		if(cursor != null){
+			int _id = cursor.getColumnIndex(GenericDao.KEY_ID);
+			int itdID = cursor.getColumnIndex(Item.COL_DESCRIPTION_ID);
+			int _cost = cursor.getColumnIndex(Item.COL_COST);
+			int _imei = cursor.getColumnIndex(Item.COL_IMEI);
+			cursor.moveToFirst();
+			ItemDescriptionBookDB itemDescriptionBookDB = new ItemDescriptionBookDB(getContext());
+			ItemDescription itemDescription = itemDescriptionBookDB.findBy(cursor.getInt(itdID));
+			itemDescriptionBookDB.close();
+			item = new Item(cursor.getInt(_id) , itemDescription , cursor.getFloat(_cost) , cursor.getString(_imei));
+		}
+		return item;
 	}
 }

@@ -17,5 +17,6 @@ public interface InventoryDao {
 	public List<Item> findByInventoryLineItemID(int inventoryLineItem_id);
 	public List<Item> findByDescriptionID(int itemDescription_id);
 	public Item findByID(int id);
+	public Item findByImei(String id);
 	public int findQuantity(int descId);
 }

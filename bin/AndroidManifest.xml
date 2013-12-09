@@ -77,6 +77,10 @@
             android:name="com.android.ui.CashierSignUpActivity"
             android:label="@string/title_activity_cashier_sign_up" >
         </activity>
+        <activity
+            android:name="com.android.ui.CashierEditProfileActivity"
+            android:label="@string/title_activity_cashier_edit_profile" >
+        </activity>
     </application>
 
 </manifest>

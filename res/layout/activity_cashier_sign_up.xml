@@ -39,7 +39,9 @@
         android:layout_alignLeft="@+id/txtSignUpPassword"
         android:layout_alignRight="@+id/txtSignUpPassword"
         android:layout_below="@+id/txtSignUpPassword"
-        android:text="OK" />
+        android:text="OK" 
+        style="@style/ButtonText"
+         android:background="@drawable/btn_yellow"/>
 
     <EditText
         android:id="@+id/txtSignUpUsername"

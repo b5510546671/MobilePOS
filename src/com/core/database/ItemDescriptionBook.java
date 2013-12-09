@@ -19,7 +19,7 @@ public class ItemDescriptionBook {
 		return x;
 	}
 
-	public ItemDescription add(Context con, String name , String description , float price , int barcode ,float cost) {
+	public ItemDescription add(Context con, String name , String description , float price , String barcode ,float cost) {
 		ItemDescription itemDescription = new ItemDescription(0, name, description,cost ,  price, barcode);
 		db = new ItemDescriptionBookDB(con);
 		itemDescription = db.insert(itemDescription);
@@ -54,7 +54,7 @@ public class ItemDescriptionBook {
 		return i;
 	}
 	
-	public ItemDescription getItemDescriptionByBarcode(Context con , int barcode){
+	public ItemDescription getItemDescriptionByBarcode(Context con , String barcode){
 		db = new ItemDescriptionBookDB(con);
 		ItemDescription i = db.findByBarcode(barcode);
 		db.close();

@@ -6,6 +6,7 @@ import java.util.Date;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 
 import com.core.Customer;
 
@@ -102,7 +103,7 @@ public class CustomerBookDB extends GenericDao implements CustomerBookDao {
 		ArrayList<Customer> customers = new ArrayList<Customer>();
 		if(cursor != null){
 			if(cursor.moveToFirst()){
-				int count = cursor.getColumnCount(); 
+				int count = cursor.getCount();
 				//customers = new Customer[count];
 				int _id = cursor.getColumnIndex(GenericDao.KEY_ID);
 				int cus_name = cursor.getColumnIndex(Customer.COL_NAME);

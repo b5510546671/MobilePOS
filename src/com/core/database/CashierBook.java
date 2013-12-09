@@ -26,7 +26,7 @@ public class CashierBook {
 		return c;
 	}
 	
-	public List<Cashier> getAll(Context con) {
+	public List<Cashier> getAllCashier(Context con) {
 		db = new CashierBookDB(con);
 		List<Cashier> c  = db.findAll();
 		db.close();

@@ -6,7 +6,7 @@ public class Item implements Serializable {
     public static final String DATABASE_TABLE = "Inventory";
     public static final int DATABASE_VERSION = 1;
     public static final String TABLE_CREATE =
-        "create table if not exists Inventory (_id integer primary key autoincrement , imei_id text not null, sale_id integer, description_id integer not null, inventorylineitem_id integer not null);";
+        "create table if not exists Inventory (_id integer primary key autoincrement , imei_id text not null, sale_id integer, description_id integer not null, inventorylineitem_id integer not null , cost real not null);";
    
     public static final String COL_INVENTORYLINEITEM_ID = "inventorylineitem_id";
     public static final String COL_DESCRIPTION_ID = "description_id";

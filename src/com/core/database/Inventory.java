@@ -23,7 +23,7 @@ public class Inventory {
 	
 	public List<Item> getAllStock(Context con){
 		db = new InventoryDB(con);
-		List<Item> i = db.findByDescriptionID(Item.SALE_STOCK_ID);
+		List<Item> i = db.findBySaleID(Item.SALE_STOCK_ID);
 		db.close();
 		return i;
 	}
@@ -85,11 +85,6 @@ public class Inventory {
 		return i;
 	}
 	
-	public List<Item> getStockItems(Context con){
-		db = new InventoryDB(con);
-		List<Item> i = db.findBySaleID(Item.SALE_STOCK_ID);
-		db.close();
-		return i;
-	}
+	
 	
 }

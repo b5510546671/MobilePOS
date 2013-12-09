@@ -65,7 +65,7 @@ public class StockAddNewProductActivity extends Activity {
 					String name = txtName.getText().toString();
 					int cost = Integer.parseInt(txtCost.getText().toString());
 					float price = Float.parseFloat(txtPrice.getText().toString());
-					int barcode = Integer.parseInt( txtBarcode.getText().toString());
+					String barcode =  txtBarcode.getText().toString();
 					String productDescription = txtProductDescription.getText().toString();
 					
 					ItemDescription itemDescription = inventoryController.createNewItemDescription(getApplicationContext(), name, productDescription, price, barcode,cost);

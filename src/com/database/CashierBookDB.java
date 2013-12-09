@@ -1,11 +1,9 @@
 package com.database;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import com.core.Cashier;
-import com.core.Customer;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -23,19 +21,19 @@ public class CashierBookDB extends GenericDao implements CashierBookDao{
         cv.put(Cashier.COL_NAME , c.getName());
         cv.put(Cashier.COL_PASSWORD , c.getPassword());
         cv.put(Cashier.COL_USERNAME , c.getUsername());
-        c = new Cashier((int)super.insert(Customer.DATABASE_TABLE, cv), c.getName() ,c.getUsername() , c.getPassword());
+        c = new Cashier((int)super.insert(Cashier.DATABASE_TABLE, cv), c.getName() ,c.getUsername() , c.getPassword());
         return c;
 	}
 
 	@Override
 	public int delete(Cashier c) {
-		return (int)super.delete(Customer.DATABASE_TABLE , GenericDao.KEY_ID + "=" + c.getId(), null);
+		return (int)super.delete(Cashier.DATABASE_TABLE , GenericDao.KEY_ID + "=" + c.getId(), null);
 	}
 
 	@Override
 	public List<Cashier> findAll() {
 		String[] columns = new String[]{GenericDao.KEY_ID , Cashier.COL_NAME , Cashier.COL_USERNAME , Cashier.COL_PASSWORD};
-		Cursor cursor = super.get(Customer.DATABASE_TABLE, columns );
+		Cursor cursor = super.get(Cashier.DATABASE_TABLE, columns );
 		List<Cashier> c = new ArrayList<Cashier>();
 		if(cursor != null){
 			int count = cursor.getCount();
@@ -56,7 +54,7 @@ public class CashierBookDB extends GenericDao implements CashierBookDao{
 	@Override
 	public Cashier findBy(String name) {
 		String[] columns = new String[]{GenericDao.KEY_ID , Cashier.COL_NAME , Cashier.COL_USERNAME , Cashier.COL_PASSWORD};
-		Cursor cursor = super.get(Customer.DATABASE_TABLE, columns , Customer.COL_NAME + " like " + "'" +name +"'");
+		Cursor cursor = super.get(Cashier.DATABASE_TABLE, columns , Cashier.COL_NAME + " like " + "'" +name +"'");
 		Cashier c = null;
 		if(cursor != null){
 			if(cursor.moveToFirst()){
@@ -73,7 +71,7 @@ public class CashierBookDB extends GenericDao implements CashierBookDao{
 	@Override
 	public Cashier findBy(int id) {
 		String[] columns = new String[]{GenericDao.KEY_ID , Cashier.COL_NAME , Cashier.COL_USERNAME , Cashier.COL_PASSWORD};
-		Cursor cursor = super.get(Customer.DATABASE_TABLE, columns , GenericDao.KEY_ID + "=" + id);
+		Cursor cursor = super.get(Cashier.DATABASE_TABLE, columns , GenericDao.KEY_ID + "=" + id);
 		Cashier c = null;
 		if(cursor != null){
 			if(cursor.moveToFirst()){

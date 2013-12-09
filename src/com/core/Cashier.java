@@ -22,11 +22,11 @@ public class Cashier implements Serializable{
     private String username;
     private String password;
     
-    public Cashier(int id,String name,String userName,String passWord) {
-    	this.id  =id;
+    public Cashier(int id,String name,String userName,String password) {
+    	this.id = id;
     	this.name = name;
     	this.username = userName;
-    	this.password = passWord;
+    	this.password = password;
 	}
     
 	public String getName() {

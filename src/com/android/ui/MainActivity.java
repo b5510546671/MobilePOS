@@ -228,7 +228,8 @@ public class MainActivity extends Activity {
 
 							@Override
 							public void onClick(DialogInterface arg0,int arg1) {
-								
+								Intent intent = new Intent(getApplicationContext(), CashierEditProfileActivity.class);
+								startActivity(intent);
 							}
 						});
 				builder.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {

@@ -39,7 +39,6 @@ public class StockCreateNewStock extends Activity {
 	private CashierCustomArrayAdapter arrayAdapter;
 
 	private List<Item> items = new ArrayList<Item>();
-	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,11 +59,12 @@ public class StockCreateNewStock extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long arg3) {
-				//String s = (String) itemListView.getItemAtPosition(position);
+				// String s = (String) itemListView.getItemAtPosition(position);
 				items.remove(position);
-				
+
 				arrayAdapter.notifyDataSetChanged();
-				//Toast.makeText(getApplicationContext(), "remove", Toast.LENGTH_SHORT).show();
+				// Toast.makeText(getApplicationContext(), "remove",
+				// Toast.LENGTH_SHORT).show();
 
 			}
 		});
@@ -75,106 +75,123 @@ public class StockCreateNewStock extends Activity {
 			public void onClick(View v) {
 
 				try {
-					final int barcode = Integer.parseInt(txtBarcode.getText().toString());
-					
+					final String barcode = txtBarcode.getText().toString();
+					barcode.replace(" ", "");
+					Toast.makeText(getApplicationContext(), barcode, 1).show();
+					ItemDescription itemDes = inventoryController.getItemDescriptionByBarcode(getApplicationContext(), barcode);
+					if (itemDes == null)
+						{
+							//throw new Exception();
+						}
+					else {
+						AlertDialog.Builder alert = new AlertDialog.Builder(
+								StockCreateNewStock.this);
 
+						alert.setTitle("Product IMEI number");
+						alert.setMessage("Inser the Imei of the product");
+
+						// Set an EditText view to get user input
+						final EditText input = new EditText(StockCreateNewStock.this);
+						alert.setView(input);
+
+						alert.setPositiveButton("OK",
+								new DialogInterface.OnClickListener() {
+									public void onClick(DialogInterface dialog,
+											int whichButton) {
+										String imei = input.getText().toString();
+
+										Item item = new Item(-1, inventoryController.getItemDescriptionByBarcode(getApplicationContext(), barcode), imei);
+										items.add(item);
+
+										arrayAdapter.notifyDataSetChanged();
+									}
+								});
+
+						alert.setNegativeButton("Cancel",
+								new DialogInterface.OnClickListener() {
+									public void onClick(DialogInterface dialog,
+											int whichButton) {
+									}
+								});
+
+						alert.show();
+					}
+
+				} catch (Exception e) {
 					AlertDialog.Builder alert = new AlertDialog.Builder(StockCreateNewStock.this);
 
-					alert.setTitle("Product IMEI number");
-					alert.setMessage("Inser the Imei of the product");
+					alert.setTitle("Stock Manager");
+					alert.setMessage( "Barcode Wrong!");
 
 					// Set an EditText view to get user input 
-					final EditText input = new EditText(StockCreateNewStock.this);
-					alert.setView(input);
 
-					alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+					alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int whichButton) {
-					  String imei = input.getText().toString();
-					  ItemDescription itemDes = inventoryController.getItemDescriptionByBarcode(getApplicationContext(), barcode);
-					  Item item = new Item(-1, itemDes,imei);
-						items.add(item);
-						
-						arrayAdapter.notifyDataSetChanged();
-					  }
-					});
-
-					alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-					  public void onClick(DialogInterface dialog, int whichButton) {
+					  // Do something with value!
 					  }
 					});
 
 					alert.show();
-					
-
-					
-
-				} catch (Exception e) {
-					final AlertDialog alertDialog1 = new AlertDialog.Builder(
-		                    getApplicationContext()).create();
-		 
-		            alertDialog1.setTitle("Stock Manager");
-		 
-		            alertDialog1.setMessage("Barcode Wrong!");
-		
-		            alertDialog1.setButton("OK", new DialogInterface.OnClickListener() {
-		            	
-		                public void onClick(DialogInterface dialog, int which) {
-		                	
-		                }
-		            });
-		            alertDialog1.show();
 				}
 
 			}
 		});
-		
-		
-		
+
 		btFinished.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 
-				InventoryLineItem i  =new InventoryLineItem(-1, items,DateManager.getCurrentDate(),SaleController.getInstance().getCashier());
-				
-				InventoryLineItem getInven = inventoryController.addinventoryLineItemToInventory(getApplicationContext(), i);
-				
+				InventoryLineItem i = new InventoryLineItem(-1, items,
+						DateManager.getCurrentDate(), SaleController
+								.getInstance().getCashier());
+
+				InventoryLineItem getInven = inventoryController
+						.addinventoryLineItemToInventory(
+								getApplicationContext(), i);
+
 				// TODO Auto-generated method stub
-                AlertDialog.Builder builder = new AlertDialog.Builder(StockCreateNewStock.this);
-                builder.setTitle("Stock Manaer");
-                builder.setMessage("Already added to stock");
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
- 
-                    @Override
-                    public void onClick(DialogInterface arg0, int arg1) {
-                        // TODO Auto-generated method stub
-                        //Toast.makeText(getApplicationContext(), "Ok is clicked", Toast.LENGTH_LONG).show();
-                    	finish();
-                    }
-                });
-                
-                builder.show(); //To show the AlertDialog
-				
+				AlertDialog.Builder builder = new AlertDialog.Builder(
+						StockCreateNewStock.this);
+				builder.setTitle("Stock Manaer");
+				builder.setMessage("Already added to stock");
+				builder.setPositiveButton("OK",
+						new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface arg0, int arg1) {
+								// TODO Auto-generated method stub
+								// Toast.makeText(getApplicationContext(),
+								// "Ok is clicked", Toast.LENGTH_LONG).show();
+								finish();
+							}
+						});
+
+				builder.show(); // To show the AlertDialog
+
 			}
-			
+
 		});
-		
+
 		btScanWithBarcode.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
 				try {
-					Intent intent = new Intent("com.google.zxing.client.android.SCAN");
+					Intent intent = new Intent(
+							"com.google.zxing.client.android.SCAN");
 					intent.putExtra("SCAN_MODE", "PRODUCT_MODE");
 					startActivityForResult(intent, 0);
 				} catch (Exception e) {
-					Toast.makeText(getBaseContext(),"Please Install Barcode Scanner",Toast.LENGTH_SHORT).show();
+					Toast.makeText(getBaseContext(),
+							"Please Install Barcode Scanner",
+							Toast.LENGTH_SHORT).show();
 				}
 
 			}
 		});
 	}
-	
+
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 		if (requestCode == 0) {
@@ -188,7 +205,6 @@ public class StockCreateNewStock extends Activity {
 		}
 		super.onActivityResult(requestCode, resultCode, intent);
 	}
-
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

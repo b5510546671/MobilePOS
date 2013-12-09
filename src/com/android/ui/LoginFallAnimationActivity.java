@@ -65,12 +65,13 @@ public class LoginFallAnimationActivity extends Activity {
 		setContentView(R.layout.activity_login_fall);
 		saleController = SaleController.getInstance();
 
-		// TODO delete after cashier database finished
-		Cashier c = new Cashier(1, "Sikarin", "1", "1");
-		cashierMap.put(c.getUsername(), c);
+//		// TODO delete after cashier database finished
+//		Cashier c = new Cashier(1, "Sikarin", "1", "1");
+//		cashierMap.put(c.getUsername(), c);
 
 		// TODO getCashier from the database
 		//saleController.getAllCashier(getApplicationContext());
+		
 
 		Display display = getWindowManager().getDefaultDisplay();
 		display.getRectSize(mDisplaySize);
@@ -111,6 +112,10 @@ public class LoginFallAnimationActivity extends Activity {
 
 			@Override
 			public void onClick(View arg0) {
+				cashierMap.clear();
+				for(Cashier c : saleController.getAllCashier(getApplicationContext())){
+					cashierMap.put(c.getUsername(), c);
+				}
 
 				username = txtUsername.getText().toString();
 				password = txtPassword.getText().toString();
