@@ -20,7 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class StockViewAllActivity extends Activity {
+public class StockViewAllItemDescriptionActivity extends Activity {
 
 	private ListView listview;
 	private SaleController saleController;

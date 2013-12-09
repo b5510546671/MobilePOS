@@ -95,10 +95,7 @@ public class HistoryFragment extends Fragment {
 				s += "\nCash : " + sales.get(position).getPayment().getInput();
 				s += "\nCustomer : "
 						+ sales.get(position).getCustomer().getName();
-				s += "\nDate : "
-						+ +(sales.get(position).getDate().getDay() + 1) + "/"
-						+ (sales.get(position).getDate().getMonth() + 1) + "/"
-						+ (sales.get(position).getDate().getYear() + 1900);
+				s += "\nDate : "+DateManager.getDateString(sales.get(position).getDate());
 
 				AlertDialog.Builder builder = new AlertDialog.Builder(
 						getActivity());

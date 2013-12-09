@@ -20,19 +20,29 @@ public class StockFragment extends Fragment{
 	private Button btViewAll;
 	private Button btAddNewProduct;
 	private Button btCreateNewMember;
+	private Button btViewAllStock;
 
 	 @Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		btNewStock = (Button)getView().findViewById(R.id.btSearch);
 		btViewAll = (Button)getView().findViewById(R.id.btStockViewAll);
 		btAddNewProduct = (Button)getView().findViewById(R.id.btStockAddNewProduct);
-		
+		btViewAllStock = (Button)getView().findViewById(R.id.btStockViewAllStock);
 		btCreateNewMember = (Button)getView().findViewById(R.id.btRegisterNewMember);
+		
+		btViewAllStock.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getActivity().getApplicationContext(), StockViewAllStock.class);
+				startActivity(intent);
+				
+			}
+		});
 		btCreateNewMember.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				//Toast.makeText(getActivity().getApplicationContext(), "Create New Stock", Toast.LENGTH_SHORT).show();
 				
 				Intent intent = new Intent(getActivity().getApplicationContext(), CustomerRegisterActivity.class);
 				startActivity(intent);
@@ -45,7 +55,6 @@ public class StockFragment extends Fragment{
 			
 			@Override
 			public void onClick(View v) {
-				//Toast.makeText(getActivity().getApplicationContext(), "Create New Stock", Toast.LENGTH_SHORT).show();
 				
 				Intent intent = new Intent(getActivity().getApplicationContext(), StockCreateNewStock.class);
 				startActivity(intent);
@@ -57,9 +66,8 @@ public class StockFragment extends Fragment{
 			
 			@Override
 			public void onClick(View v) {
-				//Toast.makeText(getActivity().getApplicationContext(), "View All Stock", Toast.LENGTH_SHORT).show();
 				
-				Intent intent = new Intent(getActivity().getApplicationContext(), StockViewAllActivity.class);
+				Intent intent = new Intent(getActivity().getApplicationContext(), StockViewAllItemDescriptionActivity.class);
 				startActivity(intent);
 				
 			}
@@ -68,7 +76,6 @@ public class StockFragment extends Fragment{
 			
 			@Override
 			public void onClick(View v) {
-				//Toast.makeText(getActivity().getApplicationContext(), "Add New Product to Stock", Toast.LENGTH_SHORT).show();
 				
 				Intent intent = new Intent(getActivity().getApplicationContext(), StockAddNewProductActivity.class);
 				startActivity(intent);

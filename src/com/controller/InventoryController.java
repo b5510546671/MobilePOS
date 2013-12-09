@@ -1,5 +1,7 @@
 package com.controller;
 
+import java.util.List;
+
 import android.content.Context;
 
 import com.core.InventoryLineItem;
@@ -27,6 +29,13 @@ public class InventoryController {
 	public ItemDescription getItemDescriptionByBarcode(Context con, String barcode){
 		return store.getItemDescriptionBook().getItemDescriptionByBarcode(con, barcode);
 	}
+	
+	public List<InventoryLineItem> getAllInventoryLineItem(Context con){
+		return store.getInventory().getAllInventoryLineItem(con);
+	}
+	
+	
+	
 	
 	public Item getItemByItemDescription(Context con,ItemDescription itemDes){
 		return store.getInventory().getItemsByItemDescription(con, itemDes).get(0);

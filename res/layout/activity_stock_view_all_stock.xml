@@ -6,29 +6,25 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".StockViewAllItemDescriptionActivity" >
+    tools:context=".StockViewAllStock" >
 
     <TextView
-        android:id="@+id/txtItemListView"
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/listViewStockAll"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/listViewStockAll"
-        android:background="@android:color/holo_orange_light"
-        android:text="Product Description"
-        android:textColor="#FFFFFF"
-        android:textColorHint="@android:color/holo_blue_bright"
-        android:textSize="20sp" />
+        android:text="TextView" />
 
     <ListView
-        android:id="@+id/listViewStockAll"
+        android:id="@+id/listViewViewAllStock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/txtItemListView"
-        android:drawSelectorOnTop="true" >
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textView1" >
 
     </ListView>
 

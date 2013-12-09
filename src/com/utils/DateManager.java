@@ -10,7 +10,13 @@ public class DateManager {
 		Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("GMT+7"));
 		
 		
-		    return cal.getTime();
- 	}
+		    return new Date();
+	}
+	
+	public static String getDateString(Date date){
+       String[] s = date.toLocaleString().split(" ");
+       String send = s[0] + " "+ s[1] + " " + s[2] ; 
+		return send;
+	}
 
 }

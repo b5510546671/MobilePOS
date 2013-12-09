@@ -79,12 +79,28 @@ public class Inventory {
 	}
 	
 	public int getQuantity(Context con){
+		return getAllItem(con).size();
+	}
+	
+	public List<Item> getAllItem(Context con){
 		InventoryDB inventoryDB = new InventoryDB(con);
-		int i = inventoryDB.findAll().size();
+		List<Item> i = inventoryDB.findAll();
 		inventoryDB.close();
 		return i;
 	}
 	
+	public List<InventoryLineItem> getAllInventoryLineItem(Context con){
+		InventoryLineItemBookDB inventoryLineItemBookDB = new InventoryLineItemBookDB(con);
+		List<InventoryLineItem> i = inventoryLineItemBookDB.findAll();
+		inventoryLineItemBookDB.close();
+		return i;
+	}
 	
+	public boolean isSold(Context con , Item item){
+		InventoryDB inventoryDB = new InventoryDB(con);
+		int i = inventoryDB.getSaleId(item);
+		inventoryDB.close();
+		return i != -1;
+	}
 	
 }

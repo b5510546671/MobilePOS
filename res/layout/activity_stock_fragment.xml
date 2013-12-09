@@ -58,29 +58,39 @@
        	android:background="@drawable/btn_yellow"/>
 
     <Button
-        android:id="@+id/btRegisterNewMember"
+        android:id="@+id/btStockViewAllStock"
         style="@style/ButtonText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/btStockAddNewProduct"
         android:layout_alignRight="@+id/btStockAddNewProduct"
-        android:layout_below="@+id/TextView01"
-        android:layout_marginTop="28dp"
+        android:layout_below="@+id/btStockAddNewProduct"
         android:background="@drawable/btn_yellow"
-        android:text="Register new member" />
+        android:text="View All Stock" />
 
     <TextView
         android:id="@+id/TextView01"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/btStockAddNewProduct"
-        android:layout_alignRight="@+id/btStockAddNewProduct"
-        android:layout_below="@+id/btStockAddNewProduct"
+        android:layout_alignLeft="@+id/btStockViewAllStock"
+        android:layout_alignRight="@+id/btStockViewAllStock"
+        android:layout_below="@+id/btStockViewAllStock"
         android:background="#FFFFFF"
         android:gravity="center"
         android:text="Member Manager"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/pressed_sikarinstyle"
         android:textSize="30dp" />
+
+    <Button
+        android:id="@+id/btRegisterNewMember"
+        style="@style/ButtonText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/TextView01"
+        android:layout_alignRight="@+id/TextView01"
+        android:layout_below="@+id/TextView01"
+        android:background="@drawable/btn_yellow"
+        android:text="Register new member" />
 
 </RelativeLayout>

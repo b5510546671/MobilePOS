@@ -65,12 +65,6 @@ public class LoginFallAnimationActivity extends Activity {
 		setContentView(R.layout.activity_login_fall);
 		saleController = SaleController.getInstance();
 
-//		// TODO delete after cashier database finished
-//		Cashier c = new Cashier(1, "Sikarin", "1", "1");
-//		cashierMap.put(c.getUsername(), c);
-
-		// TODO getCashier from the database
-		//saleController.getAllCashier(getApplicationContext());
 		
 
 		Display display = getWindowManager().getDefaultDisplay();
@@ -127,6 +121,7 @@ public class LoginFallAnimationActivity extends Activity {
 					if (cash.getPassword().equals(password)) {
 						Intent intent = new Intent(getApplicationContext(),MainActivity.class);
 						intent.putExtra("cashier", cash);
+						finish();
 						
 						startActivity(intent);
 					} else {

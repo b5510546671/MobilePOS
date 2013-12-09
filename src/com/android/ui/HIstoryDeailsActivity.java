@@ -12,6 +12,7 @@ import com.core.Customer;
 import com.core.Item;
 import com.core.Payment;
 import com.core.Sale;
+import com.utils.DateManager;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -70,8 +71,7 @@ public class HIstoryDeailsActivity extends Activity {
 		btOK = (Button) findViewById(R.id.btHistoryDetailsOk);
 		productListView = (ListView) findViewById(R.id.listViewHistoryDetailsProduct);
 
-		String dateString = (date.getDay() + 1) + "/" + (date.getMonth() + 1)
-				+ "/" + (date.getYear() + 1900);
+		String dateString = DateManager.getDateString(date);
 		txtDate.setText(dateString);
 		txtDate.setEnabled(false);
 		txtCash.setText(payment.getInput() + "");

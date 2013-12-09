@@ -1,5 +1,6 @@
 package com.android.ui;
 
+import java.util.Date;
 import java.util.List;
 
 import android.app.Activity;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import com.android.softspectproject.R;
 import com.core.Item;
 import com.core.Sale;
+import com.utils.DateManager;
 
 public class HistoryCustomArrayAdapter extends ArrayAdapter<Sale> {
 	private List<Sale> sales;
@@ -36,7 +38,7 @@ public class HistoryCustomArrayAdapter extends ArrayAdapter<Sale> {
 	LayoutInflater inflater = context.getLayoutInflater();
 	View rowView= inflater.inflate(R.layout.sale_listview, null, true);
 	TextView txtTitle = (TextView) rowView.findViewById(R.id.txtSaleDetail);
-	txtTitle.setText("Sale ID : " + sales.get(position).getID() + " (  Date :" + (sales.get(position).getDate().getDay()+1)+"/"+(sales.get(position).getDate().getMonth()+1) + "/" + (sales.get(position).getDate().getYear()+1900)+")");
+	txtTitle.setText("Sale ID : " + sales.get(position).getID() + " (  Date :" + DateManager.getDateString(sales.get(position).getDate())+")");
 	 
 	
 	

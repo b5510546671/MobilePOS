@@ -181,4 +181,16 @@ public class InventoryDB extends GenericDao implements InventoryDao{
 		}
 		return item;
 	}
+
+	@Override
+	public int getSaleId(Item item) {
+		String[] columns = new String[]{Item.COL_SALE_ID};
+		Cursor cursor = super.get(Item.DATABASE_TABLE , columns , GenericDao.KEY_ID + " = " + item.getID());
+		if(cursor != null){
+			int _saleId = cursor.getColumnIndex(Item.COL_SALE_ID);
+			cursor.moveToFirst();
+			return cursor.getInt(_saleId);
+		}
+		return 0;
+	}
 }

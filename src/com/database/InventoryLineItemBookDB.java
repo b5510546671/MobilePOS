@@ -1,7 +1,7 @@
 package com.database;
 
-import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -12,8 +12,6 @@ import android.database.Cursor;
 import com.core.Cashier;
 import com.core.InventoryLineItem;
 import com.core.Item;
-import com.core.Payment;
-import com.core.Sale;
 
 public class InventoryLineItemBookDB extends GenericDao implements
 		InventoryLineItemBookDao {
@@ -57,7 +55,7 @@ public class InventoryLineItemBookDB extends GenericDao implements
 				CashierBookDB cashDB = new CashierBookDB(getContext());
 				Cashier cashier = cashDB.findBy(cursor.getInt(_cash));
 				cashDB.close();
-				inventoryLineItem = new InventoryLineItem(cursor.getInt(_id),list , new Date(cursor.getInt(_date)) , cashier);
+				inventoryLineItem = new InventoryLineItem(cursor.getInt(_id),list , new Date(cursor.getLong(_date)) , cashier);
 				
 			}
 		}
@@ -75,23 +73,20 @@ public class InventoryLineItemBookDB extends GenericDao implements
 			int _id = cursor.getColumnIndex(GenericDao.KEY_ID);
 			if(cursor.moveToFirst()){
 				InventoryDB inventoryDB = new InventoryDB(getContext());
+				CashierBookDB cashDB = new CashierBookDB(getContext());
 				HashMap<Integer, Cashier> cashMap = new HashMap<Integer, Cashier>();
 				for(int i = 0 ; i < cursor.getCount() ; i++){
-					int cashierId = cursor.getInt(_id);
+					int cashierId = cursor.getInt(_cash);
 					Cashier cashier;
-					if(cashMap.containsKey(cursor.getInt(cashierId))) cashier = cashMap.get(cashierId);
-					else {
-						CashierBookDB cashDB = new CashierBookDB(getContext());
-						cashier = cashDB.findBy(cashierId);
-						cashDB.close();
-						cashMap.put(cashierId, cashier);
-					}
+					if(!cashMap.containsKey(cursor.getInt(cashierId))) cashMap.put(cashierId, cashDB.findBy(cashierId));
+					cashier = cashMap.get(cursor.getInt(cashierId));
 					inventoryLineItems.add(
-							new InventoryLineItem(cursor.getInt(_id), inventoryDB.findByInventoryLineItemID(cursor.getInt(_id)) , new Date(cursor.getInt(_date)) , cashier)
+							new InventoryLineItem(cursor.getInt(_id), inventoryDB.findByInventoryLineItemID(cursor.getInt(_id)) , new Date(cursor.getLong(_date)) , cashier)
 					);
 					cursor.moveToNext();
 				}
 				inventoryDB.close();
+				cashDB.close();
 			}
 		}
 		return inventoryLineItems;
