@@ -78,8 +78,8 @@ public class InventoryLineItemBookDB extends GenericDao implements
 				for(int i = 0 ; i < cursor.getCount() ; i++){
 					int cashierId = cursor.getInt(_cash);
 					Cashier cashier;
-					if(!cashMap.containsKey(cursor.getInt(cashierId))) cashMap.put(cashierId, cashDB.findBy(cashierId));
-					cashier = cashMap.get(cursor.getInt(cashierId));
+					if(!cashMap.containsKey(cashierId)) cashMap.put(cashierId, cashDB.findBy(cashierId));
+					cashier = cashMap.get(cashierId);
 					inventoryLineItems.add(
 							new InventoryLineItem(cursor.getInt(_id), inventoryDB.findByInventoryLineItemID(cursor.getInt(_id)) , new Date(cursor.getLong(_date)) , cashier)
 					);
