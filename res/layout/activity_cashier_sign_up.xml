@@ -9,7 +9,7 @@
     tools:context=".CashierSignUpActivity" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/txtStockDetails"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -47,7 +47,7 @@
         android:id="@+id/txtSignUpUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
+        android:layout_alignLeft="@+id/txtStockDetails"
         android:layout_alignRight="@+id/txtSignUpName"
         android:layout_below="@+id/txtSignUpName"
         android:ems="10"
@@ -57,9 +57,9 @@
         android:id="@+id/txtSignUpName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_alignRight="@+id/textView1"
-        android:layout_below="@+id/textView1"
+        android:layout_alignLeft="@+id/txtStockDetails"
+        android:layout_alignRight="@+id/txtStockDetails"
+        android:layout_below="@+id/txtStockDetails"
         android:ems="10"
         android:hint="Name"
         android:inputType="textPersonName" >

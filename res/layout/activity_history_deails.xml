@@ -9,7 +9,7 @@
     tools:context=".HistoryDetailsActivity" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/txtStockDetails"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -24,8 +24,8 @@
         android:id="@+id/txtHistoryDetailsDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textView1"
-        android:layout_below="@+id/textView1"
+        android:layout_alignRight="@+id/txtStockDetails"
+        android:layout_below="@+id/txtStockDetails"
         android:layout_toRightOf="@+id/TextView01"
         android:ems="10"
         android:hint="Date" >
@@ -97,7 +97,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/txtHistoryDetailsDate"
         android:layout_alignBottom="@+id/txtHistoryDetailsDate"
-        android:layout_alignLeft="@+id/textView1"
+        android:layout_alignLeft="@+id/txtStockDetails"
         android:text="Date"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="16sp" />

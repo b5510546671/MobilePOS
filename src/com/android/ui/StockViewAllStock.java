@@ -38,6 +38,8 @@ public class StockViewAllStock extends Activity {
 		inventoryLineItems.clear();
 		for(InventoryLineItem i : inventoryController.getAllInventoryLineItem(getApplicationContext())){
 			inventoryLineItems.add(i);
+			
+			if(i.getCashier()==null) Toast.makeText(getApplicationContext(), "Cashier Null", 1).show();
 		}
 		
 		setContentView(R.layout.activity_stock_view_all_stock);

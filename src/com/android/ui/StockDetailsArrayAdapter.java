@@ -18,8 +18,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class CashierCustomArrayAdapter extends ArrayAdapter<Item> {
+public class StockDetailsArrayAdapter extends ArrayAdapter<Item> {
 
 	
 	private List<Item> items;
@@ -27,8 +28,8 @@ public class CashierCustomArrayAdapter extends ArrayAdapter<Item> {
 	
 	
 
-	public CashierCustomArrayAdapter(Activity context, List<Item> items) {
-		super(context, R.layout.cashier_listview, items);
+	public StockDetailsArrayAdapter(Activity context, List<Item> items) {
+		super(context, R.layout.stock_details_list_item, items);
 		this.context =  context;
 		this.items = items;
 	}
@@ -41,21 +42,20 @@ public class CashierCustomArrayAdapter extends ArrayAdapter<Item> {
 	@Override
 	public View getView(final int position, View view, ViewGroup parent) {
 	LayoutInflater inflater = context.getLayoutInflater();
-	View rowView= inflater.inflate(R.layout.cashier_listview, null, true);
-	TextView txtTitle = (TextView) rowView.findViewById(R.id.txtItemListView);
+	View rowView= inflater.inflate(R.layout.stock_details_list_item, null, true);
+	TextView txtTitle = (TextView) rowView.findViewById(R.id.txtStockDetailListItem);
 	txtTitle.setText(items.get(position).toString());
-	 Button btRemove = (Button) rowView.findViewById(R.id.btItemListView);
-	//ImageView imageView = (ImageView) rowView.findViewById(R.id.img);
-	 
-	 btRemove.setOnClickListener(new OnClickListener() {
-		
+	 Button btRemove = (Button) rowView.findViewById(R.id.btDelete);
+	 btRemove.setOnClickListener(new OnClickListener() 
+	 {
 		@Override
 		public void onClick(View v) {
-			items.remove(position);
-			notifyDataSetChanged();
-			
+			Toast.makeText(context, "Delete position : " +position, 1).show();
 		}
 	});
+	
+	 
+	 
 	return rowView;
 	}
 	

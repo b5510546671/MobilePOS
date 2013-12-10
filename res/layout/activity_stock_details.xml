@@ -21,31 +21,32 @@
         android:textSize="20dp" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/txtStockDetails"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView2"
         android:layout_alignRight="@+id/textView2"
         android:layout_below="@+id/textView2"
-        android:text="TextView" />
+        android:text="TextView"
+        android:textSize="20dp" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/btFinishStockDetails"
+        style="@style/ButtonText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
+        android:layout_alignLeft="@+id/txtStockDetails"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:text="Finish"
-        style="@style/ButtonText"
-       	android:background="@drawable/btn_yellow" />
+        android:background="@drawable/btn_yellow"
+        android:text="Finish" />
 
     <ListView
-        android:id="@+id/listView1"
+        android:id="@+id/listViewStockDetails"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button1"
-        android:layout_below="@+id/textView1" >
+        android:layout_above="@+id/btFinishStockDetails"
+        android:layout_below="@+id/txtStockDetails" >
 
     </ListView>
 

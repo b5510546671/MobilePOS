@@ -84,12 +84,14 @@ public final class R {
         public static final int TextView04=0x7f070035;
         public static final int TextView05=0x7f07003a;
         public static final int TextView06=0x7f070039;
-        public static final int action_settings=0x7f070068;
+        public static final int action_settings=0x7f07006a;
         public static final int aniImageView=0x7f070064;
         public static final int btAddNewProductDescriptionScanBarcode=0x7f070055;
         public static final int btContinue=0x7f070004;
+        public static final int btDelete=0x7f070068;
         public static final int btEditOK=0x7f07002a;
         public static final int btEditProfileOK=0x7f070014;
+        public static final int btFinishStockDetails=0x7f07005a;
         public static final int btHistoryDetailsOk=0x7f07003d;
         public static final int btItemListView=0x7f070058;
         public static final int btLoginFall=0x7f07004a;
@@ -113,7 +115,6 @@ public final class R {
         public static final int btn_add_inv=0x7f070044;
         public static final int btn_remove_inv=0x7f070045;
         public static final int btn_sale_inv=0x7f070046;
-        public static final int button1=0x7f07005a;
         public static final int cashierButtonOK=0x7f07001e;
         public static final int cashierListView=0x7f070020;
         public static final int content_frame=0x7f07004f;
@@ -121,11 +122,11 @@ public final class R {
         public static final int imgLoginFall=0x7f07004d;
         public static final int left_drawer=0x7f070050;
         public static final int linearLayout1=0x7f070008;
-        public static final int listView1=0x7f07005b;
         public static final int listViewAllSale=0x7f070041;
         public static final int listViewHistoryDetailsProduct=0x7f07003e;
         public static final int listViewProductSearch=0x7f070052;
         public static final int listViewStockAll=0x7f070060;
+        public static final int listViewStockDetails=0x7f07005b;
         public static final int listViewViewAllStock=0x7f070061;
         public static final int main_layout=0x7f07004b;
         public static final int pager=0x7f070002;
@@ -135,7 +136,6 @@ public final class R {
         public static final int radioGroup1=0x7f070005;
         public static final int scrollView1=0x7f07000c;
         public static final int spinnerReport=0x7f070040;
-        public static final int textView1=0x7f07001a;
         public static final int textView2=0x7f07001b;
         public static final int textView3=0x7f070016;
         public static final int textView4=0x7f07001c;
@@ -175,6 +175,8 @@ public final class R {
         public static final int txtSignUpName=0x7f070025;
         public static final int txtSignUpPassword=0x7f070022;
         public static final int txtSignUpUsername=0x7f070023;
+        public static final int txtStockDetailListItem=0x7f070069;
+        public static final int txtStockDetails=0x7f07001a;
         public static final int txtTotalPrice=0x7f07000b;
         public static final int txtViewAll=0x7f070062;
         public static final int txtWishListShow=0x7f070001;
@@ -220,6 +222,7 @@ public final class R {
         public static final int sale_listview=0x7f030021;
         public static final int search_listview=0x7f030022;
         public static final int simple_spinner_item=0x7f030023;
+        public static final int stock_details_list_item=0x7f030024;
     }
     public static final class menu {
         public static final int cashier=0x7f0a0000;

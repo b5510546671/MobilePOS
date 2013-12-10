@@ -145,10 +145,13 @@ public class StockCreateNewStock extends Activity {
 				InventoryLineItem i = new InventoryLineItem(-1, items,
 						DateManager.getCurrentDate(), SaleController
 								.getInstance().getCashier());
+				
+				
 
 				InventoryLineItem getInven = inventoryController
 						.addinventoryLineItemToInventory(
 								getApplicationContext(), i);
+				
 
 				// TODO Auto-generated method stub
 				AlertDialog.Builder builder = new AlertDialog.Builder(

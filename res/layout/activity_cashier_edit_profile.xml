@@ -59,9 +59,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/txtEditProfileName"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_alignRight="@+id/textView1"
-        android:layout_below="@+id/textView1"
+        android:layout_alignLeft="@+id/txtStockDetails"
+        android:layout_alignRight="@+id/txtStockDetails"
+        android:layout_below="@+id/txtStockDetails"
         android:text="TextView"
         android:textSize="20sp" />
 
@@ -93,7 +93,7 @@
         android:text="Password" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/txtStockDetails"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
