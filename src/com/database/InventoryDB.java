@@ -15,16 +15,26 @@ import com.core.Item;
 import com.core.ItemDescription;
 import com.core.database.Inventory;
 
+/**
+* Inventory DataAccessObject for SQLite.
+* @author Krittayot Techasombooranakit 5510545976
+*/
 public class InventoryDB extends GenericDao implements InventoryDao{
 	
 	private Context context;
 	
+	/**
+	 * Constructor of database.
+	 * @param context od application.
+	 */
 	public InventoryDB(Context context){
 		super(context, GenericDao.dName, Item.TABLE_CREATE, Item.DATABASE_TABLE, Item.DATABASE_VERSION);
 		this.context = context;
 	}
-	
-	//checked
+
+	/**
+	 * @see com.database.InventoryDao#insert(com.core.InventoryLineItem)
+	 */
 	@Override
 	public InventoryLineItem insert(InventoryLineItem inventoryLineItem) {
 		InventoryLineItemBookDB inventoryLineItemDB = new InventoryLineItemBookDB(context);
@@ -38,7 +48,9 @@ public class InventoryDB extends GenericDao implements InventoryDao{
 		return new InventoryLineItem(inventoryLineItem.getID(), inventoryLineItem.getItems(), inventoryLineItem.getDate() , inventoryLineItem.getCashier());
 	}
 
-	//checked
+	/**
+	 * @see com.database.InventoryDao#insert(int, com.core.Item)
+	 */
 	@Override
 	public Item insert(int inventoryLineItem_id , Item item) {
 		ContentValues cv = new ContentValues();
@@ -51,12 +63,17 @@ public class InventoryDB extends GenericDao implements InventoryDao{
 		return new Item((int)super.insert(Item.DATABASE_TABLE, cv) , item.getItemDescription() ,item.getCost() , item.getImei());
 	}
 
-	//checked
+	/**
+	 * @see com.database.InventoryDao#deleteItemByID(int)
+	 */
 	@Override
 	public int deleteItemByID(int id) {
 		return super.delete(Item.DATABASE_TABLE,GenericDao.KEY_ID + " = " + id, null);
 	}
 	
+	/**
+	 * @see com.database.InventoryDao#findAll()
+	 */
 	@Override
 	public ArrayList<Item> findAll() {
 		String[] columns = new String[]{GenericDao.KEY_ID ,Item.COL_DESCRIPTION_ID , Item.COL_IMEI , Item.COL_COST};
@@ -86,6 +103,9 @@ public class InventoryDB extends GenericDao implements InventoryDao{
 		return itds;
 	}
 
+	/**
+	 * @see com.database.InventoryDao#findQuantity(int)
+	 */
 	@Override
 	public int findQuantity(int descId) {
 		String[] columns = new String[]{GenericDao.KEY_ID ,Item.COL_INVENTORYLINEITEM_ID};
@@ -97,6 +117,9 @@ public class InventoryDB extends GenericDao implements InventoryDao{
 		return 0;
 	}
 	
+	/**
+	 * @see com.database.InventoryDao#updateSaleID(int, com.core.Item)
+	 */
 	@Override
 	public int updateSaleID(int sale_id , Item item) {
 		ContentValues cv = new ContentValues();
@@ -106,6 +129,9 @@ public class InventoryDB extends GenericDao implements InventoryDao{
 		//return super.update(Item.DATABASE_TABLE, item.getID(), cv);
 	}
 
+	/**
+	 * @see com.database.InventoryDao#findByID(int)
+	 */
 	@Override
 	public Item findByID(int id) {
 		String[] columns = new String[]{GenericDao.KEY_ID ,Item.COL_DESCRIPTION_ID , Item.COL_IMEI , Item.COL_COST};
@@ -124,6 +150,9 @@ public class InventoryDB extends GenericDao implements InventoryDao{
 		return item;
 	}
 
+	/**
+	 * @see com.database.InventoryDao#deleteItemsAndInventoryLineItemByInventoryLineItemID(int)
+	 */
 	@Override
 	public int deleteItemsAndInventoryLineItemByInventoryLineItemID(int inventoryLineItem_id) {
 		InventoryLineItemBookDB inventoryLineItemBookDB = new InventoryLineItemBookDB(getContext());
@@ -132,6 +161,9 @@ public class InventoryDB extends GenericDao implements InventoryDao{
 		return super.delete(Item.DATABASE_TABLE, Item.COL_INVENTORYLINEITEM_ID +"="+ inventoryLineItem_id , null);
 	}
 
+	/**
+	 * @see com.database.InventoryDao#findByDescriptionID(int)
+	 */
 	@Override
 	public ArrayList<Item> findByDescriptionID(int itemDescription_id) {
 		String[] columns = new String[]{GenericDao.KEY_ID , Item.COL_DESCRIPTION_ID};
@@ -140,6 +172,9 @@ public class InventoryDB extends GenericDao implements InventoryDao{
 	}
 
 	
+	/**
+	 * @see com.database.InventoryDao#findByInventoryLineItemID(int)
+	 */
 	@Override
 	public List<Item> findByInventoryLineItemID(int inventoryLineItem_id) {
 		String[] columns = new String[]{GenericDao.KEY_ID ,Item.COL_DESCRIPTION_ID , Item.COL_IMEI , Item.COL_COST};
@@ -147,7 +182,9 @@ public class InventoryDB extends GenericDao implements InventoryDao{
 		return getItemFromCursor(cursor);
 	}
 
-	//Checked
+	/**
+	 * @see com.database.InventoryDao#findBySaleID(int)
+	 */
 	@Override
 	public List<Item> findBySaleID(int id) {
 		String[] columns = new String[]{GenericDao.KEY_ID ,Item.COL_DESCRIPTION_ID , Item.COL_IMEI , Item.COL_COST};
@@ -155,7 +192,9 @@ public class InventoryDB extends GenericDao implements InventoryDao{
 		return getItemFromCursor(cursor);
 	}
 
-	//Checked
+	/**
+	 * @see com.database.InventoryDao#moveToStockBySaleID(int)
+	 */
 	@Override
 	public int moveToStockBySaleID(int sale_id) {
 		ContentValues cv = new ContentValues();
@@ -163,6 +202,9 @@ public class InventoryDB extends GenericDao implements InventoryDao{
 		return super.update( Item.DATABASE_TABLE , Item.COL_SALE_ID + "=" + sale_id , cv);
 	}
 
+	/**
+	 * @see com.database.InventoryDao#findByImei(java.lang.String)
+	 */
 	@Override
 	public Item findByImei(String id) {
 		String[] columns = new String[]{GenericDao.KEY_ID ,Item.COL_DESCRIPTION_ID , Item.COL_IMEI , Item.COL_DESCRIPTION_ID};
@@ -182,6 +224,9 @@ public class InventoryDB extends GenericDao implements InventoryDao{
 		return item;
 	}
 
+	/**
+	 * @see com.database.InventoryDao#getSaleId(com.core.Item)
+	 */
 	@Override
 	public int getSaleId(Item item) {
 		String[] columns = new String[]{Item.COL_SALE_ID};

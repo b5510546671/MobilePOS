@@ -32,13 +32,7 @@ public class InventoryLineItemBookDB extends GenericDao implements
 	public int delete(int inventoryLineItemId) {
 		return (int)super.delete(InventoryLineItem.DATABASE_TABLE , inventoryLineItemId);
 	}
-
-	/*@Override
-	public int update(InventoryLineItem ili) {
-		// TODO Auto-generated method stub
-		return 0;
-	}*/
-
+	
 	@Override
 	public InventoryLineItem findByID(int id) {
 		String[] columns = new String[]{GenericDao.KEY_ID , InventoryLineItem.COL_DATE , InventoryLineItem.COL_CASHIER_ID};

@@ -9,16 +9,33 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-public class GenericDao extends SQLiteOpenHelper {
+/**
+ * GenericDao super of all dao database.
+ * @author Krittayot Techasombooranakit 5510545976
+ */
+public abstract class GenericDao extends SQLiteOpenHelper {
 
     private static final String TAG = "GenericDao";
     private SQLiteDatabase db;
+    /**
+     * database .db file name.
+     */
     public static String dName = "posData";
+    /**
+     * primary kay of general database table.
+     */
+    public static final String KEY_ID = "_id";
     private String tName;
     private String sql;
-    public static final String KEY_ID = "_id";
     private Context context;
     
+    /**
+     * @param ctx as context of application.
+     * @param dbName as a name of .db file.
+     * @param sql
+     * @param tableName
+     * @param ver
+     */
     public GenericDao(Context ctx, String dbName, String sql, String tableName, int ver){
         super(ctx, dbName, null, ver);
         this.context = ctx;
@@ -40,6 +57,9 @@ public class GenericDao extends SQLiteOpenHelper {
         }
     }
 
+    /**
+     * @see android.database.sqlite.SQLiteOpenHelper#close()
+     */
     public void close(){ 
             Log.i(TAG, "Closing the database [ " + dName + " ].");
             db.close(); 
