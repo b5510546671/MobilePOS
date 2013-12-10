@@ -2,20 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_2"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".CustomerRegisterActivity" >
-
-    <TextView
-        android:id="@+id/txtItemListView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="Customer Register"
-        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/txtSearchProduct"
@@ -25,7 +17,8 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/txtItemListView"
         android:ems="10"
-        android:hint="Name" >
+        android:hint="Name"
+         >
 
         <requestFocus />
     </EditText>
@@ -50,5 +43,18 @@
         style="@style/ButtonText"
        	android:background="@drawable/btn_yellow"
         android:text="OK" />
+
+    <TextView
+        android:id="@+id/txtItemListView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/txtSearchProduct"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="@android:color/holo_orange_light"
+        android:text="Customer Register"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp" 
+        android:gravity="center"/>
 
 </RelativeLayout>
