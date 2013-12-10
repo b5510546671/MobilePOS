@@ -6,7 +6,6 @@ import java.util.List;
 import com.android.softspectproject.R;
 import com.android.softspectproject.R.layout;
 import com.android.softspectproject.R.menu;
-import com.android.softspectproject.StockDetailsActivity;
 import com.controller.InventoryController;
 import com.core.Cashier;
 import com.core.InventoryLineItem;
@@ -31,6 +30,9 @@ public class StockViewAllStock extends Activity {
 	private List<InventoryLineItem> inventoryLineItems= new ArrayList<InventoryLineItem>();
 	private InventoryController inventoryController;
 
+	/* 
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

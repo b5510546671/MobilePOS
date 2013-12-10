@@ -51,6 +51,8 @@ public class StockDetailsArrayAdapter extends ArrayAdapter<Item> {
 		@Override
 		public void onClick(View v) {
 			Toast.makeText(context, "Delete position : " +position, 1).show();
+			items.remove(position);
+			notifyDataSetChanged();
 		}
 	});
 	

@@ -86,7 +86,7 @@
             android:label="@string/title_activity_stock_view_all_stock" >
         </activity>
         <activity
-            android:name="com.android.softspectproject.StockDetailsActivity"
+            android:name="com.android.ui.StockDetailsActivity"
             android:label="@string/title_activity_stock_details" >
         </activity>
     </application>
