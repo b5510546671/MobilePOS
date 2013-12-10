@@ -6,6 +6,11 @@ import java.util.Date;
 
 import android.content.Context;
 
+
+/**
+ * @author Apiwat //TODO
+ * Cashier or operator who control POS (using for login and piority of employee)
+ */
 public class Cashier implements Serializable{
 	
 	  public static final String DATABASE_TABLE = "CashierBook";

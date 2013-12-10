@@ -3,6 +3,10 @@ package com.core;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * @author Apiwat //TODO
+ * 	Customer with information.
+ */
 public class Customer implements Serializable {
     public static final String DATABASE_TABLE = "CustomerBook";
     public static final int DATABASE_VERSION = 1;

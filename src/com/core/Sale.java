@@ -6,6 +6,10 @@ import java.util.Date;
 import java.util.List;
 
 
+/**
+ * @author //TODO
+ * Sale which contains items and any information of a sale.
+ */
 public class Sale implements Serializable {
 	public static final String DATABASE_TABLE = "SaleLadger";
     public static final int DATABASE_VERSION = 1;

@@ -2,6 +2,10 @@ package com.core;
 
 import java.io.Serializable;
 
+/**
+ * @author Apiwat //TODO
+ * Item of pos system.
+ */
 public class Item implements Serializable {
     public static final String DATABASE_TABLE = "Inventory";
     public static final int DATABASE_VERSION = 1;

@@ -2,6 +2,10 @@ package com.core;
 
 import java.io.Serializable;
 
+/**
+ * @author Supavit //TODO
+ * itemDescription for information of product.
+ */
 public class ItemDescription implements Serializable {
     public static final String DATABASE_TABLE = "ItemDescriptionBook";
     public static final int DATABASE_VERSION = 1;

@@ -4,6 +4,10 @@ import java.io.Serializable;
 import java.io.StringWriter;
 
 
+/**
+ * @author Apiwat //TODO
+ * payment data of each sale (for future include tax or more information).
+ */
 public class Payment implements Serializable {
 	public static final String DATABASE_TABLE = "PaymentBook";
     public static final int DATABASE_VERSION = 1;

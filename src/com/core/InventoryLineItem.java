@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * @author Apiwat //TODO
+ *	Lot of items create for put it together in to stock inventory at once.
+ */
 public class InventoryLineItem implements Serializable{
 	 public static final String DATABASE_TABLE = "InventoryLineItemBook";
 	 public static final int DATABASE_VERSION = 1;
