@@ -33,6 +33,11 @@ public class CashierSignUpActivity extends Activity {
 	 */
 	private EditText txtPassword;
 	/**
+	 * txtConfirmPassword is the confirm password EditText to sign up.
+	 */
+	private EditText txtConfirmPassword;
+	
+	/**
 	 * btOK is the OK Button to confirm signing up.
 	 */
 	private Button btOK;
@@ -68,41 +73,68 @@ public class CashierSignUpActivity extends Activity {
 		txtPassword = (EditText)findViewById(R.id.txtSignUpPassword);
 		txtName = (EditText)findViewById(R.id.txtSignUpName);
 		btOK = (Button)findViewById(R.id.btSignUpOK);
+		txtConfirmPassword = (EditText)findViewById(R.id.txtSignUpConfirmPassword);
 		
 		btOK.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
+				String confirm = txtConfirmPassword.getText().toString();
 				username = txtUsername.getText().toString();
 				password = txtPassword.getText().toString();
 				name = txtName.getText().toString();
-				final Cashier cashier = new Cashier(-1, name, username, password);
-				
-				AlertDialog.Builder builder = new AlertDialog.Builder(CashierSignUpActivity.this);
-				builder.setTitle("Sign up Confirmation");
-				builder.setMessage("Are You sure want to Sign Up?");
-				
-				builder.setNegativeButton("OK",
-						new DialogInterface.OnClickListener() {
-
-							@Override
-							public void onClick(
-									DialogInterface arg0,
-									int arg1) {
-								Cashier c = cashierBookController.addCashierToCashierBook(getApplicationContext(), cashier);
-								finish();
-							}
-						});
-				builder.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
+				if(!confirm.equals(password)){
+					final Cashier cashier = new Cashier(-1, name, username, password);
 					
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						finish();
-						
-					}
-				});
+					AlertDialog.Builder builder = new AlertDialog.Builder(CashierSignUpActivity.this);
+					builder.setTitle("Password Wrong!");
+					builder.setMessage("Password and Confirm Password not correct!");
+					
+					builder.setNegativeButton("OK",
+							new DialogInterface.OnClickListener() {
 
-				builder.show();
+								@Override
+								public void onClick(
+										DialogInterface arg0,
+										int arg1) {
+									txtPassword.setText("");
+									txtConfirmPassword.setText("");
+									
+								}
+							});
+					
+
+					builder.show();
+				}
+				else {
+					final Cashier cashier = new Cashier(-1, name, username, password);
+					
+					AlertDialog.Builder builder = new AlertDialog.Builder(CashierSignUpActivity.this);
+					builder.setTitle("Sign up Confirmation");
+					builder.setMessage("Are You sure want to Sign Up?");
+					
+					builder.setNegativeButton("OK",
+							new DialogInterface.OnClickListener() {
+
+								@Override
+								public void onClick(
+										DialogInterface arg0,
+										int arg1) {
+									Cashier c = cashierBookController.addCashierToCashierBook(getApplicationContext(), cashier);
+									finish();
+								}
+							});
+					builder.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
+						
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							finish();
+							
+						}
+					});
+
+					builder.show();
+				}
 				
 			}
 		});

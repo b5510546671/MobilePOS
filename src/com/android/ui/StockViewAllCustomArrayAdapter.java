@@ -57,6 +57,7 @@ public class StockViewAllCustomArrayAdapter extends ArrayAdapter<ItemDescription
 	TextView txtTitle = (TextView) rowView.findViewById(R.id.txtViewAll);
 	txtTitle.setText(itemDescriptions.get(position).toString());
 	Button btEdit = (Button) rowView.findViewById(R.id.btViewAllEdit);
+	btEdit.setText("...");
 	btEdit.setOnClickListener(new OnClickListener() {
 		
 		@Override
@@ -75,7 +76,6 @@ public class StockViewAllCustomArrayAdapter extends ArrayAdapter<ItemDescription
 
                 @Override
                 public void onClick(DialogInterface arg0, int arg1) {
-                    Toast.makeText(context, "OK", Toast.LENGTH_SHORT).show();
                 	
                 }
             });

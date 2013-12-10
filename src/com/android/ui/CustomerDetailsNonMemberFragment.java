@@ -81,7 +81,7 @@ public class CustomerDetailsNonMemberFragment extends Fragment {
 				
 				AlertDialog alertDialog1 = new AlertDialog.Builder(getActivity()).create();
 
-				Customer c = new Customer(-1, "none",DateManager.getCurrentDate(),txtNonMemberEmail.getText().toString());
+				final Customer c = new Customer(-1, "none",DateManager.getCurrentDate(),txtNonMemberEmail.getText().toString());
 				saleController.setCurrentCustomer(c);	
 				Sale sale = saleController.getCurrentSale(getActivity(),DateManager.getCurrentDate());
 				
@@ -101,9 +101,9 @@ public class CustomerDetailsNonMemberFragment extends Fragment {
 										int which) {
 									
 									Intent newActivity = new Intent(Intent.ACTION_SEND);
-									String email="deknaew_bws@hotmail.com";
+									String email=c.getEmail();
 									String subject="Receipt from POS mobile";
-									String message="Thnk You For Shopping";
+									String message="Thank You For Shopping";
 									newActivity.putExtra(Intent.EXTRA_EMAIL,email);         
 									newActivity.putExtra(Intent.EXTRA_SUBJECT, subject);
 									newActivity.putExtra(Intent.EXTRA_TEXT, message);

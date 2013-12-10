@@ -115,7 +115,6 @@ public class MainActivity extends Activity {
         cashier = (Cashier) getIntent().getSerializableExtra("cashier");
         
         if(cashier != null){
-        	Toast.makeText(getApplicationContext(), "Cashier : "+cashier.getName(), 1).show();
         	saleController.setCurrentCashier(cashier);
         }
         

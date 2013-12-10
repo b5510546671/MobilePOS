@@ -140,7 +140,7 @@ public class CustomerDetailsMemberedFragment extends Fragment {
 									//saleController.setCustomer(customer);
 									Sale sale = saleController.getCurrentSale(getActivity().getApplicationContext(),DateManager.getCurrentDate());
 									Intent newActivity = new Intent(Intent.ACTION_SEND);
-									String[] email=new String[]{"deknaew_bws@hotmail.com"};
+									String[] email=new String[]{customer.getEmail()};
 									String subject="Receipt from POS mobile";
 									String message="Thnk You For Shopping";
 									newActivity.putExtra(Intent.EXTRA_EMAIL,email);         
@@ -148,7 +148,7 @@ public class CustomerDetailsMemberedFragment extends Fragment {
 									newActivity.putExtra(Intent.EXTRA_TEXT, message);
 									newActivity.setType("plain/text");
 									startActivity(Intent.createChooser(newActivity, "Email Sending Option :"));
-									
+									getActivity().finish();
 									
 								}
 							});
