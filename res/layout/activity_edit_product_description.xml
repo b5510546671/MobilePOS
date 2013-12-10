@@ -120,6 +120,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/txtEditPrice"
+        android:layout_alignRight="@+id/txtStockDetails"
         android:layout_toRightOf="@+id/TextView01"
         android:ems="10"
         android:hint="Cost"
@@ -131,6 +132,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/txtEditCost"
         android:layout_alignLeft="@+id/txtEditCost"
+        android:layout_alignParentRight="true"
         android:ems="10"
         android:hint="Barcode"
         android:inputType="number" />
@@ -163,6 +165,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/txtEditBarcode"
         android:layout_alignLeft="@+id/txtEditBarcode"
+        android:layout_alignParentRight="true"
         android:ems="10"
         android:hint="Name" />
 

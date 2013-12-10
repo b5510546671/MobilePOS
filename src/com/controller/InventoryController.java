@@ -133,5 +133,22 @@ public class InventoryController {
 	public Cashier editCashier(Context con, Cashier cashier) {
 		return store.getCashierBook().editCashier(con, cashier);
 	}
+	
+	/**
+	 * @param con is the Context of Activity.
+	 * @param i is Item to remove from Inventory
+	 * @return true if sold, false if not sold.
+	 */
+	public boolean isSold(Context con, Item i){
+		return store.getInventory().isSold(con, i);
+	}
+	
+	/**
+	 * @param con is the Context of Activity.
+	 * @param i is Item to remove from Inventoryi
+	 */
+	public void removeItemFromInventory(Context con,Item i){
+		store.getInventory().remove(con, i);
+	}
 
 }

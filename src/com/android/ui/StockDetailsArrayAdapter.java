@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.android.softspectproject.R;
+import com.controller.InventoryController;
 import com.core.Item;
 
 import android.app.Activity;
@@ -54,13 +55,16 @@ public class StockDetailsArrayAdapter extends ArrayAdapter<Item> {
 				true);
 		TextView txtTitle = (TextView) rowView
 				.findViewById(R.id.txtStockDetailListItem);
-		txtTitle.setText(items.get(position).toString());
+		txtTitle.setText(items.get(position).toString() +" (IMEI :"+items.get(position).getImei()+")");
 		Button btRemove = (Button) rowView.findViewById(R.id.btDelete);
+		
+		if(InventoryController.getInstance().isSold(context, items.get(position))){
+			btRemove.setEnabled(false);
+			btRemove.setText("SOLD");
+		}
 		btRemove.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(context, "Delete position : " + position, 1)
-						.show();
 				items.remove(position);
 				notifyDataSetChanged();
 			}

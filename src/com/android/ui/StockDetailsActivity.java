@@ -56,6 +56,11 @@ public class StockDetailsActivity extends Activity {
 	 * items is the ArrayList of the items.
 	 */
 	private List<Item> items = new ArrayList<Item>();
+	
+	/**
+	 * allItem is the ArrayList of the all items from current InventoryLineItem.
+	 */
+	private List<Item> allItem = new ArrayList<Item>();
 
 	/**
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
@@ -77,8 +82,10 @@ public class StockDetailsActivity extends Activity {
 		txtDetails.setText(s);
 		
 		items.clear();
+		allItem.clear();
 		for(Item i : inventoryLineItem.getItems())
 		{
+			allItem.add(i);
 			items.add(i);
 		}
 		adapter = new StockDetailsArrayAdapter(this, items);
@@ -98,6 +105,13 @@ public class StockDetailsActivity extends Activity {
 
 							@Override
 							public void onClick(DialogInterface arg0,int arg1) {
+								
+								for(Item i : allItem){
+									if(!items.contains(i)){
+										InventoryController.getInstance().removeItemFromInventory(getApplicationContext(), i);
+										
+									}
+								}
 								InventoryLineItem newLine = new InventoryLineItem(-1, items, inventoryLineItem.getDate(), SaleController.getInstance().getCurrentCashier());
 								InventoryController.getInstance().removeInvntoryLineItemFromInventory(getApplicationContext(), inventoryLineItem);
 								InventoryController.getInstance().addInventoryLineItemToInventory(getApplicationContext(), newLine);
