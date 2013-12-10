@@ -10,14 +10,25 @@ import android.util.Log;
 
 import com.core.Customer;
 
+/**
+ * Customer DataAccessObject for SQLite.
+ * @author Krittayot Techasombooranakit 5510545976
+ */
 public class CustomerBookDB extends GenericDao implements CustomerBookDao {
 	Context context;
 
+	/**
+	 * Constructor of database.
+	 * @param context of application.
+	 */
 	public CustomerBookDB(Context context) {
 		super(context, GenericDao.dName, Customer.TABLE_CREATE, Customer.DATABASE_TABLE, Customer.DATABASE_VERSION);
 		this.context = context;
 	}
 
+	/**
+	 * @see com.database.CustomerBookDao#insert(com.core.Customer)
+	 */
 	@Override
 	public Customer insert(Customer customer) {
 		ContentValues cv = new ContentValues();
@@ -28,6 +39,9 @@ public class CustomerBookDB extends GenericDao implements CustomerBookDao {
         return customer;
 	}
 
+	/**
+	 * @see com.database.CustomerBookDao#findBy(java.lang.String)
+	 */
 	@Override
 	public Customer findBy(String name) {
 		String[] columns = new String[]{GenericDao.KEY_ID , Customer.COL_NAME , Customer.COL_DATE , Customer.COL_EMAIL};
@@ -45,6 +59,9 @@ public class CustomerBookDB extends GenericDao implements CustomerBookDao {
 		return customer;
 	}
 	
+	/**
+	 * @see com.database.CustomerBookDao#findBy(int)
+	 */
 	@Override
 	public Customer findBy(int id) {
 		String[] columns = new String[]{GenericDao.KEY_ID , Customer.COL_NAME , Customer.COL_DATE , Customer.COL_EMAIL};
@@ -62,6 +79,9 @@ public class CustomerBookDB extends GenericDao implements CustomerBookDao {
 		return customer;
 	}
 
+	/**
+	 * @see com.database.CustomerBookDao#deleteBy(java.lang.String)
+	 */
 	@Override
 	public Customer deleteBy(String name) {
 		Customer customer = this.findBy(name);
@@ -69,6 +89,9 @@ public class CustomerBookDB extends GenericDao implements CustomerBookDao {
 		return customer;
 	}
 
+	/**
+	 * @see com.database.CustomerBookDao#findByContains(java.lang.String)
+	 */
 	@Override
 	public ArrayList<Customer> findByContains(String name) {
 		String[] columns = new String[]{GenericDao.KEY_ID , Customer.COL_NAME , Customer.COL_DATE , Customer.COL_EMAIL};
@@ -91,11 +114,17 @@ public class CustomerBookDB extends GenericDao implements CustomerBookDao {
 		return customers;
 	}
 
+	/**
+	 * @see com.database.CustomerBookDao#deleteByID(int)
+	 */
 	@Override
 	public int deleteByID(int id) {
 		return (int)super.delete(Customer.DATABASE_TABLE , GenericDao.KEY_ID + "=" + id, null);
 	}
 
+	/**
+	 * @see com.database.CustomerBookDao#findAll()
+	 */
 	@Override
 	public ArrayList<Customer> findAll() {
 		String[] columns = new String[]{GenericDao.KEY_ID , Customer.COL_NAME , Customer.COL_DATE , Customer.COL_EMAIL};
@@ -118,6 +147,9 @@ public class CustomerBookDB extends GenericDao implements CustomerBookDao {
 		return customers;
 	}
 
+	/**
+	 * @see com.database.CustomerBookDao#update(com.core.Customer)
+	 */
 	@Override
 	public int update(Customer customer) {
 		ContentValues cv = new ContentValues();

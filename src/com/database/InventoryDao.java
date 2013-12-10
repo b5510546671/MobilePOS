@@ -19,5 +19,7 @@ public interface InventoryDao {
 	public Item findByID(int id);
 	public Item findByImei(String id);
 	public int findQuantity(int descId);
+	
+	
 	public int getSaleId(Item item);
 }

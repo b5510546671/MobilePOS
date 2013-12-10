@@ -9,12 +9,23 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 
+/**
+* CashierBook DataAccessObject for SQLite.
+* @author Krittayot Techasombooranakit 5510545976
+*/
 public class CashierBookDB extends GenericDao implements CashierBookDao{
 
+	/**
+	 * Constructor of database.
+	 * @param context of application.
+	 */
 	public CashierBookDB(Context ctx) {
 		super(ctx, GenericDao.dName , Cashier.TABLE_CREATE, Cashier.DATABASE_TABLE, Cashier.DATABASE_VERSION);
 	}
 
+	/**
+	 * @see com.database.CashierBookDao#insert(com.core.Cashier)
+	 */
 	@Override
 	public Cashier insert(Cashier c) {
 		ContentValues cv = new ContentValues();
@@ -25,11 +36,17 @@ public class CashierBookDB extends GenericDao implements CashierBookDao{
         return c;
 	}
 
+	/**
+	 * @see com.database.CashierBookDao#delete(com.core.Cashier)
+	 */
 	@Override
 	public int delete(Cashier c) {
 		return (int)super.delete(Cashier.DATABASE_TABLE , GenericDao.KEY_ID + "=" + c.getId(), null);
 	}
 
+	/**
+	 * @see com.database.CashierBookDao#findAll()
+	 */
 	@Override
 	public List<Cashier> findAll() {
 		String[] columns = new String[]{GenericDao.KEY_ID , Cashier.COL_NAME , Cashier.COL_USERNAME , Cashier.COL_PASSWORD};
@@ -51,6 +68,9 @@ public class CashierBookDB extends GenericDao implements CashierBookDao{
 		return c;
 	}
 
+	/**
+	 * @see com.database.CashierBookDao#findBy(java.lang.String)
+	 */
 	@Override
 	public Cashier findBy(String name) {
 		String[] columns = new String[]{GenericDao.KEY_ID , Cashier.COL_NAME , Cashier.COL_USERNAME , Cashier.COL_PASSWORD};
@@ -68,6 +88,9 @@ public class CashierBookDB extends GenericDao implements CashierBookDao{
 		return c;
 	}
 
+	/**
+	 * @see com.database.CashierBookDao#findBy(int)
+	 */
 	@Override
 	public Cashier findBy(int id) {
 		String[] columns = new String[]{GenericDao.KEY_ID , Cashier.COL_NAME , Cashier.COL_USERNAME , Cashier.COL_PASSWORD};
@@ -85,6 +108,9 @@ public class CashierBookDB extends GenericDao implements CashierBookDao{
 		return c;
 	}
 
+	/**
+	 * @see com.database.CashierBookDao#update(com.core.Cashier)
+	 */
 	@Override
 	public Cashier update(Cashier c) {
 		ContentValues cv = new ContentValues();

@@ -15,12 +15,23 @@ import com.core.Item;
 import com.core.Payment;
 import com.core.Sale;
 
+/**
+* SaleLadger DataAccessObject for SQLite.
+* @author Krittayot Techasombooranakit 5510545976
+*/
 public class SaleLadgerDB extends GenericDao implements SaleLadgerDao{
-
+	
+	/**
+	 * Constructor.
+	 * @param context of application.
+	 */
 	public SaleLadgerDB(Context context){
 		super(context, GenericDao.dName, Sale.TABLE_CREATE, Sale.DATABASE_TABLE, Sale.DATABASE_VERSION);
 	}
 	
+	/**
+	 * @see com.database.SaleLadgerDao#insert(com.core.Sale)
+	 */
 	@Override
 	public Sale insert(Sale sale) {
 		PaymentBookDB paymentBookDB = new PaymentBookDB(getContext());
@@ -47,6 +58,9 @@ public class SaleLadgerDB extends GenericDao implements SaleLadgerDao{
         return sale;
 	}
 
+	/**
+	 * @see com.database.SaleLadgerDao#delete(com.core.Sale)
+	 */
 	@Override
 	public int delete(Sale sale) {
 		PaymentBookDB paymentBookDB = new PaymentBookDB(getContext());
@@ -61,6 +75,9 @@ public class SaleLadgerDB extends GenericDao implements SaleLadgerDao{
 		
 	}
 
+	/**
+	 * @see com.database.SaleLadgerDao#update(com.core.Sale)
+	 */
 	@Override
 	public Sale update(Sale sale) {
 		delete(sale);
@@ -68,6 +85,9 @@ public class SaleLadgerDB extends GenericDao implements SaleLadgerDao{
 		return sale;
 	}
 
+	/**
+	 * @see com.database.SaleLadgerDao#findAll()
+	 */
 	@Override
 	public ArrayList<Sale> findAll() {
 		String[] columns = new String[]{GenericDao.KEY_ID, Sale.COL_CUSTOMER_ID ,  Sale.COL_DATE , Sale.COL_PAYMENT_ID , Sale.COL_CASHIER_ID};
@@ -109,6 +129,9 @@ public class SaleLadgerDB extends GenericDao implements SaleLadgerDao{
 		return sales;
 	}
 
+	/**
+	 * @see com.database.SaleLadgerDao#findByID(int)
+	 */
 	@Override
 	public Sale findByID(int id) {
 		String[] columns = new String[]{GenericDao.KEY_ID, Sale.COL_CUSTOMER_ID ,  Sale.COL_DATE , Sale.COL_PAYMENT_ID , Sale.COL_CASHIER_ID};
