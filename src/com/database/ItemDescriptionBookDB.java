@@ -9,12 +9,23 @@ import android.util.Log;
 
 import com.core.ItemDescription;
 
+/**
+* ItemDescription DataAccessObject for SQLite.
+* @author Krittayot Techasombooranakit 5510545976
+*/
 public class ItemDescriptionBookDB extends GenericDao implements ItemDescriptionBookDao {
 	
+	/**
+	 * Constructor of database.
+	 * @param context of application.
+	 */
 	public ItemDescriptionBookDB(Context context) {
 		super(context, GenericDao.dName, ItemDescription.TABLE_CREATE, ItemDescription.DATABASE_TABLE, ItemDescription.DATABASE_VERSION);
 	}
 
+	/**
+	 * @see com.database.ItemDescriptionBookDao#insert(com.core.ItemDescription)
+	 */
 	@Override
 	public ItemDescription insert(ItemDescription itd) {
 		ContentValues cv = new ContentValues();
@@ -27,6 +38,9 @@ public class ItemDescriptionBookDB extends GenericDao implements ItemDescription
 		return new ItemDescription((int)tmp , itd.getName() , itd.getItemDescription() , itd.getCost() , itd.getPrice(), itd.getBarcode());
 	}
 
+	/**
+	 * @see com.database.ItemDescriptionBookDao#update(int, com.core.ItemDescription)
+	 */
 	@Override
 	public int update(int id, ItemDescription itd) {
 		ContentValues cv = new ContentValues();
@@ -38,6 +52,9 @@ public class ItemDescriptionBookDB extends GenericDao implements ItemDescription
         return super.update(ItemDescription.DATABASE_TABLE, GenericDao.KEY_ID + "=" + id, cv);
 	}
 
+	/**
+	 * @see com.database.ItemDescriptionBookDao#findAll()
+	 */
 	@Override
 	public ArrayList<ItemDescription> findAll() {
 		String[] columns = new String[]{ GenericDao.KEY_ID , ItemDescription.COL_DESCRIPTION ,ItemDescription.COL_BARCODE, ItemDescription.COL_NAME , ItemDescription.COL_PRICE , ItemDescription.COL_COST};
@@ -64,17 +81,26 @@ public class ItemDescriptionBookDB extends GenericDao implements ItemDescription
 		return itds;
 	}
 
+	/**
+	 * @see com.database.ItemDescriptionBookDao#deleteByID(int)
+	 */
 	@Override
 	public int deleteByID(int id) {
 		return super.delete(ItemDescription.DATABASE_TABLE,(long)id);
 	}
 	
+	/**
+	 * @see com.database.ItemDescriptionBookDao#findByContains(java.lang.String)
+	 */
 	@Override
 	public ArrayList<ItemDescription> findByContains(String name) {
 		String[] cols = new String[]{ GenericDao.KEY_ID , ItemDescription.COL_DESCRIPTION ,ItemDescription.COL_BARCODE, ItemDescription.COL_NAME , ItemDescription.COL_PRICE , ItemDescription.COL_COST};
 		return getItemDescriptionsFromCursor(super.get(ItemDescription.DATABASE_TABLE, cols , ItemDescription.COL_NAME + " like " + "'%" + name + "%'" ));
 	}
 
+	/**
+	 * @see com.database.ItemDescriptionBookDao#findBy(int)
+	 */
 	@Override
 	public ItemDescription findBy(int id) {
 		Cursor cursor;
@@ -96,6 +122,9 @@ public class ItemDescriptionBookDB extends GenericDao implements ItemDescription
 		return itd;
 	}
 
+	/**
+	 * @see com.database.ItemDescriptionBookDao#findBy(java.lang.String)
+	 */
 	@Override
 	public ItemDescription findBy(String name) {
 		Cursor cursor;
@@ -116,6 +145,9 @@ public class ItemDescriptionBookDB extends GenericDao implements ItemDescription
 		return itd;
 	}
 
+	/**
+	 * @see com.database.ItemDescriptionBookDao#findByBarcode(java.lang.String)
+	 */
 	@Override
 	public ItemDescription findByBarcode(String barcode) {
 		Cursor cursor;

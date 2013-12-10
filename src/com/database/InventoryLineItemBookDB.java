@@ -13,13 +13,24 @@ import com.core.Cashier;
 import com.core.InventoryLineItem;
 import com.core.Item;
 
+/**
+* InventoryLineItem DataAccessObject for SQLite.
+* @author Krittayot Techasombooranakit 5510545976
+*/
 public class InventoryLineItemBookDB extends GenericDao implements
 		InventoryLineItemBookDao {
 	
+	/**
+	 * Constructor of database.
+	 * @param context of application.
+	 */
 	public InventoryLineItemBookDB(Context ctx) {
 		super(ctx, GenericDao.dName, InventoryLineItem.TABLE_CREATE, InventoryLineItem.DATABASE_TABLE, InventoryLineItem.DATABASE_VERSION);
 	}
 
+	/**
+	 * @see com.database.InventoryLineItemBookDao#insert(com.core.InventoryLineItem)
+	 */
 	@Override
 	public InventoryLineItem insert(InventoryLineItem ili) {
 		ContentValues cv = new ContentValues();
@@ -28,11 +39,17 @@ public class InventoryLineItemBookDB extends GenericDao implements
 		return new InventoryLineItem((int)super.insert(InventoryLineItem.DATABASE_TABLE , cv), ili.getItems(), ili.getDate() ,ili.getCashier());
 	}
 
+	/**
+	 * @see com.database.InventoryLineItemBookDao#delete(int)
+	 */
 	@Override
 	public int delete(int inventoryLineItemId) {
 		return (int)super.delete(InventoryLineItem.DATABASE_TABLE , inventoryLineItemId);
 	}
 	
+	/**
+	 * @see com.database.InventoryLineItemBookDao#findByID(int)
+	 */
 	@Override
 	public InventoryLineItem findByID(int id) {
 		String[] columns = new String[]{GenericDao.KEY_ID , InventoryLineItem.COL_DATE , InventoryLineItem.COL_CASHIER_ID};
@@ -56,6 +73,9 @@ public class InventoryLineItemBookDB extends GenericDao implements
 		return inventoryLineItem;
 	}
 
+	/**
+	 * @see com.database.InventoryLineItemBookDao#findAll()
+	 */
 	@Override
 	public List<InventoryLineItem> findAll() {
 		String[] columns = new String[]{GenericDao.KEY_ID , InventoryLineItem.COL_DATE , InventoryLineItem.COL_CASHIER_ID};
