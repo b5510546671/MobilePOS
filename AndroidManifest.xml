@@ -70,7 +70,7 @@
             android:label="@string/title_activity_edit_product_description" >
         </activity>
         <activity
-            android:name="com.android.ui.HIstoryDeailsActivity"
+            android:name="com.android.ui.HistoryDetailsActivity"
             android:label="@string/title_activity_history_deails" >
         </activity>
         <activity

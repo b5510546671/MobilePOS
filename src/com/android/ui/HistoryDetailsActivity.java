@@ -28,7 +28,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class HIstoryDeailsActivity extends Activity {
+public class HistoryDetailsActivity extends Activity {
 
 	private Sale sale;
 	private Customer customer;
@@ -90,7 +90,7 @@ public class HIstoryDeailsActivity extends Activity {
 			public void onClick(View v) {
 
 				AlertDialog.Builder builder = new AlertDialog.Builder(
-						HIstoryDeailsActivity.this);
+						HistoryDetailsActivity.this);
 				builder.setTitle("Edit Sale Confirmation");
 				builder.setMessage("Are You sure want to edit sale?");
 				builder.setNegativeButton("OK",
@@ -146,7 +146,7 @@ public class HIstoryDeailsActivity extends Activity {
 				Item item = items.get(arg2);
 
 				AlertDialog.Builder builder = new AlertDialog.Builder(
-						HIstoryDeailsActivity.this);
+						HistoryDetailsActivity.this);
 				builder.setTitle("Product details");
 				String s = "ID : " + item.getID() + "\nName : "
 						+ item.getItemDescription().getName() + "\nBarcode : "
@@ -167,7 +167,7 @@ public class HIstoryDeailsActivity extends Activity {
 							@Override
 							public void onClick(DialogInterface arg0, int arg1) {
 								AlertDialog.Builder builder = new AlertDialog.Builder(
-										HIstoryDeailsActivity.this);
+										HistoryDetailsActivity.this);
 								builder.setTitle("Delete Confirmation");
 								builder.setMessage("Are You sure want to delete?");
 								builder.setNegativeButton("OK",

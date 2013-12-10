@@ -108,7 +108,7 @@ public class HistoryFragment extends Fragment {
 							public void onClick(DialogInterface arg0, int arg1) {
 								Intent intent = new Intent(getActivity()
 										.getApplicationContext(),
-										HIstoryDeailsActivity.class);
+										HistoryDetailsActivity.class);
 								intent.putExtra("sale", sales.get(position));
 								startActivity(intent);
 

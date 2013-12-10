@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.content.Context;
 
+import com.core.Cashier;
 import com.core.InventoryLineItem;
 import com.core.Item;
 import com.core.ItemDescription;
@@ -56,6 +57,9 @@ public class InventoryController {
 		return store.getInventory().addInventoryLineItem(con, inventoryLineItem);
 	}
 	
+	public Cashier editCashier(Context con , Cashier cashier){
+		return store.getCashierBook().editCashier(con, cashier);
+	}
 	
 
 }

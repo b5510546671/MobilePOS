@@ -56,6 +56,8 @@ public class MainActivity extends Activity {
 	ActionBar actionBar;
 	private static ListView listViews;
 	private SaleController saleController;
+	private Cashier cashier;
+	private TextView txtHeader;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +65,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         saleController = SaleController.getInstance();
-        Cashier cashier = (Cashier) getIntent().getSerializableExtra("cashier");
+        cashier = (Cashier) getIntent().getSerializableExtra("cashier");
         
         if(cashier != null){
         	Toast.makeText(getApplicationContext(), "Cashier : "+cashier.getName(), 1).show();
@@ -80,7 +82,7 @@ public class MainActivity extends Activity {
         
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
         View headerView = ((LayoutInflater)getSystemService(getApplicationContext().LAYOUT_INFLATER_SERVICE)).inflate(R.layout.header, null, false);
-        TextView txtHeader = (TextView)(headerView.findViewById(R.id.txtHeaderUsername));
+        txtHeader = (TextView)(headerView.findViewById(R.id.txtHeaderUsername));
         txtHeader.setText("Cashier : " + saleController.getCashier().getName());
         mDrawerList.addHeaderView(headerView, "HEY", false);
         mDrawerList.setSelected(false);
@@ -144,6 +146,12 @@ public class MainActivity extends Activity {
     }
 
     @Override
+	protected void onResume() {
+    	txtHeader.setText("Cashier : " + saleController.getCashier().getName());
+		super.onResume();
+	}
+
+	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main, menu);
@@ -261,7 +269,7 @@ public class MainActivity extends Activity {
                     	startActivity(intent);
                     }
                 });
-                builder.show(); //To show the AlertDialog
+                builder.show();
             }
         	mDrawerLayout.closeDrawers();
         }
