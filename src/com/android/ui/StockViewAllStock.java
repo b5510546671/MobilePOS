@@ -6,6 +6,7 @@ import java.util.List;
 import com.android.softspectproject.R;
 import com.android.softspectproject.R.layout;
 import com.android.softspectproject.R.menu;
+import com.android.softspectproject.StockDetailsActivity;
 import com.controller.InventoryController;
 import com.core.Cashier;
 import com.core.InventoryLineItem;
@@ -51,10 +52,9 @@ public class StockViewAllStock extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				Toast.makeText(getApplicationContext(),"position :" + arg2, 1).show();
 				AlertDialog.Builder builder = new AlertDialog.Builder(StockViewAllStock.this);
 				builder.setTitle("Stock Details");
-				InventoryLineItem invenCurrent = inventoryLineItems.get(arg2);
+				final InventoryLineItem invenCurrent = inventoryLineItems.get(arg2);
 				String s =	"ID : " + invenCurrent.getID()+
 							"\nDate : " + DateManager.getDateString(invenCurrent.getDate());
 						
@@ -65,8 +65,10 @@ public class StockViewAllStock extends Activity {
 
 							@Override
 							public void onClick(DialogInterface arg0,int arg1) {
-//								Intent intent = new Intent(getApplicationContext(), CashierEditProfileActivity.class);
-//								startActivity(intent);
+								Intent intent = new Intent(getApplicationContext(), StockDetailsActivity.class);
+								intent.putExtra("inventoryLineItem", invenCurrent);
+								startActivity(intent);
+								
 							}
 						});
 				builder.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {

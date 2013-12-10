@@ -24,5 +24,6 @@
     <string name="title_activity_cashier_sign_up">CashierSignUpActivity</string>
     <string name="title_activity_cashier_edit_profile">CashierEditProfileActivity</string>
     <string name="title_activity_stock_view_all_stock">StockViewAllStock</string>
+    <string name="title_activity_stock_details">StockDetailsActivity</string>
 
 </resources>

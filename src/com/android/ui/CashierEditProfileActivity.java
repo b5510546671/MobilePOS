@@ -68,11 +68,13 @@ public class CashierEditProfileActivity extends Activity {
 				public void onClick(DialogInterface dialog, int whichButton) {
 					
 					SaleController.getInstance().setCashier(inventoryController.editCashier(getApplicationContext(), newCashier));
-				  }
+					finish();
+				}
 				});
 
 				alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 				  public void onClick(DialogInterface dialog, int whichButton) {
+					  finish();
 				  }
 				});
 
