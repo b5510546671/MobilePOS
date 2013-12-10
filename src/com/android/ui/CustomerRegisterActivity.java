@@ -1,10 +1,8 @@
 package com.android.ui;
 
-import java.util.Date;
 
 import com.controller.SaleController;
 import com.core.Customer;
-import com.core.Sale;
 import com.utils.DateManager;
 import com.android.softspectproject.R;
 import android.os.Bundle;
@@ -17,14 +15,28 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
-
+/**
+ * CustomerRegisterActivity is the Customer register Activity
+ * @author Sikarin	Larnamwong	5510546174
+ *
+ */
 public class CustomerRegisterActivity extends Activity {
-	
+	/**
+	 * btOK is the OK Button
+	 */
 	private Button btOK;
+	/**
+	 * txtName is the customer's name EditText.
+	 */
 	private EditText txtName;
+	/**
+	 * txtEmail is the customer's E-mail EditText.
+	 */
 	private EditText txtEmail;
 
+	/**
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -90,6 +102,9 @@ public class CustomerRegisterActivity extends Activity {
 		
 	}
 
+	/**
+	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

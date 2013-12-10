@@ -29,20 +29,62 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+/**
+ * 
+ * CashierFragment is the Cashier Fragment of the ActionBar.
+ * 
+ * @author Sikarin Larnamwong 5510546174
+ * 
+ */
 public class CashierFragment extends Fragment {
+	/**
+	 * itemListView is the ListView of Item.
+	 */
 	private ListView itemListView;
+	/**
+	 * buttonNext is the Button to go to the next step.
+	 */
 	private Button buttonNext;
+	/**
+	 * scanWithBarcodeButton is the Button to scan barcode.
+	 */
 	private Button scanWithBarcodeButton;
+	/**
+	 * txtBarcode is the barcode EditText.
+	 */
 	private EditText txtBarcode;
+	/**
+	 * buttonOK is the OK Button.
+	 */
 	private Button buttonOK;
+	/**
+	 * saleController is the instance of SaleController class
+	 */
 	private SaleController saleController;
+	/**
+	 * items is the ArrayList of Item.
+	 */
 	private List<Item> items = new ArrayList<Item>();
-
+	/**
+	 * adapter is the CashierCustomArrayAdapter of the ListView.
+	 */
 	private CashierCustomArrayAdapter adapter;
+	/**
+	 * itemDisplay is the ArrayList of String to display.
+	 */
 	private List<String> itemDisplay = new ArrayList<String>();
 
-	private HashMap<Integer, Item> itemsMap = new HashMap<Integer, Item>();
-
+	/**
+	 * onCreateView is the method called while view created.
+	 * 
+	 * @param inflater
+	 *            is the Inflater of the view.
+	 * @param container
+	 *            is the ViewGroup.
+	 * @param savedInstanceState
+	 *            is the Bundle of the View.
+	 * @return
+	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -53,6 +95,14 @@ public class CashierFragment extends Fragment {
 
 	}
 
+	/**
+	 * onViewCreated is the method called after view is created.
+	 * 
+	 * @param view
+	 *            is the View of the Fragment.
+	 * @param savedInstanceState
+	 *            is the Bundle.
+	 */
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
@@ -70,7 +120,6 @@ public class CashierFragment extends Fragment {
 						CashierContinueActivity.class);
 
 				items = new ArrayList<Item>();
-				// Toast.makeText(getActivity(), items.toString(), 1).show();
 				adapter.notifyDataSetChanged();
 
 				startActivity(intent);
@@ -101,17 +150,13 @@ public class CashierFragment extends Fragment {
 		itemListView.setAdapter(adapter);
 		adapter.notifyDataSetChanged();
 
-		// itemListView.setTextFilterEnabled(true);
 		itemListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 
-				saleController.setItemList(adapter.getItems());
-				// itemDisplay.remove(arg2);
-				// items.remove(arg2);
-				// saleController.setItemList(items);
+				saleController.setCurrentItemList(adapter.getItems());
 				adapter.notifyDataSetChanged();
 
 			}
@@ -123,22 +168,19 @@ public class CashierFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 
-				// txtBarcode.setText("");
-				// Toast.makeText(getActivity(), "Item amount : " +
-				// items.size(), Toast.LENGTH_SHORT).show();
-
-				saleController.setItemList(adapter.getItems());
+				saleController.setCurrentItemList(adapter.getItems());
 
 				try {
 
 					String barcode = txtBarcode.getText().toString();
-					Item item = saleController.getItemfromInventoryByIMEI(getActivity().getApplicationContext(), barcode);
+					Item item = saleController.getItemfromInventoryByIMEI(
+							getActivity().getApplicationContext(), barcode);
 
 					if (item != null) {
 
 						items.add(item);
 						adapter.notifyDataSetChanged();
-						saleController.setItemList(adapter.getItems());
+						saleController.setCurrentItemList(adapter.getItems());
 
 					}
 
@@ -148,8 +190,7 @@ public class CashierFragment extends Fragment {
 
 						alertDialog1.setTitle("Stock Manager");
 
-						alertDialog1
-								.setMessage("Not enough product!\nIf you want to force add press OK");
+						alertDialog1.setMessage("Empty!");
 
 						alertDialog1.setButton("OK",
 								new DialogInterface.OnClickListener() {
@@ -164,17 +205,13 @@ public class CashierFragment extends Fragment {
 					}
 
 				} catch (Exception e) {
-					// Toast.makeText(getActivity(),
-					// "Please fill the blank with the barcode number",
-					// Toast.LENGTH_SHORT).show();
 
 					final AlertDialog alertDialog1 = new AlertDialog.Builder(
 							getActivity()).create();
 
 					alertDialog1.setTitle("Cashier Manager");
 
-					alertDialog1
-							.setMessage("Please fill the blank with the barcode number");
+					alertDialog1.setMessage("Empty");
 
 					alertDialog1.setButton("OK",
 							new DialogInterface.OnClickListener() {
@@ -191,6 +228,16 @@ public class CashierFragment extends Fragment {
 		});
 	}
 
+	/**
+	 * onActivityResult is the method to call after get the result.
+	 * 
+	 * @param requestCode
+	 *            is the result request code.
+	 * @param resultCode
+	 *            is the result.
+	 * @param intent
+	 *            is intent that send the result.
+	 */
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 		if (requestCode == 0) {

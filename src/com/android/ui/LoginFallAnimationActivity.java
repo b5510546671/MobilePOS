@@ -35,28 +35,69 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 import android.widget.RelativeLayout.LayoutParams;
 
+/**
+ * LoginFallAnimationActivity is the Animation snow fall animation login Activity.
+ * @author Sikarin	Larnamwong	5510546174
+ *
+ */
 public class LoginFallAnimationActivity extends Activity {
 
-	private int[] LEAVES = { R.drawable.snow1, R.drawable.snow1,
+	/**
+	 * snow is the snow picture.
+	 */
+	private int[] snow = { R.drawable.snow1, R.drawable.snow1,
 			R.drawable.snow2, R.drawable.snow2, };
-
+	/**
+	 * mDisplaySize is the Rect to display the animation.
+	 */
 	private Rect mDisplaySize = new Rect();
+	/**
+	 * saleController is the instance of the SaleController. 
+	 */
 	private SaleController saleController;
+	/**
+	 * mRootLayout is the animation root RelativeLayout.
+	 */
 	private RelativeLayout mRootLayout;
+	/**
+	 * mAllImageViews is the ArrayList of the ImageView.
+	 */
 	private ArrayList<View> mAllImageViews = new ArrayList<View>();
-
+	/**
+	 * mScale is the animation scale.
+	 */
 	private float mScale;
-
+	/**
+	 * btLogin is the login Button.
+	 */
 	private Button btLogin;
+	/**
+	 * btSignUp is the sign up Button.
+	 */
 	private Button btSignUp;
+	/**
+	 * cashierMap is the HashMap of Cashier.
+	 */
 	private Map<String, Cashier> cashierMap = new HashMap<String, Cashier>();
-
+	/**
+	 * txtUsername is the username EditText.
+	 */
 	private EditText txtUsername;
+	/**
+	 * txtPassword is the password EditText.
+	 */
 	private EditText txtPassword;
-
+	/**
+	 * username is the Cashier username.
+	 */
 	private String username;
+	/**
+	 * password is the Cashier password.
+	 */
 	private String password;
-
+	/**
+	 * t is the animation Timer.
+	 */
 	private Timer t = new Timer();
 
 	@Override
@@ -107,7 +148,7 @@ public class LoginFallAnimationActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				cashierMap.clear();
-				for(Cashier c : saleController.getAllCashier(getApplicationContext())){
+				for(Cashier c : saleController.getAllCashierFromCashierBook(getApplicationContext())){
 					cashierMap.put(c.getUsername(), c);
 				}
 
@@ -139,6 +180,9 @@ public class LoginFallAnimationActivity extends Activity {
 		});
 	}
 
+	/**
+	 * shake is the method to shake the element in the layout.
+	 */
 	public void shake() {
 		Animation shake = AnimationUtils.loadAnimation(getApplicationContext(),
 				R.anim.shake);
@@ -149,6 +193,10 @@ public class LoginFallAnimationActivity extends Activity {
 		btSignUp.startAnimation(shake);
 	}
 
+	/**
+	 * startAnimation is the method to start animation.
+	 * @param aniView is animation view.
+	 */
 	public void startAnimation(final ImageView aniView) {
 
 		aniView.setPivotX(aniView.getWidth() / 2);
@@ -181,12 +229,15 @@ public class LoginFallAnimationActivity extends Activity {
 		animator.start();
 	}
 
+	/**
+	 * mHandler is the animation Handler.
+	 */
 	private Handler mHandler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
 			super.handleMessage(msg);
-			int viewId = new Random().nextInt(LEAVES.length);
-			Drawable d = getResources().getDrawable(LEAVES[viewId]);
+			int viewId = new Random().nextInt(snow.length);
+			Drawable d = getResources().getDrawable(snow[viewId]);
 			LayoutInflater inflate = LayoutInflater
 					.from(LoginFallAnimationActivity.this);
 			final ImageView imageView = (ImageView) inflate.inflate(
@@ -211,7 +262,15 @@ public class LoginFallAnimationActivity extends Activity {
 		}
 	};
 
+	/**
+	 * ExeTimerTask is the customTimerTask
+	 * @author thigirakaipon
+	 *
+	 */
 	private class ExeTimerTask extends TimerTask {
+		/**
+		 * @see java.util.TimerTask#run()
+		 */
 		@Override
 		public void run() {
 			mHandler.sendEmptyMessage(Constants.EMPTY_MESSAGE_WHAT);

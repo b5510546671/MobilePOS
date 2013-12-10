@@ -16,19 +16,48 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+ * StockAddNewProductActivity is the Activity to add the new ItemDescription.
+ * @author Sikarin	Larnamwong	5510546174
+ *
+ */
 public class StockAddNewProductActivity extends Activity {
-	
+	/**
+	 * txtName is the name of the Item EditText.
+	 */
 	private EditText txtName;
+	/**
+	 * txtPrice is the name of the Item EditPrice.
+	 */
 	private EditText txtPrice;
+	/**
+	 * txtBarcode is the barcode of the Item EditText.
+	 */
 	private EditText txtBarcode;
+	/**
+	 * txtProductDescription is the product description of the Item EditText
+	 */
 	private EditText txtProductDescription;
+	/**
+	 * txtCost is the cost of the Item EditText
+	 */
 	private EditText txtCost;
+	/**
+	 * btScanBarcode is the scan barcode Button.
+	 */
 	private Button btScanBarcode;
-	
+	/**
+	 * btOK is the Button to Confirm barcode input.
+	 */
 	private Button btOK;
-	
+	/**
+	 * inventoryController is the instance of the InventoryController.
+	 */
 	private InventoryController inventoryController;
 
+    /**
+     * @see android.app.Activity#onCreate(android.os.Bundle)
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,6 +140,9 @@ public class StockAddNewProductActivity extends Activity {
 		});
         
     }
+    /**
+     * @see android.app.Activity#onActivityResult(int, int, android.content.Intent)
+     */
     @Override
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 		if (requestCode == 0) {
@@ -125,6 +157,9 @@ public class StockAddNewProductActivity extends Activity {
 		super.onActivityResult(requestCode, resultCode, intent);
 	}
 
+    /**
+     * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

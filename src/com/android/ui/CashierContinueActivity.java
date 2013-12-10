@@ -1,9 +1,5 @@
 package com.android.ui;
 
-
-
-
-
 import com.android.softspectproject.R;
 
 import android.os.Bundle;
@@ -24,17 +20,28 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
+/**
+ * CashierContinueActivity is the class of the FragmentActivity that contain the details step of make sale process.
+ * @author Sikarin	Larnamwong  b5510546174
+ *
+ */
 public class CashierContinueActivity extends FragmentActivity {
+	/**
+	 * viewpager is the CustomViewPager of this fragment
+	 */
 	private CustomViewPager viewPager;
-
+	/**
+	 * cashierPagerAdapter is the custom PagerAdapter of the activity
+	 */
 	private CashierPagerAdapter cashierPageAdapter;
 
+	/**
+	 * @see android.support.v4.app.FragmentActivity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_cashier_continue);
-		
 
 		cashierPageAdapter = new CashierPagerAdapter(
 				getSupportFragmentManager());
@@ -45,8 +52,6 @@ public class CashierContinueActivity extends FragmentActivity {
 		viewPager = (CustomViewPager) findViewById(R.id.pager);
 
 		viewPager.setAdapter(cashierPageAdapter);
-
-		
 
 	}
 
@@ -68,6 +73,9 @@ public class CashierContinueActivity extends FragmentActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
+	/**
+	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

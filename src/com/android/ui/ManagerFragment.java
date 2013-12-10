@@ -14,15 +14,37 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class StockFragment extends Fragment{
-	
+/**
+ * ManagerFragment is the manager in stock and customer part Fragment.
+ * @author Sikarin	Larnamwong	5510546174.
+ *
+ */
+public class ManagerFragment extends Fragment{
+	/**
+	 * btNewStock is the add new stock Button.
+	 */
 	private Button btNewStock;
+	/**
+	 * btViewAll is the view all ItemDescription Button.
+	 */
 	private Button btViewAll;
+	/**
+	 * btAddNewProduct is the Button to add new ItemDescription Button.
+	 */
 	private Button btAddNewProduct;
+	/**
+	 * btCreateNewMember is the Button to create new member.
+	 */
 	private Button btCreateNewMember;
+	/**
+	 * btViewAllStock is the view all inventoryLineItem Button.
+	 */
 	private Button btViewAllStock;
 
-	 @Override
+	 /**
+	 * @see android.app.Fragment#onViewCreated(android.view.View, android.os.Bundle)
+	 */
+	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		btNewStock = (Button)getView().findViewById(R.id.btSearch);
 		btViewAll = (Button)getView().findViewById(R.id.btStockViewAll);
@@ -34,7 +56,7 @@ public class StockFragment extends Fragment{
 			
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(getActivity().getApplicationContext(), StockViewAllStock.class);
+				Intent intent = new Intent(getActivity().getApplicationContext(), StockViewAllStockActivity.class);
 				startActivity(intent);
 				
 			}
@@ -84,6 +106,9 @@ public class StockFragment extends Fragment{
 		});
 	}
 
+	/**
+	 * @see android.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
+	 */
 	@Override
 	    public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	            Bundle savedInstanceState) {

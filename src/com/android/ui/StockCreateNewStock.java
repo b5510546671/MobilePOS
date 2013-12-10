@@ -27,19 +27,49 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
-
+/**
+ * 
+ * StockCreateNewStock is the Activity to create the new InventoryLineItem.
+ * @author Sikarin	Larnamwong	5510546174
+ *
+ */
 public class StockCreateNewStock extends Activity {
-
+	/**
+	 * txtBarcode is the barcode EditText.
+	 */
 	private EditText txtBarcode;
+	/**
+	 * btOK is the OK Button to confirm barcode input.
+	 */
 	private Button btOK;
+	/**
+	 * btScanWithBarcode is the scan barocode Button.
+	 */
 	private Button btScanWithBarcode;
+	/**
+	 * itemListView is the ListView to show current Item to add.
+	 */
 	private ListView itemListView;
+	/**
+	 * btFinished is the finish add new stock process.
+	 */
 	private Button btFinished;
+	/**
+	 * inventoryController is the instance of InventoryController.
+	 */
 	private InventoryController inventoryController;
+	/**
+	 * arrayAdapter is the adapter of ListView.
+	 */
 	private CashierCustomArrayAdapter arrayAdapter;
-
+	/**
+	 * items is the ArrayList of Item to add to the new InventoryLineItem.
+	 */
 	private List<Item> items = new ArrayList<Item>();
 
+	/**
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -88,7 +118,7 @@ public class StockCreateNewStock extends Activity {
 								StockCreateNewStock.this);
 
 						alert.setTitle("Product IMEI number");
-						alert.setMessage("Inser the Imei of the product");
+						alert.setMessage("Inser the IMEI of the product");
 
 						// Set an EditText view to get user input
 						final EditText input = new EditText(StockCreateNewStock.this);
@@ -144,12 +174,12 @@ public class StockCreateNewStock extends Activity {
 
 				InventoryLineItem i = new InventoryLineItem(-1, items,
 						DateManager.getCurrentDate(), SaleController
-								.getInstance().getCashier());
+								.getInstance().getCurrentCashier());
 				
 				
 
 				InventoryLineItem getInven = inventoryController
-						.addinventoryLineItemToInventory(
+						.addInventoryLineItemToInventory(
 								getApplicationContext(), i);
 				
 
@@ -195,6 +225,9 @@ public class StockCreateNewStock extends Activity {
 		});
 	}
 
+	/**
+	 * @see android.app.Activity#onActivityResult(int, int, android.content.Intent)
+	 */
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 		if (requestCode == 0) {

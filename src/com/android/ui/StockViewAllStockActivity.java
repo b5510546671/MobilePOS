@@ -24,13 +24,30 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class StockViewAllStock extends Activity {
+/**
+ * StockViewAllStockActivity is the view all InventoryLineItem Activity.
+ * @author Sikarin	Larnamwong	5510546174
+ *
+ */
+public class StockViewAllStockActivity extends Activity {
+	/**
+	 * listViewStock is the InventoryLineItem ListView.
+	 */
 	private ListView listViewStock;
+	/**
+	 * adapter is StockViewAllStockCustomArrayAdapter.
+	 */
 	private StockViewAllStockCustomArrayAdapter adapter;
+	/**
+	 * inventoryLineItems is the ArrayList of the InventoryLineItem.
+	 */
 	private List<InventoryLineItem> inventoryLineItems= new ArrayList<InventoryLineItem>();
+	/**
+	 * inventoryController is the instance of the InventoryController.
+	 */
 	private InventoryController inventoryController;
 
-	/* 
+	/** 
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
 	@Override
@@ -56,7 +73,7 @@ public class StockViewAllStock extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				AlertDialog.Builder builder = new AlertDialog.Builder(StockViewAllStock.this);
+				AlertDialog.Builder builder = new AlertDialog.Builder(StockViewAllStockActivity.this);
 				builder.setTitle("Stock Details");
 				final InventoryLineItem invenCurrent = inventoryLineItems.get(arg2);
 				String s =	"ID : " + invenCurrent.getID()+
@@ -93,6 +110,9 @@ public class StockViewAllStock extends Activity {
 		
 	}
 
+	/**
+	 * @see android.app.Activity#onResume()
+	 */
 	@Override
 	protected void onResume() {
 		inventoryLineItems.clear();
@@ -103,6 +123,9 @@ public class StockViewAllStock extends Activity {
 		super.onResume();
 	}
 
+	/**
+	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

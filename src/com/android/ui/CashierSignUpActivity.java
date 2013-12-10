@@ -1,11 +1,8 @@
 package com.android.ui;
 
 import com.android.softspectproject.R;
-import com.android.softspectproject.R.layout;
-import com.android.softspectproject.R.menu;
 import com.controller.CashierBookController;
 import com.core.Cashier;
-import com.core.Item;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -17,19 +14,48 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
+/**
+ * CashierSignUpActivity is the Cashier sign up activity
+ * @author Sikarin	Larnamwong  5510546174
+ *
+ */
 public class CashierSignUpActivity extends Activity {
-	
+	/**
+	 * txtUsername is the user name EditText to sign up.
+	 */
 	private EditText txtUsername;
+	/**
+	 * txtName is the name of user EditText to sign up.
+	 */
 	private EditText txtName;
+	/**
+	 * txtPassword is the password EditText to sign up.
+	 */
 	private EditText txtPassword;
+	/**
+	 * btOK is the OK Button to confirm signing up.
+	 */
 	private Button btOK;
 
+	/**
+	 * username is the username of the Cashier.
+	 */
 	private String username = "";
+	/**
+	 * password is the password of the Cashier.
+	 */
 	private String password = "";
+	/**
+	 * name is the name of the Cashier.
+	 */
 	private String name="";
-	
+	/**
+	 * cashierBookController is the instance of the CashierBookController
+	 */
 	private CashierBookController cashierBookController;
+	/**
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -63,8 +89,7 @@ public class CashierSignUpActivity extends Activity {
 							public void onClick(
 									DialogInterface arg0,
 									int arg1) {
-								Cashier c = cashierBookController.addCashier(getApplicationContext(), cashier);
-								Toast.makeText(getApplicationContext(), "Name : " + c.getName(), 1).show();
+								Cashier c = cashierBookController.addCashierToCashierBook(getApplicationContext(), cashier);
 								finish();
 							}
 						});
@@ -83,6 +108,9 @@ public class CashierSignUpActivity extends Activity {
 		});
 	}
 
+	/**
+	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

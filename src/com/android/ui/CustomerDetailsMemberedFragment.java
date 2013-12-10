@@ -1,10 +1,5 @@
 package com.android.ui;
 
-
-
-
-import java.util.Date;
-
 import com.controller.SaleController;
 import com.core.Customer;
 import com.core.Sale;
@@ -24,16 +19,42 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
+/**
+ * 
+ * CustomerDetailsMemberedFragment is the customer details Fragment
+ * @author Sikarin	Larnamwong	5510546174
+ *
+ */
 public class CustomerDetailsMemberedFragment extends Fragment {
+	/**
+	 * txtMemberId is the member ID EditText.
+	 */
 	private EditText txtMemberId;
+	/**
+	 * btMemberOK is the OK Button to continue.
+	 */
 	private Button btMemberOK;
+	/**
+	 * btSendEmail is the Button to send the E-mail to the Customer.
+	 */
 	private Button btSendEmail;
+	/**
+	 * saleController is the instance of the SaleController.
+	 */
 	private SaleController saleController;
+	/**
+	 * customer is the current customer.
+	 */
 	private Customer customer;
+	/**
+	 * txtMemberedDetails is the member details TextView.
+	 */
 	private TextView txtMemberedDetails;
 	
 
+	/**
+	 * @see android.support.v4.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
+	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -44,6 +65,9 @@ public class CustomerDetailsMemberedFragment extends Fragment {
 		return rootView;
 	}
 
+	/**
+	 * @see android.support.v4.app.Fragment#onViewCreated(android.view.View, android.os.Bundle)
+	 */
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 
@@ -72,7 +96,7 @@ public class CustomerDetailsMemberedFragment extends Fragment {
 					if(customer == null)  throw new Exception();
 					else {
 						if(customer.getName().equals("none")) throw new Exception();
-						saleController.setCustomer(customer);
+						saleController.setCurrentCustomer(customer);
 					}
 					Log.i("log",customer.toString());
 					txtMemberedDetails.setText("Membered Details"
@@ -97,7 +121,7 @@ public class CustomerDetailsMemberedFragment extends Fragment {
 				if(customer != null){
 					
 					
-					Sale sale =saleController.getSale(getActivity(), DateManager.getCurrentDate());
+					Sale sale =saleController.getCurrentSale(getActivity(), DateManager.getCurrentDate());
 					
 					Sale receive  = saleController.addSaleToSaleLadger(getActivity().getApplicationContext(),sale);
 					
@@ -114,7 +138,7 @@ public class CustomerDetailsMemberedFragment extends Fragment {
 								public void onClick(DialogInterface dialog,
 										int which) {
 									//saleController.setCustomer(customer);
-									Sale sale = saleController.getSale(getActivity().getApplicationContext(),DateManager.getCurrentDate());
+									Sale sale = saleController.getCurrentSale(getActivity().getApplicationContext(),DateManager.getCurrentDate());
 									Intent newActivity = new Intent(Intent.ACTION_SEND);
 									String[] email=new String[]{"deknaew_bws@hotmail.com"};
 									String subject="Receipt from POS mobile";

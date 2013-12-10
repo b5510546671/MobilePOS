@@ -26,15 +26,40 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
+/**
+ * StockDetailsActivity is the InventoryLineItem details Activity.
+ * @author Sikarin	Larnamwong	5510546174
+ *
+ */
 public class StockDetailsActivity extends Activity {
+	/**
+	 * inventoryLineItem is the current InventoryLineItem.
+	 */
 	private InventoryLineItem inventoryLineItem;
+	/**
+	 * txtDetails is the TextView to show the current InventoryLineItem details.
+	 */
 	private TextView txtDetails;
+	/**
+	 * listViewItem is the ListView to show all Item  in the InventoryLineItem.
+	 */
 	private ListView listViewItem;
+	/**
+	 * btFinish is the finished process Button.
+	 */
 	private Button btFinish;
+	/**
+	 * adapter is the StockDetailsArrayAdapter of ItemListView.
+	 */
 	private StockDetailsArrayAdapter adapter;
+	/**
+	 * items is the ArrayList of the items.
+	 */
 	private List<Item> items = new ArrayList<Item>();
 
+	/**
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -73,9 +98,9 @@ public class StockDetailsActivity extends Activity {
 
 							@Override
 							public void onClick(DialogInterface arg0,int arg1) {
-								InventoryLineItem newLine = new InventoryLineItem(-1, items, inventoryLineItem.getDate(), SaleController.getInstance().getCashier());
+								InventoryLineItem newLine = new InventoryLineItem(-1, items, inventoryLineItem.getDate(), SaleController.getInstance().getCurrentCashier());
 								InventoryController.getInstance().removeInvntoryLineItemFromInventory(getApplicationContext(), inventoryLineItem);
-								InventoryController.getInstance().addinventoryLineItemToInventory(getApplicationContext(), newLine);
+								InventoryController.getInstance().addInventoryLineItemToInventory(getApplicationContext(), newLine);
 								finish();
 							}
 						});
@@ -92,6 +117,9 @@ public class StockDetailsActivity extends Activity {
 		});
 	}
 
+	/**
+	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.stock_details, menu);

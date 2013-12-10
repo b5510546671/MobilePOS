@@ -15,7 +15,7 @@ public class DateManager {
 	
 	public static String getDateString(Date date){
        String[] s = date.toLocaleString().split(" ");
-       String send = s[0] + " "+ s[1] + " " + s[2] ; 
+       String send = s[1].replaceAll(",", "") + " "+ s[0] + " " + s[2] ; 
 		return send;
 	}
 

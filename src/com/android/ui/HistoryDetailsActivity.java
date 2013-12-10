@@ -5,8 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 import com.android.softspectproject.R;
-import com.android.softspectproject.R.layout;
-import com.android.softspectproject.R.menu;
 import com.controller.SaleController;
 import com.core.Customer;
 import com.core.Item;
@@ -26,26 +24,70 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
+/**
+ * HistoryDetailsActivity is the sale history details Activity.
+ * 
+ * @author Sikarin Larnamwong 5510546174
+ * 
+ */
 public class HistoryDetailsActivity extends Activity {
-
+	/**
+	 * sale is the sale's Sale.
+	 */
 	private Sale sale;
+	/**
+	 * customer is the sale's Customer.
+	 */
 	private Customer customer;
+	/**
+	 * payment is the sale's Payment
+	 */
 	private Payment payment;
+	/**
+	 * items is the sale's Item list
+	 */
 	private List<Item> items = new ArrayList<Item>();
+	/**
+	 * date is the sale's Date.
+	 */
 	private Date date;
-
+	/**
+	 * txtDate is the date EditText.
+	 */
 	private EditText txtDate;
+	/**
+	 * txtName is the name EditText.
+	 */
 	private EditText txtName;
+	/**
+	 * txtEmail is the E-mail EditText.
+	 */
 	private EditText txtEmail;
+	/**
+	 * txtPrice is the price EditText.
+	 */
 	private EditText txtPrice;
+	/**
+	 * txtCash is the input EditText.
+	 */
 	private EditText txtCash;
+	/**
+	 * btOk is the OK Button.
+	 */
 	private Button btOK;
+	/**
+	 * productListView is the ListView of Item
+	 */
 	private ListView productListView;
-
+	/**
+	 * adapter is the adapter of ListView.
+	 */
 	private SearchCustomArrayAdapter adapter;
 
+	/**
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -110,7 +152,9 @@ public class HistoryDetailsActivity extends Activity {
 										.getText().toString(), date, txtEmail
 										.getText().toString());
 
-								Sale saleNew = new Sale(-1, items,saleController.getCashier(), customerNew,paymentNew, date);
+								Sale saleNew = new Sale(-1, items,
+										saleController.getCurrentCashier(),
+										customerNew, paymentNew, date);
 								saleController.removeSaleFromSaleLadger(
 										getApplicationContext(), sale);
 								saleController.addSaleToSaleLadger(
@@ -212,6 +256,9 @@ public class HistoryDetailsActivity extends Activity {
 
 	}
 
+	/**
+	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

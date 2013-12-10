@@ -1,13 +1,9 @@
 package com.android.ui;
 
 import com.android.softspectproject.R;
-import com.android.softspectproject.R.id;
-import com.android.softspectproject.R.layout;
-import com.android.softspectproject.R.menu;
 import com.controller.InventoryController;
 import com.controller.SaleController;
 import com.core.Cashier;
-import com.core.InventoryLineItem;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -19,24 +15,45 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
+/**
+ * CashierEditProfileActivity is the editting profile page of the Cashier
+ * @author Sikarin	Larnamwong  b5510546174
+ *
+ */
 public class CashierEditProfileActivity extends Activity {
-	
+	/**
+	 * txtPassword is the password EditText 
+	 */
 	private EditText txtPassword;
+	/**
+	 * txtUsername is the cashier username EditText
+	 */
 	private EditText txtUsername;
+	/**
+	 * txtName is the cashier name EditText
+	 */
 	private EditText txtName;
+	/**
+	 * btOK is the OK button
+	 */
 	private Button btOK;
+	/**
+	 * 
+	 */
 	private TextView txtDetails;
 	private SaleController saleController;
 	private InventoryController inventoryController;
 
+	/**
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_cashier_edit_profile);
 		inventoryController = InventoryController.getInstance();
 		saleController = SaleController.getInstance();
-		final Cashier cashier = saleController.getCashier();
+		final Cashier cashier = saleController.getCurrentCashier();
 	
 		txtName = (EditText)findViewById(R.id.txtEditProfileName);
 		txtUsername = (EditText)findViewById(R.id.txtEditProfileUsername);
@@ -67,7 +84,7 @@ public class CashierEditProfileActivity extends Activity {
 				alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int whichButton) {
 					
-					SaleController.getInstance().setCashier(inventoryController.editCashier(getApplicationContext(), newCashier));
+					SaleController.getInstance().setCurrentCashier(inventoryController.editCashier(getApplicationContext(), newCashier));
 					finish();
 				}
 				});
@@ -85,6 +102,9 @@ public class CashierEditProfileActivity extends Activity {
 				
 	}
 
+	/**
+	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

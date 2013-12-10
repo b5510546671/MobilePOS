@@ -32,21 +32,56 @@ import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
-
+/**
+ * HistoryFragment is the Sale historyFragment.
+ * @author Sikarin	Larnamwong
+ *
+ */
 public class HistoryFragment extends Fragment {
-
+	/**
+	 * btDateChange is the Date ChangingButton;
+	 */
 	private Button btDateChange;
+	/**
+	 * optionSearchSpinner is the drop down Spinner to search.
+	 */
 	private Spinner optionSearchSpinner;
+	/**
+	 * listViewSale is the Sale history ListView.
+	 */
 	private ListView listViewSale;
+	/**
+	 * selectedDay is the user search selected day.
+	 */
 	private int selectedDay = 0;
+	/**
+	 * selectedMonth is the user search selected month.
+	 */
 	private int selectedMonth = 0;
+	/**
+	 * selectedYear is the user search selected Year 
+	 */
 	private int selectedYear = 0;
+	/**
+	 * saleController is the instance of the SaleController.
+	 */
 	private SaleController saleController;
-
+	/**
+	 * allSales is the ArrayList of all Sale History.
+	 */
 	private List<Sale> allSales = new ArrayList<Sale>();
+	/**
+	 * sales is the ArrayList of the display Sale History.
+	 */
 	private List<Sale> sales = new ArrayList<Sale>();
+	/**
+	 * adapter is the HistoryCustomArrayAdapter of the ListView.
+	 */
 	private HistoryCustomArrayAdapter adapter;
 
+	/**
+	 * @see android.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
+	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -55,6 +90,9 @@ public class HistoryFragment extends Fragment {
 		return rootView;
 	}
 
+	/**
+	 * @see android.app.Fragment#onViewCreated(android.view.View, android.os.Bundle)
+	 */
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 
@@ -76,8 +114,6 @@ public class HistoryFragment extends Fragment {
 		list.add("Search by Date");
 		list.add("Search by Month");
 		list.add("Search by Year");
-		// allSales =
-		// saleController.getAllSale(getActivity().getApplicationContext());
 
 		adapter = new HistoryCustomArrayAdapter(getActivity(), sales);
 		listViewSale.setAdapter(adapter);
@@ -129,7 +165,7 @@ public class HistoryFragment extends Fragment {
 
 		});
 		sales.clear();
-		for (Sale sale : saleController.getAllSale(getActivity()
+		for (Sale sale : saleController.getAllSaleFromSaleLadger(getActivity()
 				.getApplicationContext())) {
 			sales.add(sale);
 		}
@@ -148,13 +184,12 @@ public class HistoryFragment extends Fragment {
 					public void onItemSelected(AdapterView<?> parentView,
 							View selectedItemView, int position, long id) {
 
-						// Toast.makeText(getActivity(),selectedDay +"/"+
-						// selectedMonth+"/"+ selectedYear, 1).show();
+//						 Toast.makeText(getActivity(),selectedDay +"/"+ selectedMonth+"/"+ selectedYear+"/n", 1).show();
 
 						if (position == 0) {
 							sales.clear();
 							for (Sale sale : saleController
-									.getAllSale(getActivity())) {
+									.getAllSaleFromSaleLadger(getActivity())) {
 								sales.add(sale);
 							}
 							adapter.notifyDataSetChanged();
@@ -162,18 +197,18 @@ public class HistoryFragment extends Fragment {
 						} else if (position == 1) {// By Date
 							sales.clear();
 							for (Sale sale : saleController
-									.getAllSale(getActivity())) {
-								if (sale.getDate().getDay() + 1 == selectedDay
+									.getAllSaleFromSaleLadger(getActivity())) {
+								if (DateManager.getDateString(sale.getDate()).split(" ")[0].equals(selectedDay+"")
 										&& sale.getDate().getMonth() + 1 == selectedMonth
 										&& sale.getDate().getYear() + 1900 == selectedYear)
 									sales.add(sale);
 							}
 							adapter.notifyDataSetChanged();
 
-						} else if (position == 2) {// By Month
+						} else if (position == 2) {
 							sales.clear();
 							for (Sale sale : saleController
-									.getAllSale(getActivity())) {
+									.getAllSaleFromSaleLadger(getActivity())) {
 								if (sale.getDate().getMonth() + 1 == selectedMonth)
 									sales.add(sale);
 							}
@@ -181,7 +216,7 @@ public class HistoryFragment extends Fragment {
 						} else if (position == 2) {// By Month
 							sales.clear();
 							for (Sale sale : saleController
-									.getAllSale(getActivity())) {
+									.getAllSaleFromSaleLadger(getActivity())) {
 								if (sale.getDate().getYear() + 1900 == selectedYear)
 									sales.add(sale);
 							}
@@ -239,10 +274,13 @@ public class HistoryFragment extends Fragment {
 		super.onViewCreated(view, savedInstanceState);
 	}
 
+	/**
+	 * @see android.app.Fragment#onResume()
+	 */
 	@Override
 	public void onResume() {
 		sales.clear();
-		for (Sale sale : saleController.getAllSale(getActivity()
+		for (Sale sale : saleController.getAllSaleFromSaleLadger(getActivity()
 				.getApplicationContext())) {
 			sales.add(sale);
 		}

@@ -24,15 +24,41 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+/**
+ * SearchFragment is the search product Fragment.
+ * @author Sikarin	Larnamwong	5510546174
+ *
+ */
 public class SearchFragment extends Fragment {
 
+	/**
+	 * saleController is the instance of the SaleController.
+	 */
 	private SaleController saleController;
-	private List<Item> items = new ArrayList<Item>();;
+	/**
+	 * items is the List of all Item.
+	 */
+	private List<Item> items = new ArrayList<Item>();
+	/**
+	 * adapter is the SearchCustomArrayAdapter of ListView.
+	 */
 	private SearchCustomArrayAdapter adapter;
+	/**
+	 * searchListView is the ListView of search Item.
+	 */
 	private ListView searchListView;
+	/**
+	 * txtSearch is the EditText to put the word to search.
+	 */
 	private EditText txtSearch;
+	/**
+	 * showItems is theArrayList of the showed Item.
+	 */
 	private List<Item> showItems = new ArrayList<Item>();
 
+	/**
+	 * @see android.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
+	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -41,12 +67,15 @@ public class SearchFragment extends Fragment {
 		return rootView;
 	}
 
+	/**
+	 * @see android.app.Fragment#onViewCreated(android.view.View, android.os.Bundle)
+	 */
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		saleController = SaleController.getInstance();
 		items.clear();
 
-		for (Item i : saleController.getAllItem(getActivity().getApplicationContext())) {
+		for (Item i : saleController.getAllItemFromInventory(getActivity().getApplicationContext())) {
 
 			items.add(i);
 			showItems.add(i);

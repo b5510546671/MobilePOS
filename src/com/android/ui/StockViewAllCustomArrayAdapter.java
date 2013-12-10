@@ -21,17 +21,35 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * StockViewAllCustomArrayAdapter is the custom ArrayAdapter for the InventoryLineItem ListView.
+ * @author Sikarin	Larnamwong	5510546174
+ *
+ */
 public class StockViewAllCustomArrayAdapter extends ArrayAdapter<ItemDescription> {
 	
+	/**
+	 * itemDescriptions is the List of all ItemDescription.
+	 */
 	private List<ItemDescription> itemDescriptions;
+	/**
+	 * context is the current Activity.
+	 */
 	private Activity context;
 
+	/**
+	 * @param context is the current Activity.
+	 * @param itemDescriptions is the List of all ItemDescription.
+	 */
 	public StockViewAllCustomArrayAdapter(Activity context,List<ItemDescription> itemDescriptions) {
 		super(context,R.layout.activity_viewall_itemdescription,itemDescriptions);
 		this.itemDescriptions = itemDescriptions;
 		this.context = context;
 	}
 
+	/**
+	 * @see android.widget.ArrayAdapter#getView(int, android.view.View, android.view.ViewGroup)
+	 */
 	@Override
 	public View getView(final int position, View view, ViewGroup parent) {
 	LayoutInflater inflater = context.getLayoutInflater();

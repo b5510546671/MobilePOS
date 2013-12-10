@@ -19,12 +19,27 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
+/**
+ * CustomerDetailsNonMemberFragment is the non member customer details Fragment.
+ * @author Sikarin	Larnamwong	5510546174
+ *
+ */
 public class CustomerDetailsNonMemberFragment extends Fragment {
-
+	/**
+	 * txtNonMemberName is the non member name EditText.
+	 */
 	private EditText txtNonMemberName;
+	/**
+	 * txtNonMemberName is the non member E-mail EditText.
+	 */
 	private EditText txtNonMemberEmail;
+	/**
+	 * btNonMemberOK is the Button to send the E-mail to non member customer.
+	 */
 	private Button btNonMemberOK;
+	/**
+	 * saleController is the instance of the SaleController.
+	 */
 	private SaleController saleController;
 
 	/**
@@ -48,7 +63,7 @@ public class CustomerDetailsNonMemberFragment extends Fragment {
 
 		super.onViewCreated(view, savedInstanceState);
 		saleController  = SaleController.getInstance();
-		Toast.makeText(getActivity(), saleController.getItemsList().toString(), 1).show();
+		Toast.makeText(getActivity(), saleController.getCurrentItemsList().toString(), 1).show();
 		
 		
 		
@@ -67,8 +82,8 @@ public class CustomerDetailsNonMemberFragment extends Fragment {
 				AlertDialog alertDialog1 = new AlertDialog.Builder(getActivity()).create();
 
 				Customer c = new Customer(-1, "none",DateManager.getCurrentDate(),txtNonMemberEmail.getText().toString());
-				saleController.setCustomer(c);	
-				Sale sale = saleController.getSale(getActivity(),DateManager.getCurrentDate());
+				saleController.setCurrentCustomer(c);	
+				Sale sale = saleController.getCurrentSale(getActivity(),DateManager.getCurrentDate());
 				
 				if(sale == null ) Toast.makeText(getActivity(), "Invalid data", Toast.LENGTH_SHORT).show();
 				else{
