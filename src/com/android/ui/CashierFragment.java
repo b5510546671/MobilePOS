@@ -107,6 +107,8 @@ public class CashierFragment extends Fragment {
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 		saleController = SaleController.getInstance();
+		items.clear();
+		saleController.setCurrentItemList(items);
 		adapter = new CashierCustomArrayAdapter(getActivity(), items);
 		itemListView = (ListView) getView().findViewById(R.id.cashierListView);
 
@@ -114,6 +116,7 @@ public class CashierFragment extends Fragment {
 		buttonOK = (Button) getView().findViewById(R.id.cashierButtonOK);
 		buttonNext.setOnClickListener(new OnClickListener() {
 
+			
 			@Override
 			public void onClick(View arg0) {
 				Intent intent = new Intent(getActivity(),

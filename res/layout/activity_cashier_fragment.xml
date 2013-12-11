@@ -42,12 +42,11 @@
 
         <Button
             android:id="@+id/btScanWithBarcode"
+            style="@style/ButtonText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Scan with Barcode" 
-            style="@style/ButtonText"
-       	android:background="@drawable/btn_yellow"
-            />
+            android:background="@drawable/btn_yellow"
+            android:text="Scan IMEI number" />
 
         <TextView
             style="?android:listSeparatorTextViewStyle"

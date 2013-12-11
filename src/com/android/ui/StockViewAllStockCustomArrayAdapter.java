@@ -46,9 +46,9 @@ public class StockViewAllStockCustomArrayAdapter extends ArrayAdapter<InventoryL
 		LayoutInflater inflater = context.getLayoutInflater();
 		View rowView = inflater.inflate(R.layout.search_listview, null, true);
 		TextView txtTitle = (TextView) rowView.findViewById(R.id.txtItemSearch);
-		txtTitle.setText("ID : "
+		txtTitle.setText("Stock ID : "
 				+ inventoryLineItems.get(position).getID()
-				+ "(Date Added : "
+				+ " (Date Added : "
 				+ DateManager.getDateString(inventoryLineItems.get(position)
 						.getDate()) + ")");
 

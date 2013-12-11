@@ -22,7 +22,7 @@
         </activity>
         <activity
             android:name="com.android.ui.LoginFallAnimationActivity"
-            android:label="Login" >
+            android:label="Mobile POS" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
