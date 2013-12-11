@@ -47,7 +47,7 @@ public class SearchCustomArrayAdapter extends ArrayAdapter<Item> {
 	LayoutInflater inflater = context.getLayoutInflater();
 	View rowView= inflater.inflate(R.layout.search_listview, null, true);
 	TextView txtTitle = (TextView) rowView.findViewById(R.id.txtItemSearch);
-	txtTitle.setText(items.get(position).toString());
+	txtTitle.setText(items.get(position).toString() + " : ( IMEI : "+items.get(position).getImei()+" )" );
 	 
 	
 	return rowView;

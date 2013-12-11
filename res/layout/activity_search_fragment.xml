@@ -9,49 +9,23 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".SearchFragment" >
 
-    <TextView
-        android:id="@+id/txtItemListView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:background="#FFFFFF"
-        android:gravity="center"
-        android:text="Search Product"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/pressed_sikarinstyle"
-        android:textSize="30dp" />
-
     <EditText
         android:id="@+id/txtSearchProduct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/txtItemListView"
         android:ems="10"
-        android:hint="Product name" >
+        android:hint="Search Product by name" >
 
         <requestFocus />
     </EditText>
-
-    <Button
-        android:id="@+id/btSearch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/txtSearchProduct"
-        android:layout_alignRight="@+id/txtSearchProduct"
-        android:layout_below="@+id/txtSearchProduct"
-        style="@style/ButtonText"
-       	android:background="@drawable/btn_yellow"
-        android:text="Search" />
 
     <ListView
         android:id="@+id/listViewProductSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btSearch"
+        android:layout_below="@+id/txtSearchProduct"
         android:layout_centerHorizontal="true" >
 
     </ListView>

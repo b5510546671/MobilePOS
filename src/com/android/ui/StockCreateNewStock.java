@@ -129,18 +129,33 @@ public class StockCreateNewStock extends Activity {
 									public void onClick(DialogInterface dialog,
 											int whichButton) {
 										String imei = input.getText().toString();
+										
+										if(!imei.equals("")){
+											Item item = new Item(-1, inventoryController.getItemDescriptionByBarcode(getApplicationContext(), barcode), imei);
+											items.add(item);
 
-										Item item = new Item(-1, inventoryController.getItemDescriptionByBarcode(getApplicationContext(), barcode), imei);
-										items.add(item);
-
-										arrayAdapter.notifyDataSetChanged();
+											arrayAdapter.notifyDataSetChanged();
+										}
+										else {
+											Toast.makeText(getApplicationContext(), "Please fill the IMEI number", 1).show();
+										}
 									}
 								});
 
-						alert.setNegativeButton("Cancel",
+						alert.setNeutralButton("Scan IMEI",
 								new DialogInterface.OnClickListener() {
 									public void onClick(DialogInterface dialog,
 											int whichButton) {
+										try {
+											Intent intent = new Intent(
+													"com.google.zxing.client.android.SCAN");
+											intent.putExtra("SCAN_MODE", "PRODUCT_MODE");
+											startActivityForResult(intent,1);
+										} catch (Exception e) {
+											Toast.makeText(getApplicationContext(),
+													"Please Install Barcode Scanner",
+													Toast.LENGTH_SHORT).show();
+										}
 									}
 								});
 
@@ -193,9 +208,6 @@ public class StockCreateNewStock extends Activity {
 
 							@Override
 							public void onClick(DialogInterface arg0, int arg1) {
-								// TODO Auto-generated method stub
-								// Toast.makeText(getApplicationContext(),
-								// "Ok is clicked", Toast.LENGTH_LONG).show();
 								finish();
 							}
 						});
@@ -230,7 +242,19 @@ public class StockCreateNewStock extends Activity {
 	 */
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-		if (requestCode == 0) {
+		if(requestCode==1){
+			if(resultCode==this.RESULT_OK){
+				String contents = intent.getStringExtra("SCAN_RESULT");
+				String format = intent.getStringExtra("SCAN_RESULT_FORMAT");
+				String imei = contents;
+
+				Item item = new Item(-1, inventoryController.getItemDescriptionByBarcode(getApplicationContext(), txtBarcode.getText().toString()), imei);
+				items.add(item);
+
+				arrayAdapter.notifyDataSetChanged();
+			}
+		}
+		else if (requestCode == 0) {
 			if (resultCode == this.RESULT_OK) {
 
 				String contents = intent.getStringExtra("SCAN_RESULT");

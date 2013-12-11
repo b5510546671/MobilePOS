@@ -129,6 +129,7 @@ public class CashierFragment extends Fragment {
 		scanWithBarcodeButton = (Button) getView().findViewById(
 				R.id.btScanWithBarcode);
 		txtBarcode = (EditText) getView().findViewById(R.id.CashierTxtID);
+		txtBarcode.setText("");
 		scanWithBarcodeButton.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -197,9 +198,11 @@ public class CashierFragment extends Fragment {
 
 									public void onClick(DialogInterface dialog,
 											int which) {
+										
 
 									}
 								});
+						
 
 						alertDialog1.show();
 					}

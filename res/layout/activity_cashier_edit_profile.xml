@@ -9,52 +9,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".CashierEditProfileActivity" >
 
-    <Button
-        android:id="@+id/btEditProfileOK"
-        style="@style/ButtonText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:background="@drawable/btn_yellow"
-        android:text="OK" />
-
-    <EditText
-        android:id="@+id/txtEditProfilePassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/btEditProfileOK"
-        android:layout_alignParentRight="true"
-        android:layout_toRightOf="@+id/textView3"
-        android:ems="10"
-        android:hint="password"
-        android:inputType="textPassword" />
-
-    <EditText
-        android:id="@+id/txtEditProfileUsername"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/txtEditProfilePassword"
-        android:layout_alignLeft="@+id/txtEditProfilePassword"
-        android:layout_alignRight="@+id/txtEditProfilePassword"
-        android:ems="10"
-        android:hint="username" />
-
-    <EditText
-        android:id="@+id/txtEditProfileName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/txtEditProfileUsername"
-        android:layout_alignLeft="@+id/txtEditProfileUsername"
-        android:layout_alignRight="@+id/txtEditProfileUsername"
-        android:ems="10"
-        android:hint="name"
-        android:inputType="textPersonName" >
-
-        <requestFocus />
-    </EditText>
-
     <TextView
         android:id="@+id/txtEditProfileDetails"
         android:layout_width="wrap_content"
@@ -105,5 +59,70 @@
         android:text="Edit Profile"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#FFFFFF" />
+
+    <TextView
+        android:id="@+id/TextView01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btEditProfileOK"
+        android:layout_alignRight="@+id/textView3"
+        android:text="Old Password" />
+
+    <EditText
+        android:id="@+id/txtEditProfileOldPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btEditProfileOK"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/textView4"
+        android:ems="10"
+        android:hint="Old Password"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/btEditProfileOK"
+        style="@style/ButtonText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/TextView01"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/btn_yellow"
+        android:text="OK" />
+
+    <EditText
+        android:id="@+id/txtEditProfilePassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txtEditProfileOldPassword"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/TextView01"
+        android:ems="10"
+        android:hint="password"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/txtEditProfileUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txtEditProfilePassword"
+        android:layout_alignLeft="@+id/txtEditProfilePassword"
+        android:layout_alignParentRight="true"
+        android:ems="10"
+        android:hint="username" />
+
+    <EditText
+        android:id="@+id/txtEditProfileName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txtEditProfileUsername"
+        android:layout_alignLeft="@+id/txtEditProfileUsername"
+        android:layout_alignParentRight="true"
+        android:ems="10"
+        android:hint="name"
+        android:inputType="textPersonName" >
+
+        <requestFocus />
+    </EditText>
 
 </RelativeLayout>

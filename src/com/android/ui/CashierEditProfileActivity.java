@@ -34,14 +34,24 @@ public class CashierEditProfileActivity extends Activity {
 	 */
 	private EditText txtName;
 	/**
+	 * txtOldPassword is the cashier old password EditText.
+	 */
+	private EditText txtOldPassword;
+	/**
 	 * btOK is the OK button
 	 */
 	private Button btOK;
 	/**
-	 * 
+	 * txtDetails is the TextView of Cashier details.
 	 */
 	private TextView txtDetails;
+	/**
+	 * saleController is the instance of the SaleController.
+	 */
 	private SaleController saleController;
+	/**
+	 * inventoryController is the instance of the InventoryController.
+	 */
 	private InventoryController inventoryController;
 
 	/**
@@ -60,6 +70,7 @@ public class CashierEditProfileActivity extends Activity {
 		txtPassword = (EditText)findViewById(R.id.txtEditProfilePassword);
 		btOK = (Button)findViewById(R.id.btEditProfileOK);
 		txtDetails = (TextView)findViewById(R.id.txtEditProfileDetails);
+		txtOldPassword = (EditText)findViewById(R.id.txtEditProfileOldPassword);
 		txtDetails.setEnabled(false);
 		String s = 	"ID : " +cashier.getId()+
 					"\nName : " +cashier.getName()+
@@ -78,24 +89,47 @@ public class CashierEditProfileActivity extends Activity {
 				final Cashier newCashier = new Cashier(cashier.getId(), name, username, pass);
 				AlertDialog.Builder alert = new AlertDialog.Builder(CashierEditProfileActivity.this);
 
-				alert.setTitle("Edit Confirmation");
-				alert.setMessage("Are you sure want to edit cashier?");
+				if(txtOldPassword.getText().toString().equals(cashier.getPassword())){
+					alert.setTitle("Edit Confirmation");
+					alert.setMessage("Are you sure want to edit cashier?");
 
-				alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog, int whichButton) {
-					
-					SaleController.getInstance().setCurrentCashier(inventoryController.editCashier(getApplicationContext(), newCashier));
-					finish();
+					alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int whichButton) {
+						
+						SaleController.getInstance().setCurrentCashier(inventoryController.editCashier(getApplicationContext(), newCashier));
+						finish();
+					}
+					});
+
+					alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+					  public void onClick(DialogInterface dialog, int whichButton) {
+						  finish();
+					  }
+					});
+
+					alert.show();
 				}
-				});
+				else{
+					AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+							CashierEditProfileActivity.this);
+			 
+						// set title
+						alertDialogBuilder.setTitle("Invalid old Password");
+			 
+						// set dialog message
+						alertDialogBuilder.setMessage("Invalid old password!");
+						alertDialogBuilder.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,int id) {
 
-				alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-				  public void onClick(DialogInterface dialog, int whichButton) {
-					  finish();
-				  }
-				});
-
-				alert.show();
+								}
+							  });
+						
+			 
+							AlertDialog alertDialog = alertDialogBuilder.create();
+			 
+							alertDialog.show();
+				}
+				
 				
 			}
 		});

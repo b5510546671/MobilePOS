@@ -18,11 +18,11 @@
         </activity>
         <activity
             android:name="com.android.ui.CashierContinueActivity"
-            android:label="@string/title_activity_cashier_continue" >
+            android:label="Cashier" >
         </activity>
         <activity
             android:name="com.android.ui.LoginFallAnimationActivity"
-            android:label="Fall" >
+            android:label="Login" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,63 +31,63 @@
         </activity>
         <activity
             android:name="com.android.ui.CashierContinueFragment1"
-            android:label="@string/title_activity_cashier_continue2" >
+            android:label="Cashier" >
         </activity>
         <activity
             android:name="com.android.ui.MainActivity"
-            android:label="@string/title_activity_main" >
+            android:label="Mobile POS" >
         </activity>
         <activity
             android:name="com.android.ui.StoreManagerActivity"
-            android:label="@string/title_activity_store_manager" >
+            android:label="Store Manage" >
         </activity>
         <activity
             android:name="com.android.ui.InventoryManagerActivity"
-            android:label="@string/title_activity_inventory_manager" >
+            android:label="Inventory Manage" >
         </activity>
         <activity
             android:name="com.android.ui.StockCreateNewStock"
-            android:label="@string/title_activity_stock_create_new_stock" >
+            android:label="Create new Stock" >
         </activity>
         <activity
             android:name="com.android.ui.StockViewAllItemDescriptionActivity"
-            android:label="@string/title_activity_stock_view_all" >
+            android:label="All Item Description" >
         </activity>
         <activity
             android:name="com.android.ui.StockAddNewProductActivity"
-            android:label="@string/title_activity_stock_add_new_product" >
+            android:label="Add new Product Description" >
         </activity>
         <activity
             android:name="com.android.ui.StockInventoryLineItemDetail"
-            android:label="@string/title_activity_stock_inventory_line_item_detail" >
+            android:label="Stock Details" >
         </activity>
         <activity
             android:name="com.android.ui.CustomerRegisterActivity"
-            android:label="@string/title_activity_customer_register" >
+            android:label="Customer Register" >
         </activity>
         <activity
             android:name="com.android.ui.EditProductDescriptionActivity"
-            android:label="@string/title_activity_edit_product_description" >
+            android:label="Edit Product Desccription" >
         </activity>
         <activity
             android:name="com.android.ui.HistoryDetailsActivity"
-            android:label="@string/title_activity_history_deails" >
+            android:label="Sale History Details" >
         </activity>
         <activity
             android:name="com.android.ui.CashierSignUpActivity"
-            android:label="@string/title_activity_cashier_sign_up" >
+            android:label="Cashier Sign Up" >
         </activity>
         <activity
             android:name="com.android.ui.CashierEditProfileActivity"
-            android:label="@string/title_activity_cashier_edit_profile" >
+            android:label="Cashier Edit Profile" >
         </activity>
         <activity
             android:name="com.android.ui.StockViewAllStockActivity"
-            android:label="@string/title_activity_stock_view_all_stock" >
+            android:label="View all Stock" >
         </activity>
         <activity
             android:name="com.android.ui.StockDetailsActivity"
-            android:label="@string/title_activity_stock_details" >
+            android:label="Stock Details" >
         </activity>
     </application>
 

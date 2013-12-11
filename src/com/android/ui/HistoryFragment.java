@@ -104,7 +104,7 @@ public class HistoryFragment extends Fragment {
 		optionSearchSpinner = (Spinner) getView().findViewById(
 				R.id.spinnerReport);
 		btDateChange = (Button) getView().findViewById(R.id.btReportDate);
-		btDateChange.setText("Selected Date : " + selectedDay + "/"
+		btDateChange.setText("Select Date Here! : " + selectedDay + "/"
 				+ selectedMonth + "/" + selectedYear);
 
 		listViewSale = (ListView) getView().findViewById(R.id.listViewAllSale);
@@ -249,7 +249,7 @@ public class HistoryFragment extends Fragment {
 						selectedDay = dayOfMonth;
 						selectedMonth = monthOfYear + 1;
 						selectedYear = year;
-						btDateChange.setText(selectedDay + "/" + selectedMonth
+						btDateChange.setText("Select Date Here! : " +selectedDay + "/" + selectedMonth
 								+ "/" + selectedYear);
 
 					}
