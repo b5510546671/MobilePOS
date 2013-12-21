@@ -194,7 +194,7 @@ public class CashierFragment extends Fragment {
 
 						alertDialog1.setTitle("Stock Manager");
 
-						alertDialog1.setMessage("Empty!");
+						alertDialog1.setMessage("No Product found!");
 
 						alertDialog1.setButton("OK",
 								new DialogInterface.OnClickListener() {

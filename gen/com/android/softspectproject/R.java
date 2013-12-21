@@ -104,13 +104,13 @@ public final class R {
         public static final int btRegisterOK=0x7f070029;
         public static final int btReportDate=0x7f07003e;
         public static final int btScanWithBarcode=0x7f07001e;
-        public static final int btSearch=0x7f07005b;
+        public static final int btSearch=0x7f07005a;
         public static final int btSignUpOK=0x7f070025;
-        public static final int btStockAddNewProduct=0x7f07005c;
+        public static final int btStockAddNewProduct=0x7f07005d;
         public static final int btStockBarcodeScan=0x7f070057;
         public static final int btStockOK=0x7f070020;
-        public static final int btStockViewAll=0x7f07005a;
-        public static final int btStockViewAllStock=0x7f07005d;
+        public static final int btStockViewAll=0x7f07005b;
+        public static final int btStockViewAllStock=0x7f07005c;
         public static final int btViewAllEdit=0x7f070062;
         public static final int btn_add_inv=0x7f070043;
         public static final int btn_remove_inv=0x7f070044;

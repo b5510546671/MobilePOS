@@ -124,13 +124,13 @@ public class SearchFragment extends Fragment {
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before,
 					int count) {
-				// Toast.makeText(getActivity(), "Text : " + s, 1).show();
-				if (s == "") {
+				String ss = (s+"").replaceAll("\n", "");
+				if (ss == "") {
 					showItems = items;
 				} else {
 					showItems.clear();
 					for (Item i : items) {
-						if (i.getItemDescription().getName().contains(s)) {
+						if (i.getItemDescription().getName().contains(ss)) {
 							showItems.add(i);
 						}
 					}
@@ -141,13 +141,11 @@ public class SearchFragment extends Fragment {
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
-				// TODO Auto-generated method stub
 
 			}
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
 
 			}
 		});

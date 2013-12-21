@@ -113,16 +113,9 @@ public class EditProductDescriptionActivity extends Activity {
 					if (name == "" || barcode == "" || price == ""
 							|| cost == "")
 						throw new Exception();
-					ItemDescription i = new ItemDescription(-1, name,
-							description, Float.parseFloat(cost), Float
-									.parseFloat(price), barcode);
-					inventoryController.removeItemDescriptionByBarcode(
-							getApplicationContext(),
-							oldItemDescription.getBarcode());
-					inventoryController.createNewItemDescription(
-							getApplicationContext(), name, description,
-							Float.parseFloat(price), barcode,
-							Float.parseFloat(cost));
+					ItemDescription i = new ItemDescription(-1, name,description, Float.parseFloat(cost), Float.parseFloat(price), barcode);
+					
+					inventoryController.editProductDescriptionByID(oldItemDescription.getId(), i, getApplicationContext());
 					final AlertDialog alertDialog1 = new AlertDialog.Builder(
 							EditProductDescriptionActivity.this).create();
 

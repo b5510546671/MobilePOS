@@ -150,5 +150,14 @@ public class InventoryController {
 	public void removeItemFromInventory(Context con,Item i){
 		store.getInventory().remove(con, i);
 	}
+	/**
+	 * editItemDescriptionByID is the method to edit item description in the database.
+	 * @param id is the key id to edit. 
+	 * @param idesc new itemdescription.
+	 * @param context context of the application.
+	 */
+	public void editProductDescriptionByID(int id,ItemDescription itemDesc,Context con){
+		store.getItemDescriptionBook().editItemDescriptionByID(id,itemDesc, con);
+	}
 
 }

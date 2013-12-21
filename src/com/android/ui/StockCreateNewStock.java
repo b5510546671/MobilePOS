@@ -187,32 +187,51 @@ public class StockCreateNewStock extends Activity {
 			@Override
 			public void onClick(View v) {
 
-				InventoryLineItem i = new InventoryLineItem(-1, items,
-						DateManager.getCurrentDate(), SaleController
-								.getInstance().getCurrentCashier());
-				
-				
+				if(items.size()>0)
+				{
+					InventoryLineItem i = new InventoryLineItem(-1, items,
+							DateManager.getCurrentDate(), SaleController
+									.getInstance().getCurrentCashier());
+					
+					
 
-				InventoryLineItem getInven = inventoryController
-						.addInventoryLineItemToInventory(
-								getApplicationContext(), i);
-				
+					InventoryLineItem getInven = inventoryController
+							.addInventoryLineItemToInventory(
+									getApplicationContext(), i);
+					
 
-				// TODO Auto-generated method stub
-				AlertDialog.Builder builder = new AlertDialog.Builder(
-						StockCreateNewStock.this);
-				builder.setTitle("Stock Manaer");
-				builder.setMessage("Already added to stock");
-				builder.setPositiveButton("OK",
-						new DialogInterface.OnClickListener() {
+					// TODO Auto-generated method stub
+					AlertDialog.Builder builder = new AlertDialog.Builder(
+							StockCreateNewStock.this);
+					builder.setTitle("Stock Manaer");
+					builder.setMessage("Already added to stock");
+					builder.setPositiveButton("OK",
+							new DialogInterface.OnClickListener() {
 
-							@Override
-							public void onClick(DialogInterface arg0, int arg1) {
-								finish();
-							}
-						});
+								@Override
+								public void onClick(DialogInterface arg0, int arg1) {
+									finish();
+								}
+							});
 
-				builder.show(); // To show the AlertDialog
+					builder.show(); 
+				}
+				else {
+					AlertDialog.Builder builder = new AlertDialog.Builder(
+							StockCreateNewStock.this);
+					builder.setTitle("Stock Manaer");
+					builder.setMessage("Empty product please add some Product!");
+					builder.setPositiveButton("OK",
+							new DialogInterface.OnClickListener() {
+
+								@Override
+								public void onClick(DialogInterface arg0, int arg1) {
+									
+								}
+							});
+
+					builder.show(); 
+				}
 
 			}
 

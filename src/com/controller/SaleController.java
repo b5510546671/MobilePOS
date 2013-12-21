@@ -272,7 +272,7 @@ public class SaleController {
 	 * @param con
 	 *            is the Context from the Activity.
 	 * @param imei
-	 *            is th IMEI to ger from Inventory.
+	 *            is the IMEI to get from Inventory.
 	 * @return found Item.
 	 */
 	public Item getItemfromInventoryByIMEI(Context con, String imei) {
@@ -284,7 +284,30 @@ public class SaleController {
 				return i;
 			}
 		}
+	
+		
+		return null;
 
+	}
+	
+	/**
+	 * getItemfromInventoryByBarcode is the method from Inventory by input barcode.
+	 * 
+	 * @param con
+	 *            is the Context from the Activity.
+	 * @param barcode
+	 *            is the barcode to get from Inventory.
+	 * @return found Item.
+	 */
+	public Item getItemfromInventoryByBarcode(Context con, String barcode) {
+
+		List<Item> itemList = getAllItemFromInventory(con);
+
+		for (Item i : itemList) {
+			if (!itemsMap.containsKey(i.getID()) && i.getItemDescription().getBarcode().equals(barcode)) {
+				return i;
+			}
+		}
 		return null;
 
 	}

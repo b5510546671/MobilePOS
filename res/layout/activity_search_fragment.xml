@@ -16,7 +16,9 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:ems="10"
-        android:hint="Search Product by name" >
+        android:hint="Search Product by name" 
+        android:singleLine="true"
+    	android:lines="1">
 
         <requestFocus />
     </EditText>

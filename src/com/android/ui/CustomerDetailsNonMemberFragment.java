@@ -91,7 +91,7 @@ public class CustomerDetailsNonMemberFragment extends Fragment {
 					alertDialog1.setTitle("POS Mobile");
 					
 					
-					alertDialog1.setMessage(savedSale.getItems().toString()+ "\nE-mail Sent to >>" + c.getEmail());
+					alertDialog1.setMessage("Finish Sale Process\nPlease sent the receipt via E-mail to the customer");
 					
 
 					alertDialog1.setButton("OK",

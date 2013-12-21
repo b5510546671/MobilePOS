@@ -138,7 +138,7 @@ public class CustomerDetailsMemberedFragment extends Fragment {
 
 					alertDialog1.setTitle("POS Mobile");
 
-					alertDialog1.setMessage("E-mail Sent");
+					alertDialog1.setMessage("Finish Sale Process\nPlease sent the receipt via E-mail to the customer");
 
 					alertDialog1.setButton("OK",
 							new DialogInterface.OnClickListener() {

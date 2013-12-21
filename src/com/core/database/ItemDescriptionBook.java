@@ -1,4 +1,4 @@
-package com.core.database;
+ package com.core.database;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,5 +101,18 @@ public class ItemDescriptionBook {
 		ItemDescription i = db.findByBarcode(barcode);
 		db.close();
 		return i;
+	}
+	
+	/**
+	 * editItemDescriptionByID is the method to edit item description in the database.
+	 * @param id is the key id to edit. 
+	 * @param idesc new itemdescription.
+	 * @param context context of the application.
+	 */
+	public void editItemDescriptionByID(int id,ItemDescription idesc,Context context){
+		db = new ItemDescriptionBookDB(context);
+		db.update(id, idesc);
+		db.close();
+		
 	}
 }

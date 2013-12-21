@@ -14,6 +14,8 @@ import com.utils.Constants;
 
 import android.animation.ValueAnimator;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -22,6 +24,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.DisplayMetrics;
 import android.view.Display;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -275,5 +278,35 @@ public class LoginFallAnimationActivity extends Activity {
 		public void run() {
 			mHandler.sendEmptyMessage(Constants.EMPTY_MESSAGE_WHAT);
 		}
+	}
+	
+	/**
+	 * @see android.app.Activity#onKeyDown(int, android.view.KeyEvent)
+	 */
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if ((keyCode == KeyEvent.KEYCODE_BACK))
+	    {
+			AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+			alert.setTitle("Quit Confirmation");
+			alert.setMessage("Are you sure wnt to quit?");
+
+			alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int whichButton) {
+			  finish();
+			  }
+			});
+
+			alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+			  public void onClick(DialogInterface dialog, int whichButton) {
+			   
+			  }
+			});
+
+			alert.show();
+	    }
+	    
+		return super.onKeyDown(keyCode, event);
 	}
 }

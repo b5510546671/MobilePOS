@@ -20,6 +20,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -38,6 +39,8 @@ import android.widget.Toast;
  *
  */
 public class MainActivity extends Activity {
+	
+
 	/**
 	 * mDrawerLayout is the current DrawerLayout
 	 */
@@ -240,6 +243,7 @@ public class MainActivity extends Activity {
 
 			// Set an EditText view to get user input
 			final EditText input = new EditText(this);
+			
 			alert.setView(input);
 
 			alert.setPositiveButton("Search",
@@ -247,6 +251,8 @@ public class MainActivity extends Activity {
 						public void onClick(DialogInterface dialog,
 								int whichButton) {
 							String value = input.getText().toString();
+							
+							if(value == null || value.equals("")) return;
 
 							intent.putExtra(SearchManager.QUERY, value);
 							
@@ -362,5 +368,34 @@ public class MainActivity extends Activity {
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
+    /**
+     * @see android.app.Activity#onKeyDown(int, android.view.KeyEvent)
+     */
+    @Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if ((keyCode == KeyEvent.KEYCODE_BACK))
+	    {
+			AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+			alert.setTitle("Quit Confirmation");
+			alert.setMessage("Are you sure wnt to quit?");
+
+			alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int whichButton) {
+			  finish();
+			  }
+			});
+
+			alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+			  public void onClick(DialogInterface dialog, int whichButton) {
+			   
+			  }
+			});
+
+			alert.show();
+	    }
+	    
+		return super.onKeyDown(keyCode, event);
+	}
     
 }

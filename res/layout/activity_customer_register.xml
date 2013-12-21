@@ -18,7 +18,8 @@
         android:layout_below="@+id/txtItemListView"
         android:ems="10"
         android:hint="Name"
-         >
+        android:singleLine="true"
+    	android:lines="1">
 
         <requestFocus />
     </EditText>

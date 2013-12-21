@@ -24,57 +24,57 @@
         android:textSize="30dp" />
 
     <Button
-        android:id="@+id/btStockViewAll"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/btSearch"
-        android:text="View All Product Description" 
-        style="@style/ButtonText"
-       	android:background="@drawable/btn_yellow"/>
-
-    <Button
-        android:id="@+id/btStockAddNewProduct"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/btStockViewAll"
-        android:layout_alignRight="@+id/btStockViewAll"
-        android:layout_below="@+id/btStockViewAll"
-        android:text="Add New Product Description" 
-        style="@style/ButtonText"
-       	android:background="@drawable/btn_yellow"/>
-
-    <Button
         android:id="@+id/btSearch"
+        style="@style/ButtonText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/btStockViewAll"
-        android:layout_alignRight="@+id/btStockViewAll"
+        android:layout_alignParentRight="true"
         android:layout_below="@+id/txtItemListView"
         android:layout_marginTop="14dp"
-        android:text="Create New Stock" 
-        style="@style/ButtonText"
-       	android:background="@drawable/btn_yellow"/>
+        android:background="@drawable/btn_yellow"
+        android:text="Create New Stock" />
 
     <Button
         android:id="@+id/btStockViewAllStock"
         style="@style/ButtonText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/btStockAddNewProduct"
-        android:layout_alignRight="@+id/btStockAddNewProduct"
-        android:layout_below="@+id/btStockAddNewProduct"
+        android:layout_alignLeft="@+id/btSearch"
+        android:layout_alignRight="@+id/btSearch"
+        android:layout_below="@+id/btSearch"
         android:background="@drawable/btn_yellow"
         android:text="View All Stock" />
 
-    <TextView
-        android:id="@+id/TextView01"
+    <Button
+        android:id="@+id/btStockAddNewProduct"
+        style="@style/ButtonText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/btStockViewAllStock"
         android:layout_alignRight="@+id/btStockViewAllStock"
         android:layout_below="@+id/btStockViewAllStock"
+        android:background="@drawable/btn_yellow"
+        android:text="Add New Product Description" />
+
+    <Button
+        android:id="@+id/btStockViewAll"
+        style="@style/ButtonText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/txtItemListView"
+        android:layout_alignRight="@+id/txtItemListView"
+        android:layout_below="@+id/btStockAddNewProduct"
+        android:background="@drawable/btn_yellow"
+        android:text="View All Product Description" />
+
+    <TextView
+        android:id="@+id/TextView01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btStockViewAll"
+        android:layout_alignRight="@+id/btStockViewAll"
+        android:layout_below="@+id/btStockViewAll"
         android:background="#FFFFFF"
         android:gravity="center"
         android:text="Member Manager"
